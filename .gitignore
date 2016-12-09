@@ -1,3 +1,7 @@
+# For specific files, generated in subdirectories
+# please use a diffrent .gitignore in the directory
+# containing the module/script.
+
 # Compiled source #
 ###################
 *.com
