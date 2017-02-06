@@ -1,41 +1,43 @@
 <?php
-
+$message = Login();
 function Login()
 {
+  global $db_host, $db_name, $db_pass, $db_user;
   // check if email or pass are empty
-  $error = "Empty email or password";
+  $message = "Empty email or password";
   if(empty($_POST['email']))
-    return false;
+    return $message;
   if(empty($_POST['password']))
-    return false;
+    return $message;
   // sanitize email and password (for html, not sql)
   $email = htmlspecialchars($_POST['email']);
   $password = htmlspecialchars($_POST['password']);
   // hash password
   $password = md5($password);
   // connect to mysql dbase
+  require_once("configuration.php");
   $mysql_connection = new mysqli($db_host, $db_user, $db_pass, $db_name);
   // check connection
-  $error = "Couldn't connect to database";
-  if (!$mysql_connection) {
+  $message = "Couldn't connect to database";
+  if ($mysql_connection->connect_error) {
       //die("Connection failed: " . mysqli_connect_error());
-      return false;
+      return $mysql_connection->connect_error;
   }
+  $email = $mysql_connection->real_escape_string($email);
   // create and execute sql query
   $sql = "SELECT * FROM users WHERE email='$email' AND password_hash='$password'";
   $query_result = $mysql_connection->query($sql);
   // if result is not found, user wrote wrong credentials
-  $error = "No user found";
-  if($result->num_rows <= 0)
-    return false;
+  $message = "User not found, check email or password";
+  if($query_result->num_rows <= 0)
+    return $message;
 
   // start the session
   session_start();
   $_SESSION['user'] = $email;
-  return true;
+  $message = "User found, main page not implemented (yet)";
+  return $message;
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -79,10 +81,7 @@ function Login()
     <button type="submit">Login</button>
     <input type="checkbox" checked="checked"> Remember me
   </form>
-  <? php if(Login())
-           echo "<p> Succesful login";
-         else
-           echo $error?>
+  <?php echo $message?>
 
 </div>
 </body>
