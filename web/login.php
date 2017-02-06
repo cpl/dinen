@@ -3,6 +3,7 @@
 function Login()
 {
   // check if email or pass are empty
+  $error = "Empty email or password";
   if(empty($_POST['email']))
     return false;
   if(empty($_POST['password']))
@@ -15,14 +16,16 @@ function Login()
   // connect to mysql dbase
   $mysql_connection = new mysqli($db_host, $db_user, $db_pass, $db_name);
   // check connection
+  $error = "Couldn't connect to database";
   if (!$mysql_connection) {
-      die("Connection failed: " . mysqli_connect_error());
+      //die("Connection failed: " . mysqli_connect_error());
       return false;
   }
   // create and execute sql query
   $sql = "SELECT * FROM users WHERE email='$email' AND password_hash='$password'";
   $query_result = $mysql_connection->query($sql);
   // if result is not found, user wrote wrong credentials
+  $error = "No user found";
   if($result->num_rows <= 0)
     return false;
 
@@ -76,7 +79,10 @@ function Login()
     <button type="submit">Login</button>
     <input type="checkbox" checked="checked"> Remember me
   </form>
-  <? php echo Login(); ?>
+  <? php if(Login())
+           echo "<p> Succesful login";
+         else
+           echo $error?>
 
 </div>
 </body>
