@@ -4,23 +4,34 @@ function Login()
 {
   // check if email or pass are empty
   if(empty($_POST['email']))
-  {
-    $this->HandleError("UserName is empty!");
     return false;
-  }
   if(empty($_POST['password']))
-  {
-    $this->HandleError("Password is empty!");
     return false;
-  }
   // sanitize email and password (for html, not sql)
   $email = htmlspecialchars($_POST['email']);
   $password = htmlspecialchars($_POST['password']);
   // hash password
   $password = md5($password);
+  // connect to mysql dbase
+  $mysql_connection = new mysqli($db_host, $db_user, $db_pass, $db_name);
+  // check connection
+  if (!$mysql_connection) {
+      die("Connection failed: " . mysqli_connect_error());
+      return false;
+  }
+  // create and execute sql query
+  $sql = "SELECT * FROM users WHERE email='$email' AND password_hash='$password'";
+  $query_result = $mysql_connection->query($sql);
+  // if result is not found, user wrote wrong credentials
+  if($result->num_rows <= 0)
+    return false;
 
+  // start the session
+  session_start();
+  $_SESSION['user'] = $email;
   return true;
 }
+
 
 ?>
 
@@ -65,6 +76,7 @@ function Login()
     <button type="submit">Login</button>
     <input type="checkbox" checked="checked"> Remember me
   </form>
+  <? php echo Login(); ?>
 
 </div>
 </body>
