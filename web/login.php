@@ -32,11 +32,14 @@ function Login()
   if($query_result->num_rows <= 0)
     return $message;
 
+  $user = $query_result->fetch_row();
   // start the session
   session_start();
   $_SESSION['user'] = $email;
-  $message = "User found, main page not implemented (yet)";
-  return $message;
+  $_SESSION['manager_id'] = $user[0];
+  $_SESSION['name'] = $user[1];
+  header('Location: restaurants.php');
+  return $user[1];
 }
 ?>
 
