@@ -14,8 +14,7 @@
   <?php require_once 'common/navbar.php'; ?>
   <div class = 'container'>
     <?php
-      $name = $_SESSION['name'];
-      echo 'Hello, $name. Restaurants you own:';
+      echo "Hello, {$_SESSION['name']}. Restaurants you own:";
       require_once 'php_scripts/get_restaurants.php'; echo getRestaurants();
     ?>
   </div>

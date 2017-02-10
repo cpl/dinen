@@ -13,8 +13,10 @@ function register() {
   $email = htmlspecialchars($_POST['email']);
   $password = htmlspecialchars($_POST['password']);
   $c_password = htmlspecialchars($_POST['c_password']);
-  if($password != $c_password)
-    return 'Passwords do not match.';
+  if (preg_match('/[^a-zA-Z\s-]+/', $name))
+    return 'Names must only consist of letters and hyphens.';
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+    return 'Invalid email.';
   if(strlen($password) < 8)
     return 'Passwords must be more than 7 characters.';
   if(strlen($password) > 250)
@@ -23,10 +25,8 @@ function register() {
     return 'Passwords must include at least one number!';
   if (!preg_match('/[a-zA-Z]+/', $password))
     return 'Passwords must include at least one letter!';
-  if (!preg_match('/^[a-zA-Z-]*$/',$name))
-    return 'Names can only consist of letters and hyphens.';
-  if (!filter_var($email, FILTER_VALIDATE_EMAIL))
-    return 'Invalid email.';
+  if($password != $c_password)
+    return 'Passwords do not match.';
   $password_hash = hash('sha256', $password);
   global $mysqli;
   if ($mysqli->connect_error)

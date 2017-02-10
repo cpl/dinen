@@ -7,11 +7,11 @@ function getRestaurants() {
   global $mysqli;
   $query_result = $mysqli->query($query);
   if ($query_result->num_rows === 0)
-    return '<div>Sorry, no restaurants found</div>';
+    return '<div>No restaurants found.</div>';
   $restaurant_list = '<div>';
   while ($row = $query_result->fetch_array()) {
-    $restaurant_list .= "<div>You have a restaurant called {$row['name']}"
-                         ." which is a {$row['category']}.</div>";
+    $restaurant_list .= "<div>{$row['name']}, which is a {$row['category']}."
+                        ."</div>";
   }
   $restaurant_list .= '</div>';
   $mysqli->close();
