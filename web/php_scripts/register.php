@@ -31,14 +31,19 @@ function register() {
   global $mysqli;
   if ($mysqli->connect_error)
     return 'Database connection failed.';
-  $email = $mysqli->real_escape_string($email);
-  $query = "SELECT * FROM users WHERE email = '$email'";
-  if($mysqli->query($query)->num_rows >= 1)
+  $stmt = $mysqli->prepare('SELECT * FROM users WHERE email = ?');
+  $stmt->bind_param('s', $email); $stmt->execute();
+  if($stmt->get_result()->num_rows >= 1)
     return 'User already exists.';
-  $query= "INSERT INTO users (name, email, password_hash, category)
-           VALUES ('$name', '$email', '$password_hash', 'manager')";
-  if ($mysqli->query($query) === FALSE)
+  $stmt->close();
+  $stmt = $mysqli->prepare('INSERT INTO
+                            users (name, email, password_hash, category)
+                            VALUES (?, ?, ?, ?)');
+  $category = 'manager';
+  $stmt->bind_param('ssss', $name, $email, $password_hash, $category);
+  $stmt->execute();
+  if ($stmt->errno != 0)
     return 'Failed to create user.';
-  $mysqli->close();
+  $stmt->close(); $mysqli->close();
   return 'User created.';
 }

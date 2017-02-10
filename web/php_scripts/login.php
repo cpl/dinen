@@ -10,20 +10,20 @@ function login() {
   global $mysqli;
   if ($mysqli->connect_error)
     return 'Database connection failed.';
-  $email = $mysqli->real_escape_string($email);
-  $query = "SELECT * FROM users WHERE email = '$email'
-            AND password_hash = '$password_hash'";
-  $query_result = $mysqli->query($query);
+  $stmt = $mysqli->prepare('SELECT * FROM users WHERE email = ?
+                            AND password_hash = ?');
+  $stmt->bind_param('ss', $email, $password_hash); $stmt->execute();
+  $stmt_result = $stmt->get_result();
   # If no users are found, then the credentials are incorrect.
-  if($query_result->num_rows <= 0)
+  if($stmt_result->num_rows <= 0)
     return 'User not found, check email and password.';
-  $user = $query_result->fetch_row();
+  $user = $stmt_result->fetch_row();
   # Store the user's info in a PHP session.
   session_start();
   $_SESSION['user'] = $email;
   $_SESSION['manager_id'] = $user[0];
   $_SESSION['name'] = $user[1];
   header('Location: ../restaurants.php');
-  $mysqli->close();
+  $stmt->close(); $mysqli->close();
   return 'Success.';
 }
