@@ -13,5 +13,5 @@
     }
   }
   function logged_in() {
-    return $_SESSION['user_id'] !== NULL;
+    return array_key_exists('user_id',$_SESSION) && $_SESSION['user_id'] !== NULL;
   }
