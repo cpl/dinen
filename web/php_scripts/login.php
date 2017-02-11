@@ -25,7 +25,8 @@ function login() {
       return 'Invalid email-password combination.<br><br>';
     $user = $stmt_result->fetch_row();
     # Store the user's info in a PHP session.
-    session_start();
+    if(session_status() == PHP_SESSION_NONE)
+      session_start();
     $_SESSION['user_id'] = $user[0];
     $_SESSION['user_name'] = $user[1];
     $_SESSION['user_email'] = $user[2];
