@@ -16,7 +16,7 @@
       if (logged_in())
         echo "
           <ul class='nav navbar-nav navbar-right'>
-            <li><a href ='logout.php'>Logout</a></li>
+            <li><a href ='php_scripts/logout.php'>Logout</a></li>
           </ul>
         ";
       else
