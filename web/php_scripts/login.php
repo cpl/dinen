@@ -1,7 +1,10 @@
+
 <?php
 require_once 'validators.php';
 require_once 'connect_to_db.php';
+login();
 function login() {
+  //$_SESSION['data'] = $_POST['data'];
   if (!empty($_POST['email'].$_POST['password'])) {
     # Sanitize email and password (for PHP, not SQL).
     $email = htmlspecialchars($_POST['email']);
@@ -22,12 +25,13 @@ function login() {
       return 'Invalid email-password combination.<br><br>';
     $user = $stmt_result->fetch_row();
     # Store the user's info in a PHP session.
-    session_start();
+    if(session_status() == PHP_SESSION_NONE)
+      session_start();
     $_SESSION['user_id'] = $user[0];
     $_SESSION['user_name'] = $user[1];
     $_SESSION['user_email'] = $user[2];
     $_SESSION['user_category'] = $user[4];
-    header('Location: restaurants.php');
+    //header('Location: ../restaurants.php');
     $stmt->close();
     $mysqli->close();
     return 'Success.<br><br>';
