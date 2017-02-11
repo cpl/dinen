@@ -4,6 +4,7 @@ require_once 'validators.php';
 require_once 'connect_to_db.php';
 login();
 function login() {
+  //$_SESSION['data'] = $_POST['data'];
   if (!empty($_POST['email'].$_POST['password'])) {
     # Sanitize email and password (for PHP, not SQL).
     $email = htmlspecialchars($_POST['email']);
@@ -29,7 +30,7 @@ function login() {
     $_SESSION['user_name'] = $user[1];
     $_SESSION['user_email'] = $user[2];
     $_SESSION['user_category'] = $user[4];
-    header('Location: restaurants.php');
+    //header('Location: ../restaurants.php');
     $stmt->close();
     $mysqli->close();
     return 'Success.<br><br>';

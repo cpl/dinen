@@ -8,7 +8,6 @@
 <?php require_once 'common/navbar.php'; ?>
 <div class = 'container'>
   <?php
-    session_start();
     require_once 'php_scripts/login.php'; //echo login();
     require_once 'php_scripts/validators.php';
     echo "

@@ -10,15 +10,15 @@ $(function () {
     });
 });
 
-$("#login-button").click(function() {
+function login() {
   $.ajax(
     {
-      url: 'php_scripts/login.php',
+      url: 'api/v1/api.php',
       type: 'POST',
       data : { email : $("#email").val(), password : $("#password").val() }
-   })
-   .done(goToRestaurants);
-})
+   }).done(goToRestaurants);
+   return false;
+}
 
 function goToRestaurants()
 {
