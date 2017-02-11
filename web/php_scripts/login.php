@@ -1,6 +1,6 @@
 <?php
-require_once('validators.php');
-require_once('connect_to_db.php');
+require_once 'validators.php';
+require_once 'connect_to_db.php';
 function login() {
   if (!empty($_POST['email'].$_POST['password'])) {
     # Sanitize email and password (for PHP, not SQL).
@@ -23,9 +23,10 @@ function login() {
     $user = $stmt_result->fetch_row();
     # Store the user's info in a PHP session.
     session_start();
-    $_SESSION['user'] = $email;
-    $_SESSION['manager_id'] = $user[0];
-    $_SESSION['name'] = $user[1];
+    $_SESSION['user_id'] = $user[0];
+    $_SESSION['user_name'] = $user[1];
+    $_SESSION['user_email'] = $user[2];
+    $_SESSION['user_category'] = $user[4];
     header('Location: restaurants.php');
     $stmt->close();
     $mysqli->close();
