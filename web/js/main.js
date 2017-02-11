@@ -13,7 +13,7 @@ $(function () {
 function login() {
   $.ajax(
     {
-      url: 'api/v1/api.php',
+      url: 'php_scripts/login.php',
       type: 'POST',
       data : { email : $("#email").val(), password : $("#password").val() }
    }).done(goToRestaurants);
