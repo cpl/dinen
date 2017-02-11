@@ -10,10 +10,19 @@ $(function () {
     });
 });
 
-$("#login-form").ajaxForm({url: 'php_scripts/login.php', type: 'post'})
+$(document).ready(function() {
+  $("#login-form").ajaxForm(
+    {
+      url: 'php_scripts/login.php',
+      type: 'post',
+      success: goToRestaurants
+   })
+})
 
-
-
+function goToRestaurants()
+{
+  window.location.replace("restaurants.php");
+}
 
 //this function compare password with c_password:
 function validatePassword() {
