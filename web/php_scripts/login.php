@@ -2,6 +2,7 @@
 <?php
 require_once 'validators.php';
 require_once 'connect_to_db.php';
+login();
 function login() {
   if (!empty($_POST['email'].$_POST['password'])) {
     # Sanitize email and password (for PHP, not SQL).

@@ -10,13 +10,14 @@ $(function () {
     });
 });
 
-$(document).ready(function() {
-  $("#login-form").ajaxForm(
+$("#login-button").click(function() {
+  $.ajax(
     {
       url: 'php_scripts/login.php',
-      type: 'post',
-      success: goToRestaurants
+      type: 'POST',
+      data : { email : $("#email").val(), password : $("#password").val() }
    })
+   .done(goToRestaurants);
 })
 
 function goToRestaurants()
