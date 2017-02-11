@@ -10,6 +10,17 @@ $(function () {
     });
 });
 
+//this function compare password with c_password: 
+function validatePassword() {
+    var password = document.getElementById("password");
+    var confirm_password = document.getElementById("c_password");
+    if (password.value !== confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
+    } else {
+        confirm_password.setCustomValidity('');
+    }
+}
+
 function formToJSON(selectedForm) {
     var json = {};
     $(selectedForm).find(':input[name]:enabled').each(function () {
