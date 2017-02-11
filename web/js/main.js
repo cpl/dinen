@@ -1,4 +1,4 @@
-// Here we will write the code responsible for communicating between frontend and backend 
+// Here we will write the code responsible for communicating between frontend and backend
 //this function modifies the registrationForm submit in order to send JSON data to server:
 $(function () {
     $('#registerForm').on('submit', function (e) {
@@ -10,7 +10,12 @@ $(function () {
     });
 });
 
-//this function compare password with c_password: 
+$("#login-form").ajaxForm({url: 'php_scripts/login.php', type: 'post'})
+
+
+
+
+//this function compare password with c_password:
 function validatePassword() {
     var password = document.getElementById("password");
     var confirm_password = document.getElementById("c_password");
