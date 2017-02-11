@@ -23,7 +23,7 @@ function login() {
   $_SESSION['user'] = $email;
   $_SESSION['manager_id'] = $user[0];
   $_SESSION['name'] = $user[1];
-  header('Location: ../restaurants.php');
+  header('Location: restaurants.php');
   $stmt->close(); $mysqli->close();
   return 'Success.';
 }
