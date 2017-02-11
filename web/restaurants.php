@@ -1,9 +1,4 @@
-<?php
-  session_start();
-  require_once 'php_scripts/restrict_access.php';
-  # Redirect non-managers to the login page.
-  restrict_access(UserType::MANAGER);
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,3 +15,8 @@
   </div>
 </body>
 </html>
+<?php
+  require_once 'php_scripts/restrict_access.php';
+  # Redirect non-managers to the login page.
+  restrict_access(UserType::MANAGER);
+?>
