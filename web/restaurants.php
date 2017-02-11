@@ -1,3 +1,9 @@
+<?php
+  session_start();
+  require_once 'php_scripts/restrict_access.php';
+  # Redirect non-managers to the login page.
+  restrict_access(UserType::MANAGER);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,11 +12,9 @@
 </head>
 <body>
   <?php require_once 'common/navbar.php'; ?>
-  <div class = "container">
+  <div class = 'container'>
     <?php
-      session_start();
-      $name = $_SESSION['name'];
-      echo "Hello, $name. Restaurant list:";
+      echo "Hello, {$_SESSION['name']}. Restaurants you own:";
       require_once 'php_scripts/get_restaurants.php'; echo getRestaurants();
     ?>
   </div>

@@ -1,68 +1,49 @@
 <?php
-require_once("configuration.php");
+require_once('connect_to_db.php');
 function register() {
-  if(empty($_POST['email']))
-    return 'NO EMAIL!';
-  if(empty($_POST['password']))
-    return 'NO PASS!';
   if(empty($_POST['name']))
-    return 'NO NAME!';
+    return 'Name required.';
+  if(empty($_POST['email']))
+    return 'Email required.';
+  if(empty($_POST['password']))
+    return 'Password required.';
   if(empty($_POST['c_password']))
-    return 'NO CPASS!';
-
-  $EMAIL = htmlspecialchars($_POST['email']);
-  $PASSWORD = htmlspecialchars($_POST['password']);
-  $C_PASSWORD = htmlspecialchars($_POST['c_password']);
-  $NAME = htmlspecialchars($_POST['name']);
-
-  if($PASSWORD != $C_PASSWORD) {
-    return 'PASSWORDS DONT MATCH!';
-  }
-
-  if(strlen($PASSWORD) < 8)
-    return "PASS IS LESS THAN 8";
-
-  if(strlen($PASSWORD) > 250)
-    return "PASS IS TOO BIG!";
-
-  if (!preg_match("#[0-9]+#", $PASSWORD)) {
-    return "Password must include at least one number!";
-  }
-
-  if (!preg_match("#[a-zA-Z]+#", $PASSWORD)) {
-    return "Password must include at least one letter!";
-  }
-
-  if (!preg_match("/^[a-zA-Z ]*$/",$NAME)) {
-    return "NAME HAS INVALID CHARS";
-  }
-
-  $PASS_HASH = hash('sha256', $PASSWORD);
-
-
-  if (!filter_var($EMAIL, FILTER_VALIDATE_EMAIL)) {
-    return "INVALID EMAIL";
-  }
-
-  global $db_host, $db_name, $db_pass, $db_user;
-  $SQL = new mysqli($db_host, $db_user, $db_pass, $db_name);
-  if ($SQL->connect_error) {
-    return "Couldn't connect to database: ".$SQL->connect_error;
-  }
-
-  $DB_EMAIL = $SQL->real_escape_string($EMAIL);
-  $SQL_Q = "SELECT * FROM users WHERE email='$DB_EMAIL'";
-  $SQL_QR = $SQL->query($SQL_Q);
-
-  if($SQL_QR->num_rows >= 1)
-    return "USER ALREADY EXISTS";
-
-  $SQL_Q = "INSERT INTO users (name, email, password_hash, category) VALUES ('$NAME', '$EMAIL', '$PASS_HASH', 'manager')";
-
-  if ($SQL->query($SQL_Q) === FALSE)
-    return "ERROR IN MAKING RECORD: " . $SQL->error;
-
-  $SQL->close();
-
-  return "YAY";
+    return 'Password confirmation required.';
+  $name = htmlspecialchars($_POST['name']);
+  $email = htmlspecialchars($_POST['email']);
+  $password = htmlspecialchars($_POST['password']);
+  $c_password = htmlspecialchars($_POST['c_password']);
+  if (preg_match('/[^a-zA-Z\s-]+/', $name))
+    return 'Names must only consist of letters and hyphens.';
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+    return 'Invalid email.';
+  if(strlen($password) < 8)
+    return 'Passwords must be more than 7 characters.';
+  if(strlen($password) > 250)
+    return 'Passwords must be less than 251 characters.';
+  if (!preg_match('/[0-9]+/', $password))
+    return 'Passwords must include at least one number!';
+  if (!preg_match('/[a-zA-Z]+/', $password))
+    return 'Passwords must include at least one letter!';
+  if($password != $c_password)
+    return 'Passwords do not match.';
+  $password_hash = hash('sha256', $password);
+  global $mysqli;
+  if ($mysqli->connect_error)
+    return 'Database connection failed.';
+  $stmt = $mysqli->prepare('SELECT * FROM users WHERE email = ?');
+  $stmt->bind_param('s', $email); $stmt->execute();
+  if($stmt->get_result()->num_rows >= 1)
+    return 'User already exists.';
+  $stmt->close();
+  $stmt = $mysqli->prepare('INSERT INTO
+                            users (name, email, password_hash, category)
+                            VALUES (?, ?, ?, ?)');
+  $category = 'manager';
+  $stmt->bind_param('ssss', $name, $email, $password_hash, $category);
+  $stmt->execute();
+  if ($stmt->errno != 0)
+    return 'Failed to create user.';
+  $stmt->close(); $mysqli->close();
+  return 'User created.';
 }
