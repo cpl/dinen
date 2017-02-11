@@ -1,6 +1,6 @@
 <?php
-require_once('validators.php');
-require_once('connect_to_db.php');
+require_once 'validators.php';
+require_once 'connect_to_db.php';
 function register() {
   if (!empty($_POST['name'].$_POST['email']
              .$_POST['password'].$_POST['c_password'])) {
