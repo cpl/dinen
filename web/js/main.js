@@ -59,7 +59,7 @@ function formToJSON(selectedForm) {
  * _requestWsPost - private method for RESTFul API POST call
  * @param {string} urlCmd = serverURL + wsRoot + wsCmd
  * @param {string} requestData
- * @param {string} callBackFN = numele functiei care va fi apelata cand primim raspunsul din server
+ * @param {string} callBackFN = the name of the function will be called after we get the response
  */
 function requestWsPost(urlCmd, requestData, callBackFN) {
     $.post(urlCmd, requestData)
