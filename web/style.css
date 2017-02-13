@@ -1,7 +1,7 @@
 
 html {
-    /*http://gdurl.com/ZnoM<<darkerpicture*/
-    background: url("http://gdurl.com/9k9o")no-repeat center center fixed; 
+    /* lighter picture: http://gdurl.com/9k9o */
+    background: url("http://gdurl.com/ZnoM")no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -32,7 +32,7 @@ html {
 }
 
 .header a {
-    font-family: Bushcraft, Times, Arial;	
+    font-family: Bushcraft, Times, Arial;
     color: white;
     font-size: 20px;
     text-decoration: none;
@@ -40,22 +40,22 @@ html {
     margin-top: 20px;
 }
 
-#login { 
+#login {
 	margin-right: 20px;
-			
+
 }
 
 #signup {
 	margin-right: 200px;
-	
+
 }
 
 .logo {
 	float:left;
     width: 50px;
     height: 50px;
-    margin-left: 200px; 
-} 
+    margin-left: 200px;
+}
 
 .transparent {
 	background-color:rgba(0, 0, 0, 0);
@@ -69,15 +69,17 @@ html {
 
 .button {
 	border: 1px solid #808080;
-	border-radius: 5px;
+	border-radius: 4px;
 	font-family: Bushcraft, Times;
+  font-size: 12pt;
 	color: white;
-	background-color: #4A4545;
+	background-color: #3d3838;
 	text-align: center;
-	width: 175px;
+  line-height: 1.75em;
+	width: 182px;
 	height: 30px;
 }
-	
+
 .button:hover {
 	background-color: #554C4C;
 }
@@ -86,3 +88,12 @@ html {
 	top:1px;
 }
 
+.logininput {
+    width: 175px;
+    height: 25px;
+    border: 1px solid #808080;
+	  border-radius: 4px;
+    background-color: #585252;
+    color: white;
+    padding-left: 4px
+}
