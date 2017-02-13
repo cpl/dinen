@@ -6,19 +6,18 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    height: 100%;
+}
+
+body {
+    padding: 20px;
+    height: 100%;
+    background: transparent;
 }
 
 @font-face{
 	font-family: Bushcraft;
 	src: url("fonts/Bushcraft one.otf") format("otf");
-}
-
-.form{
-	position: absolute;
-    top: 43%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
 }
 
 .header {
@@ -54,9 +53,6 @@ html {
 .navbar {
     background: transparent;
     border: transparent;
-    padding-top: 40px;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 .navbar-brand {
@@ -83,7 +79,7 @@ html {
     -webkit-transition:height 1s;
 }
 
-.button {
+.btn-login {
 	border: 1px solid #808080;
 	border-radius: 4px;
 	font-family: Bushcraft, Times;
@@ -92,21 +88,33 @@ html {
 	background-color: #3d3838;
 	text-align: center;
     line-height: 1.75em;
-	width: 182px;
-	height: 30px;
 }
 
-.button:hover {
+.btn-login:hover {
 	background-color: #554C4C;
+    color: white;
 }
-.button:active {
+.btn-login:active {
 	position:relative;
+    color: white;
 	top:1px;
 }
 
-.logininput {
-    width: 175px;
-    height: 25px;
+#login-form {
+    width: 100%;
+}
+
+.form-container {
+    min-height: 75%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 75vh; /* These two lines are counted as one :-)       */
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 256px;
+}
+
+.form-control {
     border: 1px solid #808080;
 	border-radius: 4px;
     background-color: #585252;
