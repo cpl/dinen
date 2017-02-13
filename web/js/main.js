@@ -1,8 +1,8 @@
-// Here we will write the code responsible for communicating between frontend and backend 
+// Here we will write the code responsible for communicating between frontend and backend
 
 var serverURL = ""; //  or: "/api/" put the server url here
 
-//this function compare password with c_password: 
+//this function compare password with c_password:
 function validatePassword() {
     var password = document.getElementById("password");
     var confirm_password = document.getElementById("c_password");
@@ -77,7 +77,7 @@ function requestWsPost(urlCmd, requestData, callBackFN) {
 }
 
 /**
- * _processAllWSResponse - private method only for requestWsPost 
+ * _processAllWSResponse - private method only for requestWsPost
  * @param {string} responseData
  * @param {string} callBackFN
  * @returns {undefined}
@@ -85,4 +85,32 @@ function requestWsPost(urlCmd, requestData, callBackFN) {
 function _processAllWSResponse(responseData, callBackFN) {
     //console.log('_processAllWSResponse - callBackFN: ' + callBackFN + " - responseData: " + JSON.stringify(responseData));
     this[callBackFN](responseData);
+}
+
+function register()
+{
+  var formData = formToJSON("#registerForm");
+  $.ajax(
+    {
+      url: 'php_scripts/register.php',
+      type: 'POST',
+      data: formData
+   }).done(goToRestaurants);
+   return false;
+}
+
+function login() {
+  var formData = { email : $("#email").val(), password : $("#password").val()};
+  $.ajax(
+    {
+      url: 'php_scripts/login.php',
+      type: 'POST',
+      data: formData
+   }).done(goToRestaurants);
+   return false;
+}
+
+function goToRestaurants()
+{
+  window.location.replace("restaurants.php");
 }
