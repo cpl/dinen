@@ -3,20 +3,45 @@
   <head>
     <title> Dinen - Log In </title>
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
   </head>
 
-  <div class="header">
-      <a href="index.html">
-          <img class = "logo" src="http://gdurl.com/PH8I"/>
-      </a>
-      <a id = "login" href = "login.html">LOG IN</a>
-      <a id = "signup" href = "register.html">SIGN UP</a>
+  <body>
 
-  </div>
+      <!-- <div class="header">
+          <a href="index.html">
+              <img class = "logo" src="http://gdurl.com/PH8I"/>
+          </a>
+          <a id = "login" href = "login.html">LOG IN</a>
+          <a id = "signup" href = "register.html">SIGN UP</a>
 
-  <body >
+      </div> -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <img class="logo" src="http://gdurl.com/PH8I"/>
+                </a>
+             </div>
+             <div class="collapse navbar-collapse" id="navbar">
+                 <ul class="nav navbar-nav navbar-right">
+                     <li class="active"><a href="login.html">Log In</a></li>
+                     <li><a href="register.html">Sign Up</a></li>
+                 </ul>
+             </div>
+          </div>
+      </nav>
 
   <!-- whatever name the backend puts for the action -->
     <form class = "form" action="welcome.php" method="post">
@@ -28,6 +53,10 @@
       <input class = "button" type="submit" value ="Log in">
 
     </form>
+
+    <script type="text/javascript" src="js/vendor/bootstrap.js"></script>
+
+    <script src="js/main.js"></script> <!-- Here we will write the code responsible for communicating between frontend and backend -->
 
   </body>
 </html>

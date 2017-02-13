@@ -10,7 +10,7 @@ html {
 
 @font-face{
 	font-family: Bushcraft;
-	src: url("./Bushcraft one.otf") format("otf");
+	src: url("fonts/Bushcraft one.otf") format("otf");
 }
 
 .form{
@@ -51,11 +51,26 @@ html {
 
 }
 
+.navbar {
+    background: transparent;
+    border: transparent;
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.navbar-brand {
+    padding: 8px;
+}
+
+.navbar-right {
+    font-family: Bushcraft;
+    font-size: 14pt;
+    text-align: center;
+}
+
 .logo {
-	float:left;
-    width: 50px;
-    height: 50px;
-    margin-left: 200px;
+    height: 36px;
 }
 
 .transparent {
@@ -72,11 +87,11 @@ html {
 	border: 1px solid #808080;
 	border-radius: 4px;
 	font-family: Bushcraft, Times;
-  font-size: 12pt;
+    font-size: 12pt;
 	color: white;
 	background-color: #3d3838;
 	text-align: center;
-  line-height: 1.75em;
+    line-height: 1.75em;
 	width: 182px;
 	height: 30px;
 }
@@ -93,7 +108,7 @@ html {
     width: 175px;
     height: 25px;
     border: 1px solid #808080;
-	  border-radius: 4px;
+	border-radius: 4px;
     background-color: #585252;
     color: white;
     padding-left: 4px
