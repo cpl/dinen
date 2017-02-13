@@ -87,12 +87,25 @@ function _processAllWSResponse(responseData, callBackFN) {
     this[callBackFN](responseData);
 }
 
+function register()
+{
+  var formData = formToJSON("#registerForm");
+  $.ajax(
+    {
+      url: 'php_scripts/register.php',
+      type: 'POST',
+      data: formData
+   }).done(goToRestaurants);
+   return false;
+}
+
 function login() {
+  var formData = { email : $("#email").val(), password : $("#password").val()};
   $.ajax(
     {
       url: 'php_scripts/login.php',
       type: 'POST',
-      data : { email : $("#email").val(), password : $("#password").val() }
+      data: formData
    }).done(goToRestaurants);
    return false;
 }
