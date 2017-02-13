@@ -8,7 +8,7 @@
 <?php require_once 'common/navbar.php'; ?>
 <div class = 'container'>
   <?php
-    require_once 'php_scripts/login.php'; echo login();
+    require_once 'php_scripts/login.php'; //echo login();
     require_once 'php_scripts/validators.php';
     echo "
       <form action='login.php' method='post'>
@@ -24,7 +24,10 @@
         <button type='submit' class='btn btn-primary'>Login</button>
       </form>
     ";
-  ?>
+    if($_SESSION === NULL)
+      echo 'Session is null';
+    var_dump($_SESSION);
+    ?>
 </div>
 </body>
 </html>

@@ -11,7 +11,8 @@
       <li><a href='#'>Customers</a></li>
     </ul>
     <?php
-      session_start();
+      if(session_status() == PHP_SESSION_NONE)
+        session_start();
       require_once 'php_scripts/restrict_access.php';
       if (logged_in())
         echo "

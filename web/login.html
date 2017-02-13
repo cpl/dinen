@@ -2,28 +2,30 @@
 <html>
   <head>
     <title> Dinen - Log In </title>
-    <link rel="stylesheet" type="text/css" href="style.css">
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-    <!--or href="css/bootstrap.css"-->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/login.css">
   </head>
 
   <div class="header">
-      <img class = "logo" src="http://gdurl.com/PH8I"/> 
-      <a id = "login" href = "the log in page?">LOG IN</a>
-      <a id = "signup" href = "the sign in page?">SIGN UP</a>  
-      
+      <a href="index.html">
+          <img class = "logo" src="http://gdurl.com/PH8I"/>
+      </a>
+      <a id = "login" href = "login.html">LOG IN</a>
+      <a id = "signup" href = "register.html">SIGN UP</a>
+
   </div>
 
-  <body >   
-    
+  <body >
+
   <!-- whatever name the backend puts for the action -->
     <form class = "form" action="welcome.php" method="post">
 
-      <input type="text" name="email" placeholder="Email"><br>
+      <input class="logininput" type="text" name="email" placeholder="Email"><br>
       <br><br>
-      <input type="text" name="password" placeholder="Password"><br>
+      <input class="logininput" type="text" name="password" placeholder="Password"><br>
       <br><br>
-      <input class = "button" type="submit" value ="LOG IN">
+      <input class = "button" type="submit" value ="Log in">
 
     </form>
 
