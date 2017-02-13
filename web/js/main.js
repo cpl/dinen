@@ -14,14 +14,14 @@ function validatePassword() {
 }
 
 //this function modifies the registrationForm submit in order to send JSON data to server:
-$(function () {
+/*$(function () {
     $('#registerForm').on('submit', function (e) {
         e.preventDefault();
         var dataJson = formToJSON("#registerForm");
         console.log("my data JSON: " + JSON.stringify(dataJson));
         requestWsPost(serverURL + "register.php", dataJson, "processRegisterResponse");
     });
-});
+});*/
 
 function processRegisterResponse(response) {
     console.log("processRegisterResponse: " + JSON.stringify(response));
@@ -95,7 +95,10 @@ function register()
       url: 'php_scripts/register.php',
       type: 'POST',
       data: formData
-   }).done(goToRestaurants);
+   }).done(function(msg)
+   {
+     console.log(msg);
+   });
    return false;
 }
 
