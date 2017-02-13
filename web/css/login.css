@@ -18,11 +18,7 @@ html {
     top: 43%;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%) }
-}
-.header a:hover {
-	font-weight: bold;
-	font-color: #D3D3D3;
+    transform: translate(-50%, -50%)
 }
 
 .header {
@@ -38,6 +34,11 @@ html {
     text-decoration: none;
     padding-top: 15px;
     margin-top: 20px;
+}
+
+.header a:hover {
+	text-decoration:underline;
+	color: #D3D3D3;
 }
 
 #login {
