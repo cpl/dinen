@@ -7,12 +7,14 @@ function login() {
   //$_SESSION['data'] = $_POST['data'];
   if (!empty($_POST['email'].$_POST['password'])) {
     # Sanitize email and password (for PHP, not SQL).
+    global $mysqli;
     $email = htmlspecialchars($_POST['email']);
     $password = htmlspecialchars($_POST['password']);
+    $email = $mysqli->real_escape_string($email);
+    $password = $mysqli->real_escape_string($password);
     if (!emailIsValid($email) || !passwordIsValid($password))
       return 'Server-side validation failed.<br><br>';
     $password_hash = hash('sha256', $password);
-    global $mysqli;
     if ($mysqli->connect_error)
       return 'Database connection failed.<br><br>';
     $stmt = $mysqli->prepare('SELECT * FROM users WHERE email = ?
