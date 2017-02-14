@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head> 
+    <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-
+        <link rel="shortcut icon" href="favicon.ico">
         <!-- Website CSS style -->
         <link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -24,9 +24,10 @@
                         <h1 class="title"><a href="index.html">Dinen</a> - Register</h1>
                         <hr />
                     </div>
-                </div> 
+                </div>
                 <div class="main-login main-center">
-                    <form id="registerForm" class="form-horizontal" method="post" action="#">
+                    <div id="msgDiv" hidden="true"></div>
+                    <form id="registerForm" class="form-horizontal" method="post" onsubmit="return register()">
 
                         <div class="form-group">
                             <label for="name" class="cols-sm-2 control-label">Your Name</label>
@@ -53,7 +54,7 @@
                             <div class="cols-sm-10">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                    <input type="password" class="form-control" name="password" id="password" required placeholder="Enter your Password"/>
+                                    <input type="password" class="form-control" name="password" id="password" minlength="8" required placeholder="Enter your Password"/>
                                 </div>
                             </div>
                         </div>
@@ -63,7 +64,7 @@
                             <div class="cols-sm-10">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                    <input type="password" class="form-control" name="c_password" id="c_password" onchange="validatePassword()" required placeholder="Confirm your Password"/>
+                                    <input type="password" class="form-control" name="c_password" id="c_password" onchange="validatePassword()" minlength="8" required placeholder="Confirm your Password"/>
                                 </div>
                             </div>
                         </div>
@@ -72,17 +73,17 @@
                             <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
                         </div>
                         <div class="login-register">
-                            <a href="index.php">Login</a>
+                            <a href="login.html">Login</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>');</script>
         <script type="text/javascript" src="js/vendor/bootstrap.js"></script>
 
-        <script src="js/main.js"></script> <!-- Here we will write the code responsible for communicating between frontend and backend --> 
+        <script src="js/main.js"></script> <!-- Here we will write the code responsible for communicating between frontend and backend -->
 
     </body>
 </html>

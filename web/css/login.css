@@ -1,0 +1,100 @@
+
+html {
+    /* lighter picture: http://gdurl.com/9k9o */
+    background: url("http://gdurl.com/ZnoM")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+@font-face{
+	font-family: Bushcraft;
+	src: url("./Bushcraft one.otf") format("otf");
+}
+
+.form{
+	position: absolute;
+    top: 43%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.header {
+	font-size: 1em;
+	margin-top: 70px;
+	text-align: right;
+}
+
+.header a {
+    font-family: Bushcraft, Times, Arial;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    padding-top: 15px;
+    margin-top: 20px;
+}
+
+.header a:hover {
+	text-decoration:underline;
+	color: #D3D3D3;
+}
+
+#login {
+	margin-right: 20px;
+
+}
+
+#signup {
+	margin-right: 200px;
+
+}
+
+.logo {
+	float:left;
+    width: 50px;
+    height: 50px;
+    margin-left: 200px;
+}
+
+.transparent {
+	background-color:rgba(0, 0, 0, 0);
+    color:white;
+    border: none;
+    outline:none;
+    height:30px;
+    transition:height 1s;
+    -webkit-transition:height 1s;
+}
+
+.button {
+	border: 1px solid #808080;
+	border-radius: 4px;
+	font-family: Bushcraft, Times;
+  font-size: 12pt;
+	color: white;
+	background-color: #3d3838;
+	text-align: center;
+  line-height: 1.75em;
+	width: 182px;
+	height: 30px;
+}
+
+.button:hover {
+	background-color: #554C4C;
+}
+.button:active {
+	position:relative;
+	top:1px;
+}
+
+.logininput {
+    width: 175px;
+    height: 25px;
+    border: 1px solid #808080;
+	  border-radius: 4px;
+    background-color: #585252;
+    color: white;
+    padding-left: 4px
+}

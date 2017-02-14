@@ -1,0 +1,4 @@
+#!/bin/bash
+php login.php > login.html
+chromium-browser login.html &
+
