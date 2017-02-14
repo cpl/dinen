@@ -10,10 +10,10 @@ body, html{
     margin-top: 10px;
 }
 
-h1.title { 
+h1.title {
     font-size: 50px;
-    font-family: 'Passion One', cursive; 
-    font-weight: 400; 
+    font-family: 'Passion One', cursive;
+    font-weight: 400;
 }
 
 hr{
@@ -63,18 +63,3 @@ input::-webkit-input-placeholder {
     font-size: 11px;
     text-align: center;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
