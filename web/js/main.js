@@ -102,7 +102,8 @@ function register()
            goToRestaurants();
        else
        {
-           $("#msgDiv").text = msg;
+           console.log(msg);
+           $('#msgDiv').html(msg);
        }
    });
    return false;
