@@ -1,0 +1,45 @@
+html {
+    background: url("../img/cafe blurred dark.jpg") no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+}
+
+body {
+    padding: 20px;
+    height: 100%;
+    background: transparent;
+}
+
+@font-face{
+	font-family: Bushcraft;
+	src: url("fonts/Bushcraft one.otf") format("otf");
+}
+
+.navbar {
+    background: transparent;
+    border: transparent;
+}
+
+.navbar-brand {
+    padding: 8px;
+}
+
+.navbar-right {
+    font-family: Bushcraft;
+    font-size: 14pt;
+    text-align: center;
+}
+
+.panel-title, .panel-heading, .title {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.logo {
+    height: 36px;
+}
