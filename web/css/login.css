@@ -1,24 +1,22 @@
 
 html {
-    /* lighter picture: http://gdurl.com/9k9o */
-    background: url("http://gdurl.com/ZnoM")no-repeat center center fixed;
+    background: url("../img/cafe blurred dark.jpg") no-repeat center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    height: 100%;
+}
+
+body {
+    padding: 20px;
+    height: 100%;
+    background: transparent;
 }
 
 @font-face{
 	font-family: Bushcraft;
-	src: url("./Bushcraft one.otf") format("otf");
-}
-
-.form{
-	position: absolute;
-    top: 43%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
+	src: url("fonts/Bushcraft one.otf") format("otf");
 }
 
 .header {
@@ -51,11 +49,23 @@ html {
 
 }
 
+.navbar {
+    background: transparent;
+    border: transparent;
+}
+
+.navbar-brand {
+    padding: 8px;
+}
+
+.navbar-right {
+    font-family: Bushcraft;
+    font-size: 14pt;
+    text-align: center;
+}
+
 .logo {
-	float:left;
-    width: 50px;
-    height: 50px;
-    margin-left: 200px;
+    height: 36px;
 }
 
 .transparent {
@@ -68,32 +78,44 @@ html {
     -webkit-transition:height 1s;
 }
 
-.button {
+.btn-login {
 	border: 1px solid #808080;
 	border-radius: 4px;
 	font-family: Bushcraft, Times;
-  font-size: 12pt;
+    font-size: 12pt;
 	color: white;
 	background-color: #3d3838;
 	text-align: center;
-  line-height: 1.75em;
-	width: 182px;
-	height: 30px;
+    line-height: 1.75em;
 }
 
-.button:hover {
+.btn-login:hover {
 	background-color: #554C4C;
+    color: white;
 }
-.button:active {
+.btn-login:active {
 	position:relative;
+    color: white;
 	top:1px;
 }
 
-.logininput {
-    width: 175px;
-    height: 25px;
+#login-form {
+    width: 100%;
+}
+
+.form-container {
+    min-height: 75%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 256px;
+}
+
+.form-control {
     border: 1px solid #808080;
-	  border-radius: 4px;
+	border-radius: 4px;
     background-color: #585252;
     color: white;
     padding-left: 4px

@@ -23,8 +23,8 @@
       else
         echo "
           <ul class='nav navbar-nav navbar-right'>
-            <li><a href ='login.php'>Login</a></li>
-            <li><a href ='register.php'>Sign up</a></li>
+            <li><a href ='login.html'>Login</a></li>
+            <li><a href ='register.html'>Sign up</a></li>
           </ul>
         ";
     ?>
