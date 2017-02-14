@@ -1,7 +1,6 @@
 
 html {
-    /* lighter picture: http://gdurl.com/9k9o */
-    background: url("http://gdurl.com/ZnoM")no-repeat center center fixed;
+    background: url("../img/cafe blurred dark.jpg") no-repeat center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
