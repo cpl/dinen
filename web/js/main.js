@@ -97,7 +97,14 @@ function register()
       data: formData
    }).done(function(msg)
    {
-     console.log(msg);
+       // If user created, redirect to restaurants.php, else print error to user
+       if(msg == "User created")
+           goToRestaurants();
+       else
+       {
+           console.log(msg);
+           $('#msgDiv').html(msg);
+       }
    });
    return false;
 }
