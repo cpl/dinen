@@ -11,16 +11,16 @@ function register() {
     $c_password = htmlspecialchars($_POST['c_password']);
     if (!nameIsValid($name) || !emailIsValid($email)
         || !passwordsAreValid($password, $c_password))
-      return 'Server-side validation failed.<br><br>';
+      return 'Either name or email or password are not of required format';
     $password_hash = hash('sha256', $password);
     global $mysqli;
     if ($mysqli->connect_error)
-      return 'Database connection failed.<br><br>';
+      return 'Database connection failed';
     $stmt = $mysqli->prepare('SELECT * FROM users WHERE email = ?');
     $stmt->bind_param('s', $email);
     $stmt->execute();
     if ($stmt->get_result()->num_rows >= 1)
-      return 'User already exists.<br><br>';
+      return 'User already exists';
     $stmt->close();
     $stmt = $mysqli->prepare('INSERT INTO
                               users (name, email, password_hash, category)
@@ -29,9 +29,9 @@ function register() {
     $stmt->bind_param('ssss', $name, $email, $password_hash, $category);
     $stmt->execute();
     if ($stmt->errno != 0)
-      return 'Failed to create user.<br><br>';
+      return 'Failed to create user';
     $stmt->close();
     $mysqli->close();
-    return 'User created.<br><br>';
+    return 'User created';
   }
 }
