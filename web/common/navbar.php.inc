@@ -23,7 +23,7 @@
         if (logged_in())
           echo "
             <ul class='nav navbar-nav navbar-right'>
-              <li><a><span class='glyphicon glyphicon-user'></span>[Insert Username Here]</a></li>
+              <li><a><span class='glyphicon glyphicon-user'></span>$_SESSION['user_category']</a></li>
               <li><a href ='php_scripts/logout.php'>Logout</a></li>
             </ul>
           ";
