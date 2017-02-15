@@ -29,7 +29,7 @@ function login() {
 }
 function formToJSON(form) {
   var json = {};
-  $(form).find(':input[name]:enabled').each( function() {
+  $(form).find(':input[name]:enabled').each(function() {
     var self = $(this);
     var name = self.attr('name');
     if (json[name]) {
