@@ -40,13 +40,13 @@ function formToJSON(form) {
   });
   return JSON.stringify(json);
 }
-/*
+
 function validatePassword() {
   if ($('#password').val() === $('#password_confirmation').val()) {
-      confirm_password.setCustomValidity('');
-    } else {
-      confirm_password.setCustomValidity("Passwords Don't Match");
-    }
+    confirm_password.setCustomValidity('');
+  } else {
+    confirm_password.setCustomValidity("Passwords do not match");
+  }
 }
 function showMsgAlert(component, message) {
   $.ajax({method: "GET", url: "components/" + component, success: function (data) {
@@ -55,4 +55,3 @@ function showMsgAlert(component, message) {
     $("#msgDiv").fadeIn(800);
   }});
 }
-*/
