@@ -1,4 +1,3 @@
-
 <?php
 require_once 'validators.php';
 require_once 'connect_to_db.php';
@@ -27,7 +26,6 @@ function login($email, $password) {
     $_SESSION['user_name'] = $user[1];
     $_SESSION['user_email'] = $user[2];
     $_SESSION['user_category'] = $user[4];
-    //header('Location: ../restaurants.php');
     $stmt->close();
     $mysqli->close();
     return 'success';
