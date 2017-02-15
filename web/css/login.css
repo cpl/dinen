@@ -1,24 +1,3 @@
-
-html {
-    background: url("../img/cafe blurred dark.jpg") no-repeat center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100%;
-}
-
-body {
-    padding: 20px;
-    height: 100%;
-    background: transparent;
-}
-
-@font-face{
-	font-family: Bushcraft;
-	src: url("fonts/Bushcraft one.otf") format("otf");
-}
-
 .header {
 	font-size: 1em;
 	margin-top: 70px;
@@ -39,33 +18,15 @@ body {
 	color: #D3D3D3;
 }
 
-#login {
-	margin-right: 20px;
-
-}
-
-#signup {
-	margin-right: 200px;
-
-}
-
 .navbar {
     background: transparent;
     border: transparent;
-}
-
-.navbar-brand {
-    padding: 8px;
 }
 
 .navbar-right {
     font-family: Bushcraft;
     font-size: 14pt;
     text-align: center;
-}
-
-.logo {
-    height: 36px;
 }
 
 .transparent {

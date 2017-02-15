@@ -1,13 +1,35 @@
-
-body, html{
+html {
+    background: url("../img/cafe blurred dark.jpg") no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     height: 100%;
-    background-repeat: no-repeat;
-    background-color: #d3d3d3;
     font-family: 'Oxygen', sans-serif;
 }
 
-.main{
+body {
+    padding: 20px;
+    height: 100%;
+    background: transparent;
+}
+
+@font-face{
+	font-family: Bushcraft;
+	src: url("fonts/Bushcraft one.otf") format("otf");
+}
+
+.main {
     margin-top: 10px;
+}
+
+.navbar-brand {
+    padding: auto;
+    vertical-align: middle;
+}
+
+.logo {
+    height: 36px;
 }
 
 h1.title {
