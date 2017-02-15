@@ -6,7 +6,7 @@
     switch ($userType) {
       case UserType::MANAGER:
         if ($_SESSION['user_category'] != 'manager') {
-          header('Location: login.php');
+          header('Location: login.html');
           exit('Page restricted to managers.');
         }
         break;
