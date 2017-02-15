@@ -2,21 +2,15 @@
 <?php
 require_once 'validators.php';
 require_once 'connect_to_db.php';
-login();
-function login() {
-  //$_SESSION['data'] = $_POST['data'];
-  if (!empty($_POST['email'].$_POST['password'])) {
+function login($email, $password) {
+  if (!empty($email.$password)) {
     # Sanitize email and password (for PHP, not SQL).
     global $mysqli;
-    $email = htmlspecialchars($_POST['email']);
-    $password = htmlspecialchars($_POST['password']);
-    $email = $mysqli->real_escape_string($email);
-    $password = $mysqli->real_escape_string($password);
     if (!emailIsValid($email) || !passwordIsValid($password))
-      return 'Server-side validation failed.<br><br>';
+      return 'Server-side validation failed.';
     $password_hash = hash('sha256', $password);
     if ($mysqli->connect_error)
-      return 'Database connection failed.<br><br>';
+      return 'Database connection failed.';
     $stmt = $mysqli->prepare('SELECT * FROM users WHERE email = ?
                               AND password_hash = ?');
     $stmt->bind_param('ss', $email, $password_hash);
@@ -24,7 +18,7 @@ function login() {
     $stmt_result = $stmt->get_result();
     # If no users are found, then the credentials are incorrect.
     if ($stmt_result->num_rows <= 0)
-      return 'Invalid email-password combination.<br><br>';
+      return 'Invalid email-password combination.';
     $user = $stmt_result->fetch_row();
     # Store the user's info in a PHP session.
     if(session_status() == PHP_SESSION_NONE)
@@ -36,6 +30,7 @@ function login() {
     //header('Location: ../restaurants.php');
     $stmt->close();
     $mysqli->close();
-    return 'Success.<br><br>';
+    return 'success';
   }
+  return 'Server-side validation failed.';
 }
