@@ -1,56 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Dinen - Sign Up</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- bootstrap -->
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-        <script src="js/vendor/jquery-1.11.2.min.js"></script>
-        <script src="js/vendor/bootstrap.min.js"></script>
-        <link rel="shortcut icon" href="favicon.ico">
-
-        <!-- Website CSS style -->
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-
-        <!-- Page CSS style -->
-        <link rel="stylesheet" type="text/css" href="css/register.css">
-
-        <!-- Website Font style -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-
-        <!-- Google Fonts -->
-        <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+      <?php require_once 'common/head.php.inc'; ?>
+      <link rel="stylesheet" type="text/css" href="css/register.css">
+      <title>Dinen - Sign Up</title>
     </head>
     <body>
-        <!-- Navbar -->
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html">
-                        <img class="logo" src="http://gdurl.com/PH8I"/>
-                    </a>
-                 </div>
-                 <div class="collapse navbar-collapse" id="navbar">
-                     <ul class="nav navbar-nav navbar-right">
-                         <li><a href="login.html">Log In</a></li>
-                         <li class="active"><a href="register.html">Sign Up</a></li>
-                     </ul>
-                 </div>
-              </div>
-          </nav>
+        <?php require_once 'common/navbar.php.inc'; ?>
         <div class="container">
             <div class="row main">
                 <!-- <div class="panel-heading">
                     <div class="panel-title text-center">
-                        <h1 class="title"><a href="index.html">Dinen</a> - Register</h1>
+                        <h1 class="title"><a href="index.php">Dinen</a> - Register</h1>
                         <hr />
                     </div>
                 </div> -->
@@ -110,17 +71,11 @@
                             <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
                         </div>
                         <div class="login-register">
-                            <a href="login.html">Login</a>
+                            <a href="login.php">Login</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>');</script>
-        <script type="text/javascript" src="js/vendor/bootstrap.js"></script>
-
-        <script src="js/main.js"></script> <!-- Here we will write the code responsible for communicating between frontend and backend -->
-
     </body>
 </html>

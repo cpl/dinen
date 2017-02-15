@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php require_once 'common/head.php'; ?>
-  <title>Dinen Login</title>
+  <?php require_once 'common/head.php.inc'; ?>
+  <link rel="stylesheet" type="text/css" href="css/restaurants.css">
+  <title>My Restaurants</title>
 </head>
 <body>
-  <?php require_once 'common/navbar.php'; ?>
+  <?php require_once 'common/navbar.php.inc'; ?>
   <div class = 'container'>
     <?php
       echo "Hello, {$_SESSION['user_name']}. Restaurants you own:";

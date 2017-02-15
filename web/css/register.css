@@ -1,12 +1,13 @@
 .navbar {
     background: transparent;
     border: transparent;
-}
-
-.navbar-right {
     font-family: Bushcraft;
     font-size: 14pt;
     text-align: center;
+}
+
+.navbar-nav>li>a {
+    line-height: 1.5em;
 }
 
 .main-login {
