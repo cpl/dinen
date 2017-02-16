@@ -4,14 +4,76 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <!--<html class="no-js" lang="">--> <!--<![endif]-->
     <head>
-      <?php include_once "common/head.php.inc"; ?>
-      <title>Dinen</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- bootstrap -->
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+      <script src="js/vendor/jquery-1.11.2.min.js"></script>
+      <script src="js/vendor/bootstrap.min.js"></script>
+      <script src="js/main.js"></script>
+      <link rel="shortcut icon" href="favicon.ico">
+
+      <!-- Website CSS style -->
+      <link rel="stylesheet" type="text/css" href="css/main.css">
+
+      <!-- Page CSS style -->
+      <!-- <link rel="stylesheet" type="text/css" href="css/index.css"> -->
+
+      <!-- Website Font style -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+      <!-- Google Fonts -->
+      <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+      <!-- Page title -->
+      <title> Dinen </title>
     </head>
     <body>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <?php include_once "common/navbar.php.inc"; ?>
+        <nav class='navbar navbar-inverse'>
+          <div class='container-fluid'>
+            <div class='navbar-header'>
+              <a class='navbar-brand' href='index.php'>
+                <img class="logo" src="img/Dinen small logo.png"/>
+              </a>
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <ul class='nav navbar-nav'>
+                <!-- TODO: use 'class="active"' to mark the page the user is currently on. -->
+                <li><a href='#'>Business</a></li>
+                <li><a href='#'>Customers</a></li>
+              </ul>
+              <?php
+                if(session_status() == PHP_SESSION_NONE)
+                  session_start();
+                require_once 'php_scripts/restrict_access.php';
+                if (logged_in())
+                  echo "
+                    <ul class='nav navbar-nav navbar-right'>
+                      <li><a><span class='glyphicon glyphicon-user'></span>[Insert Username Here]</a></li>
+                      <li><a href ='php_scripts/logout.php'>Logout</a></li>
+                    </ul>
+                  ";
+                else
+                  echo "
+                    <ul class='nav navbar-nav navbar-right'>
+                      <li><a href='login.html'><span class='glyphicon glyphicon-log-in'></span>Log in</a></li>
+                      <li><a href='register.html'><span class='glyphicon glyphicon-user'></span>Sign Up</a></li>
+                    </ul>
+                  ";
+              ?>
+            </div>
+          </div>
+        </nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
