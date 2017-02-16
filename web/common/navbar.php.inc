@@ -1,7 +1,7 @@
 <nav class='navbar navbar-inverse'>
   <div class='container-fluid'>
     <div class='navbar-header'>
-      <a class='navbar-brand' href='index.html'>
+      <a class='navbar-brand' href='index.php'>
         <img class="logo" src="img/Dinen small logo.png"/>
       </a>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
