@@ -31,9 +31,7 @@ function login() {
 }
 
 function create_restaurant() {
-  var data = formToDict('#createForm', ':input[name]:enabled');
-  jQuery.extend(data, formToDict('#createForm', ':textarea[name]:enabled'));
-  jQuery.extend(data, formToDict('#createForm', ':select[name]:enabled'));
+  var data = formToDict('#createForm');
   console.log(data);
   return false;
 }
@@ -44,10 +42,9 @@ function formToJSON(form) {
 }
 
 // Turns form into dictionary
-// find query - query for find function
-function formToDict(form, findQuery) {
+function formToDict(form) {
   var dict = {};
-  $(form).find(findQuery).each(function() {
+  $(form).find(':input[name]:enabled').each(function() {
     var self = $(this);
     var name = self.attr('name');
     if (dict[name]) {
