@@ -15,16 +15,25 @@ body {
 }
 
 @font-face{
-	font-family: Bushcraft;
-	src: url("fonts/Bushcraft one.otf") format("otf");
+	font-family: bushcraft;
+	src: url("../fonts/bushcraft.otf") format("opentype");
 }
 
 .main {
     margin-top: 10px;
 }
 
+.navbar {
+    font-family: bushcraft;
+    font-size: 14pt;
+}
+
 .navbar-brand {
-    padding: 7px;
+    padding: 9px;
+}
+
+.navbar-left>li>a {
+    padding-top: 20px;
 }
 
 .logo {
