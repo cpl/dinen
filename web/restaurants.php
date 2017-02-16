@@ -12,6 +12,9 @@
       echo "Hello, {$_SESSION['user_name']}. Restaurants you own:";
       require_once 'php_scripts/get_restaurants.php'; echo getRestaurants();
     ?>
+    <div>
+      <a href="register_restaurant.html">Add another restaurant</a>
+    </div>
   </div>
 </body>
 </html>
