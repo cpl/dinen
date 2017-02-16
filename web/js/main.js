@@ -1,4 +1,5 @@
 var apiURL = 'api/v1/api.php';
+
 function register() {
   $.ajax({
     url: apiURL,
@@ -13,6 +14,7 @@ function register() {
   });
   return false;
 }
+
 function login() {
   $.ajax({
     url: apiURL,
@@ -27,27 +29,46 @@ function login() {
   });
   return false;
 }
+
+function create_restaurant() {
+  var data = formToDict(form, ':input[name]:enabled');
+  jQuery.extend(data, formToDict(form, ':textarea[name]:enabled'));
+  jQuery.extend(data, formToDict(form, ':select[name]:enabled'));
+  console.log(data);
+  return false;
+}
+
+// turns input from form into JSON format
 function formToJSON(form) {
-  var json = {};
-  $(form).find(':input[name]:enabled').each(function() {
+  return JSON.stringify(formToDict(form, ':input[name]:enabled'));
+}
+
+// Turns form into dictionary
+// find query - query for find function
+function formToDict(form, findQuery) {
+  var dict = {};
+  $(form).find(findQuery).each(function() {
     var self = $(this);
     var name = self.attr('name');
-    if (json[name]) {
-      json[name] = json[name] + ',' + self.val();
+    if (dict[name]) {
+      dict[name] = dict[name] + ',' + self.val();
     } else {
-      json[name] = self.val();
+      dict[name] = self.val();
     }
   });
-  return JSON.stringify(json);
+  return dict;
 }
 
 function validatePassword() {
-  if ($('#password').val() === $('#password_confirmation').val()) {
-    confirm_password.setCustomValidity('');
+  if ($('#password').val() !== $('#password_confirmation').val()) {
+    confirm_password.setCustomValidity('Passwords don\'t match');
+  } else if ($('#password').val.length() < 8) {
+    confirm_password.setCustomValidity('Password length is less than 8');
   } else {
-    confirm_password.setCustomValidity("Passwords do not match");
+    confirm_password.setCustomValidity('');
   }
 }
+
 function showMsgAlert(component, message) {
   $.ajax({method: "GET", url: "components/" + component, success: function (data) {
     data = data.toString().replace("#msg#", message);
