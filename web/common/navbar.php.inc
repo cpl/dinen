@@ -11,7 +11,7 @@
       </button>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
-      <ul class='nav navbar-nav'>
+      <ul class='nav navbar-left navbar-nav'>
         <!-- TODO: use 'class="active"' to mark the page the user is currently on. -->
         <li><a href='#'>Business</a></li>
         <li><a href='#'>Customers</a></li>
