@@ -32,7 +32,19 @@ function login() {
 
 function create_restaurant() {
   var data = formToDict('#createForm');
+  data['request'] = 'register_restaurant';
   console.log(data);
+  $.ajax({
+    url: apiURL,
+    type: 'POST',
+    data: data
+  }).done(function(response) {
+    if (response == 'success') {
+      window.location.replace("restaurants.php");
+    } else {
+      alert(response);
+    }
+  });
   return false;
 }
 
