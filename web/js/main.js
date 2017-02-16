@@ -31,9 +31,9 @@ function login() {
 }
 
 function create_restaurant() {
-  var data = formToDict(form, ':input[name]:enabled');
-  jQuery.extend(data, formToDict(form, ':textarea[name]:enabled'));
-  jQuery.extend(data, formToDict(form, ':select[name]:enabled'));
+  var data = formToDict('#createForm', ':input[name]:enabled');
+  jQuery.extend(data, formToDict('#createForm', ':textarea[name]:enabled'));
+  jQuery.extend(data, formToDict('#createForm', ':select[name]:enabled'));
   console.log(data);
   return false;
 }
