@@ -14,28 +14,30 @@ function create_restaurant() {
     return 'Restaurant name is missing';
   if (empty($_POST['description']))
     return 'Description is empty';
-  if (empty($_POST['type']))
+  if (empty($_POST['category']))
     return 'Restaurant has no type';
   global $mysqli;
   if ($mysqli->connect_error)
     return 'Database connection failed.';
   $address_id = create_address();
-  if($address_id == -1)
-    return "Failed to create address.";
-  $stmt = $mysqli->prepare('INSERT INTO restaurants (name,' .
-                             'description, type, address_id, manager_id)' .
-                             ' VALUES (?, ?, ?, ?, ?)');
+  // if is not integer
+  if(strval($address_id) != strval(intval($address_id)))
+    return $address_id;
+  $stmt = $mysqli->prepare('INSERT INTO restaurants (name,
+                            description, category, address_id, manager_id)
+                            VALUES (?, ?, ?, ?, ?)');
   // santize name, type and description
   $name = htmlspecialchars($_POST['name']);
-  $type = htmlspecialchars($_POST['type']);
+  $category = htmlspecialchars($_POST['category']);
   $description = htmlspecialchars($_POST['description']);
   // create and execute sql request
-  $stmt->bind_param('sssss', $name, $description, $type, $address_id, $_POST['user_id']);
+  $stmt->bind_param('sssii', $name, $description, $category, $address_id, $_SESSION['user_id']);
   $stmt->execute();
   if ($stmt->errno != 0)
     return 'Failed to create restaurant.';
   // get the returned string of schedule creation
-  $scheduleReturn = create_schedule();
+  $scheduleReturn = create_schedule($stmt->insert_id);
+  $stmt->close();
   $mysqli->close();
   return $scheduleReturn;
 }
@@ -49,11 +51,11 @@ function create_schedule($restaurant_id)
   global $mysqli;
   $days = array("monday", "tuesday", "wednesday", "thursday", "friday",
                 "saturday", "sunday");
-  $stmt = $mysqli->prepare('INSERT INTO schedules (restaurant_id, day_of_week, time_open, time_close)' .
-                           ' VALUES (?, ?, ?, ?)');
+  $stmt = $mysqli->prepare('INSERT INTO schedules (restaurant_id, day_of_week, time_open, time_close)
+                            VALUES (?, ?, ?, ?)');
   $dayOfWeek = 1;
   // for each day of the week
-  foreach($day in $days)
+  foreach($days as $day)
   {
     // check that day of the week exists in
     $startTimeString = $day . "StartTime";
@@ -66,6 +68,7 @@ function create_schedule($restaurant_id)
     }
     // TODO: Check start time string and end time string for
     // potential vulnerabilities
+    // Also, transform it into sql - readable format
     $stmt->bind_param('ssss', $restaurant_id, $dayOfWeek, $startTimeString, $endTimeString);
     $stmt->execute();
     if ($stmt->errno != 0)
@@ -79,15 +82,15 @@ function create_schedule($restaurant_id)
 
 // Create address function
 // Creates address entry in sql dbase
-// Returns id of address if successful, -1 otherwise
+// Returns id of address if successful, error string otherwise
 function create_address()
 {
   global $mysqli;
-  if(empty($_POST['town'])
-    return 'Town is missing.'
-  if(empty($_POST['country'])
+  if(empty($_POST['town']))
+    return 'Town is missing.';
+  if(empty($_POST['country']))
     return 'Country is missing.';
-  if(empty($_POST['street1'])
+  if(empty($_POST['street1']))
     return 'Empty street input.';
   $town = htmlspecialchars($_POST['town']);
   $country = htmlspecialchars($_POST['country']);
@@ -100,13 +103,13 @@ function create_address()
     $street2 = "";
   else
     $street2 = htmlspecialchars($_POST['street2']);
-  $stmt = $mysqli->prepare('INSERT INTO addresses (street_name_line_1,' .
-                           'street_name_line_2, town, country, postcode)' .
-                           ' VALUES (?, ?, ?, ?, ?)');
+  $stmt = $mysqli->prepare('INSERT INTO addresses (street_name_line_1,
+                            street_name_line_2, town, country, postcode)
+                            VALUES (?, ?, ?, ?, ?)');
   $stmt->bind_param('sssss', $street1, $street2, $town, $country, $postcode);
   $stmt->execute();
   if ($stmt->errno != 0)
-    return -1;
+    return 'Failed to create address' . $stmt->error;
   $id = $stmt->insert_id;
   $stmt->close();
   return $id;

@@ -12,7 +12,7 @@ switch ($request) {
     processLoginRequest();
     break;
   case 'register_restaurant':
-    create_restaurant();
+    echo json_encode(create_restaurant());
     break;
 }
 
