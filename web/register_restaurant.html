@@ -58,7 +58,7 @@
 
       <!-- whatever name the backend puts for the action -->
       <div class="container-fluid form-container">
-          <form id="loginForm" role="form" onsubmit="return login()">
+          <form id="createForm" role="form" onsubmit="return create_restaurant()">
             <div class="form-group">
               <input name="name" type="text" placeholder="Restaurant name" class="form-control">
             </div>
@@ -69,8 +69,8 @@
             <div class="form-group">
                 Country:
                 <input name="country" type="text" class="form-control" placeholder="Country">
-                City:
-                <input name="city" type="text" class="form-control" placeholder="City">
+                Town:
+                <input name="town" type="text" class="form-control" placeholder="Town">
                 Street:
                 <input name="street1" type="text" class="form-control" placeholder="Street address">
                 <input name="street2" type="text" class="form-control" placeholder="Street address 2">
@@ -128,7 +128,7 @@
             </div>
 
             <div class="form-group">
-                <select name="type" placeholder="Tavern">
+                <select name="category" placeholder="tavern">
                     <option value="tavern">Tavern</option>
                     <option value="pub">Pub</option>
                     <option value="restaurant">Restaurant</option>
