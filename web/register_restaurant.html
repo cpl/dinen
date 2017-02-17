@@ -1,149 +1,211 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title> Dinen - Create restaurant</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
 
-    <!-- bootstrap -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-    <script src="js/vendor/jquery-1.11.2.min.js"></script>
-    <script src="js/vendor/bootstrap.min.js"></script>
-    <link rel="shortcut icon" href="favicon.ico">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Website CSS style -->
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+        <!-- bootstrap -->
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+        <script src="js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
+        <link rel="shortcut icon" href="favicon.ico">
 
-    <!-- Page CSS style -->
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+        <!-- Website CSS style -->
+        <link rel="stylesheet" type="text/css" href="css/main.css">
 
-    <!-- Website Font style -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+        <!-- Page CSS style -->
+        <link rel="stylesheet" type="text/css" href="css/register.css">
 
-    <!-- Google Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-  </head>
+        <!-- Website Font style -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
-  <body>
+        <!-- Google Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 
-      <!-- <div class="header">
-          <a href="index.html">
-              <img class = "logo" src="http://gdurl.com/PH8I"/>
-          </a>
-          <a id = "login" href = "login.html">LOG IN</a>
-          <a id = "signup" href = "register.html">SIGN UP</a>
+        <!-- Page title -->
+        <title> Dinen - Register restaurant </title>
+    </head>
 
-      </div> -->
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">
-                    <img class="logo" src="img/Dinen small logo.png"/>
-                </a>
-             </div>
-             <div class="collapse navbar-collapse" id="navbar">
-                 <ul class="nav navbar-nav navbar-right">
-                     <li class="active"><a href="login.html">Log In</a></li>
-                     <li><a href="register.html">Sign Up</a></li>
-                 </ul>
-             </div>
-          </div>
-      </nav>
-
-      <!-- whatever name the backend puts for the action -->
-      <div class="container-fluid form-container">
-          <form id="createForm" role="form" onsubmit="return create_restaurant()">
-            <div class="form-group">
-              <input name="name" type="text" placeholder="Restaurant name" class="form-control">
+    <body>
+        <nav class='navbar navbar-inverse'>
+            <div class='container-fluid'>
+                <div class='navbar-header'>
+                    <a class='navbar-brand' href='index.php'>
+                        <img class="logo" src="img/Dinen small logo.png" />
+                    </a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class='nav navbar-left navbar-nav'>
+                        <li><a href='#'>Business</a></li>
+                        <li><a href='#'>Customers</a></li>
+                    </ul>
+                    <ul class='nav navbar-nav navbar-right'>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Themes <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" data-theme="default" class="theme-link">Default</a></li>
+                                <li><a href="#" data-theme="amelia" class="theme-link">Amelia</a></li>
+                                <li><a href="#" data-theme="cerulean" class="theme-link">Cerulean</a></li>
+                                <li><a href="#" data-theme="cosmo" class="theme-link">Cosmo</a></li>
+                                <li><a href="#" data-theme="cyborg" class="theme-link">Cyborg</a></li>
+                                <li><a href="#" data-theme="flatly" class="theme-link">Flatly</a></li>
+                                <li><a href="#" data-theme="journal" class="theme-link">Journal</a></li>
+                                <li><a href="#" data-theme="readable" class="theme-link">Readable</a></li>
+                                <li><a href="#" data-theme="simplex" class="theme-link">Simplex</a></li>
+                                <li><a href="#" data-theme="slate" class="theme-link">Slate</a></li>
+                                <li><a href="#" data-theme="spacelab" class="theme-link">Spacelab</a></li>
+                                <li><a href="#" data-theme="united" class="theme-link">United</a></li>
+                            </ul>
+                        </li>
+                        <li><a href='login.html'><span class='glyphicon glyphicon-log-in'></span>Log in</a></li>
+                        <li class="active"><a href='register.html'><span class='glyphicon glyphicon-user'></span>Sign Up</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="form-group">
-              <textarea name="description" class="form-control"></textarea>
+        </nav>
+        <div class="container">
+            <div class="row main">
+                <!-- <div class="panel-heading">
+                              <div class="panel-title text-center">
+                                  <h1 class="title"><a href="index.php">Dinen</a> - Register</h1>
+                                  <hr />
+                              </div>
+                          </div> -->
+                <div class="main-login register-restaurant-center">
+                    <div class="panel-heading">
+                        <div class="panel-title text-center">
+                            <h1 class="title">Register Restaurant</h1>
+                            <hr />
+                        </div>
+                    </div>
+                    <div id="msgDiv"> </div>
+                    <form id="createForm" class="form-horizontal" method="post" onsubmit="return create_restaurant()">
+
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">Restaurant name:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-cutlery fa" aria-hidden="true"></i></span>
+                                <input name="name" type="text" placeholder="Restaurant name" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description" class="cols-sm-2 control-label">Description:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-info fa" aria-hidden="true"></i></span>
+                                <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="country" class="cols-sm-2 control-label">Country:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-globe fa" aria-hidden="true"></i></span>
+                                <input name="country" type="text" class="form-control" placeholder="Country">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="town" class="cols-sm-2 control-label">Town:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-map-marker fa" aria-hidden="true"></i></span>
+                                <input name="town" type="text" class="form-control" placeholder="Town">
+                            </div>
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="street1" class="cols-sm-2 control-label">Street:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-street-view fa" aria-hidden="true"></i></span>
+                                <input name="street1" type="text" class="form-control" placeholder="Street address line 1">
+                                <input name="street2" type="text" class="form-control" placeholder="Street address line 2">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="postcode" class="cols-sm-2 control-label">Postcode:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                <input name="postcode" type="text" class="form-control" placeholder="Postcode">
+                            </div>
+                        </div>
+
+                        
+
+                        <label class="cols-sm-2 control-label">Schedule:</label>
+                        <div class="col-md-offset-1">
+                            <div class="form-group">
+                                <b>Monday:</b> From
+                                <input name="mondayStartTime" type="time" value="09:00:00" class="form-control">
+                                To
+                                <input name="mondayEndTime" type="time" value="09:00:00" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <b>Tuesday:</b> From
+                                <input name="tuesdayStartTime" type="time" value="09:00:00" class="form-control">
+                                To
+                                <input name="tuesdayEndTime" type="time" value="09:00:00" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <b>Wednesday:</b> From
+                                <input name="wednesdayStartTime" type="time" value="09:00:00" class="form-control">
+                                To
+                                <input name="wednesdayEndTime" type="time" value="09:00:00" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <b>Thursday:</b> From
+                                <input name="thursdayStartTime" type="time" value="09:00:00" class="form-control">
+                                To
+                                <input name="thursdayEndTime" type="time" value="09:00:00" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <b>Friday:</b> From
+                                <input name="fridayStartTime" type="time" value="09:00:00" class="form-control">
+                                To
+                                <input name="fridayEndTime" type="time" value="09:00:00" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <b>Saturday:</b> From
+                                <input name="saturdayStartTime" type="time" value="09:00:00" class="form-control">
+                                To
+                                <input name="saturdayEndTime" type="time" value="09:00:00" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <b>Sunday:</b> From
+                                <input name="sundayStartTime" type="time" value="09:00:00" class="form-control">
+                                To
+                                <input name="sundayEndTime" type="time" value="09:00:00" class="form-control">
+                            </div>
+                        </div>
+                        <label for="category" class="cols-sm-2 control-label">Restaurant Category:</label>
+
+                        <select name="category" placeholder="tavern">
+                            <option value="tavern">Tavern</option>
+                            <option value="pub">Pub</option>
+                            <option value="restaurant">Restaurant</option>
+                            <option value="fastFood">Fast food</option>
+                            <option value="takeaway">Takeaway</option>
+                        </select>
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register restaurant</button>
+                    </form>
+                </div>
             </div>
-            Address:
-            <div class="form-group">
-                Country:
-                <input name="country" type="text" class="form-control" placeholder="Country">
-                Town:
-                <input name="town" type="text" class="form-control" placeholder="Town">
-                Street:
-                <input name="street1" type="text" class="form-control" placeholder="Street address">
-                <input name="street2" type="text" class="form-control" placeholder="Street address 2">
-                Postcode:
-                <input name="postcode" type="text" class="form-control" placeholder="Postcode">
-            </div>
-            Schedule:
-            <div class="form-group">
-                Monday: From
-                <input name="mondayStartTime" type="time" value="09:00:00" class="form-control">
-                To
-                <input name="mondayEndTime" type="time" value="09:00:00" class="form-control">
-            </div>
+        </div>
+    </body>
 
-            <div class="form-group">
-                Tuesday: From
-                <input name="tuesdayStartTime" type="time" value="09:00:00" class="form-control">
-                To
-                <input name="tuesdayEndTime" type="time" value="09:00:00" class="form-control">
-            </div>
-
-            <div class="form-group">
-                Wednesday: From
-                <input name="wednesdayStartTime" type="time" value="09:00:00" class="form-control">
-                To
-                <input name="wednesdayEndTime" type="time" value="09:00:00" class="form-control">
-            </div>
-
-            <div class="form-group">
-                Thursday: From
-                <input name="thursdayStartTime" type="time" value="09:00:00" class="form-control">
-                To
-                <input name="thursdayEndTime" type="time" value="09:00:00" class="form-control">
-            </div>
-
-            <div class="form-group">
-                Friday: From
-                <input name="fridayStartTime" type="time" value="09:00:00" class="form-control">
-                To
-                <input name="fridayEndTime" type="time" value="09:00:00" class="form-control">
-            </div>
-
-            <div class="form-group">
-                Saturday: From
-                <input name="saturdayStartTime" type="time" value="09:00:00" class="form-control">
-                To
-                <input name="saturdayEndTime" type="time" value="09:00:00" class="form-control">
-            </div>
-
-            <div class="form-group">
-                Sunday: From
-                <input name="sundayStartTime" type="time" value="09:00:00" class="form-control">
-                To
-                <input name="sundayEndTime" type="time" value="09:00:00" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <select name="category" placeholder="tavern">
-                    <option value="tavern">Tavern</option>
-                    <option value="pub">Pub</option>
-                    <option value="restaurant">Restaurant</option>
-                    <option value="fastFood">Fast food</option>
-                    <option value="takeaway">Takeaway</option>
-                </select>
-            </div>
-
-            <input class="btn btn-login btn-block" type="submit" value = "Create restaurant">
-          </form>
-      </div>
-
-    <script type="text/javascript" src="js/vendor/bootstrap.js"></script>
-
-    <script src="js/main.js"></script> <!-- Here we will write the code responsible for communicating between frontend and backend -->
-
-  </body>
 </html>
