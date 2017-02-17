@@ -23,7 +23,7 @@ $(function () {
     });
 });
 
-function register() {
+function register(e) {
     var ref = $(this).find("[required]");
     $(ref).each(function () {
         if ($(this).val() === '') {
