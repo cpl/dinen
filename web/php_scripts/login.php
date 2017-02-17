@@ -22,6 +22,10 @@ function login($email, $password) {
   if ($stmt_result->num_rows <= 0)
     return 'Invalid email-password combination.';
   $user = $stmt_result->fetch_row();
+
+  if ($user[6] == 0)
+    return 'Please activate your account first, a confirmation email was sent';
+
   # Store the user's info in a PHP session.
   if(session_status() == PHP_SESSION_NONE)
     session_start();
