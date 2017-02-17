@@ -1,10 +1,10 @@
 <?php
 
-if($_GET['key'])
-  echo '<h1>CONFRIMING...</h1><br/>';
-  confirm_confirmation($_GET['key']);
-
-
+if (!empty($_GET))
+  if($_GET['key']){
+    echo '<h1>CONFRIMING...</h1><br/>';
+    confirm_confirmation($_GET['key']);
+  }
 
 function create_confirmation($uid, $name, $email){
 

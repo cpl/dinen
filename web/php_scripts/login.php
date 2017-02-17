@@ -1,6 +1,8 @@
 <?php
+
 require_once 'validators.php';
 require_once 'connect_to_db.php';
+
 function login($email, $password) {
   if (empty($email.$password))
     return 'Email and password are empty';
