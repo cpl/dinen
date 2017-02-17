@@ -1,19 +1,13 @@
 .navbar {
     background: transparent;
     border: transparent;
-    font-family: Bushcraft;
-    font-size: 14pt;
     text-align: center;
-}
-
-.navbar-nav>li>a {
-    line-height: 1.5em;
 }
 
 .btn-login {
 	border: 1px solid #808080;
 	border-radius: 4px;
-	font-family: Bushcraft, Times;
+	font-family: bushcraft, Times;
 	font-size: 14pt;
 	color: white;
 	background-color: #3d3838;

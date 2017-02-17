@@ -11,7 +11,7 @@
       </button>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
-      <ul class='nav navbar-nav'>
+      <ul class='nav navbar-left navbar-nav'>
         <!-- TODO: use 'class="active"' to mark the page the user is currently on. -->
         <li><a href='#'>Business</a></li>
         <li><a href='#'>Customers</a></li>
@@ -23,7 +23,8 @@
         if (logged_in())
           echo "
             <ul class='nav navbar-nav navbar-right'>
-              <li><a><span class='glyphicon glyphicon-user'></span>[Insert Username Here]</a></li>
+
+              <li><a><span class='glyphicon glyphicon-user'></span>" . $_SESSION['user_name'] . "</a></li>
               <li><a href ='php_scripts/logout.php'>Logout</a></li>
             </ul>
           ";
