@@ -26,6 +26,7 @@ body {
 .navbar {
     font-family: bushcraft;
     font-size: 14pt;
+    text-align: center;
 }
 
 .navbar-brand {

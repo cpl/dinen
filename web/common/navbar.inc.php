@@ -34,7 +34,7 @@ echo '</pre>';
           echo "
             <ul class='nav navbar-nav navbar-right'>
 
-              <li><a><span class='glyphicon glyphicon-user'></span>" . $_SESSION['user_name'] . "</a></li>
+              <li><a><!--<span class='glyphicon glyphicon-user'></span>-->" . $_SESSION['user_name'] . "</a></li>
               <li><a href ='php_scripts/logout.php'>Logout</a></li>
             </ul>
           ";
