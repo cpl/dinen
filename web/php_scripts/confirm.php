@@ -54,8 +54,7 @@ function create_confirmation($uid, $name, $email){
     return 'Failed to create confirmation entry.';
 
 
-  $shellcommand = "./email.sh " . $email . " " . $key;
-  shell_exec($shellcommand);
+    $output = shell_exec('./email.sh '.$email.' '.$key);
 
   return 'success';
 }
@@ -85,6 +84,10 @@ function confirm_confirmation($key){
     $mysqli->query("UPDATE `users` SET `active` = 1 WHERE `id` = '$uid' LIMIT 1");
     $mysqli->query("DELETE FROM `confirm` WHERE `id` = '$idd' LIMIT 1");
     echo "OK";
+    if(file_exists('./email.sh'))
+      echo "email.sh";
+    else
+      echo "no email.sh";
     return 'success';
   }
   echo "FAILED";
