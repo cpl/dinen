@@ -1,3 +1,5 @@
+/* global confirm_password */
+
 var apiURL = 'api/v1/api.php';
 
 var themes = {
@@ -13,7 +15,8 @@ var themes = {
     "slate": "//bootswatch.com/slate/bootstrap.min.css",
     "spacelab": "//bootswatch.com/spacelab/bootstrap.min.css",
     "united": "//bootswatch.com/united/bootstrap.min.css"
-}
+};
+
 $(function () {
     var themesheet = $('<link href="' + themes['default'] + '" rel="stylesheet" />');
     themesheet.appendTo('head');
@@ -38,7 +41,7 @@ function register(e) {
         type: 'POST',
         data: 'request=register&data=' + formToJSON('#registerForm')
     }).done(function (response) {
-        if (response == 'success') {
+        if (response === 'success') {
             window.location.replace("index.php");
         } else {
             alert(response);
@@ -53,7 +56,7 @@ function login() {
         type: 'POST',
         data: 'request=login&data=' + formToJSON('#loginForm')
     }).done(function (response) {
-        if (response == 'success') {
+        if (response === 'success') {
             window.location.replace("restaurants.php");
         } else {
             alert(response);
@@ -96,11 +99,13 @@ function formToDict(form) {
     return dict;
 }
 
+//this function compare password with c_password: 
 function validatePassword() {
-    if ($('#password').val() !== $('#password_confirmation').val()) {
-        confirm_password.setCustomValidity('Passwords don\'t match');
-    } else if ($('#password').val.length() < 8) {
-        confirm_password.setCustomValidity('Password length is less than 8');
+    var password = document.getElementById("password");
+    var confirm_password = document.getElementById("password_confirmation");
+    console.log("merge");
+    if (password.value !== confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
     } else {
         confirm_password.setCustomValidity('');
     }
