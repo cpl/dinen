@@ -7,7 +7,7 @@ function register() {
     data: 'request=register&data=' + formToJSON('#registerForm')
   }).done(function(response) {
     if (response == 'success') {
-      window.location.replace("restaurants.php");
+      window.location.replace("index.php");
     } else {
       alert(response);
     }

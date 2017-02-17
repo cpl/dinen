@@ -1,3 +1,13 @@
+<?php
+if(session_status() == PHP_SESSION_NONE)
+  session_start();
+
+echo '<pre>';
+echo 'DONT BE SCARED, THIS IS JUST A DEBUG THING, CONTACT ALEX <br>';
+var_dump($_SESSION);
+echo '</pre>';
+?>
+
 <nav class='navbar navbar-inverse'>
   <div class='container-fluid'>
     <div class='navbar-header'>
