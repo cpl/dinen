@@ -33,7 +33,7 @@ body {
     padding: 9px;
 }
 
-.navbar-left>li>a {
+.navbar-nav>li>a {
     padding-top: 20px;
 }
 
