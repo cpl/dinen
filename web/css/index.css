@@ -1,0 +1,21 @@
+.line-seperator{
+	height: 5px;
+	border: 0;
+	width: 100%;
+	box-shadow: 0 5px 5px -5px #696969 inset;
+}
+
+
+.footer{
+  position: absolute;
+  float:left;
+  margin-bottom: 20px;
+ }
+
+ .footer-text {
+   margin-top:20px;
+   text-align:left;
+   color:#717171;
+   font-family: times;
+   font-size:16px;
+ }
