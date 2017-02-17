@@ -1,5 +1,11 @@
 <?php
 
+if($_GET['key'])
+  echo '<h1>CONFRIMING...</h1><br/>';
+  confirm_confirmation($_GET['key']);
+
+
+
 function create_confirmation($uid, $name, $email){
 
   $db_host = 'dinen.ddns.net';
@@ -69,15 +75,16 @@ function confirm_confirmation($key){
 
   if($results->num_rows === 1) {
     $arr = $results->fetch_array();
-    var_dump($arr);
     $idd = $arr['id'];
     $uid = $arr['user_id'];
     echo $idd . " - " . $uid;
     $mysqli->query("UPDATE `users` SET `active` = 1 WHERE `id` = '$uid' LIMIT 1");
     $mysqli->query("DELETE FROM `confirm` WHERE `id` = '$idd' LIMIT 1");
+    echo "OK";
     return 'success';
   }
-  return 'fail1';
+  echo "FAILED";
+  return 'fail';
 }
-return 'fail2';
+
 ?>
