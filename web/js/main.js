@@ -8,7 +8,6 @@ var themes = {
     "cyborg": "//bootswatch.com/cyborg/bootstrap.min.css",
     "flatly": "//bootswatch.com/flatly/bootstrap.min.css",
     "journal": "//bootswatch.com/journal/bootstrap.min.css",
-    "readable": "//bootswatch.com/readable/bootstrap.min.css",
     "simplex": "//bootswatch.com/simplex/bootstrap.min.css",
     "slate": "//bootswatch.com/slate/bootstrap.min.css",
     "spacelab": "//bootswatch.com/spacelab/bootstrap.min.css",
