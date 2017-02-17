@@ -5,6 +5,8 @@ $name_regex = $alpha_char_regex.$alpha_or_hyphen_char_regex.'*';
 $full_name_regex = $name_regex.'\s'.$name_regex;
 $password_regex = '(.*\d+.*'.$alpha_char_regex.'+.*)'
                   .'|(.*'.$alpha_char_regex.'+.*\d+.*)';
+
+
 function nameIsValid($name) {
   global $full_name_regex;
   return preg_match('/'.$full_name_regex.'/', $name);
@@ -26,5 +28,5 @@ function passwordsAreValid($password, $c_password) {
 }
 
 function isValid($str) {
-    return !preg_match('/[^ A-Za-z0-9.#\\-$]/', $str);
+    return !preg_match('/[^ A-Za-z.#!\'-]/', $str);
 }
