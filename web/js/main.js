@@ -1,5 +1,3 @@
-/* global confirm_password */
-
 var apiURL = 'api/v1/api.php';
 
 var themes = {
