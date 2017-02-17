@@ -6,16 +6,26 @@
 }
 
 
-.footer{
+.footer-company{
   position: absolute;
   float:left;
+	color:white;
   margin-bottom: 20px;
+	margin-left: 20px;
  }
 
- .footer-text {
-   margin-top:20px;
+.footer-text {
+	 margin-left: 20px;
+   margin-top:10px;
    text-align:left;
    color:#717171;
    font-family: times;
    font-size:16px;
- }
+}
+
+footer {
+    position: fixed;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+}
