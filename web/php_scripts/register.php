@@ -1,6 +1,8 @@
 <?php
 require_once 'validators.php';
 require_once 'connect_to_db.php';
+require_once 'confirm.php';
+
 function register($name, $email, $password, $confirmation_password) {
   if (empty($name.$email.$password.$confirmation_password))
     return 'Register form is empty';
@@ -34,7 +36,15 @@ function register($name, $email, $password, $confirmation_password) {
   // $_SESSION['user_name'] = $name;
   // $_SESSION['user_email'] = $email;
   // $_SESSION['user_category'] = $category;
+
+  $stmtuid = $stmt->insert_id;
+
   $stmt->close();
   $mysqli->close();
+
+  $conf_status = create_confirmation($stmtuid, $name, $email);
+  if($conf_status != "success")
+    return $conf_status;
+
   return 'success';
 }
