@@ -30,15 +30,17 @@ body {
 }
 
 .navbar-brand {
-    padding: 9px;
-}
-
-.navbar-nav>li>a {
-    padding-top: 20px;
+    padding: 8px;
 }
 
 .logo {
-    height: 36px;
+    height: 100%;
+    width: auto;
+}
+
+.navbar-nav>li>a {
+    padding-top: 18px;
+    padding-bottom: 12px;
 }
 
 .glyphicon {
