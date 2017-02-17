@@ -53,6 +53,10 @@ function create_confirmation($uid, $name, $email){
   if ($stmt->errno != 0)
     return 'Failed to create confirmation entry.';
 
+
+  $shellcommand = "./email.sh " . $email . " " . $key;
+  shell_exec($shellcommand);
+
   return 'success';
 }
 
