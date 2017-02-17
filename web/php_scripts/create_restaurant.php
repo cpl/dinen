@@ -17,6 +17,7 @@ function create_restaurant() {
   if (empty($_POST['category']))
     return 'Restaurant has no type';
   global $mysqli;
+
   if ($mysqli->connect_error)
     return 'Database connection failed.';
   $address_id = create_address();
@@ -30,6 +31,10 @@ function create_restaurant() {
   $name = htmlspecialchars($_POST['name']);
   $category = htmlspecialchars($_POST['category']);
   $description = htmlspecialchars($_POST['description']);
+
+  if (!isValid($name) || !isValid($description) || !isValid($category))
+    return;
+
   // create and execute sql request
   $stmt->bind_param('sssii', $name, $description, $category, $address_id, $_SESSION['user_id']);
   $stmt->execute();
@@ -103,6 +108,10 @@ function create_address()
     $street2 = "";
   else
     $street2 = htmlspecialchars($_POST['street2']);
+
+  if (!isValid($town) || !isValid($country) || !isValid($street1) || !isValid($street2) || !isValid($postcode))
+    return;
+
   $stmt = $mysqli->prepare('INSERT INTO addresses (street_name_line_1,
                             street_name_line_2, town, country, postcode)
                             VALUES (?, ?, ?, ?, ?)');

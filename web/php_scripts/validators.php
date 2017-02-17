@@ -24,3 +24,7 @@ function passwordsAreValid($password, $c_password) {
     return false;
   return true;
 }
+
+function isValid($str) {
+    return !preg_match('/[^A-Za-z0-9.#\\-$]/', $str);
+}
