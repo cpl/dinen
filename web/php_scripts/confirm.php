@@ -1,10 +1,11 @@
 <?php
 
-if (!empty($_GET))
+if (!empty($_GET)){
   if($_GET['key']){
     echo '<h1>CONFRIMING...</h1><br/>';
     confirm_confirmation($_GET['key']);
   }
+}
 
 function create_confirmation($uid, $name, $email){
 
@@ -53,8 +54,10 @@ function create_confirmation($uid, $name, $email){
   if ($stmt->errno != 0)
     return 'Failed to create confirmation entry.';
 
-
-    $output = shell_exec('./email.sh '.$email.' '.$key);
+    // $output = shell_exec('./email.sh '.$email.' '.$key);
+    echo shell_exec('echo "Click this link to activate account: dinen.ddns.net/php_scripts/confirm.php?key="'.$key.' | mail -s "Dinen Confirmation" '.$email);
+    // echo "<br> OUTPUT: <br/>";
+    // echo "<pre>" . $output . "</pre>";
 
   return 'success';
 }
