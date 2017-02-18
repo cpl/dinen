@@ -42,6 +42,7 @@ function create_restaurant() {
     return 'Failed to create restaurant.';
   // get the returned string of schedule creation
   $scheduleReturn = create_schedule($stmt->insert_id, $mysqli);
+  create_menu($mysqli, $stmt->insert_id);
   $stmt->close();
   $mysqli->close();
   return $scheduleReturn;
@@ -116,4 +117,9 @@ function create_address($mysqli)
   $id = $stmt->insert_id;
   $stmt->close();
   return $id;
+}
+
+function create_menu($mysqli, $restaurant_id)
+{
+  $mysqli->query("INSERT INTO menus (restaurant_id, name) VALUES ($restaurant_id, 'Main menu')");
 }
