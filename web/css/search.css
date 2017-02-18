@@ -1,0 +1,19 @@
+.searchBox {
+  outline: none;
+  width: 100%;
+  font-size: 30px;
+  border-radius: 20px;
+  border: 1px solid #808080;
+  background-color: #3d3838;
+  color: white;
+  text-align: center;
+}
+
+/* makes the placeholder in searchBox bigger */
+input::-webkit-input-placeholder {
+  font-size: 30px;
+}
+
+.searchFilters {
+  color: white;
+}
