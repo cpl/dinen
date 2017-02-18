@@ -1,45 +1,21 @@
 <?php
+require_once 'connect_to_db.php';
 
 if (!empty($_GET)){
   if($_GET['key']){
     echo '<h1>CONFRIMING...</h1><br/>';
-    confirm_confirmation($_GET['key']);
+    echo process_confirmation($_GET['key']);
   }
 }
 
 function create_confirmation($uid, $name, $email){
+  $mysqli = createMysqlConnection();
 
-  $db_host = 'dinen.ddns.net';
-  $db_user = 'teamdinen';
-  $db_pass = 'dinenx3';
-  $db_name = 'dinen';
-  $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
-
-  $action = array();
-  $action['result'] = null;
-  $text = array();
-
-  if(empty($uid)){
-    $action['result'] = 'error';
-    array_push($text,'Missing UID.');
-  }
-  if(empty($name)){
-    $action['result'] = 'error';
-    array_push($text,'Missing name.');
-  }
-  if(empty($email)){
-    $action['result'] = 'error';
-    array_push($text,'Missing email.');
+  if(empty($uid) || empty($name) || empty($email)){
+    return "Missing name|email|id";
   }
 
-
-  if($action['result'] != 'error'){
-    $key = md5($name.$email);
-  } else {
-    return var_dump($text);
-  }
-
-  $action['text'] = $text;
+  $key = md5($name.$email);
 
   if ($mysqli->connect_error)
     return 'Database connection failed at confirm.';
@@ -62,17 +38,12 @@ function create_confirmation($uid, $name, $email){
   return 'success';
 }
 
-function confirm_confirmation($key){
+function process_confirmation($key){
 
   if(strlen($key) != 32)
     return 'Key size is wrong!';
 
-  $db_host = 'dinen.ddns.net';
-  $db_user = 'teamdinen';
-  $db_pass = 'dinenx3';
-  $db_name = 'dinen';
-
-  $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
+  $mysqli = createMysqlConnection();
 
   if ($mysqli->connect_error)
     return 'Database connection failed at confirm confirm.';
@@ -85,7 +56,7 @@ function confirm_confirmation($key){
     $uid = $arr['user_id'];
     echo $idd . " - " . $uid;
     $mysqli->query("UPDATE `users` SET `active` = 1 WHERE `id` = '$uid' LIMIT 1");
-    $mysqli->query("DELETE FROM `confirm` WHERE `id` = '$idd' LIMIT 1");
+    $mysqli->query("DELETE FROM `confirm` WHERE `id` = '$idd'");
     echo "OK";
     if(file_exists('./email.sh'))
       echo "email.sh";
