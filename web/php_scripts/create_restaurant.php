@@ -69,10 +69,7 @@ function create_schedule($restaurant_id, $mysqli)
       $dayOfWeek++;
       continue;
     }
-    // TODO: Check start time string and end time string for
-    // potential vulnerabilities
-    // Also, transform it into sql - readable format
-    $stmt->bind_param('ssss', $restaurant_id, $dayOfWeek, $startTimeString, $endTimeString);
+    $stmt->bind_param('ssss', $restaurant_id, $dayOfWeek, $_POST[$startTimeString], $_POST[$endTimeString]);
     $stmt->execute();
     if ($stmt->errno != 0)
       return 'Failed to create schedule';
