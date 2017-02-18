@@ -2,12 +2,13 @@
 
 require_once 'validators.php';
 require_once 'connect_to_db.php';
+require_once 'confirm.php';
 
 function login($email, $password) {
   if (empty($email.$password))
     return 'Email and password are empty';
   # Sanitize email and password (for PHP, not SQL).
-  global $mysqli;
+  $mysqli = createMysqlConnection();
   if (!emailIsValid($email))
     return 'Email is invalid.';
   if(!passwordIsValid($password))
@@ -26,7 +27,11 @@ function login($email, $password) {
   $user = $stmt_result->fetch_row();
 
   if ($user[6] == 0)
+  {
+    // create the confirmation email
+    create_confirmation($user[0], $user[1], $user[2]);
     return 'Please activate your account first, a confirmation email was sent';
+  }
 
   # Store the user's info in a PHP session.
   if(session_status() == PHP_SESSION_NONE)
