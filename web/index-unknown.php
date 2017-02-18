@@ -9,9 +9,7 @@
       <!-- bootstrap -->
       <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-      <script src="js/vendor/jquery-1.11.2.min.js"></script>
-      <script src="js/vendor/bootstrap.min.js"></script>
-      <script src="js/main.js"></script>
+
       <link rel="shortcut icon" href="favicon.ico">
 
       <!-- Website CSS style -->
@@ -72,5 +70,10 @@
         <p>&copy; Company 2015</p>
       </footer>
     </div> <!-- /container -->
+
+    <script src="js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    
     </body>
 </html>
