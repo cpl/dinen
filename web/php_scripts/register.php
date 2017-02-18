@@ -32,10 +32,6 @@ function register($name, $email, $password, $confirmation_password) {
     return 'Failed to create user.';
   if(session_status() == PHP_SESSION_NONE)
     session_start();
-  // $_SESSION['user_id'] = $stmt->insert_id;
-  // $_SESSION['user_name'] = $name;
-  // $_SESSION['user_email'] = $email;
-  // $_SESSION['user_category'] = $category;
 
   $stmtuid = $stmt->insert_id;
 

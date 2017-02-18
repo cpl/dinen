@@ -39,9 +39,10 @@ function register(e) {
         data: 'request=register&data=' + formToJSON('#registerForm')
     }).done(function (response) {
         if (response === 'success') {
-            window.location.replace("index.php");
+          alert("Registration email was sent to your email");
+          window.location.replace("index.php");
         } else {
-            alert(response);
+          alert(response);
         }
     });
     return false;
@@ -96,7 +97,7 @@ function formToDict(form) {
     return dict;
 }
 
-//this function compare password with c_password: 
+//this function compare password with c_password:
 function validatePassword() {
     var password = document.getElementById("password");
     var confirm_password = document.getElementById("password_confirmation");
