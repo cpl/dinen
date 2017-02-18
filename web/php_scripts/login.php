@@ -29,8 +29,11 @@ function login($email, $password) {
   if ($user[6] == 0)
   {
     // create the confirmation email
-    create_confirmation($user[0], $user[1], $user[2]);
-    return 'Please activate your account first, a confirmation email was sent';
+    $confirmation = create_confirmation($user[0], $user[1], $user[2]);
+    if($confirmation == 'success')
+      return 'Please activate your account first, a confirmation email was sent';
+    else
+      return $confirmation;
   }
 
   # Store the user's info in a PHP session.
