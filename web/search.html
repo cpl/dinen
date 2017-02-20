@@ -56,20 +56,25 @@
    <!-- All items go in this div -->
    <div class="container-fluid">
 
-     <!-- Search bar -->
+     <!-- Search bar and search button-->
      <div class="row">
        <div class="col-md-6 col-md-offset-3">
-         <form>
-           <input type="text" name="search" placeholder=" Search (e. g. Restaurant name or address)" class="searchBox"/>
-         </form>
+         <div class="input-group">
+            <input type="text" class="form-control searchBox" placeholder="Search">
+               <span class="input-group-btn">
+                  <button class="searchButton" type="button">Go!</button>
+               </span>
+         </div>
        </div>
      </div>
 
+
    <!-- Another row for search results and filters -->
-   <div class="row">
+   <div class="row marginTop">
 
      <!-- List of search filters -->
-     <div class="col-md-3 searchFilters">
+  <nav>
+     <div class="col-md-2 searchFilters">
        <dl>
          <dt><h4>Filters:</h4></dt>
          <dt>Kinds of food:</dt>
@@ -79,9 +84,10 @@
            <dd> <input type="checkbox" name="Burgers"/> Burgers </dd>
        </dl>
     </div>
+  </nav>
 
   <!-- table for search results -->
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-6 col-md-offset-1">
     <h3 style="color: white">Results</h3>
   </div>
 
