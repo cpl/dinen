@@ -3,7 +3,7 @@ require_once 'connect_to_db.php';
 # Returns the restaurants owned by the owner.
 function getRestaurants() {
   $manager_id = $_SESSION['user_id'];
-  global $mysqli;
+  $mysqli = createMysqlConnection();
   if ($mysqli->connect_error)
     return 'Database connection failed.';
   $stmt = $mysqli->prepare('SELECT * FROM restaurants WHERE manager_id = ?');

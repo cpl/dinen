@@ -26,18 +26,21 @@ body {
 .navbar {
     font-family: bushcraft;
     font-size: 14pt;
+    text-align: center;
 }
 
 .navbar-brand {
-    padding: 9px;
-}
-
-.navbar-left>li>a {
-    padding-top: 20px;
+    padding: 8px;
 }
 
 .logo {
-    height: 36px;
+    height: 100%;
+    width: auto;
+}
+
+.navbar-nav>li>a {
+    padding-top: 18px;
+    padding-bottom: 12px;
 }
 
 .glyphicon {
@@ -85,6 +88,13 @@ input::-webkit-input-placeholder {
     margin-top: 30px;
     margin: 0 auto;
     max-width: 360px;
+    padding: 40px 40px;
+}
+
+.register-restaurant-center{
+    margin-top: 30px;
+    margin: 0 auto;
+    max-width: 660px;
     padding: 40px 40px;
 }
 

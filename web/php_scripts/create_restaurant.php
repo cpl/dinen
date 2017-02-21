@@ -16,11 +16,11 @@ function create_restaurant() {
     return 'Description is empty';
   if (empty($_POST['category']))
     return 'Restaurant has no type';
-  global $mysqli;
+  $mysqli = createMysqlConnection();
 
   if ($mysqli->connect_error)
     return 'Database connection failed.';
-  $address_id = create_address();
+  $address_id = create_address($mysqli);
   // if is not integer
   if(strval($address_id) != strval(intval($address_id)))
     return $address_id;
@@ -41,7 +41,7 @@ function create_restaurant() {
   if ($stmt->errno != 0)
     return 'Failed to create restaurant.';
   // get the returned string of schedule creation
-  $scheduleReturn = create_schedule($stmt->insert_id);
+  $scheduleReturn = create_schedule($stmt->insert_id, $mysqli);
   $stmt->close();
   $mysqli->close();
   return $scheduleReturn;
@@ -50,10 +50,8 @@ function create_restaurant() {
 // Create all schedules
 // Returns 'success' if schedule created
 // Error string otherwise
-function create_schedule($restaurant_id)
+function create_schedule($restaurant_id, $mysqli)
 {
-  // By now mysqli connection should have been created
-  global $mysqli;
   $days = array("monday", "tuesday", "wednesday", "thursday", "friday",
                 "saturday", "sunday");
   $stmt = $mysqli->prepare('INSERT INTO schedules (restaurant_id, day_of_week, time_open, time_close)
@@ -71,10 +69,7 @@ function create_schedule($restaurant_id)
       $dayOfWeek++;
       continue;
     }
-    // TODO: Check start time string and end time string for
-    // potential vulnerabilities
-    // Also, transform it into sql - readable format
-    $stmt->bind_param('ssss', $restaurant_id, $dayOfWeek, $startTimeString, $endTimeString);
+    $stmt->bind_param('ssss', $restaurant_id, $dayOfWeek, $_POST[$startTimeString], $_POST[$endTimeString]);
     $stmt->execute();
     if ($stmt->errno != 0)
       return 'Failed to create schedule';
@@ -88,9 +83,8 @@ function create_schedule($restaurant_id)
 // Create address function
 // Creates address entry in sql dbase
 // Returns id of address if successful, error string otherwise
-function create_address()
+function create_address($mysqli)
 {
-  global $mysqli;
   if(empty($_POST['town']))
     return 'Town is missing.';
   if(empty($_POST['country']))

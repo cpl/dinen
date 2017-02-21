@@ -4,7 +4,7 @@
    <!-- imports -->
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-   <title>Dinen - Home</title>
+   <title>Dinen - Search</title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -15,13 +15,17 @@
    <link rel="stylesheet" href="css/bootstrap.min.css">
    <link rel="stylesheet" href="css/main.css">
    <link rel="stylesheet" href="css/bootstrap-theme.css">
+
+   <!-- My css file for this page -->
+   <link rel="stylesheet" type="text/css" href="css/search.css">
+
  </head>
 
  <body>
 
    <!-- navigation bar -->
-   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-     <div class="container">
+   <nav class="navbar navbar-inverse" role="navigation">
+     <div class="container-fluid">
        <div class="navbar-header">
          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
            <span class="sr-only">Toggle navigation</span>
@@ -29,17 +33,67 @@
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </button>
-           <a class="navbar-brand" href="index.html"><b>Dinen</b></a>
+         <a class='navbar-brand' href='index.php'>
+           <img class="logo" src="img/Dinen small logo.png" />
+         </a>
        </div>
        <div id="navbar" class="navbar-collapse collapse">
+         <ul class='nav navbar-left navbar-nav'>
+           <li><a href='#'>Business</a></li>
+           <li><a href='#'>Customers</a></li>
+         </ul>
          <ul class="nav navbar-nav navbar-right">
-           <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
-           <li><a href="register.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+           <!-- <li><a class="btn btn-success" href="login.html">Log in</a></li> -->
+           <!-- <li><a class="btn btn-default" href="register.html">Sign Up</a></li> -->
+           <li><a href="login.html"><!--<span class="glyphicon glyphicon-log-in"></span>-->Log in</a></li>
+           <li><a href="register.html"><!--<span class="glyphicon glyphicon-user"></span>-->Sign Up</a></li>
          </ul>
        </div><!--/.navbar-collapse -->
      </div>
    </nav>
    <!-- end of navigation bar -->
+
+   <!-- All items go in this div -->
+   <div class="container-fluid">
+
+     <!-- Search bar and search button-->
+     <div class="row">
+       <div class="col-md-6 col-md-offset-3">
+         <div class="input-group">
+            <input type="text" class="form-control searchBox" placeholder="Search">
+               <span class="input-group-btn">
+                  <button class="searchButton" type="button">Go!</button>
+               </span>
+         </div>
+       </div>
+     </div>
+
+
+   <!-- Another row for search results and filters -->
+   <div class="row marginTop">
+
+     <!-- List of search filters -->
+  <nav>
+     <div class="col-md-2 searchFilters">
+       <dl>
+         <dt><h4>Filters:</h4></dt>
+         <dt>Kinds of food:</dt>
+           <dd> <input type="checkbox" name="Chinese"/> Chinese </dd>
+           <dd> <input type="checkbox" name="Pizza"/> Pizza </dd>
+           <dd> <input type="checkbox" name="Sushi"/> Sushi </dd>
+           <dd> <input type="checkbox" name="Burgers"/> Burgers </dd>
+       </dl>
+    </div>
+  </nav>
+
+  <!-- table for search results -->
+  <div class="col-md-6 col-md-offset-1">
+    <h3 style="color: white">Results</h3>
+  </div>
+
+</div> <!-- row for results and filters -->
+
+   </div> <!-- container div -->
 
    <!-- Original Jscript -->
    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -49,6 +103,7 @@
    <script src="js/main.js"></script> <!-- Here we will write the code responsible for communicating between frontend and backend -->
  </body>
 
+<!-- footer -->
  <footer class="navbar-fixed-bottom">
    <hr class="line-seperator">
    <span class="footer-text">Dinen is optimized for satisfying people with food. We create an easy interface for managers to manage their restaurants and customers to order food. While using this site, you agree to have read and accepted our terms of use, cookie and privacy policy.</span>
