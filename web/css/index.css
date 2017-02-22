@@ -27,7 +27,7 @@ body {
 }
 
 .navbar.scrolled {
-    background: rgba(0, 0, 0, 0.95); 
+    background: rgba(0, 0, 0, 0.95);
 }
 
 .navbar-brand{
@@ -67,22 +67,23 @@ nav ul li{
 /*the id that takes precedence over class*/
 /*the jumbotron css   ====================================================================== */
 .white-background{
-  background-color:white;
+
 }
 
 #jumbotron-override {
   color:#1C1919;
   margin:80px 0 80px 0;
   min-height: 500px;
-  border: 2px solid black;
+  /*border: 2px solid black;
   border-radius: 5px;
-  background: url('../img/jumbotron.jpg') no-repeat center center;
+  background: url('../img/jumbotron.jpg') no-repeat center center;*/
   background-size: cover;
-  background-color: #A9A9A9;
+  background-color: white;
+  /*#A9A9A9;*/
   background-blend-mode: screen;
-  box-shadow:
+  /*box-shadow:
     0 0 0 8px hsl(100, 100%, 100%),
-    0 0 0 1px hsl(0, 0%, 50%);
+    0 0 0 1px hsl(0, 0%, 50%);*/
   font-family:times;
 }
 
