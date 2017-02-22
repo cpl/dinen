@@ -40,7 +40,7 @@ function register(e) {
     }).done(function (response) {
         if (response === 'success') {
           alert("Registration email was sent to your email");
-          window.location.replace("index.php");
+          window.location.replace("index.html");
         } else {
           alert(response);
         }
