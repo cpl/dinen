@@ -1,5 +1,7 @@
 <?php
 
+require_once 'globals.php';
+
 function restrict_access($userType) {
   switch ($userType) {
     case UserType::MANAGER:
