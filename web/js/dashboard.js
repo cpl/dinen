@@ -21,7 +21,15 @@ function get_restaurants()
     type: 'POST',
     data: data
   }).done(function (response) {
-      console.log(response);
+      if(response.status === 1)
+      {
+        // all is well, generate the html from response
+        console.log(response);
+      }
+      else {
+        // whoops, something went wrong
+        console.log(response);
+      }
     }
   );
   return false;
