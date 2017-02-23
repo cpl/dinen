@@ -66,7 +66,7 @@ function login() {
 
 function create_restaurant() {
   var data = formToDict('#createForm');
-  data['request'] = 'register_restaurant';
+  data['request'] = 'create_restaurant';
   $.ajax({
     url: apiURL,
     type: 'POST',

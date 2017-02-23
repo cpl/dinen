@@ -2,8 +2,8 @@
 
 require_once 'globals.php';
 require_once 'config.inc.php';
-require_once 'validators.php';
 require_once 'connect_to_db.php';
+require_once 'validators.php';
 require_once 'confirm.php';
 
 function getUserDataForJWT($email, $password) {
