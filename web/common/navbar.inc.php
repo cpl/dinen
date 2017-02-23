@@ -29,13 +29,13 @@ echo '</pre>';
       <?php
         if(session_status() == PHP_SESSION_NONE)
           session_start();
-        require_once 'php_scripts/restrict_access.php';
+        require_once 'php/restrict_access.php';
         if (logged_in())
           echo "
             <ul class='nav navbar-nav navbar-right'>
 
               <li><a><!--<span class='glyphicon glyphicon-user'></span>-->" . $_SESSION['user_name'] . "</a></li>
-              <li><a href ='php_scripts/logout.php'>Logout</a></li>
+              <li><a href ='php/logout.php'>Logout</a></li>
             </ul>
           ";
         else
