@@ -54,11 +54,11 @@ function login() {
     type: 'POST',
     data: 'request=login&data=' + formToJSON('#loginForm')
   }).done(function (response) {
-    if (response === 'success') {
+    if (response.status == 'sucess') {
+      localStorage.setItem('JWT', response.data);
       window.location.replace("restaurants.php");
     } else {
-      localStorage.setItem('JWT', response.data);
-      alert(localStorage.getItem('JWT'));
+      alert(response);
     }
   });
   return false;
