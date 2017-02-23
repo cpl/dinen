@@ -54,7 +54,7 @@ function login() {
     type: 'POST',
     data: 'request=login&data=' + formToJSON('#loginForm')
   }).done(function (response) {
-    if (response.status == 'sucess') {
+    if (response.status == 1) {
       localStorage.setItem('JWT', response.data);
       window.location.replace("restaurants.php");
     } else {
