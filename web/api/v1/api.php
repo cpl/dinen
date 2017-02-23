@@ -53,4 +53,21 @@ function processLoginRequest() {
 }
 
 function processCreateRestaurantRequest() {
+  if(empty($_POST['name']) || empty($_POST['description'])||
+     empty($_POST['category']) || empty($_POST['jwt']))
+  {
+    echo "Oops, some of the required fields / jwt are empty";
+    return;
+  }
+  if(!correctJWS($_POST['jwt']))
+  {
+    echo "Incorrect jwt passed";
+    return;
+  }
+  $name = htmlspecialchars($_POST['name']);
+  $description = htmlspecialchars($_POST['description']);
+  $category = htmlspecialchars($_POST['category']);
+  $payload = getJWTPayload($_POST['jwt']);
+  create_restaurant($payload['user_category'], $payload['user_id'],
+                    $name, $description, $category);
 }

@@ -9,7 +9,7 @@ const AUDIENCE = 'https://dinen.ddns.net';
 /* Create a JSON Web Token for post-login user authentication (expires after
    six hours). I assume users can be uniquely identified by email. Refer to
    https://tools.ietf.org/html/rfc7519 for information on JWTs. */
-function createJWT($user_email, $user_name, $user_category) {
+function createJWT($user_email, $user_name, $user_category, $user_id) {
   $header = base64_encode(json_encode(['alg' => 'HS256', 'typ' => 'JWT']));
 
   $nowInUnixTime = time();
@@ -26,7 +26,8 @@ function createJWT($user_email, $user_name, $user_category) {
     'iat' => $nowInUnixTime,
     'jti' => $tokenID,
     'user_name' => $user_name,
-    'user_category' => $user_category
+    'user_category' => $user_category,
+    'user_id' => $user_id
   ]));
 
   global $api_secret;
@@ -56,4 +57,16 @@ function checkJWT($jwt) {
     return ['status' => Status::SUCCESS];
   }
   return ['status' => Status::ERROR, 'data' => 'invalid'];
+}
+
+function correctJWS($jwt)
+{
+  $jwtStatus = checkJWT($jwt);
+  return $jwtStatus['status'] === Status::SUCCESS ;
+}
+
+function getJWTPayload($jwt)
+{
+  $jwt_components = explode('.', $jwt);
+  return json_decode(base64_decode($jwt_components[1]), true);
 }
