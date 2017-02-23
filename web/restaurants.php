@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php use globals\UserType;
-
-  require_once 'common/head.inc.php'; ?>
   <link rel="stylesheet" type="text/css" href="css/restaurants.css">
   <title>My Restaurants</title>
 </head>

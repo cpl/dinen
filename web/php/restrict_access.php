@@ -1,7 +1,5 @@
 <?php
 
-require_once 'config.inc.php';
-
 function restrict_access($userType) {
   switch ($userType) {
     case UserType::MANAGER:
