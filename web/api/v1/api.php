@@ -2,6 +2,7 @@
 
 header('Content-Type: application/json');
 
+require_once '../../php/globals.php';
 require_once '../../php/config.inc.php';
 require_once '../../php/register.php';
 require_once '../../php/login.php';
@@ -45,7 +46,8 @@ function processRegisterRequest() {
 
 function processLoginRequest() {
   $requestData = json_decode($_POST['data'], true);
-  $email = ''; $password = '';
+  $email = '';
+  $password = '';
   foreach ($requestData as $key => $value) {
     switch ($key) {
       case 'email':
@@ -56,7 +58,22 @@ function processLoginRequest() {
         break;
     }
   }
-  echo json_encode(login($email, $password));
+
+  # Sorry.
+  $userDataGrabAttempt = getUserDataForJWT($email, $password);
+
+  if ($userDataGrabAttempt['status'] != Status::SUCCESS) {
+    echo $userDataGrabAttempt;
+    return;
+  }
+
+  $result = ['status' => Status::SUCCESS];
+  $userData = $userDataGrabAttempt['data'];
+  $result['data'] = createJWT($userData['email'], $userData['name'],
+                              $userData['category']);
+  echo json_encode($result);
+
+  # echo json_encode(login($email, $password));
 }
 
 /* Create a JSON Web Token for post-login user authentication (expires after
@@ -86,7 +103,7 @@ function createJWT($user_email, $user_name, $user_category) {
 
   global $api_secret;
   $signature = base64_encode(hash_hmac('sha256', $header.'.'.$payload,
-                                       $api_secret));
+                             $api_secret, true));
 
   return $header.'.'.$payload.'.'.$signature;
 }

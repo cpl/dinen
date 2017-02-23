@@ -57,7 +57,7 @@ function login() {
         if (response === 'success') {
             window.location.replace("restaurants.php");
         } else {
-            alert(response);
+            alert(JSON.stringify(response));
         }
     });
     return false;
