@@ -3,20 +3,13 @@
 require_once 'validators.php';
 require_once 'connect_to_db.php';
 
-function create_restaurant() {
+function create_restaurant($user_category, $user_id, $name,
+                           $description, $category) {
   // Check if required fields are empty || user is not manager || no connection to dbase
-  if (session_status() == PHP_SESSION_NONE)
-    session_start();
-  if (empty($_SESSION['user_category']) ||
-      $_SESSION['user_category'] != 'manager' ||
-      empty($_SESSION['user_id']))
+  if (empty($user_category) ||
+      $user_category != 'manager' ||
+      empty($user_id))
     return 'Not logged in or not manager';
-  if (empty($_POST['name']))
-    return 'Restaurant name is missing';
-  if (empty($_POST['description']))
-    return 'Description is empty';
-  if (empty($_POST['category']))
-    return 'Restaurant has no type';
   $mysqli = createMySQLi();
 
   if ($mysqli->connect_error)
@@ -28,21 +21,18 @@ function create_restaurant() {
   $stmt = $mysqli->prepare('INSERT INTO restaurants (name,
                             description, category, address_id, manager_id)
                             VALUES (?, ?, ?, ?, ?)');
-  // santize name, type and description
-  $name = htmlspecialchars($_POST['name']);
-  $category = htmlspecialchars($_POST['category']);
-  $description = htmlspecialchars($_POST['description']);
 
   if (!isValid($name) || !isValid($description) || !isValid($category))
     return;
 
   // create and execute sql request
-  $stmt->bind_param('sssii', $name, $description, $category, $address_id, $_SESSION['user_id']);
+  $stmt->bind_param('sssii', $name, $description, $category, $address_id, $user_id);
   $stmt->execute();
   if ($stmt->errno != 0)
     return 'Failed to create restaurant.';
   // get the returned string of schedule creation
   $scheduleReturn = create_schedule($stmt->insert_id, $mysqli);
+  create_menu($mysqli, $stmt->insert_id);
   $stmt->close();
   $mysqli->close();
   return $scheduleReturn;
@@ -117,4 +107,9 @@ function create_address($mysqli)
   $id = $stmt->insert_id;
   $stmt->close();
   return $id;
+}
+
+function create_menu($mysqli, $restaurant_id)
+{
+  $mysqli->query("INSERT INTO menus (restaurant_id, name) VALUES ($restaurant_id, 'Main menu')");
 }

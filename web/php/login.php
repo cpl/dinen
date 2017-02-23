@@ -47,9 +47,8 @@ function getUserDataForJWT($email, $password) {
 
   $stmt->close(); $mysqli->close();
   return ['status' => Status::SUCCESS,
-          'data'
-            => ['email' => $user[2], 'name' => $user[1],
-                'category' => $user[4]]];
+          'data' => ['email' => $user[2], 'name' => $user[1],
+                     'category' => $user[4], 'id' => $user[0]]];
 }
 
 /*

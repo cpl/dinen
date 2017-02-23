@@ -54,11 +54,11 @@ function login() {
     type: 'POST',
     data: 'request=login&data=' + formToJSON('#loginForm')
   }).done(function (response) {
-    if (response === 'success') {
+    if (response.status == 1) {
+      localStorage.setItem('JWT', response.data);
       window.location.replace("restaurants.php");
     } else {
-      localStorage.setItem('JWT', response.data);
-      alert(localStorage.getItem('JWT'));
+      alert(response);
     }
   });
   return false;
@@ -67,13 +67,15 @@ function login() {
 function create_restaurant() {
   var data = formToDict('#createForm');
   data['request'] = 'create_restaurant';
+  data['jwt'] = localStorage.getItem('JWT');
+  if(data['jwt'] == null)
+  {
+    alert("No jwt in local storage, abort creation of restaurant");
+    return false;
+  }
   $.ajax({
     url: apiURL,
     type: 'POST',
-    beforeSend: function (xhr) {
-      xhr.setRequestHeader('Authorization',
-        'Bearer ' + localStorage.getItem('JWT'))
-    },
     data: data
   }).done(function (response) {
       alert(response);
@@ -122,4 +124,15 @@ function showMsgAlert(component, message) {
       $("#msgDiv").fadeIn(800);
     }
   });
+}
+
+// Use this function to find out if user is manager
+// uses jwt to check that
+function isManager()
+{
+  var jwt = localStorage.getItem('JWT');
+  if(jwt == null)
+    return false;
+  // TODO : get user category from jwt
+  return true;
 }
