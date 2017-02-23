@@ -3,6 +3,7 @@
 <head>
   <?php require_once 'common/head.inc.php'; ?>
   <link rel="stylesheet" type="text/css" href="css/restaurants.css">
+  <script src="js/dashboard.js"></script>
   <title>My Restaurants</title>
 </head>
 <body>
@@ -18,8 +19,3 @@
   </div>
 </body>
 </html>
-<?php
-  require_once 'php/restrict_access.php';
-  # Redirect non-managers to the login page.
-  restrict_access(UserType::MANAGER);
-?>

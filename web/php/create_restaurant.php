@@ -26,7 +26,7 @@ function create_restaurant($user_category, $user_id, $name,
     return;
 
   // create and execute sql request
-  $stmt->bind_param('sssii', $name, $description, $category, $address_id, $_SESSION['user_id']);
+  $stmt->bind_param('sssii', $name, $description, $category, $address_id, $user_id);
   $stmt->execute();
   if ($stmt->errno != 0)
     return 'Failed to create restaurant.';

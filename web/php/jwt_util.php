@@ -27,6 +27,7 @@ function createJWT($user_email, $user_name, $user_category, $user_id) {
     'jti' => $tokenID,
     'user_name' => $user_name,
     'user_category' => $user_category,
+    'user_email' => $user_email,
     'user_id' => $user_id
   ]));
 

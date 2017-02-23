@@ -71,6 +71,7 @@ function create_restaurant() {
   if(data['jwt'] == null)
   {
     alert("No jwt in local storage, abort creation of restaurant");
+    return false;
   }
   $.ajax({
     url: apiURL,
@@ -132,6 +133,6 @@ function isManager()
   var jwt = localStorage.getItem('JWT');
   if(jwt == null)
     return false;
-  // TODO
+  // TODO : get user category from jwt
   return true;
 }

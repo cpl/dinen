@@ -7,10 +7,10 @@ require_once '../../php/config.inc.php';
 require_once '../../php/jwt_util.php';
 require_once '../../php/register.php';
 require_once '../../php/login.php';
+require_once '../../php/get_restaurants.php';
 require_once '../../php/create_restaurant.php';
 
 $request = htmlspecialchars($_POST['request']);
-
 switch ($request) {
   case 'register':
     processRegisterRequest();
@@ -20,6 +20,9 @@ switch ($request) {
     break;
   case 'create_restaurant':
     processCreateRestaurantRequest();
+    break;
+  case 'get_restaurants':
+    processGetRestaurantsRequest();
     break;
 }
 
@@ -48,7 +51,7 @@ function processLoginRequest() {
   $result = ['status' => Status::SUCCESS];
   $userData = $userDataGrabAttempt['data'];
   $result['data'] = createJWT($userData['email'], $userData['name'],
-                              $userData['category']);
+                              $userData['category'], $userData['id']);
   echo json_encode($result);
 }
 
@@ -59,15 +62,29 @@ function processCreateRestaurantRequest() {
     echo "Oops, some of the required fields / jwt are empty";
     return;
   }
-  if(!correctJWS($_POST['jwt']))
+  if(checkJWT($_POST['jwt'])['status'] != 'success')
   {
-    echo "Incorrect jwt passed";
+    echo $_POST['jwt'];
+    echo checkJWT($_POST['jwt'])['data'];
     return;
   }
   $name = htmlspecialchars($_POST['name']);
   $description = htmlspecialchars($_POST['description']);
   $category = htmlspecialchars($_POST['category']);
   $payload = getJWTPayload($_POST['jwt']);
-  create_restaurant($payload['user_category'], $payload['user_id'],
+  echo create_restaurant($payload['user_category'], $payload['user_id'],
                     $name, $description, $category);
+}
+
+function processGetRestaurantsRequest()
+{
+  if(checkJWT($_POST['jwt'])['status'] != 'success')
+  {
+    echo json_encode($_POST['jwt']);
+    //echo checkJWT($_POST['jwt'])['data'];
+    return;
+  }
+  $payload = getJWTPayload($_POST['jwt']);
+  $json = json_encode(get_restaurants_new($payload['user_id'], $payload['user_category']));
+  echo $json;
 }
