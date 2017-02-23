@@ -57,7 +57,8 @@ function login() {
         if (response === 'success') {
             window.location.replace("restaurants.php");
         } else {
-            alert(JSON.stringify(response));
+          localStorage.setItem('JWT', response.data);
+          alert(localStorage.getItem('JWT'));
         }
     });
     return false;

@@ -85,8 +85,6 @@ function createJWT($user_email, $user_name, $user_category) {
   $nowInUnixTime = time();
   $sixHoursInSeconds = 6 * 60 * 60;
 
-  # Generate a random id; create a series of random bytes, then encode them in
-  # base 64 (so the id is a number).
   $tokenID = base64_encode(random_bytes(32));
 
   $payload = base64_encode(json_encode([
