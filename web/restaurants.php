@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <?php require_once 'common/head.inc.php'; ?>
   <link rel="stylesheet" type="text/css" href="css/restaurants.css">
   <title>My Restaurants</title>
 </head>
