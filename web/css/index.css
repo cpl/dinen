@@ -66,19 +66,16 @@ nav ul li{
 
 /*the id that takes precedence over class*/
 /*the jumbotron css   ====================================================================== */
-.white-background{
-
-}
 
 #jumbotron-override {
-  color:#1C1919;
+  color:white;
   margin:80px 0 80px 0;
   min-height: 500px;
   /*border: 2px solid black;
   border-radius: 5px;
   background: url('../img/jumbotron.jpg') no-repeat center center;*/
   background-size: cover;
-  background-color: white;
+  background: rgba(34,34,34,0.75);
   /*#A9A9A9;*/
   background-blend-mode: screen;
   /*box-shadow:
@@ -92,6 +89,10 @@ nav ul li{
 }
 
 /* 3 panels css ============================================================================ */
+
+.white-background{
+  background:white;
+}
 
 .panel-text{
   margin-top:50px;
