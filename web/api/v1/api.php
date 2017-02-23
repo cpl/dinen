@@ -25,42 +25,19 @@ switch ($request) {
 
 function processRegisterRequest() {
   $requestData = json_decode($_POST['data'], true);
-  $name = ''; $email = ''; $password = ''; $password_confirmation = '';
-  foreach ($requestData as $key => $value) {
-    switch ($key) {
-      case 'name':
-        $name = htmlspecialchars($value);
-        break;
-      case 'email':
-        $email = htmlspecialchars($value);
-        break;
-      case 'password':
-        $password = htmlspecialchars($value);
-        break;
-      case 'password_confirmation':
-        $password_confirmation = htmlspecialchars($value);
-        break;
-    }
-  }
+  $name = htmlspecialchars($requestData['name']);
+  $email = htmlspecialchars($requestData['email']);
+  $password = htmlspecialchars($requestData['password']);
+  $password_confirmation
+    = htmlspecialchars($requestData['password_confirmation']);
   echo json_encode(register($name, $email, $password, $password_confirmation));
 }
 
 function processLoginRequest() {
   $requestData = json_decode($_POST['data'], true);
-  $email = '';
-  $password = '';
-  foreach ($requestData as $key => $value) {
-    switch ($key) {
-      case 'email':
-        $email = htmlspecialchars($value);
-        break;
-      case 'password':
-        $password = htmlspecialchars($value);
-        break;
-    }
-  }
+  $email = htmlspecialchars($requestData['email']);
+  $password = htmlspecialchars($requestData['password']);
 
-  # Sorry.
   $userDataGrabAttempt = getUserDataForJWT($email, $password);
 
   if ($userDataGrabAttempt['status'] != Status::SUCCESS) {
