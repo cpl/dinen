@@ -63,7 +63,7 @@ function processLoginRequest() {
   $userDataGrabAttempt = getUserDataForJWT($email, $password);
 
   if ($userDataGrabAttempt['status'] != Status::SUCCESS) {
-    echo $userDataGrabAttempt;
+    echo json_encode($userDataGrabAttempt);
     return;
   }
 

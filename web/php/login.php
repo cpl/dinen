@@ -7,19 +7,17 @@ require_once 'connect_to_db.php';
 require_once 'confirm.php';
 
 function getUserDataForJWT($email, $password) {
-  $result = ['status' => Status::UNSET];
-
   if (empty($email.$password))
-    $result['data'] = 'Empty email and password.';
+    return ['status' => Status::ERROR, 'data' => 'Empty email and password.'];
   if (!emailIsValid($email))
-    $result['data'] = 'Invalid email.';
+    return ['status' => Status::ERROR, 'data' => 'Invalid email.'];
   if(!passwordIsValid($password))
-    $result['data'] = 'Invalid password.';
+    return ['status' => Status::ERROR, 'data' => 'Invalid password.'];
 
   $mysqli = createMySQLi();
 
   if ($mysqli->connect_error)
-    $result['data'] = 'Database connection failed.';
+    return ['status' => Status::ERROR, 'data' => 'Database connection failed.'];
 
   $password_hash = hash('sha256', $password);
   $stmt = $mysqli->prepare('SELECT * FROM users WHERE email = ?
@@ -30,7 +28,8 @@ function getUserDataForJWT($email, $password) {
 
   # If no users are found, then the credentials are incorrect.
   if ($stmt_result->num_rows <= 0)
-    $result['data'] = 'Invalid email-password combination.';
+    return ['status' => Status::ERROR,
+            'data' => 'Invalid email-password combination.'];
 
   $user = $stmt_result->fetch_row();
 
@@ -39,20 +38,18 @@ function getUserDataForJWT($email, $password) {
     # Create the confirmation email.
     $confirmation = create_confirmation($user[0], $user[1], $user[2]);
     if($confirmation == 'success')
-      $result['data']
-        = 'Account email confirmation sent, but email not confirmed.';
+      return ['status' => Status::ERROR,
+              'data'
+                => 'Account email confirmation sent, but email not confirmed.'];
     else
-      $result['data'] = $confirmation;
-  }
-
-  if ($result['status'] == Status::UNSET) {
-    $result['status'] = Status::SUCCESS;
-    $result['data'] = ['email' => $user[2], 'name' => $user[1],
-                       'category' => $user[4]];
+      return ['status' => Status::ERROR, 'data' => $confirmation];
   }
 
   $stmt->close(); $mysqli->close();
-  return $result;
+  return ['status' => Status::SUCCESS,
+          'data'
+            => ['email' => $user[2], 'name' => $user[1],
+                'category' => $user[4]]];
 }
 
 /*
