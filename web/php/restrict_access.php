@@ -1,7 +1,7 @@
 <?php
-abstract class UserType {
-  const MANAGER = 0;
-}
+
+require_once 'globals.php';
+
 function restrict_access($userType) {
   switch ($userType) {
     case UserType::MANAGER:
@@ -12,6 +12,7 @@ function restrict_access($userType) {
       break;
   }
 }
+
 function logged_in() {
   return array_key_exists('user_id', $_SESSION)
          && $_SESSION['user_id'] !== NULL;

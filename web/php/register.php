@@ -13,7 +13,7 @@ function register($name, $email, $password, $confirmation_password) {
   if (!passwordsAreValid($password, $confirmation_password))
     return 'Passwords are invalid.';
   $password_hash = hash('sha256', $password);
-  $mysqli = createMysqlConnection();
+  $mysqli = createMySQLi();
   if ($mysqli->connect_error)
     return 'Database connection failed.';
   $stmt = $mysqli->prepare('SELECT * FROM users WHERE email = ?');

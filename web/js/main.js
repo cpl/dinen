@@ -40,7 +40,7 @@ function register(e) {
     }).done(function (response) {
         if (response === 'success') {
           alert("Registration email was sent to your email");
-          window.location.replace("index.php");
+          window.location.replace("index.html");
         } else {
           alert(response);
         }
@@ -57,7 +57,8 @@ function login() {
         if (response === 'success') {
             window.location.replace("restaurants.php");
         } else {
-            alert(response);
+          localStorage.setItem('JWT', response.data);
+          alert(localStorage.getItem('JWT'));
         }
     });
     return false;

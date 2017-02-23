@@ -1,4 +1,5 @@
 <?php
+
 require_once 'validators.php';
 require_once 'connect_to_db.php';
 
@@ -16,7 +17,7 @@ function create_restaurant() {
     return 'Description is empty';
   if (empty($_POST['category']))
     return 'Restaurant has no type';
-  $mysqli = createMysqlConnection();
+  $mysqli = createMySQLi();
 
   if ($mysqli->connect_error)
     return 'Database connection failed.';

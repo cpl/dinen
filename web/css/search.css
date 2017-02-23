@@ -1,12 +1,26 @@
 .searchBox {
+  height: 40px;
   outline: none;
-  width: 100%;
   font-size: 30px;
-  border-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
   border: 1px solid #808080;
   background-color: #3d3838;
   color: white;
   text-align: center;
+  line-height: 30px;
+}
+
+.searchButton {
+  height: 40px;
+  font-size: 25px;
+  border: 1px solid #808080;
+  color: white;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+	background-color: #3d3838;
+	text-align: center;
+  line-height: 30px;
 }
 
 /* makes the placeholder in searchBox bigger */
@@ -16,4 +30,8 @@ input::-webkit-input-placeholder {
 
 .searchFilters {
   color: white;
+}
+
+.marginTop {
+  padding-top: 20px;
 }

@@ -1,4 +1,5 @@
 <?php
+
 require_once 'connect_to_db.php';
 
 if (!empty($_GET)){
@@ -10,7 +11,7 @@ if (!empty($_GET)){
 }
 
 function create_confirmation($uid, $name, $email){
-  $mysqli = createMysqlConnection();
+  $mysqli = createMySQLi();
 
   if(empty($uid) || empty($name) || empty($email)){
     return "Missing name|email|id";
@@ -37,7 +38,7 @@ function create_confirmation($uid, $name, $email){
     return 'Failed to create confirmation entry.';
   }
 
-  echo shell_exec('echo "Click this link to activate account: https://dinen.ddns.net/php_scripts/confirm.php?key='.$key.'" | mail -s "Dinen Confirmation" ' . $email);
+  echo shell_exec('echo "Click this link to activate account: https://dinen.ddns.net/php/confirm.php?key='.$key.'" | mail -s "Dinen Confirmation" ' . $email);
 
   $mysqli->close();
   return 'success';
@@ -48,7 +49,7 @@ function process_confirmation($key){
   if(strlen($key) != 32)
     return 'Key size is wrong!';
 
-  $mysqli = createMysqlConnection();
+  $mysqli = createMySQLi();
 
   if ($mysqli->connect_error)
     return 'Database connection failed at confirm confirm.';
@@ -70,5 +71,3 @@ function process_confirmation($key){
   $mysqli->close();
   return 'fail';
 }
-
-?>
