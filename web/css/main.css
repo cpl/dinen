@@ -9,7 +9,6 @@ html {
 }
 
 body {
-    padding: 20px;
     height: 100%;
     background: transparent;
 }
@@ -29,11 +28,30 @@ body {
     text-align: center;
 }
 
+.collapse {
+    -webkit-transition: all 0.6s ease-out;
+      -moz-transition: all 0.6s ease-out;
+      -o-transition: all 0.6s ease-out;
+      -ms-transition: all 0.6s ease-out;
+      transition: all 0.6s ease-out;
+}
+
+.collapse.in {
+    background: rgba(0, 0, 0, 0.95);
+}
+
+/*
+.navbar>.container-fluid {
+    padding-left: 35px;
+    padding-right: 35px;
+    height: 65px;
+}*/
+
 .navbar-brand {
     padding: 8px;
 }
 
-.logo {
+.navbar-brand>img {
     height: 100%;
     width: auto;
 }
