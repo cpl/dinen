@@ -13,7 +13,7 @@ function get_restaurants()
   console.log(JSON.stringify(data));
   if(data['jwt'] == null)
   {
-    alert('No jwt in local storage, abort restaurant fetch.');
+    window.location.replace("login.html");
     return false;
   }
   $.ajax({
@@ -25,11 +25,15 @@ function get_restaurants()
       {
         // all is well, generate the html from response
         console.log(response);
-        alert(response);
+        response.data.forEach(function (restaurant) {
+          $('#restaurants').append('You have a restuarant called '
+            + restaurant.name + ' that is a ' + restaurant.category + '.<br>');
+        });
       }
       else {
         // whoops, something went wrong
         console.log(response);
+        $('#welcome').innerHTML = 'Dirty hacker!';
       }
     }
   );
