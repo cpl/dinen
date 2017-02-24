@@ -9,10 +9,8 @@
 <body>
   <?php require_once 'common/navbar.inc.php'; ?>
   <div class = 'container'>
-    <?php
-      echo "Hello, {$_SESSION['user_name']}. Restaurants you own:";
-      require_once 'php/get_restaurants.php'; echo getRestaurants();
-    ?>
+    <div id="welcome"></div>
+    <div id="restaurants"></div>
     <div>
       <a href="register_restaurant.html">Add another restaurant</a>
     </div>

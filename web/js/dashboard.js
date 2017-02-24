@@ -1,7 +1,7 @@
 //Input here everything related to dashboard handling
 $(document).ready(function () {
   get_restaurants();
-})
+});
 
 var apiURL = 'api/v1/api.php';
 
@@ -13,7 +13,7 @@ function get_restaurants()
   console.log(JSON.stringify(data));
   if(data['jwt'] == null)
   {
-    alert("No jwt in local storage, abort creation of restaurant");
+    alert('No jwt in local storage, abort restaurant fetch.');
     return false;
   }
   $.ajax({
@@ -25,6 +25,7 @@ function get_restaurants()
       {
         // all is well, generate the html from response
         console.log(response);
+        alert(response);
       }
       else {
         // whoops, something went wrong

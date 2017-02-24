@@ -56,9 +56,9 @@ function login() {
   }).done(function (response) {
     if (response.status == 1) {
       localStorage.setItem('JWT', response.data);
-      window.location.replace("restaurants.php");
+      window.location.replace("dashboard.php");
     } else {
-      alert(response);
+      alert(response.data);
     }
   });
   return false;
