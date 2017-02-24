@@ -15,11 +15,12 @@ function get_restaurants_new($manager_id, $user_category)
     return ['status' => Status::ERROR,
             'data' => 'Database connection failed'];
   $stmt = $mysqli->prepare('SELECT * FROM restaurants WHERE manager_id = ?');
-  $stmt->bind_param('i', $manager_id); $stmt->execute();
-  $stmt_result = $stmt->get_result();
-  if ($stmt_result->num_rows === 0)
+  $stmt->bind_param('i', $manager_id);
+  $stmt->execute();
+  if ($stmt->errno != 0)
     return ['status' => Status::ERROR,
-            'data' => 'No restaurants found'];
+            'data' => 'Error executing restaurants query'];
+  $stmt_result = $stmt->get_result();
   $restaurant_list = array();
   while ($row = $stmt_result->fetch_array()) {
     array_push($restaurant_list, ['name' => $row['name'],

@@ -7,6 +7,7 @@ require_once '../../php/config.inc.php';
 require_once '../../php/jwt_util.php';
 require_once '../../php/register.php';
 require_once '../../php/login.php';
+require_once '../../php/get_menu.php';
 require_once '../../php/get_restaurants.php';
 require_once '../../php/create_restaurant.php';
 
@@ -23,6 +24,9 @@ switch ($request) {
     break;
   case 'get_restaurants':
     processGetRestaurantsRequest();
+    break;
+  case 'get_menu':
+    processGetMenuRequest();
     break;
 }
 
@@ -87,4 +91,21 @@ function processGetRestaurantsRequest()
   $payload = getJWTPayload($_POST['jwt']);
   $json = json_encode(get_restaurants_new($payload['user_id'], $payload['user_category']));
   echo $json;
+}
+
+function processGetMenuRequest()
+{
+  if(empty($_POST['restaurant_id']))
+  {
+    echo json_encode("Restaurant id is not included in request");
+    return;
+  }
+  if(empty($_POST['menu_id']))
+  {
+    echo json_encode("Menu id is not included in request");
+    return;
+  }
+  $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
+  $menu_id = htmlspecialchars($_POST['menu_id']);
+  $json = json_encode(get_menu($restaurant_id));
 }

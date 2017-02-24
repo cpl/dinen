@@ -17,5 +17,8 @@ function createMenuItem($user_email, $name, $section, $description, $price, $men
   // create and execute sql request
   $stmt->bind_param('sssii', $name, $description, $section, $price, $menu_id);
   $stmt->execute();
+  if ($stmt->errno != 0)
+    return ['status' => Status::ERROR,
+            'data' => 'Error executing menu item insertion query'];
   return [ 'status' => Status::SUCCESS];
 }
