@@ -2,6 +2,34 @@ var apiURL = 'api/v1/api.php';
 
 var Status = { FAILURE: 0, SUCCESS: 1 };
 
+var themes = {
+  'default': '//bootswatch.com/amelia/bootstrap.min.css',
+  'amelia': '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css',
+  'cerulean': '//bootswatch.com/cerulean/bootstrap.min.css',
+  'cosmo': '//bootswatch.com/cosmo/bootstrap.min.css',
+  'cyborg': '//bootswatch.com/cyborg/bootstrap.min.css',
+  'flatly': '//bootswatch.com/flatly/bootstrap.min.css',
+  'journal': '//bootswatch.com/journal/bootstrap.min.css',
+  'simplex': '//bootswatch.com/simplex/bootstrap.min.css',
+  'slate': '//bootswatch.com/slate/bootstrap.min.css',
+  'spacelab': '//bootswatch.com/spacelab/bootstrap.min.css',
+  'united': '//bootswatch.com/united/bootstrap.min.css'
+};
+
+$(function () {
+  var currentTheme
+    = $('<link href="' + themes['default'] + '" rel="stylesheet" />');
+  currentTheme.appendTo('head');
+  $('.theme-link').click(function () {
+    var themeURL = themes[$(this).attr('data-theme')];
+    currentTheme.attr('href', themeURL);
+  });
+});
+
+function formToJSON(form) {
+  return JSON.stringify(formToDict(form, ':input[name]:enabled'));
+}
+
 function register(event) {
   var ref = $(this).find("[required]");
   $(ref).each(function () {
@@ -12,12 +40,10 @@ function register(event) {
       return false;
     }
   });
-  var data = formToJSON('#registerForm');
-  data['request'] = 'register';
   $.ajax({
     url: apiURL,
     type: 'POST',
-    data: data
+    data: 'request=register&data=' + formToJSON('#registerForm')
   }).done(function (response) {
     if (response == 'success') {
       alert('Registration email was sent to your email');
@@ -46,13 +72,14 @@ function login() {
 }
 
 function create_restaurant() {
-  var data = formToDict('#createForm');
-  data['request'] = 'create_restaurant';
-  data['jwt'] = getJWT();
-  if(data['jwt'] == null) {
+  const JWT = getJWT();
+  if(JWT == null) {
     alert("You must be logged in to create restaurants.");
     return false;
   }
+  var data = formToDict('#createForm');
+  data['request'] = 'create_restaurant';
+  data['jwt'] = JWT;
   $.ajax({
     url: apiURL,
     type: 'POST',
@@ -73,34 +100,6 @@ function validatePassword() {
   } else {
     confirm_password.setCustomValidity('');
   }
-}
-
-var themes = {
-  'default': '//bootswatch.com/amelia/bootstrap.min.css',
-  'amelia': '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css',
-  'cerulean': '//bootswatch.com/cerulean/bootstrap.min.css',
-  'cosmo': '//bootswatch.com/cosmo/bootstrap.min.css',
-  'cyborg': '//bootswatch.com/cyborg/bootstrap.min.css',
-  'flatly': '//bootswatch.com/flatly/bootstrap.min.css',
-  'journal': '//bootswatch.com/journal/bootstrap.min.css',
-  'simplex': '//bootswatch.com/simplex/bootstrap.min.css',
-  'slate': '//bootswatch.com/slate/bootstrap.min.css',
-  'spacelab': '//bootswatch.com/spacelab/bootstrap.min.css',
-  'united': '//bootswatch.com/united/bootstrap.min.css'
-};
-
-$(function () {
-  var currentTheme
-    = $('<link href="' + themes['default'] + '" rel="stylesheet" />');
-  currentTheme.appendTo('head');
-  $('.theme-link').click(function () {
-    var themeurl = themes[$(this).attr('data-theme')];
-    currentTheme.attr('href', themeurl);
-  });
-});
-
-function formToJSON(form) {
-  return JSON.stringify(formToDict(form, ':input[name]:enabled'));
 }
 
 function formToDict(form) {
@@ -127,4 +126,15 @@ function isManager() {
 
 function getJWT() {
   return localStorage.getItem('JWT');
+}
+
+function showMessageAlert(component, message) {
+  $.ajax({
+    method: "GET",
+    url: "components/" + component,
+  }).done(function (response) {
+    response = response.toString().replace("#msg#", message);
+    $("#msgDiv").replaceWith(response);
+    $("#msgDiv").fadeIn(800);
+  });
 }
