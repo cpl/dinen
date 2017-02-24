@@ -139,3 +139,14 @@ function showMessageAlert(component, message) {
     $("#msgDiv").fadeIn(800);
   });
 }
+
+$('#logoutLink').click(function () {
+        $.ajax({
+          url: apiURL,
+          type: 'POST',
+          data: 'request=logout&data=' + JSON.stringify(data)
+        }).done(function () {
+          // Make sure logout works.
+          window.location.replace("dashboard.php");
+        });
+      });
