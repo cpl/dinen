@@ -3,7 +3,6 @@
 <head>
   <?php require_once 'common/head.inc.php'; ?>
   <link rel="stylesheet" type="text/css" href="css/restaurants.css">
-  <script src="js/dashboard.js"></script>
   <title>My Restaurants</title>
 </head>
 <body>
@@ -15,5 +14,6 @@
       <a href="register_restaurant.html">Add another restaurant</a>
     </div>
   </div>
+  <script src="js/dashboard.js"></script>
 </body>
 </html>
