@@ -1,6 +1,6 @@
 var apiURL = 'api/v1/api.php';
 
-var Status = { FAILURE: 0, SUCCESS: 1 };
+var Status = { ERROR: 0, SUCCESS: 1 };
 
 $(function () {
   get_restaurants();

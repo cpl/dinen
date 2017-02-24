@@ -25,12 +25,27 @@
 
 <script>
   $(document).ready(function () {
-    if (localStorage.getItem('JWT') == null) {
+    if (getJWT() == null) {
       $('#user_info').html(
         "<li><a href='login.html'><span class='glyphicon glyphicon-log-in'></span>Log in</a></li>"
         + "<li><a href='register.html'><span class='glyphicon glyphicon-user'></span>Sign Up</a></li>");
     } else {
-      $('#user_info').html("<li><a href ='php/logout.php'>Logout</a></li>");
+      $('#user_info').html("<li><a href ='#' id='logoutLink'>Logout</a></li>");
+      var data = {};
+      data['jwt'] = getJWT();
+      $('#logoutLink').click(function () {
+        $.ajax({
+          url: apiURL,
+          type: 'POST',
+          data: 'request=logout&data=' + JSON.stringify(data)
+        }).done(function () {
+          // Make sure logout works.
+          window.location.replace("dashboard.php");
+        });
+      });
     }
-  })
+  });
+  function getJWT() {
+    return localStorage.getItem('JWT');
+  }
 </script>

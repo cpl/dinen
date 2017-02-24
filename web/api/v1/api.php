@@ -27,6 +27,8 @@ switch ($request) {
     break;
   case 'get_menu':
     processGetMenuRequest();
+  case 'logout':
+    processLogoutRequest();
     break;
 }
 
@@ -60,14 +62,12 @@ function processLoginRequest() {
 }
 
 function processCreateRestaurantRequest() {
-  if(empty($_POST['name']) || empty($_POST['description'])||
-     empty($_POST['category']) || empty($_POST['jwt']))
-  {
+  if (empty($_POST['name']) || empty($_POST['description'])||
+      empty($_POST['category']) || empty($_POST['jwt'])) {
     echo "Oops, some of the required fields / jwt are empty";
     return;
   }
-  if(checkJWT($_POST['jwt'])['status'] != 'success')
-  {
+  if (checkJWT($_POST['jwt'])['status'] !== Status::SUCCESS) {
     echo $_POST['jwt'];
     echo checkJWT($_POST['jwt'])['data'];
     return;
@@ -80,11 +80,9 @@ function processCreateRestaurantRequest() {
                     $name, $description, $category);
 }
 
-function processGetRestaurantsRequest()
-{
-  if(checkJWT($_POST['jwt'])['status'] != 'success')
-  {
-    echo json_encode($_POST['jwt']);
+function processGetRestaurantsRequest() {
+  if (checkJWT($_POST['jwt'])['status'] !== Status::SUCCESS) {
+    echo json_encode(checkJWT($_POST['jwt'])['data']);
     //echo checkJWT($_POST['jwt'])['data'];
     return;
   }
@@ -108,4 +106,15 @@ function processGetMenuRequest()
   $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
   $menu_id = htmlspecialchars($_POST['menu_id']);
   $json = json_encode(get_menu($restaurant_id));
+}
+
+function processLogoutRequest() {
+  $requestData = json_decode($_POST['data'], true);
+  $jwt = htmlspecialchars($requestData['jwt']);
+  if (checkJWT($jwt)['status'] === Status::SUCCESS) {
+    if (blackListJWT($jwt)['status'] !== Status::SUCCESS) {
+      # Hmm.
+      processLogoutRequest();
+    }
+  }
 }

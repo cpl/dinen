@@ -1,6 +1,6 @@
 var apiURL = 'api/v1/api.php';
 
-var Status = { FAILURE: 0, SUCCESS: 1 };
+var Status = { ERROR: 0, SUCCESS: 1 };
 
 var themes = {
   'default': '//bootswatch.com/amelia/bootstrap.min.css',
@@ -63,6 +63,7 @@ function login() {
   }).done(function (response) {
     if (response.status === Status.SUCCESS) {
       localStorage.setItem('JWT', response.data);
+      alert(response.data)
       window.location.replace("dashboard.php");
     } else {
       alert(response.data);
