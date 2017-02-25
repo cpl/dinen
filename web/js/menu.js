@@ -34,7 +34,7 @@ function generate_html_for_menu(response)
     $('#menu').append('Menu items: <br>');
     response.data.forEach(function (item) {
       $('#menu').append('Menu item: ' + item.name + ' in a ' +
-                                item.section + '. Cost: $' + item.cost +
+                                item.section + '. Cost: $' + item.price +
                                 '. Description: ' + item.description + '.<br>');
     });
   } else {
