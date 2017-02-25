@@ -28,8 +28,12 @@ function getUserDataForJWT($email, $password) {
 
   # If no users are found, then the credentials are incorrect.
   if ($stmt_result->num_rows <= 0)
+  {
+    $stmt->close();
+    $mysqli->close();
     return ['status' => Status::ERROR,
             'data' => 'Invalid email-password combination.'];
+  }
 
   $user = $stmt_result->fetch_row();
 
@@ -38,11 +42,18 @@ function getUserDataForJWT($email, $password) {
     # Create the confirmation email.
     $confirmation = create_confirmation($user[0], $user[1], $user[2]);
     if($confirmation == 'success')
+    {
+      $stmt->close();
+      $mysqli->close();
       return ['status' => Status::ERROR,
-              'data'
-                => 'Account email confirmation sent, but email not confirmed.'];
+              'data' => 'Account email confirmation sent, but email not confirmed.'];
+    }
     else
+    {
+      $mysqli->close();
+      $stmt->close();
       return ['status' => Status::ERROR, 'data' => $confirmation];
+    }
   }
 
   $stmt->close(); $mysqli->close();
