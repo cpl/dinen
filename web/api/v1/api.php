@@ -27,6 +27,7 @@ switch ($request) {
     break;
   case 'get_menu':
     processGetMenuRequest();
+    break;
   case 'logout':
     processLogoutRequest();
     break;
@@ -49,7 +50,7 @@ function processLoginRequest() {
 
   $userDataGrabAttempt = getUserDataForJWT($email, $password);
 
-  if ($userDataGrabAttempt['status'] != Status::SUCCESS) {
+  if ($userDataGrabAttempt['status'] !== Status::SUCCESS) {
     echo json_encode($userDataGrabAttempt);
     return;
   }
@@ -87,34 +88,33 @@ function processGetRestaurantsRequest() {
     return;
   }
   $payload = getJWTPayload($_POST['jwt']);
-  $json = json_encode(get_restaurants_new($payload['user_id'], $payload['user_category']));
+  $json = json_encode(get_restaurants_new($payload['user_id'],
+                                          $payload['user_category']));
   echo $json;
 }
 
-function processGetMenuRequest()
-{
-  if(empty($_POST['restaurant_id']))
-  {
+function processGetMenuRequest() {
+  if(empty($_POST['restaurant_id'])) {
     echo json_encode("Restaurant id is not included in request");
     return;
   }
-  if(empty($_POST['menu_id']))
-  {
+  if(empty($_POST['menu_id'])) {
     echo json_encode("Menu id is not included in request");
     return;
   }
   $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
   $menu_id = htmlspecialchars($_POST['menu_id']);
-  $json = json_encode(get_menu($restaurant_id));
+  $json = json_encode(get_menu($restaurant_id, $menu_id));
+  echo $json;
 }
 
 function processLogoutRequest() {
-  $requestData = json_decode($_POST['data'], true);
-  $jwt = htmlspecialchars($requestData['jwt']);
+  $jwt = $_POST['jwt'];
   if (checkJWT($jwt)['status'] === Status::SUCCESS) {
     if (blackListJWT($jwt)['status'] !== Status::SUCCESS) {
       # Hmm.
-      processLogoutRequest();
+      //processLogoutRequest();
     }
   }
+  echo json_encode(['status' => Status::SUCCESS]);
 }

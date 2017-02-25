@@ -54,9 +54,32 @@ function checkJWT($jwt) {
       && $payload_json['iss'] == ISSUER
       && $payload_json['aud'] == AUDIENCE
       && time() >= $payload_json['nbf']) {
+
     if (time() >= $payload_json['exp'])
       return ['status' => Status::ERROR, 'data' => 'expired'];
-    return ['status' => Status::SUCCESS];
+
+    $mysqli = createMySQLi();
+
+    # This is a pretty bad scenario to be in, error must be handled server-side.
+    if ($mysqli->connect_error)
+      return ['status' => Status::ERROR,
+              'data' => 'Database connection failed.'];
+    $stmt = $mysqli->prepare("SELECT * FROM jwt_blacklist
+                              WHERE jti = ?");
+    $stmt->bind_param('s', $payload_json['jti']);
+    $stmt->execute();
+    if ($stmt->errno != 0)
+      return ['status' => Status::ERROR,
+              'data' => 'Error executing jti query'];
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0)
+      return ['status' => Status::ERROR, 'data' => 'blacklisted'];
+
+    $stmt->close();
+    $mysqli->close();
+
+    return ['status' => Status::SUCCESS, 'data' => 'valid'];
   }
   return ['status' => Status::ERROR, 'data' => 'invalid'];
 }
@@ -93,6 +116,7 @@ function blackListJWT($jwt) {
               'data' => 'Failed to insert JWT.'];
 
     $stmt->close(); $mysqli->close();
-    return ['status' => Status::SUCCESS];
+    return ['status' => Status::SUCCESS, 'data' => 'Blacklisted.'];
   }
+  return ['status' => Status::SUCCESS, 'data' => 'Already expired.'];
 }
