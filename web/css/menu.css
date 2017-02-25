@@ -1,0 +1,118 @@
+html {
+    background: url("../img/dining-set.jpg") no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Oxygen', sans-serif;
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+  padding: 0px;
+  margin-bottom: 60px;
+}
+
+/* navbar css ============================================================================ */
+
+.navbar{
+  position: absolute;
+  width:100%;
+  border: 0;
+  height: 80px;
+  background:black;
+}
+/*
+I don't think that this page should have the transparent to visible feature.
+I feel that when people are editing their pages, they  might not want a navbar above them as it kinda blocks stuff.
+-webkit-transition: all 0.6s ease-out;
+    -moz-transition: all 0.6s ease-out;
+    -o-transition: all 0.6s ease-out;
+    -ms-transition: all 0.6s ease-out;
+    transition: all 0.6s ease-out;
+.navbar.scrolled {
+    background: rgba(0, 0, 0, 0.95); 
+}
+*/
+.navbar-brand{
+  width: 60px;
+  height: 60px;
+  margin-top:10px;
+}
+
+nav ul li{
+  margin-top:10px;
+}
+
+/* the wrapper ==========================================*/
+.wrapper{
+
+}
+
+/* jumbotron css ================================================================================ */
+#jumbotron-override {
+  color:white;
+  margin:140px -20px 80px -20px;
+  min-height: 1000px;
+  /*border: 2px solid black;
+  border-radius: 5px;
+  background: url('../img/jumbotron.jpg') no-repeat center center;*/
+  background-size: cover;
+  background: rgba(34,34,34,0.75);
+  /*#A9A9A9;*/
+  background-blend-mode: screen;
+  /*box-shadow:
+    0 0 0 8px hsl(100, 100%, 100%),
+    0 0 0 1px hsl(0, 0%, 50%);*/
+  font-family:times;
+  position:relative;
+}
+
+.jumbotron h1{
+  margin-top: -20px;
+  
+}
+
+#edit-button{
+  margin-top:-15px;
+  margin-right:-20px;
+  float: right;
+  background: #808080;
+  font-size:20px;
+}
+
+#done-button{
+  bottom: 30px;
+  right: 30px;
+  position:absolute;
+  background: #67818A;
+  font-size:20px;
+}
+
+#menu{
+  min-height:750px;
+  margin-top:25px;
+}
+
+
+/* footer css  ====================================================================================== */
+
+#footer {
+  background: url('../img/cafe blurred dark.jpg') no-repeat center center;
+  background-size:cover;
+  position: relative;
+  width:100%;
+  bottom: 0;
+  font-family: times;
+}
+
+
+.footer-text {
+   margin-top:15px;
+   text-align:left;
+   color: #FFFFFF;
+   font-size:16px;
+   padding:0 0 10px 20px;
+}
+
