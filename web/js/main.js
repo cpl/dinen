@@ -59,7 +59,7 @@ function login() {
   }).done(function (response) {
     if (response.status === Status.SUCCESS) {
       localStorage.setItem('JWT', response.data);
-      console.log(response.data);
+      alert(response.data);
       window.location.replace("dashboard.php");
     } else {
       alert(response.data);
