@@ -59,7 +59,6 @@ function login() {
   }).done(function (response) {
     if (response.status === Status.SUCCESS) {
       localStorage.setItem('JWT', response.data);
-      alert(response.data);
       window.location.replace("dashboard.php");
     } else {
       alert(response.data);
@@ -82,7 +81,7 @@ function create_restaurant() {
     type: 'POST',
     data: data
   }).done(function (response) {
-      alert(response);
+      window.location.replace("dashboard.php");
     }
   );
   return false;
