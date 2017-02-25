@@ -31,11 +31,11 @@ function create_restaurant($user_category, $user_id, $name,
   if ($stmt->errno != 0)
     return 'Failed to create restaurant.';
   // get the returned string of schedule creation
-  $scheduleReturn = create_schedule($stmt->insert_id, $mysqli);
+  // $scheduleReturn = create_schedule($stmt->insert_id, $mysqli);
   create_menu($mysqli, $stmt->insert_id);
   $stmt->close();
   $mysqli->close();
-  return $scheduleReturn;
+  return 'success';
 }
 
 // Create all schedules

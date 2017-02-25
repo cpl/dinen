@@ -29,7 +29,11 @@ function register($name, $email, $password, $confirmation_password) {
   $stmt->bind_param('ssss', $name, $email, $password_hash, $category);
   $stmt->execute();
   if ($stmt->errno != 0)
+  {
+    $stmt->close();
+    $mysqli->close();
     return 'Failed to create user.';
+  }
   if(session_status() == PHP_SESSION_NONE)
     session_start();
 

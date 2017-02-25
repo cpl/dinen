@@ -18,8 +18,12 @@ function get_restaurants_new($manager_id, $user_category)
   $stmt->bind_param('i', $manager_id);
   $stmt->execute();
   if ($stmt->errno != 0)
+  {
+    $mysqli->close();
+    $stmt->close();
     return ['status' => Status::ERROR,
             'data' => 'Error executing restaurants query'];
+  }
   $stmt_result = $stmt->get_result();
   $restaurant_list = array();
   while ($row = $stmt_result->fetch_array()) {
@@ -27,6 +31,8 @@ function get_restaurants_new($manager_id, $user_category)
                                   'description' => $row['description'],
                                   'category' => $row['category']]);
   }
+  $mysqli->close();
+  $stmt->close();
   return [ 'status' => Status::SUCCESS,
            'data' => ($restaurant_list)];
 }

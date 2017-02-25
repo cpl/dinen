@@ -24,15 +24,18 @@ function get_restaurants() {
 function generate_html_for_restaurants(response)
 {
   if (response.status === Status.SUCCESS) {
-    response.data.forEach(function (restaurant) {
-      $('#restaurants').append('You have a restuarant called '
-        + restaurant.name + ' that is a ' + restaurant.category
-        + ' with description: ' + restaurant.description + '.<br>');
-    });
+    response.data.forEach(generate_restaurant);
   } else {
     console.log(response);
     $('#welcome').innerHTML = response.data;
   }
+}
+
+function generate_restaurant(restaurant)
+{
+  $('#restaurants').append('You have a restuarant called '
+    + restaurant.name + ' that is a ' + restaurant.category
+    + ' with description: ' + restaurant.description + '.<br>');
 }
 
 function getJWT() {
