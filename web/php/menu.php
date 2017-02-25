@@ -64,10 +64,30 @@ function create_menu_item($user_id, $name, $section, $description, $price, $menu
                             description, section, price, menu_id)
                             VALUES (?, ?, ?, ?, ?)');
   // create and execute sql request
-  $stmt->bind_param('sssii', $name, $description, $section, $price, $menu_id);
+  $stmt->bind_param('sssdi', $name, $description, $section, $price, $menu_id);
   $stmt->execute();
   if ($stmt->errno != 0)
     return ['status' => Status::ERROR,
             'data' => 'Error executing menu item insertion query'];
   return [ 'status' => Status::SUCCESS];
+}
+
+function get_unfinished_order_items($restaurant_id)
+{
+  if(empty($restaurant_id))
+    return [ 'status' => Status::ERROR,
+              'data' => "No restaurant id given"];
+  $mysqli = createMySQLi();
+  if ($mysqli->connect_error)
+    return [ 'status' => Status::ERROR,
+             'data' => "Database connection failed"];
+  $stmt = $mysqli->prepare('SELECT * FROM orders
+                            WHERE restaurant_id = ? AND
+                                  is_finished = 0');
+  $stmt->bind_param('i', $restaurant_id);
+  $stmt->execute();
+  if ($stmt->errno != 0)
+    return ['status' => Status::ERROR,
+            'data' => 'Error getting all orders'];
+  // TODO: Finish getting unfinished order items
 }

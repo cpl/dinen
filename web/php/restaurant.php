@@ -34,9 +34,9 @@ require_once 'connect_to_db.php';
 // assuming every value was htmlspecialchars-sanitized before
 // should be tested
 // TODO: Check if restaurant belongs to logged in user
-function change_restaurant($restaurant_id, $name, $description, $category)
+function change_restaurant($user_id, $restaurant_id, $name, $description, $category)
 {
-  if(empty($restaurant_id))
+  if(empty($restaurant_id) || empty($user_id))
     return ['status' => Status::ERROR, 'data' => 'Restaurant id not specified'];
   $mysqli = createMySQLi();
 
@@ -48,13 +48,13 @@ function change_restaurant($restaurant_id, $name, $description, $category)
                             SET name = COALESCE('?', name),
                                 description = COALESCE('?', description),
                                 category = COALESCE('?', category)
-                            WHERE id = ?");
+                            WHERE id = ? AND manager_id = ?");
 
   if (!isValid($name) || !isValid($description) || !isValid($category))
     return;
 
   // create and execute sql request
-  $stmt->bind_param('sssi', $name, $description, $category, $restaurant_id);
+  $stmt->bind_param('sssii', $name, $description, $category, $restaurant_id, $user_id);
   $stmt->execute();
   if ($stmt->errno != 0)
   {
