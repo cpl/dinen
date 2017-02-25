@@ -42,7 +42,8 @@
           data: data
         }).done(function (response) {
           // Make sure logout works.
-          window.location.replace("dashboard.php");
+          localStorage.removeItem('JWT');
+          window.location.replace("index.html");
         });
       });
     }
