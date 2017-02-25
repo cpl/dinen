@@ -112,6 +112,7 @@ function blackListJWT($jwt) {
               'data' => 'Failed to insert JWT.'];
 
     $stmt->close(); $mysqli->close();
-    return ['status' => Status::SUCCESS];
+    return ['status' => Status::SUCCESS, 'data' => 'Blacklisted.'];
   }
+  return ['status' => Status::SUCCESS, 'data' => 'Already expired.'];
 }

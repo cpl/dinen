@@ -34,6 +34,7 @@
       var data = {};
       data['jwt'] = getJWT();
       $('#logoutLink').click(function () {
+        alert('Logging out.');
         $.ajax({
           url: apiURL,
           type: 'POST',

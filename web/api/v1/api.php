@@ -50,7 +50,7 @@ function processLoginRequest() {
 
   $userDataGrabAttempt = getUserDataForJWT($email, $password);
 
-  if ($userDataGrabAttempt['status'] != Status::SUCCESS) {
+  if ($userDataGrabAttempt['status'] !== Status::SUCCESS) {
     echo json_encode($userDataGrabAttempt);
     return;
   }
@@ -88,19 +88,17 @@ function processGetRestaurantsRequest() {
     return;
   }
   $payload = getJWTPayload($_POST['jwt']);
-  $json = json_encode(get_restaurants_new($payload['user_id'], $payload['user_category']));
+  $json = json_encode(get_restaurants_new($payload['user_id'],
+                                          $payload['user_category']));
   echo $json;
 }
 
-function processGetMenuRequest()
-{
-  if(empty($_POST['restaurant_id']))
-  {
+function processGetMenuRequest() {
+  if(empty($_POST['restaurant_id'])) {
     echo json_encode("Restaurant id is not included in request");
     return;
   }
-  if(empty($_POST['menu_id']))
-  {
+  if(empty($_POST['menu_id'])) {
     echo json_encode("Menu id is not included in request");
     return;
   }

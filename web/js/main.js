@@ -26,10 +26,6 @@ $(function () {
   });
 });
 
-function formToJSON(form) {
-  return JSON.stringify(formToDict(form, ':input[name]:enabled'));
-}
-
 function register(event) {
   var ref = $(this).find("[required]");
   $(ref).each(function () {
@@ -63,7 +59,7 @@ function login() {
   }).done(function (response) {
     if (response.status === Status.SUCCESS) {
       localStorage.setItem('JWT', response.data);
-      alert(response.data)
+      console.log(response.data);
       window.location.replace("dashboard.php");
     } else {
       alert(response.data);
@@ -115,6 +111,10 @@ function formToDict(form) {
     }
   });
   return dict;
+}
+
+function formToJSON(form) {
+  return JSON.stringify(formToDict(form, ':input[name]:enabled'));
 }
 
 function isManager() {
