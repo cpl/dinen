@@ -54,9 +54,28 @@ function checkJWT($jwt) {
       && $payload_json['iss'] == ISSUER
       && $payload_json['aud'] == AUDIENCE
       && time() >= $payload_json['nbf']) {
+
     if (time() >= $payload_json['exp'])
       return ['status' => Status::ERROR, 'data' => 'expired'];
-    return ['status' => Status::SUCCESS];
+
+    $mysqli = createMySQLi();
+
+    # This is a pretty bad scenario to be in, error must be handled server-side.
+    if ($mysqli->connect_error)
+      return ['status' => Status::ERROR,
+              'data' => 'Database connection failed.'];
+
+    $result = $mysqli->query("SELECT * FROM jwt_blacklist
+                              WHERE jti = '{$payload_json['jti']}'");
+    if (!$result)
+      return ['status' => Status::ERROR, 'data' => 'query failed'];
+
+    if ($result->num_rows > 0)
+      return ['status' => Status::ERROR, 'data' => 'blacklisted'];
+
+    $mysqli->close();
+
+    return ['status' => Status::SUCCESS, 'data' => 'valid'];
   }
   return ['status' => Status::ERROR, 'data' => 'invalid'];
 }

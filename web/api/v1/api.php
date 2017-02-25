@@ -27,6 +27,7 @@ switch ($request) {
     break;
   case 'get_menu':
     processGetMenuRequest();
+    break;
   case 'logout':
     processLogoutRequest();
     break;
@@ -117,4 +118,5 @@ function processLogoutRequest() {
       processLogoutRequest();
     }
   }
+  echo json_encode(['status' => Status::SUCCESS]);
 }
