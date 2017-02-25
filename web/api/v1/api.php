@@ -7,9 +7,8 @@ require_once '../../php/config.inc.php';
 require_once '../../php/jwt_util.php';
 require_once '../../php/register.php';
 require_once '../../php/login.php';
-require_once '../../php/get_menu.php';
-require_once '../../php/get_restaurants.php';
-require_once '../../php/create_restaurant.php';
+require_once '../../php/menu.php';
+require_once '../../php/restaurant.php';
 
 $request = htmlspecialchars($_POST['request']);
 switch ($request) {
@@ -88,8 +87,8 @@ function processGetRestaurantsRequest() {
     return;
   }
   $payload = getJWTPayload($_POST['jwt']);
-  $json = json_encode(get_restaurants_new($payload['user_id'],
-                                          $payload['user_category']));
+  $json = json_encode(get_restaurants($payload['user_id'],
+                                      $payload['user_category']));
   echo $json;
 }
 

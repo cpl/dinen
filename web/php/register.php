@@ -34,8 +34,6 @@ function register($name, $email, $password, $confirmation_password) {
     $mysqli->close();
     return 'Failed to create user.';
   }
-  if(session_status() == PHP_SESSION_NONE)
-    session_start();
 
   $stmtuid = $stmt->insert_id;
 
