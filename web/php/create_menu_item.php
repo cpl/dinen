@@ -1,8 +1,8 @@
 <?php
 
-function createMenuItem($user_email, $name, $section, $description, $price, $menu_id)
+function createMenuItem($user_id, $name, $section, $description, $price, $menu_id)
 {
-  if(empty($user_email) || empty($name) || empty($section) ||
+  if(empty($user_id) || empty($name) || empty($section) ||
      empty($price))
     return [ 'status' => Status::ERROR,
               'data' => "Empty required fields given to create menu item"];
