@@ -1,35 +1,38 @@
 var apiURL = 'api/v1/api.php';
 
+var Status = { ERROR: 0, SUCCESS: 1 };
+
 var themes = {
-  "default": "//bootswatch.com/amelia/bootstrap.min.css",
-  "amelia": "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css",
-  "cerulean": "//bootswatch.com/cerulean/bootstrap.min.css",
-  "cosmo": "//bootswatch.com/cosmo/bootstrap.min.css",
-  "cyborg": "//bootswatch.com/cyborg/bootstrap.min.css",
-  "flatly": "//bootswatch.com/flatly/bootstrap.min.css",
-  "journal": "//bootswatch.com/journal/bootstrap.min.css",
-  "simplex": "//bootswatch.com/simplex/bootstrap.min.css",
-  "slate": "//bootswatch.com/slate/bootstrap.min.css",
-  "spacelab": "//bootswatch.com/spacelab/bootstrap.min.css",
-  "united": "//bootswatch.com/united/bootstrap.min.css"
+  'default': '//bootswatch.com/amelia/bootstrap.min.css',
+  'amelia': '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css',
+  'cerulean': '//bootswatch.com/cerulean/bootstrap.min.css',
+  'cosmo': '//bootswatch.com/cosmo/bootstrap.min.css',
+  'cyborg': '//bootswatch.com/cyborg/bootstrap.min.css',
+  'flatly': '//bootswatch.com/flatly/bootstrap.min.css',
+  'journal': '//bootswatch.com/journal/bootstrap.min.css',
+  'simplex': '//bootswatch.com/simplex/bootstrap.min.css',
+  'slate': '//bootswatch.com/slate/bootstrap.min.css',
+  'spacelab': '//bootswatch.com/spacelab/bootstrap.min.css',
+  'united': '//bootswatch.com/united/bootstrap.min.css'
 };
 
 $(function () {
-  var themesheet = $('<link href="' + themes['default'] + '" rel="stylesheet" />');
-  themesheet.appendTo('head');
+  var currentTheme
+    = $('<link href="' + themes['default'] + '" rel="stylesheet" />');
+  currentTheme.appendTo('head');
   $('.theme-link').click(function () {
-    var themeurl = themes[$(this).attr('data-theme')];
-    themesheet.attr('href', themeurl);
+    var themeURL = themes[$(this).attr('data-theme')];
+    currentTheme.attr('href', themeURL);
   });
 });
 
-function register(e) {
+function register(event) {
   var ref = $(this).find("[required]");
   $(ref).each(function () {
     if ($(this).val() === '') {
       alert("Required field should not be blank.");
       $(this).focus();
-      e.preventDefault();
+      event.preventDefault();
       return false;
     }
   });
@@ -38,9 +41,9 @@ function register(e) {
     type: 'POST',
     data: 'request=register&data=' + formToJSON('#registerForm')
   }).done(function (response) {
-    if (response === 'success') {
-      alert("Registration email was sent to your email");
-      window.location.replace("index.html");
+    if (response == 'success') {
+      alert('Registration email was sent to your email');
+      window.location.replace('index.html');
     } else {
       alert(response);
     }
@@ -54,26 +57,29 @@ function login() {
     type: 'POST',
     data: 'request=login&data=' + formToJSON('#loginForm')
   }).done(function (response) {
-    if (response === 'success') {
-      window.location.replace("restaurants.php");
-    } else {
+    if (response.status === Status.SUCCESS) {
       localStorage.setItem('JWT', response.data);
-      alert(localStorage.getItem('JWT'));
+      alert(response.data);
+      window.location.replace("dashboard.php");
+    } else {
+      alert(response.data);
     }
   });
   return false;
 }
 
 function create_restaurant() {
+  const JWT = getJWT();
+  if(JWT == null) {
+    alert("You must be logged in to create restaurants.");
+    return false;
+  }
   var data = formToDict('#createForm');
   data['request'] = 'create_restaurant';
+  data['jwt'] = JWT;
   $.ajax({
     url: apiURL,
     type: 'POST',
-    beforeSend: function (xhr) {
-      xhr.setRequestHeader('Authorization',
-        'Bearer ' + localStorage.getItem('JWT'))
-    },
     data: data
   }).done(function (response) {
       alert(response);
@@ -82,12 +88,17 @@ function create_restaurant() {
   return false;
 }
 
-// turns input from form into JSON format
-function formToJSON(form) {
-  return JSON.stringify(formToDict(form, ':input[name]:enabled'));
+function validatePassword() {
+  var password = document.getElementById('password');
+  var confirm_password = document.getElementById('password_confirmation');
+  console.log('merge');
+  if (password.value != confirm_password.value) {
+    confirm_password.setCustomValidity('Passwords do not match.');
+  } else {
+    confirm_password.setCustomValidity('');
+  }
 }
 
-// Turns form into dictionary
 function formToDict(form) {
   var dict = {};
   $(form).find(':input[name]:enabled').each(function () {
@@ -102,24 +113,29 @@ function formToDict(form) {
   return dict;
 }
 
-//this function compare password with c_password:
-function validatePassword() {
-  var password = document.getElementById("password");
-  var confirm_password = document.getElementById("password_confirmation");
-  console.log("merge");
-  if (password.value !== confirm_password.value) {
-    confirm_password.setCustomValidity("Passwords Don't Match");
-  } else {
-    confirm_password.setCustomValidity('');
-  }
+function formToJSON(form) {
+  return JSON.stringify(formToDict(form, ':input[name]:enabled'));
 }
 
-function showMsgAlert(component, message) {
+function isManager() {
+  const JWT = getJWT();
+  if(JWT == null)
+    return false;
+  // TODO: get user category from JWT
+  return true;
+}
+
+function getJWT() {
+  return localStorage.getItem('JWT');
+}
+
+function showMessageAlert(component, message) {
   $.ajax({
-    method: "GET", url: "components/" + component, success: function (data) {
-      data = data.toString().replace("#msg#", message);
-      $("#msgDiv").replaceWith(data);
-      $("#msgDiv").fadeIn(800);
-    }
+    method: "GET",
+    url: "components/" + component,
+  }).done(function (response) {
+    response = response.toString().replace("#msg#", message);
+    $("#msgDiv").replaceWith(response);
+    $("#msgDiv").fadeIn(800);
   });
 }

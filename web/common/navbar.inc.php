@@ -1,13 +1,3 @@
-<?php
-if(session_status() == PHP_SESSION_NONE)
-  session_start();
-
-echo '<pre>';
-echo 'DONT BE SCARED, THIS IS JUST A DEBUG THING, CONTACT ALEX <br>';
-var_dump($_SESSION);
-echo '</pre>';
-?>
-
 <nav class='navbar navbar-inverse'>
   <div class='container-fluid'>
     <div class='navbar-header'>
@@ -26,26 +16,39 @@ echo '</pre>';
         <li><a href='#'>Business</a></li>
         <li><a href='#'>Customers</a></li>
       </ul>
-      <?php
-        if(session_status() == PHP_SESSION_NONE)
-          session_start();
-        require_once 'php/restrict_access.php';
-        if (logged_in())
-          echo "
-            <ul class='nav navbar-nav navbar-right'>
 
-              <li><a><!--<span class='glyphicon glyphicon-user'></span>-->" . $_SESSION['user_name'] . "</a></li>
-              <li><a href ='php/logout.php'>Logout</a></li>
-            </ul>
-          ";
-        else
-          echo "
-            <ul class='nav navbar-nav navbar-right'>
-              <li><a href='login.html'><span class='glyphicon glyphicon-log-in'></span>Log in</a></li>
-              <li><a href='register.html'><span class='glyphicon glyphicon-user'></span>Sign Up</a></li>
-            </ul>
-          ";
-      ?>
+      <ul class='nav navbar-nav navbar-right' id="user_info">
+      </ul>
     </div>
   </div>
 </nav>
+
+<script>
+  $(document).ready(function () {
+    if (getJWT() == null) {
+      $('#user_info').html(
+        "<li><a href='login.html'><span class='glyphicon glyphicon-log-in'></span>Log in</a></li>"
+        + "<li><a href='register.html'><span class='glyphicon glyphicon-user'></span>Sign Up</a></li>");
+    } else {
+      $('#user_info').html("<li><a href='#' id='logoutLink'>Logout</a></li>");
+      var data = {};
+      data['jwt'] = getJWT();
+      data['request'] = 'logout';
+      $('#logoutLink').click(function () {
+        alert('Logging out.');
+        $.ajax({
+          url: 'api/v1/api.php',
+          type: 'POST',
+          data: data
+        }).done(function (response) {
+          // Make sure logout works.
+          localStorage.removeItem('JWT');
+          window.location.replace("index.html");
+        });
+      });
+    }
+  });
+  function getJWT() {
+    return localStorage.getItem('JWT');
+  }
+</script>
