@@ -108,12 +108,11 @@ function processGetMenuRequest() {
 }
 
 function processLogoutRequest() {
-  $requestData = json_decode($_POST['data'], true);
-  $jwt = htmlspecialchars($requestData['jwt']);
+  $jwt = $_POST['jwt'];
   if (checkJWT($jwt)['status'] === Status::SUCCESS) {
     if (blackListJWT($jwt)['status'] !== Status::SUCCESS) {
       # Hmm.
-      processLogoutRequest();
+      //processLogoutRequest();
     }
   }
   echo json_encode(['status' => Status::SUCCESS]);

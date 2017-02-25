@@ -64,15 +64,19 @@ function checkJWT($jwt) {
     if ($mysqli->connect_error)
       return ['status' => Status::ERROR,
               'data' => 'Database connection failed.'];
-
-    $result = $mysqli->query("SELECT * FROM jwt_blacklist
-                              WHERE jti = '{$payload_json['jti']}'");
-    if (!$result)
-      return ['status' => Status::ERROR, 'data' => 'query failed'];
+    $stmt = $mysqli->prepare("SELECT * FROM jwt_blacklist
+                              WHERE jti = ?");
+    $stmt->bind_param('s', $payload_json['jti']);
+    $stmt->execute();
+    if ($stmt->errno != 0)
+      return ['status' => Status::ERROR,
+              'data' => 'Error executing jti query'];
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0)
       return ['status' => Status::ERROR, 'data' => 'blacklisted'];
 
+    $stmt->close();
     $mysqli->close();
 
     return ['status' => Status::SUCCESS, 'data' => 'valid'];

@@ -30,16 +30,17 @@
         "<li><a href='login.html'><span class='glyphicon glyphicon-log-in'></span>Log in</a></li>"
         + "<li><a href='register.html'><span class='glyphicon glyphicon-user'></span>Sign Up</a></li>");
     } else {
-      $('#user_info').html("<li><a href ='#' id='logoutLink'>Logout</a></li>");
+      $('#user_info').html("<li><a href='#' id='logoutLink'>Logout</a></li>");
       var data = {};
       data['jwt'] = getJWT();
+      data['request'] = 'logout';
       $('#logoutLink').click(function () {
         alert('Logging out.');
         $.ajax({
-          url: apiURL,
+          url: 'api/v1/api.php',
           type: 'POST',
-          data: 'request=logout&data=' + JSON.stringify(data)
-        }).done(function () {
+          data: data
+        }).done(function (response) {
           // Make sure logout works.
           window.location.replace("dashboard.php");
         });
