@@ -64,7 +64,7 @@ function change_restaurant($restaurant_id, $name, $description, $category)
   }
   $stmt->close();
   $mysqli->close();
-  return [ 'status' => Status:SUCCESS, 'data' => 'Changed restaurant'];
+  return [ 'status' => Status::SUCCESS, 'data' => 'Changed restaurant'];
 }
 
 function change_address($address_id, $town, $country, $street1, $street2, $postcode)
@@ -91,7 +91,7 @@ function change_address($address_id, $town, $country, $street1, $street2, $postc
   }
   $stmt->close();
   $mysqli->close();
-  return [ 'status' => Status:SUCCESS, 'data' => 'Changed address'];
+  return [ 'status' => Status::SUCCESS, 'data' => 'Changed address'];
 }
 
 function create_restaurant($user_category, $user_id, $name,
