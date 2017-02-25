@@ -104,7 +104,8 @@ function processGetMenuRequest() {
   }
   $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
   $menu_id = htmlspecialchars($_POST['menu_id']);
-  $json = json_encode(get_menu($restaurant_id));
+  $json = json_encode(get_menu($restaurant_id, $menu_id));
+  echo $json;
 }
 
 function processLogoutRequest() {

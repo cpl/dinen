@@ -17,18 +17,21 @@ function get_restaurants() {
     url: apiURL,
     type: 'POST',
     data: requestData
-  }).done(function (response) {
-    if (response.status === Status.SUCCESS) {
-      response.data.forEach(function (restaurant) {
-        $('#restaurants').append('You have a restuarant called '
-          + restaurant.name + ' that is a ' + restaurant.category + '.<br>');
-      });
-    } else {
-      console.log(response);
-      $('#welcome').innerHTML = response.data;
-    }
-  });
+  }).done(generate_html_for_restaurants);
   return false;
+}
+
+function generate_html_for_restaurants(response)
+{
+  if (response.status === Status.SUCCESS) {
+    response.data.forEach(function (restaurant) {
+      $('#restaurants').append('You have a restuarant called '
+        + restaurant.name + ' that is a ' + restaurant.category + '.<br>');
+    });
+  } else {
+    console.log(response);
+    $('#welcome').innerHTML = response.data;
+  }
 }
 
 function getJWT() {
