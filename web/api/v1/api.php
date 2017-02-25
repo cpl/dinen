@@ -77,8 +77,8 @@ function processCreateRestaurantRequest() {
   $description = htmlspecialchars($_POST['description']);
   $category = htmlspecialchars($_POST['category']);
   $payload = getJWTPayload($_POST['jwt']);
-  echo create_restaurant($payload['user_category'], $payload['user_id'],
-                    $name, $description, $category);
+  echo json_encode(create_restaurant($payload['user_category'], $payload['user_id'],
+                    $name, $description, $category));
 }
 
 function processGetRestaurantsRequest() {
