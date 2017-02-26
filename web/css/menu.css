@@ -50,7 +50,7 @@ nav ul li{
 
 }
 
-/* jumbotron css ================================================================================ */
+/* outer jumbotron css ================================================================================ */
 #jumbotron-override {
   color:white;
   margin:140px -20px 80px -20px;
@@ -90,11 +90,25 @@ nav ul li{
   font-size:20px;
 }
 
+/* inner jumbotron css ================================================================================ */
+
 #menu{
   min-height:750px;
   margin-top:25px;
+  padding:0 0 0 0;
   border: 5px solid white;
   box-shadow: 0px 0px 0px 3px black inset;
+}
+
+.menu-header{
+  background: #29268A;
+  min-height: 60px;
+  width:99%;
+  margin-top:5px;
+}
+
+.categories{
+  margin: 15px 0 0 10px;
 }
 
 
