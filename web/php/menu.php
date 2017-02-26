@@ -81,13 +81,22 @@ function get_unfinished_order_items($restaurant_id)
   if ($mysqli->connect_error)
     return [ 'status' => Status::ERROR,
              'data' => "Database connection failed"];
-  $stmt = $mysqli->prepare('SELECT * FROM orders
-                            WHERE restaurant_id = ? AND
-                                  is_finished = 0');
+  $stmt = $mysqli->prepare('SELECT * FROM order_items
+                            WHERE order_id IN (SELECT id FROM orders
+                                               WHERE restaurant_id = ? AND
+                                                     is_finished = 0)');
   $stmt->bind_param('i', $restaurant_id);
   $stmt->execute();
   if ($stmt->errno != 0)
     return ['status' => Status::ERROR,
             'data' => 'Error getting all orders'];
+  $stmt_result = $stmt->get_result();
+  $order_list = array();
+  while ($row = $stmt_result->fetch_array()) {
+    array_push($order_list, ['menu_item_id' => $row['menu_item_id'],
+                             'is_finished' => $row['is_finished']]);
+  }
+  return [ 'status' => Status::SUCCESS,
+           'data' => ($order_list)];
   // TODO: Finish getting unfinished order items
 }
