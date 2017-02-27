@@ -3,8 +3,6 @@
 require_once 'connect_to_db.php';
 require_once 'validators.php';
 
-remove_restaurant(1, 13, "Testing123");
-
 function remove_user($user_id, $password){
 
   if (empty($password))
@@ -86,7 +84,8 @@ function remove_restaurant($restaurant_id, $manager_id, $password){
 
   $stmt->close();
   $mysqli->close();
-}
+
+} // remove_restaurant
 
 function remove_menu($menu_id, $manager_id, $password){
 
@@ -118,7 +117,40 @@ function remove_menu($menu_id, $manager_id, $password){
 
   $stmt->close();
   $mysqli->close();
-}
+} // remove_menu
+
+function remove_item($item_id, $manager_id, $password){
+
+  if (empty($password))
+    return ['status' => Status::ERROR, 'data' => 'Empty password.'];
+  if(!passwordIsValid($password))
+    return ['status' => Status::ERROR, 'data' => 'Invalid password.'];
+
+  if(!confirm_action($manager_id, $password))
+    return ['status' => Status::ERROR, 'data' => 'Auth failed'];
+
+  $mysqli = createMySQLi();
+
+  if ($mysqli->connect_error)
+    return ['status' => Status::ERROR,
+            'data' => 'Database connection failed'];
+
+  $stmt = $mysqli->prepare('DELETE FROM menu_items
+                            WHERE id = ? AND restaurant_id in (
+                                                    SELECT id FROM restaurant
+                                                    WHERE manager_id = ?)');
+
+  $stmt->bind_param('ii', $item_id, $manager_id);
+  $stmt->execute();
+
+  if ($stmt->errno != 0)
+    return ['status' => Status::ERROR,
+            'data' => 'Error executing item removal'];
+
+  $stmt->close();
+  $mysqli->close();
+
+} // remove_item
 
 function confirm_action($user_id, $password){
 
