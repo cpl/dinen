@@ -97,13 +97,8 @@ function processGetMenuRequest() {
     echo json_encode("Restaurant id is not included in request");
     return;
   }
-  if(empty($_POST['menu_id'])) {
-    echo json_encode("Menu id is not included in request");
-    return;
-  }
   $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
-  $menu_id = htmlspecialchars($_POST['menu_id']);
-  $json = json_encode(get_menu($restaurant_id, $menu_id));
+  $json = json_encode(get_menu($restaurant_id));
   echo $json;
 }
 
