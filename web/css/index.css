@@ -16,15 +16,6 @@ html {
   height: 80px;*/
   background: transparent;
   border: transparent;
-  -webkit-transition: all 0.6s ease-out;
-    -moz-transition: all 0.6s ease-out;
-    -o-transition: all 0.6s ease-out;
-    -ms-transition: all 0.6s ease-out;
-    transition: all 0.6s ease-out;
-}
-
-.navbar.scrolled {
-    background: rgba(0, 0, 0, 0.95);
 }
 
 /*.navbar-brand{

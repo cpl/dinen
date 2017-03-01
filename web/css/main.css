@@ -1,3 +1,4 @@
+/* General ======================================== */
 html {
     background: url("../img/cafe blurred dark.jpg") no-repeat center fixed;
     -webkit-background-size: cover;
@@ -13,42 +14,41 @@ body {
     background: transparent;
 }
 
-@font-face{
-	font-family: bushcraft;
-	src: url("../fonts/bushcraft.otf") format("opentype");
+@font-face {
+    font-family: bushcraft;
+    src: url("../fonts/bushcraft.otf") format("opentype");
 }
 
 .main {
     margin-top: 10px;
 }
 
+/* Navbar ========================================== */
 .navbar {
     font-family: bushcraft;
     font-size: 14pt;
     text-align: center;
+    -webkit-transition: all 0.6s ease-out;
+    -moz-transition: all 0.6s ease-out;
+    -o-transition: all 0.6s ease-out;
+    -ms-transition: all 0.6s ease-out;
+    transition: all 0.6s ease-out;
 }
 
-.collapse {
-    -webkit-transition: all 0.6s ease-out;
-      -moz-transition: all 0.6s ease-out;
-      -o-transition: all 0.6s ease-out;
-      -ms-transition: all 0.6s ease-out;
-      transition: all 0.6s ease-out;
+.navbar.opaque {
+    background: rgb(0, 0, 0);
 }
 
 .collapse.in {
-    background: rgba(0, 0, 0, 0.95);
+    background: rgb(0, 0, 0);
 }
-
-/*
-.navbar>.container-fluid {
-    padding-left: 35px;
-    padding-right: 35px;
-    height: 65px;
-}*/
 
 .navbar-brand {
     padding: 8px;
+}
+
+.navbar-toggle {
+    border: none;
 }
 
 .navbar-brand>img {
@@ -61,10 +61,17 @@ body {
     padding-bottom: 12px;
 }
 
+.navbar-inverse .navbar-nav>li.active>a {
+    background: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
 .glyphicon {
     margin-right: 8px;
 }
 
+/* Content ========================================== */
 h1.title {
     font-size: 50px;
     font-family: 'Passion One', cursive;

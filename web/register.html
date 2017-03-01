@@ -34,11 +34,11 @@
         <a class='navbar-brand' href='index.html'>
           <img class="logo" src="img/Dinen small logo.png" />
         </a>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
       </div>
       <div class="collapse navbar-collapse" id="navbar">
         <ul class='nav navbar-left navbar-nav'>
@@ -46,22 +46,22 @@
           <li><a href='#'>Customers</a></li>
         </ul>
         <ul class='nav navbar-nav navbar-right'>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Themes <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#" data-theme="default" class="theme-link">Default</a></li>
-                <li><a href="#" data-theme="amelia" class="theme-link">Amelia</a></li>
-                <li><a href="#" data-theme="cerulean" class="theme-link">Cerulean</a></li>
-                <li><a href="#" data-theme="cosmo" class="theme-link">Cosmo</a></li>
-                <li><a href="#" data-theme="cyborg" class="theme-link">Cyborg</a></li>
-                <li><a href="#" data-theme="flatly" class="theme-link">Flatly</a></li>
-                <li><a href="#" data-theme="journal" class="theme-link">Journal</a></li>
-                <li><a href="#" data-theme="simplex" class="theme-link">Simplex</a></li>
-                 <li><a href="#" data-theme="slate" class="theme-link">Slate</a></li>
-                  <li><a href="#" data-theme="spacelab" class="theme-link">Spacelab</a></li>
-                  <li><a href="#" data-theme="united" class="theme-link">United</a></li>
-              </ul>
-            </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Themes <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#" data-theme="default" class="theme-link">Default</a></li>
+              <li><a href="#" data-theme="amelia" class="theme-link">Amelia</a></li>
+              <li><a href="#" data-theme="cerulean" class="theme-link">Cerulean</a></li>
+              <li><a href="#" data-theme="cosmo" class="theme-link">Cosmo</a></li>
+              <li><a href="#" data-theme="cyborg" class="theme-link">Cyborg</a></li>
+              <li><a href="#" data-theme="flatly" class="theme-link">Flatly</a></li>
+              <li><a href="#" data-theme="journal" class="theme-link">Journal</a></li>
+              <li><a href="#" data-theme="simplex" class="theme-link">Simplex</a></li>
+              <li><a href="#" data-theme="slate" class="theme-link">Slate</a></li>
+              <li><a href="#" data-theme="spacelab" class="theme-link">Spacelab</a></li>
+              <li><a href="#" data-theme="united" class="theme-link">United</a></li>
+            </ul>
+          </li>
           <li><a href='login.html'>Log in</a></li>
           <li class="active"><a href='register.html'>Sign Up</a></li>
         </ul>
@@ -70,12 +70,6 @@
   </nav>
   <div class="container">
     <div class="row main">
-      <!-- <div class="panel-heading">
-                    <div class="panel-title text-center">
-                        <h1 class="title"><a href="index.php">Dinen</a> - Register</h1>
-                        <hr />
-                    </div>
-                </div> -->
       <div class="main-login main-center">
         <div class="panel-heading">
           <div class="panel-title text-center">
@@ -121,8 +115,7 @@
             <div class="cols-sm-10">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                <input type="password" class="form-control" name="password_confirmation"
-                       id="password_confirmation" minlength="8" required placeholder="Confirm your Password" onchange="validatePassword()"/>
+                <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" minlength="8" required placeholder="Confirm your Password" onchange="validatePassword()" />
               </div>
             </div>
           </div>
@@ -142,6 +135,7 @@
   <script src="js/vendor/bootstrap.min.js"></script>
 
   <script src="js/main.js"></script>
+  <script src="js/navbar.js"></script>
 
 </body>
 
