@@ -54,3 +54,21 @@ function get_url_vars()
     });
     return vars;
 }
+
+// forces price to always have 2 decimals
+function($) {
+  $.fn.priceFormat = function() {
+      this.each( function( i ) {
+          $(this).change( function( e ){
+             if( isNaN( parseFloat( this.value ) ) ) return;
+             this.value = parseFloat(this.value).toFixed(2);
+          });
+       });
+       return this; //for chaining
+    }
+}
+
+// apply the priceFormat behaviour to elements with 'currency' as their class
+$( function() {
+    $('.price').priceFormat();
+});

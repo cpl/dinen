@@ -111,6 +111,19 @@ nav ul li{
   margin: 15px 0 0 10px;
 }
 
+/* inner menu css ================================================================================ */
+
+.price{
+  color:black;
+  height: 40px;
+  width: 80px;
+  background: transparent;
+  font-size:20px;
+  float:right;
+  border: transparent;
+  margin-top: 20px;
+  padding:0 5px 0 5px;
+}
 
 /* footer css  ====================================================================================== */
 

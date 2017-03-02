@@ -6,7 +6,7 @@
   <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Dinen - Home</title>
+      <title>Dinen - Menu Edit</title>
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -52,6 +52,7 @@
         <h1>MENU</h1>
         <div class = "container">
           <div id="menu" class = "jumbotron">
+            <!-- menu header -->
             <div class = "container menu-header"> 
               <div class="btn-group categories">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,7 +66,21 @@
                   <li><a href="#">MEAL DEALS</a></li>
                 </ul>
               </div>
-            </div> 
+            </div>              
+            <!-- inner menu -->
+            <div class="container-fluid form-container">
+              <input class="price" type="number" step="0.01" parseFloat(value).toFixed(2) = "0.00" min="0.00"> 
+
+              <!-- in case we want to use buttons instead of the default format ^ 
+              <input id="decreaseNumber" class="price" type="button" value="-"> --> 
+
+                <!-- not working buttons  
+                  <button id="edit">Append text</button>
+                    <button id="btn2">Append list item</button>
+                     </div>
+                  <div id="orderItems" style="color : white"></div>
+                --> 
+              </div>  
           </div>
         </div>
 
@@ -83,9 +98,9 @@
 
     <!-- Jscript ============================================================================ -->
     <script src="js/vendor/jquery-1.11.2.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> 
     <script src="js/vendor/bootstrap.js"></script>
-   <!-- <script src="js/navbar.js"></script> -->
+    <!-- <script src="js/navbar.js"></script> -->
+    <script src="js/order.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/main.js"></script>
        
