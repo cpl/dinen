@@ -103,7 +103,7 @@ function submitItem(event)
       $('#orderItems').append('Menu item: ' + item.name + ' in a ' +
                                item.section + '. Cost: $' + item.price +
                                '. Description: ' + item.description + '.<br>');
-      orderItems['order_items'].push(item.id);
+      //orderItems['order_items'].push(item.id);
     }
   });
   event.preventDefault();
