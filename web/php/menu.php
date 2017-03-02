@@ -44,7 +44,8 @@ function get_menu($restaurant_id)
       array_push($menu_list, ['name'        => $row['name'],
                               'section'     => $row['section'],
                               'price'       => $row['price'],
-                              'description' => $row['description']]);
+                              'description' => $row['description'],
+                              'id'          => $row['id']]);
     }
   }
   return [ 'status' => Status::SUCCESS,

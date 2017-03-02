@@ -1,14 +1,22 @@
 var apiURL = 'api/v1/api.php';
 var Status = { ERROR: 0, SUCCESS: 1 };
+
 var items = {};
+var orderItems = [];
 var sections = [];
+var comments = "";
+
+// add required onchange's and submit's to form and select inputs
+$("#menus").change(changeItemsInSelect);
+$("#menuItems").change(changeItemDescription);
+$("#orderForm").submit(submitItem);
 
 $(function () {
   getMenu();
 });
 
 // Get menu for restaurant
-// Needs to have 'menu' (menu id) and 'restaurant' (restaurant id)
+// Needs to have 'restaurant' (restaurant id)
 // as parameters
 function getMenu()
 {
@@ -28,6 +36,9 @@ function getMenu()
   return false;
 }
 
+// process the items sent by server
+// that is, update the select inputs
+// and add items to global array 'items'
 function processItems(response)
 {
   if (response.status === Status.SUCCESS) {
@@ -50,10 +61,7 @@ function processItems(response)
   }
 }
 
-$("#menus").change(changeItemsInSelect);
-$("#menuItems").change(changeItemDescription);
-$("#orderForm").submit(submitItem);
-
+// update the menu item options based on current menu selected
 function changeItemsInSelect(sel)
 {
   $("#menuItems option").remove();
@@ -69,6 +77,8 @@ function changeItemsInSelect(sel)
   changeItemDescription(null);
 }
 
+// update the description of the order item to be created
+// based on select for menu section
 function changeItemDescription(sel)
 {
   $("#itemDescription").text("");
@@ -80,18 +90,38 @@ function changeItemDescription(sel)
   });
 }
 
+// submit item - creates and order item out of menu item
+// for sending the order later
 function submitItem(event)
 {
+  // for every item
   items.forEach(function(item) {
+    // if the name of the item is specified in input select, add it
+    // to array of all item ids and and create html for it
     if(item.name == $('#menuItems').val())
     {
       $('#orderItems').append('Menu item: ' + item.name + ' in a ' +
                                item.section + '. Cost: $' + item.price +
                                '. Description: ' + item.description + '.<br>');
+      orderItems['order_items'].push(item.id);
     }
   });
   event.preventDefault();
 }
+
+function submitOrder()
+{
+  var requestData = {};
+  requestData['order_items'] = orderItems;
+  requestData['comments'] = comments;
+  $.ajax({
+    url: apiURL,
+    type: 'POST',
+    data: requestData
+  });//.done(processItems);
+  // TODO: finish the submit order script
+}
+
 // function to get GET parameters
 // Used as getUrlVars()['parameter']
 // Copied from stack overflow answer
