@@ -105,19 +105,19 @@ function create_restaurant($user_category, $user_id, $name,
 
   if ($mysqli->connect_error)
     return 'Database connection failed.';
-  $address_id = create_address($mysqli);
+  //$address_id = create_address($mysqli);
   // if is not integer
-  if(strval($address_id) != strval(intval($address_id)))
-    return $address_id;
+  //if(strval($address_id) != strval(intval($address_id)))
+  //  return $address_id;
   $stmt = $mysqli->prepare('INSERT INTO restaurants (name,
-                            description, category, address_id, manager_id)
-                            VALUES (?, ?, ?, ?, ?)');
+                            description, category, manager_id)
+                            VALUES (?, ?, ?, ?)');
 
   if (!isValid($name) || !isValid($description) || !isValid($category))
     return;
 
   // create and execute sql request
-  $stmt->bind_param('sssii', $name, $description, $category, $address_id, $user_id);
+  $stmt->bind_param('sssii', $name, $description, $category, $user_id);
   $stmt->execute();
   if ($stmt->errno != 0)
     return 'Failed to create restaurant.';
