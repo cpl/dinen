@@ -43,6 +43,8 @@ function generate_restaurant(restaurant)
     var tempRestaurant = oneRestaurant;
     tempRestaurant = tempRestaurant.toString().replace("#name#", restaurant.name);
     tempRestaurant = tempRestaurant.toString().replace("#description#", restaurant.description);
+    tempRestaurant = tempRestaurant.toString().replace('#menu#',
+                                                       '/menu?restaurant=' + restaurant.id)
     allRestaurants += tempRestaurant;
 }
 

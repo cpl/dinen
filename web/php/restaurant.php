@@ -229,9 +229,10 @@ function get_restaurants($manager_id, $user_category)
   $stmt_result = $stmt->get_result();
   $restaurant_list = array();
   while ($row = $stmt_result->fetch_array()) {
-    array_push($restaurant_list, ['name' => $row['name'],
+    array_push($restaurant_list, ['name'        => $row['name'],
                                   'description' => $row['description'],
-                                  'category' => $row['category']]);
+                                  'category'    => $row['category'],
+                                  'id'          => $row['id']]);
   }
   $mysqli->close();
   $stmt->close();
