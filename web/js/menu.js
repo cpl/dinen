@@ -49,12 +49,12 @@ function addMenuItem(e)
   requestData['name'] = $("#name").val();
   requestData['price'] = $('#price').val();
   requestData['description'] = $('#description').val();
-  // TODO: Continue adding menu item creation
   $.ajax({
     url: apiURL,
     type: 'POST',
     data: requestData
   });//.done(generate_html_for_menu);
+  // TODO: create new items on done
 }
 
 function generate_html_for_menu(response)
