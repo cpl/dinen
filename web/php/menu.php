@@ -52,22 +52,50 @@ function get_menu($restaurant_id)
            'data' => ($menu_list)];
 }
 
-function create_menu_item($user_id, $name, $section, $description, $price, $menu_id)
+function create_menu_item($user_id, $name, $section, $description, $price, $restaurant_id)
 {
   if(empty($user_id) || empty($name) || empty($section) ||
-     empty($price))
+     empty($price) || empty($restaurant_id))
     return [ 'status' => Status::ERROR,
               'data' => "Empty required fields given to create menu item"];
   $mysqli = createMySQLi();
-
   if ($mysqli->connect_error)
-  return [ 'status' => Status::ERROR,
-            'data' => "Database connection failed"];
+    return [ 'status' => Status::ERROR,
+             'data' => "Database connection failed"];
+  // check if restaurant is owned by user
+  $stmt = $mysqli->prepare('SELECT * FROM restaurants
+                            WHERE id = ? AND manager_id = ?');
+  $stmt->bind_param('ii', $restaurant_id, $user_id);
+  $stmt->execute();
+  $stmt->store_result();
+  if ($stmt->errno != 0)
+    return ['status' => Status::ERROR,
+            'data' => 'Error executing menu item insertion query'];
+  if ($stmt->num_rows === 0)
+    return ['status' => Status::ERROR,
+            'data' => 'No restaurant with given user id found'];
+  // by now we know that there exists restaurant with given id
+  $stmt->close();
+  $stmt = $mysqli->prepare('SELECT * FROM menus
+                            WHERE restaurant_id = ?');
+  $stmt->bind_param('i', $restaurant_id);
+  $stmt->execute();
+  $stmt_result = $stmt->get_result();
+  if ($stmt->errno != 0)
+    return ['status' => Status::ERROR,
+            'data' => 'Error executing menu item insertion query'];
+  if ($stmt_result->num_rows === 0)
+    return ['status' => Status::ERROR,
+            'data' => 'No menus associated with restaurant'];
+  $row = $stmt_result->fetch_array();
+  $id = $row[0];
+  $stmt->close();
+  // insert item into all menus associated with restaurant given by id
   $stmt = $mysqli->prepare('INSERT INTO menu_items (name,
                             description, section, price, menu_id)
                             VALUES (?, ?, ?, ?, ?)');
   // create and execute sql request
-  $stmt->bind_param('sssdi', $name, $description, $section, $price, $menu_id);
+  $stmt->bind_param('sssdi', $name, $description, $section, $price, $id);
   $stmt->execute();
   if ($stmt->errno != 0)
     return ['status' => Status::ERROR,

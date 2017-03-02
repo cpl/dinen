@@ -3,13 +3,14 @@ var apiURL = 'api/v1/api.php';
 var Status = { ERROR: 0, SUCCESS: 1 };
 
 $(function () {
-  get_menu();
+  getMenu();
+  $("#done-button-for-item").click(addMenuItem);
 });
 
 // Get menu for restaurant
 // Needs to have 'menu' (menu id) and 'restaurant' (restaurant id)
 // as parameters
-function get_menu()
+function getMenu()
 {
   // if menu GET parameter doesn't exist, abort operation
   if(!('restaurant' in get_url_vars())) {
@@ -25,6 +26,35 @@ function get_menu()
   }).done(generate_html_for_menu);
 
   return false;
+}
+
+function addMenuItem(e)
+{
+  // if menu GET parameter doesn't exist, abort operation
+  if(!('restaurant' in get_url_vars())) {
+    console.log("No restaurant parameter in GET");
+    return;
+  }
+  const JWT = localStorage.getItem('JWT');
+  if(JWT == null) {
+    console.log("User not logged in while creating items for restaurant.");
+    return;
+  }
+  var requestData = {};
+  requestData['request'] = 'add_menu_item';
+  requestData['restaurant_id'] = get_url_vars()['restaurant'];
+  requestData['jwt'] = JWT;
+  // TODO: Add section from form
+  requestData['section'] = 'CHANGEME';
+  requestData['name'] = $("#name").val();
+  requestData['price'] = $('#price').val();
+  requestData['description'] = $('#description').val();
+  $.ajax({
+    url: apiURL,
+    type: 'POST',
+    data: requestData
+  });//.done(generate_html_for_menu);
+  // TODO: create new items on done
 }
 
 function generate_html_for_menu(response)

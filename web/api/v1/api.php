@@ -30,6 +30,9 @@ switch ($request) {
   case 'logout':
     processLogoutRequest();
     break;
+  case 'add_menu_item':
+    processAddMenuItem();
+    break;
 }
 
 function processRegisterRequest() {
@@ -111,4 +114,23 @@ function processLogoutRequest() {
     }
   }
   echo json_encode(['status' => Status::SUCCESS]);
+}
+
+function processAddMenuItem()
+{
+  $jwt = $_POST['jwt'];
+  if (checkJWT($jwt)['status'] !== Status::SUCCESS) {
+    echo json_encode(['status' => Status::ERROR,
+                      'data'   => 'Wrong jwt sent']);
+    return;
+  }
+  $payload = getJWTPayload($jwt);
+  $name = htmlspecialchars($_POST['name']);
+  $section = htmlspecialchars($_POST['section']);
+  $description = htmlspecialchars($_POST['description']);
+  $price = htmlspecialchars($_POST['price']);
+  $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
+  echo json_encode(create_menu_item($payload['user_id'], $name,
+                                    $section, $description,
+                                    $price, $restaurant_id));
 }
