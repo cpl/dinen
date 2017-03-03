@@ -1,0 +1,12 @@
+html {
+    background: white;
+}
+
+body {
+    padding-top: 86px;
+}
+
+#order-table {
+    margin: auto;
+    width: 100%;
+}

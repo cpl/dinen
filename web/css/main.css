@@ -36,11 +36,11 @@ body {
 }
 
 .navbar.opaque {
-    background: rgb(0, 0, 0);
+    background: rgb(25, 25, 25);
 }
 
 .collapse.in {
-    background: rgb(0, 0, 0);
+    background: rgb(25, 25, 25);
 }
 
 .navbar-brand {
