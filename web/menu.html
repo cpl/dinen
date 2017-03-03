@@ -52,7 +52,7 @@
         <h1>MENU</h1>
         <div class = "container">
           <div id="menu" class = "jumbotron">
-            <!-- menu header -->
+            <!-- menu header ======================= -->
             <div class = "container menu-header">
               <div class="btn-group categories">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -67,7 +67,7 @@
                 </ul>
               </div>
             </div>
-            <!-- inner menu -->
+            <!-- inner menu ======================= -->
             <div class="container-fluid form-container" >
               <div class="add-item-button">
                 <button class="btn btn-default" >Add Title</button>
@@ -75,12 +75,19 @@
               </div>
 
               <div class="col-md-12 food-title-panel">
-                <input type="text" class="food-title" id="desciprtion"><br>
+                <label for="food-title">Food Title : </label>
+                <input type="text" class="food-title" id="food-title"><br>
+                <button type="button" class="btn btn-outline-secondary done-button-for-title"
+                        id="done-button-for-title" role = "button">Done</button>
               </div>
 
               <div class="col-md-12 item-panel">
-                <input type="text" class="food-name" id="desciprtion"><br>
-                <textarea class="food-description" id="desciprtion"></textarea>
+                <label for="food-name">Food Name : </label>
+                <input type="text" class="food-name" id="food-name">
+                <br>
+                <label for="food-description">Description : </label>
+                <textarea class="food-description" id="food-description"></textarea>
+                
                 <div id="price-panel" class="input-group">
                   <div class="input-group-addon currency-symbol">£</div>
                   <input type="number" class="price" id="price" step="0.01" value = "0.00" min="0.00">
@@ -89,6 +96,7 @@
                 <button type="button" class="btn btn-outline-secondary done-button-for-item"
                         id="done-button-for-item" role = "button">Done</button>
               </div>
+            </div>  
 
               <!-- in case we want to use buttons instead of the default format ^
               <input id="decreaseNumber" class="price" type="button" value="-"> -->
@@ -99,7 +107,7 @@
                      </div>
                   <div id="orderItems" style="color : white"></div>
                 -->
-              </div>
+            
           </div>
         </div>
 
