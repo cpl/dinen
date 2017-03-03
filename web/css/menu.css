@@ -1,5 +1,5 @@
 html {
-    background: url("../img/dining-set.jpg") no-repeat center fixed;
+    background: url("../img/cafe blurred dark.jpg") no-repeat center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -55,14 +55,10 @@ nav ul li{
   color:white;
   margin:140px -20px 80px -20px;
   min-height: 1000px;
-  /*border: 2px solid black;
-  border-radius: 5px;
-  background: url('../img/jumbotron.jpg') no-repeat center center;*/
+  background: url('../img/jumbotron.jpg') no-repeat center center;
   background-size: cover;
-  background: rgba(34,34,34,0.75);
-  /*#A9A9A9;*/
-  background-blend-mode: screen;
-  /*box-shadow:
+  /*creating white outline for a box
+    box-shadow:
     0 0 0 8px hsl(100, 100%, 100%),
     0 0 0 1px hsl(0, 0%, 50%);*/
   font-family:times;
