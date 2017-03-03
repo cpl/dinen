@@ -67,7 +67,8 @@ function processLoginRequest() {
 function processCreateRestaurantRequest() {
   if (empty($_POST['name']) || empty($_POST['description'])||
       empty($_POST['category']) || empty($_POST['jwt'])) {
-    echo "Oops, some of the required fields / jwt are empty";
+    echo json_encode(['status' => Status::ERROR,
+                      'data'   => 'Oops, some of the required fields / jwt are empty']);
     return;
   }
   if (checkJWT($_POST['jwt'])['status'] !== Status::SUCCESS) {

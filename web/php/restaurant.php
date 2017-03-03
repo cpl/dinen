@@ -100,11 +100,11 @@ function create_restaurant($user_category, $user_id, $name,
   if (empty($user_category) ||
       $user_category != 'manager' ||
       empty($user_id))
-    return 'Not logged in or not manager';
+    return [ 'status' => Status::SUCCESS, 'data' => 'Not logged in or manager'];
   $mysqli = createMySQLi();
 
   if ($mysqli->connect_error)
-    return 'Database connection failed.';
+    return [ 'status' => Status::SUCCESS, 'data' => 'Database connection failed'];
   //$address_id = create_address($mysqli);
   // if is not integer
   //if(strval($address_id) != strval(intval($address_id)))
@@ -117,16 +117,16 @@ function create_restaurant($user_category, $user_id, $name,
     return;
 
   // create and execute sql request
-  $stmt->bind_param('sssii', $name, $description, $category, $user_id);
+  $stmt->bind_param('sssi', $name, $description, $category, $user_id);
   $stmt->execute();
   if ($stmt->errno != 0)
-    return 'Failed to create restaurant.';
+    return [ 'status' => Status::ERROR, 'data' => 'Failed to create restaurant'];
   // get the returned string of schedule creation
   // $scheduleReturn = create_schedule($stmt->insert_id, $mysqli);
   create_menu($mysqli, $stmt->insert_id);
   $stmt->close();
   $mysqli->close();
-  return 'success';
+  return [ 'status' => Status::SUCCESS, 'data' => 'Success'];;
 }
 
 // Create all schedules
