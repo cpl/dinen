@@ -7,13 +7,14 @@ var sections = [];
 var comments = "";
 
 // add required onchange's and submit's to form and select inputs
-$("#menus").change(changeItemsInSelect);
-$("#menuItems").change(changeItemDescription);
-$("#orderForm").submit(submitItem);
-
-$(function () {
+$(function(){
   getMenu();
+  $("#menus").change(changeItemsInSelect);
+  $("#menuItems").change(changeItemDescription);
+  $("#orderForm").submit(submitItem);
+  $("#createOrderButton").click(submitOrder);
 });
+
 
 // Get menu for restaurant
 // Needs to have 'restaurant' (restaurant id)
@@ -103,7 +104,7 @@ function submitItem(event)
       $('#orderItems').append('Menu item: ' + item.name + ' in a ' +
                                item.section + '. Cost: $' + item.price +
                                '. Description: ' + item.description + '.<br>');
-      //orderItems['order_items'].push(item.id);
+      orderItems.push(item.id);
     }
   });
   event.preventDefault();
@@ -114,11 +115,15 @@ function submitOrder()
   var requestData = {};
   requestData['order_items'] = orderItems;
   requestData['comments'] = comments;
+  requestData['data'] = JSON.stringify(orderItems);
+  requestData['request'] = 'create_order';
   $.ajax({
     url: apiURL,
     type: 'POST',
     data: requestData
-  });//.done(processItems);
+  }).done(function(response){
+    console.log(response);
+  });
   // TODO: finish the submit order script
 }
 
