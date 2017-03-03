@@ -43,9 +43,7 @@ html {
 }
 
 .carousel-caption{
-  font-family: times;
   text-shadow: 1px 1px #5F5656;
-
 }
 
 .carousel-caption p{
@@ -69,7 +67,6 @@ html {
   /*box-shadow:
     0 0 0 8px hsl(100, 100%, 100%),
     0 0 0 1px hsl(0, 0%, 50%);*/
-  font-family:times;
 }
 
 .jumbotron h1{
@@ -100,7 +97,6 @@ html {
   box-shadow:
     0 0 0 2px hsl(100, 100%, 100%),
     0 0 0 1px hsl(0, 0%, 50%);
-  font-family:times;
 }
 
 #first-panel{
@@ -139,7 +135,6 @@ html {
   position: relative;
 	width:100%;
   bottom: 0;
-  font-family: times;
 }
 
 .footer-text {
