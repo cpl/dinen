@@ -51,7 +51,7 @@
         <button type="button" id="edit-button" class="btn btn-secondary btn-sm">Edit</button>
         <h1>MENU</h1>
         <div class = "container">
-          <div id="menu" class = "jumbotron">
+          <div class = "jumbotron">
             <!-- menu header ======================= -->
             <div class = "container menu-header">
               <div class="btn-group categories">
@@ -83,11 +83,11 @@
 
               <div class="col-md-12 item-panel">
                 <label for="food-name">Food Name : </label>
-                <input type="text" class="food-name" id="food-name">
+                <input type="text" class="food-name" id="name">
                 <br>
                 <label for="food-description">Description : </label>
-                <textarea class="food-description" id="food-description"></textarea>
-                
+                <textarea class="food-description" id="description"></textarea>
+
                 <div id="price-panel" class="input-group">
                   <div class="input-group-addon currency-symbol">£</div>
                   <input type="number" class="price" id="price" step="0.01" value = "0.00" min="0.00">
@@ -96,8 +96,11 @@
                 <button type="button" class="btn btn-outline-secondary done-button-for-item"
                         id="done-button-for-item" role = "button">Done</button>
               </div>
-            </div>  
 
+
+            </div>
+            <div id="menu" style="color : black">
+            </div>
               <!-- in case we want to use buttons instead of the default format ^
               <input id="decreaseNumber" class="price" type="button" value="-"> -->
 
@@ -107,7 +110,7 @@
                      </div>
                   <div id="orderItems" style="color : white"></div>
                 -->
-            
+
           </div>
         </div>
 
@@ -127,7 +130,6 @@
     <script src="js/vendor/jquery-1.11.2.min.js"></script>
     <script src="js/vendor/bootstrap.js"></script>
     <!-- <script src="js/navbar.js"></script> -->
-    <script src="js/order.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/main.js"></script>
 
