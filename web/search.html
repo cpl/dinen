@@ -24,34 +24,7 @@
  <body>
 
    <!-- navigation bar -->
-   <nav class="navbar navbar-inverse" role="navigation">
-     <div class="container-fluid">
-       <div class="navbar-header">
-         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-           <span class="sr-only">Toggle navigation</span>
-           <span class="icon-bar"></span>
-           <span class="icon-bar"></span>
-           <span class="icon-bar"></span>
-         </button>
-         <a class='navbar-brand' href='index.html'>
-           <img class="logo" src="img/Dinen small logo.png" />
-         </a>
-       </div>
-       <div id="navbar" class="navbar-collapse collapse">
-         <ul class='nav navbar-left navbar-nav'>
-           <li><a href='#'>Business</a></li>
-           <li><a href='#'>Customers</a></li>
-         </ul>
-         <ul class="nav navbar-nav navbar-right">
-           <!-- <li><a class="btn btn-success" href="login.html">Log in</a></li> -->
-           <!-- <li><a class="btn btn-default" href="register.html">Sign Up</a></li> -->
-           <li><a href="login.html"><!--<span class="glyphicon glyphicon-log-in"></span>-->Log in</a></li>
-           <li><a href="register.html"><!--<span class="glyphicon glyphicon-user"></span>-->Sign Up</a></li>
-         </ul>
-       </div><!--/.navbar-collapse -->
-     </div>
-   </nav>
-   <!-- end of navigation bar -->
+   <?php require_once 'common/navbar.inc.php'; ?>
 
    <!-- All items go in this div -->
    <div class="container-fluid">
@@ -70,25 +43,31 @@
 
 
    <!-- Another row for search results and filters -->
-   <div class="row marginTop">
+   <div class="row resultsAndFilters">
 
      <!-- List of search filters -->
-  <nav>
-     <div class="col-md-2 searchFilters">
+     <div class="col-md-2 filtersBox">
        <dl>
          <dt><h4>Filters:</h4></dt>
-         <dt>Kinds of food:</dt>
-           <dd> <input type="checkbox" name="Chinese"/> Chinese </dd>
-           <dd> <input type="checkbox" name="Pizza"/> Pizza </dd>
-           <dd> <input type="checkbox" name="Sushi"/> Sushi </dd>
-           <dd> <input type="checkbox" name="Burgers"/> Burgers </dd>
+         <dt>Restaurant category:</dt>
+           <dd> <input type="checkbox" name="Tavern"/> Tavern </dd>
+           <dd> <input type="checkbox" name="Pub"/> Pub </dd>
+           <dd> <input type="checkbox" name="Restaurant"/> Restaurant </dd>
+           <dd> <input type="checkbox" name="FastFood"/> Fast food </dd>
+           <dd> <input type="checkbox" name="Takeaway"/> Takeaway </dd>
        </dl>
+       <button type="button" class="btn btn-default customButton" style="width: 100%;">Apply Filters</button>
     </div>
-  </nav>
 
-  <!-- table for search results -->
-  <div class="col-md-6 col-md-offset-1">
-    <h3 style="color: white">Results</h3>
+
+  <!-- template for search results -->
+  <div class="col-md-6 col-md-offset-1 resultsBox">
+   <h4>#restaurantName#</h4>
+   <p>#restaurantDescription#</p>
+   <div class="field">
+     <button type="button" class="btn btn-default customButton reastaurantButton">Open Menu</button>
+   </div>
+   <hr>
   </div>
 
 </div> <!-- row for results and filters -->

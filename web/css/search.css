@@ -31,16 +31,20 @@ input::-webkit-input-placeholder {
 .resultsBox {
   color: white;
   border: 1px solid #808080;
-  background-color: #3d3838;
+  background-color: #49392c;
   border-radius: 15px;
   padding-top: 20px;
+  margin-top: 20px;
+  position: relative;
 }
 
 .filtersBox {
   color: white;
   border: 1px solid #808080;
-  background-color: #3d3838;
+  background-color: #49392c;
   border-radius: 15px;
+  margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 hr {
@@ -51,4 +55,21 @@ hr {
   margin-top: 20px;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.restaurantBox {
+  background-color: #3d3838;
+}
+
+.customButton {
+  border: 1px solid #808080;
+  color: white;
+  background: #3d3838;
+	text-align: center;
+}
+
+.reastaurantButton {
+  position: absolute;
+  top: 30%;
+  right: 5%;
 }
