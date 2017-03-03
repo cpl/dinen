@@ -28,10 +28,27 @@ input::-webkit-input-placeholder {
   font-size: 30px;
 }
 
-.searchFilters {
+.resultsBox {
   color: white;
+  border: 1px solid #808080;
+  background-color: #3d3838;
+  border-radius: 15px;
+  padding-top: 20px;
 }
 
-.marginTop {
-  padding-top: 20px;
+.filtersBox {
+  color: white;
+  border: 1px solid #808080;
+  background-color: #3d3838;
+  border-radius: 15px;
+}
+
+hr {
+  width: 100%;
+}
+
+.resultsAndFilters {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
