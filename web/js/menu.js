@@ -64,9 +64,9 @@ function addMenuItem(e)
   requestData['jwt'] = JWT;
   // TODO: Add section from form
   requestData['section'] = 'CHANGEME';
-  requestData['name'] = $("#name").val();
+  requestData['name'] = $("#food-name").val();
   requestData['price'] = $('#price').val();
-  requestData['description'] = $('#description').val();
+  requestData['description'] = $('#food-description').val();
   $.ajax({
     url: apiURL,
     type: 'POST',
@@ -78,10 +78,10 @@ function addMenuItem(e)
 function generate_html_for_menu(response)
 {
   if (response.status === Status.SUCCESS) {
-    $('#menu').empty();
-    $('#menu').append('Menu items: <br>');
+    $('#items').empty();
+    $('#items').append('Menu items: <br>');
     response.data.forEach(function (item) {
-      $('#menu').append('Menu item: ' + item.name + ' in ' +
+      $('#items').append('Menu item: ' + item.name + ' in ' +
                                 item.section + '. Cost: $' + item.price +
                                 '. Description: ' + item.description + '.<br>');
     });
