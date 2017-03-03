@@ -90,7 +90,20 @@ function create_menu_item($user_id, $name, $section, $description, $price, $rest
   $row = $stmt_result->fetch_array();
   $id = $row[0];
   $stmt->close();
-  // insert item into all menus associated with restaurant given by id
+  // check if there are duplicates
+  $stmt = $mysqli->prepare('SELECT (id) FROM menu_items
+                            WHERE name = ? AND menu_id = ?');
+  $stmt->bind_param('si', $name, $id);
+  $stmt->execute();
+  $stmt_result = $stmt->get_result();
+  if ($stmt->errno != 0)
+    return ['status' => Status::ERROR,
+            'data' => 'Error executing menu item insertion query'];
+  if ($stmt_result->num_rows != 0)
+    return ['status' => Status::ERROR,
+            'data' => 'There is an item with given name in menu already'];
+  $stmt->close();
+  // insert item into first menu associated with restaurant given by id
   $stmt = $mysqli->prepare('INSERT INTO menu_items (name,
                             description, section, price, menu_id)
                             VALUES (?, ?, ?, ?, ?)');

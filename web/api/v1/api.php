@@ -33,6 +33,9 @@ switch ($request) {
   case 'add_menu_item':
     processAddMenuItem();
     break;
+  case 'create_order':
+    processOrder();
+    break;
 }
 
 function processRegisterRequest() {
@@ -134,4 +137,10 @@ function processAddMenuItem()
   echo json_encode(create_menu_item($payload['user_id'], $name,
                                     $section, $description,
                                     $price, $restaurant_id));
+}
+
+function processOrder()
+{
+  $comments = htmlspecialchars($_POST['comments']);
+  echo json_encode($_POST['data']);
 }
