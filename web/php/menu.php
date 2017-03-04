@@ -18,35 +18,21 @@ function get_menu($restaurant_id)
   $mysqli = createMySQLi();
   if ($mysqli->connect_error)
     return ['status' => Status::ERROR,
-            'data' => 'Database connection failed'];
-  //check if menu exists
-  $menuStmt = $mysqli->prepare('SELECT * FROM menus WHERE restaurant_id = ?');
-  $menuStmt->bind_param('i', $restaurant_id);
-  $menuStmt->execute();
-  if ($menuStmt->errno != 0)
-    return ['status' => Status::ERROR,
-            'data' => 'Error executing menu query'];
-  $menuStmt_result = $menuStmt->get_result();
-  if ($menuStmt_result->num_rows === 0)
-    return ['status' => Status::ERROR,
-            'data' => 'No menus found'];
-  $itemStmt = $mysqli->prepare('SELECT * FROM menu_items WHERE menu_id = ?');
+            'data'   => 'Database connection failed'];
+  $itemStmt = $mysqli->prepare('SELECT * FROM menu_items WHERE restaurant_id = ?');
   $menu_list = array();
-  while($menuRow = $menuStmt_result->fetch_array())
-  {
-    $itemStmt->bind_param('i', $menuRow['id']);
-    $itemStmt->execute();
-    if ($itemStmt->errno != 0)
-      return ['status' => Status::ERROR,
-              'data' => 'Error executing menu items query'];
-    $itemStmt_result = $itemStmt->get_result();
-    while ($row = $itemStmt_result->fetch_array()) {
-      array_push($menu_list, ['name'        => $row['name'],
-                              'section'     => $row['section'],
-                              'price'       => $row['price'],
-                              'description' => $row['description'],
-                              'id'          => $row['id']]);
-    }
+  $itemStmt->bind_param('i', $restaurant_id);
+  $itemStmt->execute();
+  if ($itemStmt->errno != 0)
+    return ['status' => Status::ERROR,
+            'data' => 'Error executing menu items query'];
+  $itemStmt_result = $itemStmt->get_result();
+  while ($row = $itemStmt_result->fetch_array()) {
+    array_push($menu_list, ['name'        => $row['name'],
+                            'section'     => $row['section'],
+                            'price'       => $row['price'],
+                            'description' => $row['description'],
+                            'id'          => $row['id']]);
   }
   return [ 'status' => Status::SUCCESS,
            'data' => ($menu_list)];
@@ -76,9 +62,9 @@ function create_menu_item($user_id, $name, $section, $description, $price, $rest
             'data' => 'No restaurant with given user id found'];
   // by now we know that there exists restaurant with given id
   $stmt->close();
-  $stmt = $mysqli->prepare('SELECT * FROM menus
-                            WHERE restaurant_id = ?');
-  $stmt->bind_param('i', $restaurant_id);
+  $stmt = $mysqli->prepare('SELECT * FROM menu_items
+                            WHERE restaurant_id = ? AND name = ?');
+  $stmt->bind_param('ii', $restaurant_id, $name);
   $stmt->execute();
   $stmt_result = $stmt->get_result();
   if ($stmt->errno != 0)
@@ -88,32 +74,18 @@ function create_menu_item($user_id, $name, $section, $description, $price, $rest
     return ['status' => Status::ERROR,
             'data' => 'No menus associated with restaurant'];
   $row = $stmt_result->fetch_array();
-  $id = $row[0];
-  $stmt->close();
-  // check if there are duplicates
-  $stmt = $mysqli->prepare('SELECT (id) FROM menu_items
-                            WHERE name = ? AND menu_id = ?');
-  $stmt->bind_param('si', $name, $id);
-  $stmt->execute();
-  $stmt_result = $stmt->get_result();
-  if ($stmt->errno != 0)
-    return ['status' => Status::ERROR,
-            'data' => 'Error executing menu item insertion query'];
-  if ($stmt_result->num_rows != 0)
-    return ['status' => Status::ERROR,
-            'data' => 'There is an item with given name in menu already'];
   $stmt->close();
   // insert item into first menu associated with restaurant given by id
   $stmt = $mysqli->prepare('INSERT INTO menu_items (name,
-                            description, section, price, menu_id)
+                            description, section, price, restaurant_id)
                             VALUES (?, ?, ?, ?, ?)');
   // create and execute sql request
-  $stmt->bind_param('sssdi', $name, $description, $section, $price, $id);
+  $stmt->bind_param('sssdi', $name, $description, $section, $price, $restaurant_id);
   $stmt->execute();
   if ($stmt->errno != 0)
     return ['status' => Status::ERROR,
-            'data' => 'Error executing menu item insertion query'];
-  return [ 'status' => Status::SUCCESS];
+            'data'   => 'Error executing menu item insertion query'];
+  return ['status' => Status::SUCCESS];
 }
 
 // set order item finished
@@ -202,8 +174,8 @@ function get_unfinished_order_items($restaurant_id)
              'data' => "Database connection failed"];
   $stmt = $mysqli->prepare('SELECT * FROM order_items
                             WHERE order_id IN (SELECT id FROM orders
-                                               WHERE restaurant_id = ? AND
-                                                     is_finished = 0)');
+                                  WHERE restaurant_id = ? AND
+                                        is_finished = 0)');
   $stmt->bind_param('i', $restaurant_id);
   $stmt->execute();
   if ($stmt->errno != 0)
