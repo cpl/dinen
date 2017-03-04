@@ -2,6 +2,7 @@
 
 require_once 'connect_to_db.php';
 require_once 'validators.php';
+require_once 'globals.php';
 
 function remove_user($user_id, $password){
 
@@ -19,7 +20,7 @@ function remove_user($user_id, $password){
     return ['status' => Status::ERROR,
             'data' => 'Database connection failed'];
 
-  $stmt = $mysqli->prepare('DELETE FROM addresses
+  $stmt = $mysqli->prepare('DELETE FROM locations
                             WHERE id in (SELECT address_id FROM restaurants
                                          WHERE manager_id = ?)');
   $stmt->bind_param('i', $user_id);
