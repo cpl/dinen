@@ -113,9 +113,9 @@ function submitItem(event)
 function submitOrder()
 {
   var requestData = {};
-  requestData['order_items'] = orderItems;
+  requestData['restaurant'] = get_url_vars()['restaurant'];
   requestData['comments'] = comments;
-  requestData['data'] = JSON.stringify(orderItems);
+  requestData['order_items'] = JSON.stringify(orderItems);
   requestData['request'] = 'create_order';
   $.ajax({
     url: apiURL,

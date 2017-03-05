@@ -30,3 +30,8 @@ function passwordsAreValid($password, $c_password) {
 function isValid($str) {
     return !preg_match('/[^ A-Za-z0-9.#!\'-]/', $str);
 }
+
+function arrayIsInt($array)
+{
+  return ctype_digit(implode('', $array));
+}
