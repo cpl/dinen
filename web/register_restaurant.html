@@ -7,8 +7,13 @@
         <!-- bootstrap -->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+        
         <script src="js/vendor/jquery-1.11.2.min.js"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/bootstrap-formhelpers-countries.js"></script>
+        <script src="js/vendor/bootstrap-formhelpers-countries.en_US.js"></script>
+        <script src="js/vendor/bootstrap-formhelpers-selectbox.js"></script>
+
         <link rel="shortcut icon" href="favicon.ico">
 
         <!-- Website CSS style -->
@@ -102,13 +107,15 @@
                                 <textarea name="description" class="form-control" placeholder="Description"></textarea>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="country" class="cols-sm-2 control-label">Country:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-globe fa" aria-hidden="true"></i></span>
-                                <input name="country" type="text" class="form-control" placeholder="Country">
+                                <select class="input-medium bfh-countries" data-country="GB" data-flags="true"></select>
+                               
                             </div>
+
                         </div>
 
                         <div class="form-group">
@@ -118,7 +125,7 @@
                                 <input name="town" type="text" class="form-control" placeholder="Town">
                             </div>
                         </div>
-        
+
                         <div class="form-group">
                             <label for="street1" class="cols-sm-2 control-label">Street:</label>
                             <div class="input-group">
@@ -127,7 +134,7 @@
                                 <input name="street2" type="text" class="form-control" placeholder="Street address line 2">
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="postcode" class="cols-sm-2 control-label">Postcode:</label>
                             <div class="input-group">
@@ -136,7 +143,7 @@
                             </div>
                         </div>
 
-                        
+
 
                         <!--<label class="cols-sm-2 control-label">Schedule:</label>
                         <div class="col-md-offset-1">
