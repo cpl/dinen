@@ -1,23 +1,32 @@
 <?php
 
 require_once 'connect_to_db.php';
+require_once 'validators.php';
 
 // All scripts related to handling orders
 
-function create_order($user_id, $restaurant_id, $comments, $data)
+function create_order($restaurant_id, $comments, $data)
 {
-  if(empty($user_id) || empty($restaurant_id))
+  // check if restaurant is not emptyand int and data contains only integers
+  if(empty($restaurant_id))
     return [ 'status' => Status::ERROR,
              'data'   => 'User id is empty'];
+  if(strval($restaurant_id) != strval(intval($restaurant_id)))
+  return [ 'status' => Status::ERROR,
+           'data'   => 'HAAAACKS'];
+  if(!arrayIsInt($data))
+    return [ 'status' => Status::ERROR,
+             'data'   => 'HAAAACKS'];
+
   $mysqli = createMySQLi();
   if ($mysqli->connect_error)
     return ['status' => Status::ERROR,
             'data'   => 'Database connection failed.'];
-
+  // create the order entry in dbase
   $stmt = $mysqli->prepare('INSERT INTO
-                            orders (restaurant_id, user_id, comments)
-                            VALUES (?, ?, ?)');
-  $stmt->bind_param('iis', $restaurant_id, $user_id, $comments);
+                            orders (restaurant_id, comments)
+                            VALUES (?, ?)');
+  $stmt->bind_param('is', $restaurant_id, $comments);
   $stmt->execute();
   if ($stmt->errno != 0)
   {
@@ -28,19 +37,40 @@ function create_order($user_id, $restaurant_id, $comments, $data)
   }
   $order_id = $stmt->insert_id;
   $stmt->close();
-
+  // check if all menu items belong to restaurants
+  $items_stringified = "";
+  $first = true;
+  foreach ($data as $item_id) {
+    if(!$first)
+      $items_stringified = $items_stringified . ',';
+    else
+      $first = false;
+    $items_stringified = $items_stringified . $item_id;
+  }
+  $stmt = $mysqli->prepare("SELECT * FROM menu_items
+                            WHERE restaurant_id NOT IN (?) AND
+                            id IN ($items_stringified)");
+  $stmt->bind_param('i', $restaurant_id);
+  $stmt->execute();
+  if ($stmt->errno != 0)
+  {
+    $stmt->close();
+    $mysqli->close();
+    return ['status' => Status::ERROR,
+            'data'   => 'Failed checking order items.'];
+  }
+  $stmt->store_result();
+  $stmt->fetch();
+  if ($stmt->num_rows !== 0)
+    return ['status' => Status::ERROR,
+            'data'   => 'Some menu items dont belong to restaurant'];
+  $stmt->close();
+  // now insert the items into array
   $stmt = $mysqli->prepare('INSERT INTO
                             order_items (order_id, menu_item_id)
                             VALUES (?, ?)');
   foreach($data as $item_id)
   {
-    // TODO: Check if menu item id belongs to restaurant
-    // To prevent haxors from ordering items from other restaurants
-
-    // Check if menu id is integer
-    if(strval($item_id) != strval(intval($item_id)))
-      return ['status' => Status::ERROR,
-              'data'   => 'Given non-integer menu id.'];
     $stmt->bind_param('ii', $order_id, $item_id);
     $stmt->execute();
     if ($stmt->errno != 0)

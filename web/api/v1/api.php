@@ -9,6 +9,7 @@ require_once '../../php/register.php';
 require_once '../../php/login.php';
 require_once '../../php/menu.php';
 require_once '../../php/restaurant.php';
+require_once '../../php/order.php';
 
 $request = htmlspecialchars($_POST['request']);
 switch ($request) {
@@ -142,5 +143,6 @@ function processAddMenuItem()
 function processOrder()
 {
   $comments = htmlspecialchars($_POST['comments']);
-  echo json_encode($_POST['data']);
+  echo json_encode(create_order($_POST['restaurant'], $_POST['comments'],
+                                json_decode($_POST['order_items'])));
 }
