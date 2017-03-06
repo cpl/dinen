@@ -4,7 +4,7 @@
    <!-- imports -->
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-   <title>Dinen - Search</title>
+   <title>Dinen - Restaurant</title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -24,6 +24,29 @@
    <!-- navigation bar -->
    <?php require_once 'common/navbar.inc.php'; ?>
 
+   <!-- The main div where everything goes -->
+   <div class="container mainContainer">
+
+     <!-- the name of the restaurant -->
+     <center><h1>#restaurantName#</h1></center>
+     <center><h3>(#restaurantType#)</h3></center>
+
+     <div class="row">
+
+       <!-- Column for description -->
+       <div class="col-md-4 box">
+         <h2>Description:</h2>
+         <p style="font-size: 17px;">#restaurantDescription#</p>
+       </div>
+
+      <!-- Column for menu -->
+       <div class="col-md-4 box">
+         <h2>Menu:</h2>
+         <p>#restaurantMenu#</p>
+       </div>
+     </div>
+
+   </div>
 
  </body>
 </html>
