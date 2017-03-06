@@ -37,6 +37,9 @@ switch ($request) {
   case 'create_order':
     processOrder();
     break;
+  case 'get_unfinished_order_items':
+    processGetUnfinishedOrderItems();
+    break;
 }
 
 function processRegisterRequest() {
@@ -145,4 +148,10 @@ function processOrder()
   $comments = htmlspecialchars($_POST['comments']);
   echo json_encode(create_order($_POST['restaurant'], $_POST['comments'],
                                 json_decode($_POST['order_items'])));
+}
+
+function processGetUnfinishedOrderItems()
+{
+  $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
+  echo json_encode(get_unfinished_order_items($restaurant_id));
 }
