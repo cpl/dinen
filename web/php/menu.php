@@ -61,19 +61,20 @@ function create_menu_item($user_id, $name, $section, $description, $price, $rest
     return ['status' => Status::ERROR,
             'data' => 'No restaurant with given user id found'];
   // by now we know that there exists restaurant with given id
+  $stmt->free_result();
   $stmt->close();
-  $stmt = $mysqli->prepare('SELECT * FROM menu_items
-                            WHERE restaurant_id = ? AND name = ?');
-  $stmt->bind_param('ii', $restaurant_id, $name);
+  $stmt = $mysqli->prepare("SELECT * FROM menu_items
+                            WHERE name = ? AND restaurant_id = ?");
+  $stmt->bind_param('si', $name, $restaurant_id);
   $stmt->execute();
   $stmt_result = $stmt->get_result();
   if ($stmt->errno != 0)
     return ['status' => Status::ERROR,
             'data' => 'Error executing menu item insertion query'];
-  if ($stmt_result->num_rows === 0)
+  if ($stmt_result->num_rows != 0)
     return ['status' => Status::ERROR,
-            'data' => 'No menus associated with restaurant'];
-  $row = $stmt_result->fetch_array();
+            'data' => 'Item with exact same name found in restaurant'];
+  //$row = $stmt_result->fetch_array();
   $stmt->close();
   // insert item into first menu associated with restaurant given by id
   $stmt = $mysqli->prepare('INSERT INTO menu_items (name,
