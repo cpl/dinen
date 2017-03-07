@@ -52,67 +52,50 @@
         <h1>MENU</h1>
         <div class = "container">
           <div id="menu" class = "jumbotron">
-            <!-- menu header ======================= -->
-            <div class = "container menu-header">
-              <div class="btn-group categories">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Categories <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Appetiser</a></li>
-                  <li><a href="#">Main Dish</a></li>
-                  <li><a href="#">Dessert</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">MEAL DEALS</a></li>
-                </ul>
-              </div>
-            </div>
-            <!-- inner menu ======================= -->
-            <div class="container-fluid form-container" >
-              <div class="add-item-button">
-                <button class="btn btn-default" >Add Title</button>
-                <button class="btn btn-default" >Add Item</button>
-              </div>
+            <!-- inner menu ============================ -->
+            <div class="col-md-12 item-panel">
 
-              <div class="col-md-12 food-title-panel">
-                <label for="food-title">Food Title : </label>
-                <input type="text" class="food-title" id="food-title"><br>
-                <button type="button" class="btn btn-outline-secondary done-button-for-title"
-                        id="done-button-for-title" role = "button">Done</button>
+              <button type="button" class="btn btn-danger delete-button" aria-label="delete button">
+                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+              </button>
+
+              <label for="category">Category </label>
+              <span class="colon"> : </span>
+              <input type="text" class="category" id="category">            
+              <br>
+              <label for="food-name">Food Name : </label>
+              <input type="text" class="food-name" id="food-name">
+              <br>
+              <label for="food-description">Description : </label>
+              <textarea class="food-description" id="food-description"></textarea>
+
+
+              <div id="price-panel" class="input-group">
+                <div class="input-group-addon currency-symbol">£</div>
+                <input type="number" class="price" id="price" step="0.01" value = "0.00" min="0.00">
               </div>
 
-              <div class="col-md-12 item-panel">
-                <label for="food-name">Food Name : </label>
-                <input type="text" class="food-name" id="food-name">
-                <br>
-                <label for="food-description">Description : </label>
-                <textarea class="food-description" id="food-description"></textarea>
-
-                <div id="price-panel" class="input-group">
-                  <div class="input-group-addon currency-symbol">£</div>
-                  <input type="number" class="price" id="price" step="0.01" value = "0.00" min="0.00">
-                </div>
-
-                <button type="button" class="btn btn-outline-secondary done-button-for-item"
-                        id="done-button-for-item" role = "button">Done</button>
-              </div>
-            </div>
-            <div id="items" style="color:black">
+              <button type="button" class="btn btn-outline-secondary done-button-for-item"
+                      id="done-button-for-item" role = "button">Done</button>
             </div>
 
-              <!-- in case we want to use buttons instead of the default format ^
-              <input id="decreaseNumber" class="price" type="button" value="-"> -->
-
-                <!-- not working buttons
-                  <button id="edit">Append text</button>
-                    <button id="btn2">Append list item</button>
-                     </div>
-                  <div id="orderItems" style="color : white"></div>
-                -->
+            <button type="button" class="btn btn-info add-button" aria-label="add button">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
 
           </div>
+             
         </div>
+        <div id="items" style="color:black"> </div>    
+        <!-- in case we want to use buttons instead of the default format ^
+        <input id="decreaseNumber" class="price" type="button" value="-"> -->
 
+          <!-- not working buttons
+            <button id="edit">Append text</button>
+              <button id="btn2">Append list item</button>
+               </div>
+            <div id="orderItems" style="color : white"></div>
+          -->
         <button type="button" id="done-button-for-menu" class="btn btn-outline-secondary" role = "button">Done</button>
 
       </div>

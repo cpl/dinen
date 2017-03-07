@@ -1,0 +1,107 @@
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#container {
+   min-height:100%;
+   position:relative;
+}
+
+/* navbar css ============================================================================ */
+
+.navbar{
+  position: absolute;
+  width:100%;
+  border: 0;
+  height: 80px;
+  background:black;
+}
+/*
+I don't think that this page should have the transparent to visible feature.
+I feel that when people are editing their pages, they  might not want a navbar above them as it kinda blocks stuff.
+-webkit-transition: all 0.6s ease-out;
+    -moz-transition: all 0.6s ease-out;
+    -o-transition: all 0.6s ease-out;
+    -ms-transition: all 0.6s ease-out;
+    transition: all 0.6s ease-out;
+.navbar.scrolled {
+    background: rgba(0, 0, 0, 0.95);
+}
+*/
+.navbar-brand{
+  width: 60px;
+  height: 60px;
+  margin-top:10px;
+}
+
+nav ul li{
+  margin-top:10px;
+}
+
+
+/* jumbotron css ================================================================================ */
+
+#jumbotron-override {
+  color:black;
+  margin-top:140px;
+  margin-bottom:180px;
+  min-height: 500px;
+  width:50%;
+  left:25%;
+  right:25%;
+  background: white;
+  font-family:times;
+  position:relative;
+}
+
+h2{
+  margin-top:-20px;
+  font-size:50px; 
+  text-align:center;
+  position:relative;
+}
+
+#items{
+  min-height: 300px;
+  margin-bottom:40px;
+  border: 2px solid black;
+  background: white;
+}
+
+#done-button{
+  height:50px;
+  margin-top:10px;
+  bottom:10px;
+  right:10px;
+  position:absolute;
+  font-size:20px;
+  background: #80D2ED;
+  color:white;
+}
+
+#done-button:hover{
+  color:grey;
+}
+
+/* footer css  ====================================================================================== */
+
+#footer {
+  background: url('../img/cafe blurred dark.jpg') no-repeat center center;
+  background-size:cover;
+  position:absolute;
+  width:100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-family: times;
+}
+
+.footer-text {
+   margin-top:15px;
+   text-align:left;
+   color: #FFFFFF;
+   font-size:16px;
+   padding:0 0 10px 20px;
+}

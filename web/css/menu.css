@@ -1,14 +1,3 @@
-html {
-    background: url("../img/cafe blurred dark.jpg") no-repeat center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    font-family: 'Oxygen', sans-serif;
-    position: relative;
-    min-height: 100%;
-}
-
 body {
   padding: 0;
   margin: 0 0 60px 0;
@@ -43,11 +32,6 @@ I feel that when people are editing their pages, they  might not want a navbar a
 
 nav ul li{
   margin-top:10px;
-}
-
-/* the wrapper ==========================================*/
-.wrapper{
-
 }
 
 /* outer jumbotron css ================================================================================ */
@@ -103,55 +87,40 @@ nav ul li{
   margin-top:5px;
 }
 
-.categories{
-  margin: 15px 0 0 10px;
-}
-
 /* inner menu css ================================================================================ */
-
-.add-item-button{
-  margin:10px 0 10px 0;
+.delete-button{
+  float:right;
+  margin-top:10px;
+  width:38px;
+  height:30px;
 }
 
-.food-title-panel{
-  border-radius:5px;
-  border:2px solid rgba(0, 0, 0, 0.5);
-  color:black;
-  height:80px;
-  padding-top:1.2%;
-  margin-bottom:20px;
+.add-button{
+  float:left;
+  margin-top:18px;
+  margin-left:20px;
+  width:38px;
+  height:30px;
 }
-
-.food-title{
-  position:absolute;
-  height:50px;
-  width:50%;
-  font-family:times;
-  font-size:30px;
-  vertical-align: middle;
-  text-align:center;
-}
-
 .item-panel{
   border-radius:5px;
   border:2px solid rgba(0, 0, 0, 0.5);
   color:black;
-  height:190px;
   font-family:times;
 }
 
 #price-panel{
   color:black;
   font-size:20px;
+  vertical-align:middle;
   float:right;
-  margin-top: 20px;
-  width:100px;
-}
+  width:1px;
+} /* for some reason will only work when i give it a width (price-panel), stuck at making it responsive*/
 
 .price{
   border: 2px solid rgba(173, 216, 230, 0.8);
   height: 40px;
-  width: 90px;
+  width:80px;
   background: white;
   padding:0 5px 0 5px;
   font-size:20px;
@@ -169,8 +138,19 @@ textarea{
   vertical-align: top;
 }
 
-.food-name{
+.category{
   margin-top:10px;
+  width:40%;
+  height:30px;
+}
+
+.colon{
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 17px;
+}
+
+.food-name{
   width:40%;
   height:30px;
 }
@@ -181,20 +161,8 @@ textarea{
   height:120px;
 }
 
-.done-button-for-title{
-  height:50%;
-  width:7%;
-  bottom: 10px;
-  right: 10px;
-  position:absolute;
-  font-size:20px;
-  background: #80D2ED;
-  color:white;
-}
-
 .done-button-for-item{
   height:22%;
-  width:7%;
   bottom:10px;
   right:10px;
   position:absolute;
