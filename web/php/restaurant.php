@@ -30,6 +30,7 @@
 require_once 'validators.php';
 require_once 'connect_to_db.php';
 require_once 'mapsapi.php';
+require_once 'globals.php';
 
 // Change restaurant function
 // assuming every value was htmlspecialchars-sanitized before
@@ -181,19 +182,21 @@ function create_address($mysqli, $street1, $street2, $postcode, $town, $country)
     $street2 = htmlspecialchars($street2);
 
   if (!isValid($town) || !isValid($country) || !isValid($street1) || !isValid($street2) || !isValid($postcode))
-    return 'Invalid inputs';
+    return [ 'status' => Status::ERROR, 'data' => 'Invalid input for address'];
 
   // MAPS GEOCODING API
   $finalAddress = $street1.$street2.$town.$country;
   $geodata = geocode($finalAddress);
 
+  var_dump($geodata);
+
   $stmt = $mysqli->prepare('INSERT INTO locations (address_line_1,
                             address_line_2, postcode, city, country, latitude, longitude)
                             VALUES (?, ?, ?, ?, ?, ?, ?)');
-  $stmt->bind_param('sssss', $street1, $street2, $postcode, $town, $country, $geodata[0], $geodata[1]);
+  $stmt->bind_param('sssssdd', $street1, $street2, $postcode, $town, $country, $geodata[0], $geodata[1]);
   $stmt->execute();
   if ($stmt->errno != 0)
-    return 'Failed to create address' . $stmt->error;
+    return [ 'status' => Status::ERROR, 'data' => 'Failed to create address'];
   $id = $stmt->insert_id;
   $stmt->close();
 
