@@ -96,6 +96,9 @@ function change_address($address_id, $town, $country, $street1, $street2, $postc
   return [ 'status' => Status::SUCCESS, 'data' => 'Changed address'];
 }
 
+// TEST
+var_dump(create_restaurant('manager', 1, 'TESTING FROM SCRIPT', 'SCRIPT', 'tavern', 'Bulevardul 1 Decembrie 1918', '', '', 'Bucuresti'));
+
 function create_restaurant($user_category, $user_id, $name,
                            $description, $category, $street1, $street2, $postcode, $town) {
   // Check if required fields are empty || user is not manager || no connection to dbase
@@ -109,7 +112,7 @@ function create_restaurant($user_category, $user_id, $name,
     return [ 'status' => Status::SUCCESS, 'data' => 'Database connection failed'];
 
   // CREATE ADDRESS AND OBTAIN ID FOR RESTAURANT RELATION
-  $adrid = create_address($mysqli, $street1, $street2, $postcode, $town, "FRONTEND");
+  $adrid = create_address($mysqli, $street1, $street2, $postcode, $town, "");
 
   $stmt = $mysqli->prepare('INSERT INTO restaurants (name,
                             description, category, manager_id, location_id)
@@ -195,7 +198,7 @@ function create_address($mysqli, $street1, $street2, $postcode, $town, $country)
   $finalAddress = $street1.$street2.$town.$country;
   $geodata = geocode($finalAddress);
 
-  var_dump($geodata);
+  // var_dump($geodata);
 
   $stmt = $mysqli->prepare('INSERT INTO locations (address_line_1,
                             address_line_2, postcode, city, country, latitude, longitude)
