@@ -108,9 +108,7 @@ function create_restaurant($user_category, $user_id, $name,
     return [ 'status' => Status::SUCCESS, 'data' => 'Database connection failed'];
 
   // CREATE ADDRESS ?
-  $address_id = create_address($mysqli);
-  if(strval($address_id) != strval(intval($address_id)))
-    return $address_id;
+  create_address($mysqli);
 
   $stmt = $mysqli->prepare('INSERT INTO restaurants (name,
                             description, category, manager_id)
@@ -168,25 +166,20 @@ function create_schedule($restaurant_id, $mysqli)
 // Create address function
 // Creates address entry in sql dbase
 // Returns id of address if successful, error string otherwise
-function create_address($mysqli)
+function create_address($mysqli, $street1, $street2, $postcode, $town, $country)
 {
-  if(empty($_POST['town']))
-    return 'Town is missing.';
-  if(empty($_POST['country']))
-    return 'Country is missing.';
-  if(empty($_POST['street1']))
-    return 'Empty street input.';
-  $town = htmlspecialchars($_POST['town']);
-  $country = htmlspecialchars($_POST['country']);
-  $street1 = htmlspecialchars($_POST['street1']);
-  if(empty($_POST['postcode']))
+  $town = htmlspecialchars($town);
+  $country = htmlspecialchars($country);
+  $street1 = htmlspecialchars($street1);
+
+  if(empty($postcode))
     $postcode = "";
   else
-    $postcode = htmlspecialchars($_POST['postcode']);
-  if(empty($_POST['street2']))
+    $postcode = htmlspecialchars($postcode);
+  if(empty($street2))
     $street2 = "";
   else
-    $street2 = htmlspecialchars($_POST['street2']);
+    $street2 = htmlspecialchars($street2);
 
   if (!isValid($town) || !isValid($country) || !isValid($street1) || !isValid($street2) || !isValid($postcode))
     return;
