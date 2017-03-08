@@ -97,7 +97,7 @@ function change_address($address_id, $town, $country, $street1, $street2, $postc
 }
 
 // TEST
-var_dump(create_restaurant('manager', 1, 'TESTING FROM SCRIPT', 'SCRIPT', 'tavern', 'Bulevardul 1 Decembrie 1918', '', '', 'Bucuresti'));
+// var_dump(create_restaurant('manager', 1, 'TESTING FROM SCRIPT', 'SCRIPT', 'tavern', 'Bulevardul 1 Decembrie 1918', '', '', 'Bucuresti'));
 
 function create_restaurant($user_category, $user_id, $name,
                            $description, $category, $street1, $street2, $postcode, $town) {
