@@ -97,7 +97,7 @@ function change_address($address_id, $town, $country, $street1, $street2, $postc
 }
 
 function create_restaurant($user_category, $user_id, $name,
-                           $description, $category) {
+                           $description, $category, $street1, $street2, $postcode, $town) {
   // Check if required fields are empty || user is not manager || no connection to dbase
   if (empty($user_category) ||
       $user_category != 'manager' ||
@@ -109,7 +109,7 @@ function create_restaurant($user_category, $user_id, $name,
     return [ 'status' => Status::SUCCESS, 'data' => 'Database connection failed'];
 
   // CREATE ADDRESS AND OBTAIN ID FOR RESTAURANT RELATION
-  $adrid = create_address($mysqli);
+  $adrid = create_address($mysqli, $street1, $street2, $postcode, $town, "FRONTEND MAKE THE BUTTON WORK");
 
   $stmt = $mysqli->prepare('INSERT INTO restaurants (name,
                             description, category, manager_id, location_id)

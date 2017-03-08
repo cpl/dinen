@@ -72,8 +72,11 @@ function processLoginRequest() {
 }
 
 function processCreateRestaurantRequest() {
+  // MUST INCLUDE COUNTRY!!!
+  // FRONTEND's button doesn't send the COUNTRY!
   if (empty($_POST['name']) || empty($_POST['description'])||
-      empty($_POST['category']) || empty($_POST['jwt'])) {
+      empty($_POST['category']) || empty($_POST['jwt'] ||
+      empty($_POST['street1'] || empty($_POST['town'])))) {
     echo json_encode(['status' => Status::ERROR,
                       'data'   => 'Oops, some of the required fields / jwt are empty']);
     return;
@@ -86,9 +89,21 @@ function processCreateRestaurantRequest() {
   $name = htmlspecialchars($_POST['name']);
   $description = htmlspecialchars($_POST['description']);
   $category = htmlspecialchars($_POST['category']);
+  
+  $street1 = htmlspecialchars($_POST['street1']);
+  if (empty($_POST['street2']))
+    $street2 = "";
+  else
+    $street2 = htmlspecialchars($_POST['street2']);
+  if (empty($_POST['postcode']))
+    $postcode = "";
+  else
+    $postcode = htmlspecialchars($_POST('postcode'));
+  $town = htmlspecialchars($_POST['town']);
+
   $payload = getJWTPayload($_POST['jwt']);
   echo json_encode(create_restaurant($payload['user_category'], $payload['user_id'],
-                    $name, $description, $category));
+                    $name, $description, $category, $street1, $street2, $postcode, $town));
 }
 
 function processGetRestaurantsRequest() {
