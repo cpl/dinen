@@ -9,6 +9,10 @@ body {
    position:relative;
 }
 
+#no-padding{
+  padding:0;
+}
+
 /* navbar css ============================================================================ */
 
 .navbar{
@@ -41,9 +45,9 @@ nav ul li{
 }
 
 
-/* jumbotron css ================================================================================ */
+/* container css ================================================================================ */
 
-#jumbotron-override {
+.custom-jumbotron{
   color:black;
   margin-top:140px;
   margin-bottom:180px;
@@ -54,35 +58,43 @@ nav ul li{
   background: white;
   font-family:times;
   position:relative;
+  border: 2px solid rgba(0, 0, 0, 0.8);
 }
 
-h2{
-  margin-top:-20px;
+.custom-jumbotron p{
   font-size:50px; 
   text-align:center;
   position:relative;
+  background:#A9A9A9;
+  border-bottom: 2px solid rgba(66, 61, 41, 0.5)
 }
 
-#items{
-  min-height: 300px;
-  margin-bottom:40px;
-  border: 2px solid black;
-  background: white;
+.items{
+  min-height: 30px;
+  margin-bottom:5px;
+  font:black;
+  vertical-align: middle;
 }
 
-#done-button{
-  height:50px;
-  margin-top:10px;
-  bottom:10px;
-  right:10px;
-  position:absolute;
+.item-list{
   font-size:20px;
-  background: #80D2ED;
+  text-align:left;
+}
+
+#payment-button{
+  border-top: 2px solid rgba(81, 80, 77, 0.77); 
+  font-size: 3vw;
+  bottom:0;
+  position:absolute;
+  height:15%;
+  width:100%;
+  background: #0080ff;
+  border-radius:0;
   color:white;
 }
 
 #done-button:hover{
-  color:grey;
+  color:#696969;
 }
 
 /* footer css  ====================================================================================== */

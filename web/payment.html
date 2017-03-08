@@ -47,17 +47,27 @@
 
       <!-- the jumbotron ======================================================================== -->
       <div class = "container">
-        <div id="jumbotron-override" class = "jumbotron">
+        <div class="custom-jumbotron">
           <!--<button type="button" id="edit-button" class="btn btn-secondary btn-sm">Edit</button>-->
-          <h2>Summary Of Items</h2>
+          <p>Order Summary</p>
 
-          <div id="items" class = "jumbotron">
+          <div class="col-md-12 items">
+            <span class=item-list>#name#</span>
+            <span class=item-list>#count#</span>
+          </div>
 
-          </div>  
+          <div class="col-md-12 items">
+            <span class=item-list>#name#</span>
+            <span class=item-list>#count#</span>
+          </div>
+
+          <div class="col-md-12 items">
+            <span class=item-list>#name#</span>
+            <span class=item-list>#count#</span>
+          </div>
+          
           <button type="button" class="btn btn-outline-secondary done-button"
-                      id="done-button" role = "button">Done</button>
-
-
+                      id="payment-button" role = "button">Proceed to Payment</button>
         </div>
       </div>
 
