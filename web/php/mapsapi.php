@@ -13,6 +13,7 @@ function geocode($address) {
     $resp = json_decode($resp_json, true);
 
     // CHECK IF APPROVED
+    // var_dump($resp);
     if($resp['status']=='OK'){
  
         // GET THE COORDINATES
@@ -35,11 +36,11 @@ function geocode($address) {
             return $data_arr;
              
         }else{
-            return false;
+            return [ 'status' => Status::ERROR, 'data' => 'SOMETHING IS MISSING FROM MAPS API'];
         }
          
     }else{
-        return false;
+        return [ 'status' => Status::ERROR, 'data' => 'Got 0 responses from MAPS API'];
     }
 
 } // geocode

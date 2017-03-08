@@ -109,7 +109,7 @@ function create_restaurant($user_category, $user_id, $name,
     return [ 'status' => Status::SUCCESS, 'data' => 'Database connection failed'];
 
   // CREATE ADDRESS AND OBTAIN ID FOR RESTAURANT RELATION
-  $adrid = create_address($mysqli, $street1, $street2, $postcode, $town, "FRONTEND MAKE THE BUTTON WORK");
+  $adrid = create_address($mysqli, $street1, $street2, $postcode, $town, "FRONTEND");
 
   $stmt = $mysqli->prepare('INSERT INTO restaurants (name,
                             description, category, manager_id, location_id)
@@ -168,6 +168,11 @@ function create_schedule($restaurant_id, $mysqli) {
 // Create address function
 // Creates address entry in sql dbase
 // Returns id of address if successful, error string otherwise
+
+// TEST
+// $mysqli = createMySQLi();
+// create_address($mysqli, "Bulevardul Camil Ressu 1", "", "", "Bucuresti", "");
+
 function create_address($mysqli, $street1, $street2, $postcode, $town, $country)
 {
   $town = htmlspecialchars($town);
@@ -198,7 +203,7 @@ function create_address($mysqli, $street1, $street2, $postcode, $town, $country)
   $stmt->bind_param('sssssdd', $street1, $street2, $postcode, $town, $country, $geodata[0], $geodata[1]);
   $stmt->execute();
   if ($stmt->errno != 0)
-    return [ 'status' => Status::ERROR, 'data' => 'Failed to create address'];
+    return [ 'status' => Status::ERROR, 'data' => 'Failed to create address', 'error' => $stmt->errno];
   $id = $stmt->insert_id;
   $stmt->close();
 
