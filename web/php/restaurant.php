@@ -121,8 +121,10 @@ function create_restaurant($user_category, $user_id, $name,
   // create and execute sql request
   $stmt->bind_param('sssii', $name, $description, $category, $user_id, $adrid);
   $stmt->execute();
+  $testarr = array();
+  array_push($testarr, $name, $description, $category, $user_id, $adrid, $street1, $street2, $postcode, $town);
   if ($stmt->errno != 0)
-    return [ 'status' => Status::ERROR, 'data' => 'Failed to create restaurant'];
+    return [ 'status' => Status::ERROR, 'data' => 'Failed to create restaurant', 'var_dump' => $testarr];
   // get the returned string of schedule creation
   // $scheduleReturn = create_schedule($stmt->insert_id, $mysqli);
   create_menu($mysqli, $stmt->insert_id);
