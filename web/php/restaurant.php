@@ -106,10 +106,12 @@ function create_restaurant($user_category, $user_id, $name,
 
   if ($mysqli->connect_error)
     return [ 'status' => Status::SUCCESS, 'data' => 'Database connection failed'];
-  //$address_id = create_address($mysqli);
-  // if is not integer
-  //if(strval($address_id) != strval(intval($address_id)))
-  //  return $address_id;
+
+  // CREATE ADDRESS ?
+  $address_id = create_address($mysqli);
+  if(strval($address_id) != strval(intval($address_id)))
+    return $address_id;
+
   $stmt = $mysqli->prepare('INSERT INTO restaurants (name,
                             description, category, manager_id)
                             VALUES (?, ?, ?, ?)');
