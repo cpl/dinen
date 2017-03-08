@@ -107,18 +107,18 @@ function create_restaurant($user_category, $user_id, $name,
   if ($mysqli->connect_error)
     return [ 'status' => Status::SUCCESS, 'data' => 'Database connection failed'];
 
-  // CREATE ADDRESS ?
-  create_address($mysqli);
+  // CREATE ADDRESS AND OBTAIN ID FOR RESTAURANT RELATION
+  $adrid = create_address($mysqli);
 
   $stmt = $mysqli->prepare('INSERT INTO restaurants (name,
-                            description, category, manager_id)
-                            VALUES (?, ?, ?, ?)');
+                            description, category, manager_id, location_id)
+                            VALUES (?, ?, ?, ?, ?)');
 
   if (!isValid($name) || !isValid($description) || !isValid($category))
     return;
 
   // create and execute sql request
-  $stmt->bind_param('sssi', $name, $description, $category, $user_id);
+  $stmt->bind_param('sssii', $name, $description, $category, $user_id, $adrid);
   $stmt->execute();
   if ($stmt->errno != 0)
     return [ 'status' => Status::ERROR, 'data' => 'Failed to create restaurant'];
@@ -133,8 +133,7 @@ function create_restaurant($user_category, $user_id, $name,
 // Create all schedules
 // Returns 'success' if schedule created
 // Error string otherwise
-function create_schedule($restaurant_id, $mysqli)
-{
+function create_schedule($restaurant_id, $mysqli) {
   $days = array("monday", "tuesday", "wednesday", "thursday", "friday",
                 "saturday", "sunday");
   $stmt = $mysqli->prepare('INSERT INTO schedules (restaurant_id, day_of_week, time_open, time_close)
@@ -182,7 +181,7 @@ function create_address($mysqli, $street1, $street2, $postcode, $town, $country)
     $street2 = htmlspecialchars($street2);
 
   if (!isValid($town) || !isValid($country) || !isValid($street1) || !isValid($street2) || !isValid($postcode))
-    return;
+    return 'Invalid inputs';
 
   // MAPS GEOCODING API
   $finalAddress = $street1.$street2.$town.$country;
