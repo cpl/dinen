@@ -63,7 +63,7 @@ function addMenuItem(e)
   requestData['restaurant_id'] = get_url_vars()['restaurant'];
   requestData['jwt'] = JWT;
   // TODO: Add section from form
-  requestData['section'] = 'CHANGEME';
+  requestData['section'] = $("#category").val();
   requestData['name'] = $("#food-name").val();
   requestData['price'] = $('#price').val();
   requestData['description'] = $('#food-description').val();
