@@ -70,7 +70,7 @@ nav ul li{
 }
 
 .items{
-  min-height: 30px;
+  min-height:30px;
   margin-bottom:5px;
   font:black;
   vertical-align: middle;
@@ -81,11 +81,24 @@ nav ul li{
   text-align:left;
 }
 
+.make-bottom{
+  width:100%;
+  bottom:0;
+  position:absolute;
+  margin-right:0;
+}
+
+.total-box{
+  border-top:2px solid rgba(0,0,0,1);
+  background:white;
+  font-size:20px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
 #payment-button{
   border-top: 2px solid rgba(81, 80, 77, 0.77); 
   font-size: 3vw;
-  bottom:0;
-  position:absolute;
   height:15%;
   width:100%;
   background: #0080ff;
@@ -93,8 +106,8 @@ nav ul li{
   color:white;
 }
 
-#done-button:hover{
-  color:#696969;
+#payment-button:hover{
+  color:#000000;
 }
 
 /* footer css  ====================================================================================== */
