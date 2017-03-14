@@ -98,7 +98,7 @@ function processCreateRestaurantRequest() {
   if (empty($_POST['postcode']))
     $postcode = "";
   else
-    $postcode = htmlspecialchars($_POST('postcode'));
+    $postcode = htmlspecialchars($_POST['postcode']);
   $town = htmlspecialchars($_POST['town']);
 
   $payload = getJWTPayload($_POST['jwt']);

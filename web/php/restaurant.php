@@ -195,7 +195,7 @@ function create_address($mysqli, $street1, $street2, $postcode, $town, $country)
     return [ 'status' => Status::ERROR, 'data' => 'Invalid input for address'];
 
   // MAPS GEOCODING API
-  $finalAddress = $street1.$street2.$town.$country;
+  $finalAddress = $street1." ".$street2." ".$town." ".$country;
   $geodata = geocode($finalAddress);
 
   // var_dump($geodata);
