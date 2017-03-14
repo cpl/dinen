@@ -10,6 +10,7 @@ require_once '../../php/login.php';
 require_once '../../php/menu.php';
 require_once '../../php/restaurant.php';
 require_once '../../php/order.php';
+require_once '../../php/search.php';
 
 $request = htmlspecialchars($_POST['request']);
 switch ($request) {
@@ -40,7 +41,18 @@ switch ($request) {
   case 'get_unfinished_order_items':
     processGetUnfinishedOrderItems();
     break;
+  case 'get_restaurants_near_user':
+    processGetRestaurantsNearUser();
+    break;
 }
+
+function processGetRestaurantsNearUser() {
+  $searchstring = htmlspecialchars($_POST['searchstring']);
+  $lat = htmlspecialchars($_POST['lat']);
+  $lng = htmlspecialchars($_POST['lng']);
+
+  echo json_encode(search($searchstring, $lat, $lng));
+} // processGetRestaurantsNearUser
 
 function processRegisterRequest() {
   $requestData = json_decode($_POST['data'], true);
