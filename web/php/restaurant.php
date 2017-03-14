@@ -105,11 +105,11 @@ function create_restaurant($user_category, $user_id, $name,
   if (empty($user_category) ||
       $user_category != 'manager' ||
       empty($user_id))
-    return [ 'status' => Status::SUCCESS, 'data' => 'Not logged in or manager'];
+    return [ 'status' => Status::ERROR, 'data' => 'Not logged in or manager'];
   $mysqli = createMySQLi();
 
   if ($mysqli->connect_error)
-    return [ 'status' => Status::SUCCESS, 'data' => 'Database connection failed'];
+    return [ 'status' => Status::ERROR, 'data' => 'Database connection failed'];
 
   // CREATE ADDRESS AND OBTAIN ID FOR RESTAURANT RELATION
   $adrid = create_address($mysqli, $street1, $street2, $postcode, $town, "");
@@ -119,7 +119,7 @@ function create_restaurant($user_category, $user_id, $name,
                             VALUES (?, ?, ?, ?, ?)');
 
   if (!isValid($name) || !isValid($description) || !isValid($category))
-    return;
+    return [ 'status' => Status::ERROR, 'data' => 'Failed, invalid fields!'];
 
   // create and execute sql request
   $stmt->bind_param('sssii', $name, $description, $category, $user_id, $adrid);
