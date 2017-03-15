@@ -62,7 +62,7 @@ function processOrderItems(response)
     var string = "<tr>" +
                  "<th>" + orderItem.order_id + "</th>" +
                  "<th>" + menuItems[orderItem.menu_item_id].name + "</th>" +
-                 "<th>" + "TODO" + "</th>" +
+                 "<th>" + orderItem.time + "</th>" +
                  "</tr>";
     $('#order-items').append(string);
   });
