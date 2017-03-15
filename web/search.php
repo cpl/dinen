@@ -33,10 +33,10 @@
      <div class="row">
        <div class="col-md-6 col-md-offset-3">
          <div class="input-group">
-            <input type="text" class="form-control searchBox" placeholder="Search">
-               <span class="input-group-btn">
-                  <button class="searchButton" type="button">Go!</button>
-               </span>
+            <input type="text" class="form-control searchBox" placeholder="Search" id ="search">
+            <span class="input-group-btn">
+              <button class="searchButton" type="button" id="search-button">Go!</button>
+            </span>
          </div>
        </div>
      </div>
@@ -62,9 +62,11 @@
 
   <!-- template for search results -->
   <div class="col-md-6 col-md-offset-1 resultsBox">
+    <div id="result-box">
        <div><h4>#restaurantName#</h4></div>
        <div><p>#restaurantDescription#</p></div>
-     <hr>
+       <hr>
+    </div>
   </div>
 
 </div> <!-- row for results and filters -->
@@ -77,6 +79,7 @@
    <script src="js/vendor/bootstrap.js"></script>
    <script src="http://malsup.github.io/jquery.form.js"></script>
    <script src="js/main.js"></script> <!-- Here we will write the code responsible for communicating between frontend and backend -->
+   <script src="js/search.js"></script>
  </body>
 
 <!-- footer -->

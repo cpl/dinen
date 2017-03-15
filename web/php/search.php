@@ -8,31 +8,27 @@ require_once 'globals.php';
 require_once 'connect_to_db.php';
 require_once 'validators.php';
 
-function search($searchstring, $lat, $lng) {
-
-  if(empty($searchstring))
-    return ['status' => Status::ERROR, 'data' => 'Empty search request.'];
+function search($lat, $lng) {
 
   if(empty($lat) || empty($lng))
     return ['status' => Status::ERROR, 'data' => 'Our website is centered around your location'];
-
-  $searchstring = "%".$searchstring."%";
+  $lat = floatval($lat);
+  $lng = floatval($lng);
   $mysqli = createMySQLi();
   if ($mysqli->connect_error)
     return ['status' => Status::ERROR,
             'data' => 'Database connection failed'];
 
-  $latDiff = 0.02;
-  $lngDiff = 0.04;
+  $latDiff = 0.16;
+  $lngDiff = 0.32;
   $stmt = $mysqli->prepare("SELECT * FROM restaurants WHERE location_id IN (
-                            SELECT id FROM locations WHERE 
-                              longitude <= (? + $lngDiff) AND 
+                            SELECT id FROM locations WHERE
+                              longitude <= (? + $lngDiff) AND
                               longitude >= (? - $lngDiff) AND
-                              latitude  >= (? - $latDiff) AND 
-                              latitude  <= (? + $latDiff)
-                            ) AND name LIKE ?");
+                              latitude  >= (? - $latDiff) AND
+                              latitude  <= (? + $latDiff))");
 
-  $stmt->bind_param('dddds',$lng, $lng, $lat, $lat, $searchstring);
+  $stmt->bind_param('dddd',$lng, $lng, $lat, $lat);
   $stmt->execute();
 
   if ($stmt->errno != 0)

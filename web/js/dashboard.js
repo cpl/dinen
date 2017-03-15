@@ -6,6 +6,7 @@ var Status = {ERROR: 0, SUCCESS: 1};
 
 var allRestaurants = "";
 var oneRestaurant = $('#restaurants').html();
+$('#restaurants').html("");
 $(function () {
     get_restaurants();
     //generate_html_for_restaurants(response);

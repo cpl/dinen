@@ -173,10 +173,10 @@ function get_unfinished_order_items($restaurant_id)
   if ($mysqli->connect_error)
     return [ 'status' => Status::ERROR,
              'data' => "Database connection failed"];
-  $stmt = $mysqli->prepare('SELECT * FROM order_items
-                            WHERE order_id IN (SELECT id FROM orders
-                                  WHERE restaurant_id = ? AND
-                                        is_finished = 0)');
+  // get the orders from dbase to get time of order
+  $stmt = $mysqli->prepare('SELECT * FROM orders
+                            WHERE restaurant_id = ? AND
+                            is_finished = 0');
   $stmt->bind_param('i', $restaurant_id);
   $stmt->execute();
   if ($stmt->errno != 0)
@@ -188,12 +188,33 @@ function get_unfinished_order_items($restaurant_id)
   $stmt_result = $stmt->get_result();
   $order_list = array();
   while ($row = $stmt_result->fetch_array()) {
-    array_push($order_list, ['menu_item_id' => $row['menu_item_id'],
-                             'is_finished'  => $row['is_finished'],
-                             'order_id'     => $row['order_id'],
-                             'id'           => $row['id']]);
+    $order_list[$row['id']] = ['id'       => $row['id'],
+                               'comments' => $row['comments'],
+                               'time'     => $row['time']];
+  }
+  // get all order items from restaurants
+  $stmt = $mysqli->prepare('SELECT * FROM order_items
+                            WHERE order_id IN (SELECT id FROM orders
+                                  WHERE restaurant_id = ? AND
+                                        is_finished = 0)');
+  $stmt->bind_param('i', $restaurant_id);
+  $stmt->execute();
+  if ($stmt->errno != 0)
+  {
+    $mysqli->close();
+    return ['status' => Status::ERROR,
+            'data' => 'Error getting all order items'];
+  }
+  $stmt_result = $stmt->get_result();
+  $order_item_list = array();
+  while ($row = $stmt_result->fetch_array()) {
+    array_push($order_item_list, ['menu_item_id' => $row['menu_item_id'],
+                                  'is_finished'  => $row['is_finished'],
+                                  'order_id'     => $row['order_id'],
+                                  'id'           => $row['id'],
+                                  'time'         => $order_list[$row['order_id']]['time']]);
   }
   $mysqli->close();
   return [ 'status' => Status::SUCCESS,
-           'data' => ($order_list)];
+           'data' => ($order_item_list)];
 }
