@@ -2,6 +2,7 @@
 body {
   padding: 0;
   margin: 0;
+ 
 }
 
 #container {
@@ -12,6 +13,7 @@ body {
 #no-padding{
   padding:0;
 }
+
 
 /* navbar css ============================================================================ */
 
@@ -47,11 +49,10 @@ nav ul li{
 
 /* container css ================================================================================ */
 
-.custom-jumbotron{
+#payment-panel{
+  padding:0;
   color:black;
-  margin-top:140px;
-  margin-bottom:180px;
-  min-height: 500px;
+  margin:140px -20px 60px -20px;
   width:50%;
   left:25%;
   right:25%;
@@ -59,9 +60,33 @@ nav ul li{
   font-family:times;
   position:relative;
   border: 2px solid rgba(0, 0, 0, 0.8);
+
 }
 
-.custom-jumbotron p{
+.payment-items{
+  min-height: 300px;
+  max-height: 500px;
+  margin-top:-15px;
+  overflow:scroll;
+  overflow-x: hidden;
+  margin-bottom: 20px;
+}
+
+/*
+#payment-panel::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+#payment-panel::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+#payment-panel::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+*/
+#payment-panel p{
   font-size:50px; 
   text-align:center;
   position:relative;
@@ -115,12 +140,12 @@ nav ul li{
 #footer {
   background: url('../img/cafe blurred dark.jpg') no-repeat center center;
   background-size:cover;
-  position:absolute;
+  position:relative;
   width:100%;
-  position: absolute;
   bottom: 0;
   left: 0;
   font-family: times;
+  margin-top:10px;
 }
 
 .footer-text {

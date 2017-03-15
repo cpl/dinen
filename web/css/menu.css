@@ -74,10 +74,13 @@ nav ul li{
 
 #menu{
   min-height:750px;
+  max-height:1500px;
   margin-top:25px;
   padding:0 0 0 0;
-  border: 5px solid white;
-  box-shadow: 0px 0px 0px 3px black inset;
+  border: 3px solid black;
+ /* box-shadow: 0px 0px 0px 3px black inset;*/
+  overflow:scroll;
+  overflow-x: hidden;
 }
 
 .menu-header{
@@ -97,8 +100,7 @@ nav ul li{
 
 .add-button{
   float:left;
-  margin-top:18px;
-  margin-left:20px;
+  margin: 18px 0 15px 20px;
   left:50%;
   right:50%;
   width:80px;
@@ -107,7 +109,7 @@ nav ul li{
 }
 .item-panel{
   border-radius:5px;
-  border:2px solid rgba(0, 0, 0, 0.5);
+  border-bottom:2px solid rgba(0, 0, 0, 0.5);
   color:black;
   font-family:times;
 }
