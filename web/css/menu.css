@@ -116,10 +116,11 @@ nav ul li{
 
 #price-panel{
   color:black;
+  height:auto;
   font-size:20px;
-  vertical-align:middle;
   float:right;
-  width:1px;
+  width:10%;
+  border:2px solid black;
 } /* for some reason will only work when i give it a width (price-panel), stuck at making it responsive*/
 
 .price{
@@ -167,7 +168,6 @@ textarea{
 }
 
 .done-button-for-item{
-  height:22%;
   bottom:10px;
   right:10px;
   position:absolute;
