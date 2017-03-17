@@ -78,8 +78,17 @@
   <!-- Our JavaScript -->
   <script src="js/common.js"></script>
   <script>
+    $('html, body').css({
+      'overflow': 'hidden',
+      'height': '100%'
+    });
     $('#page_contents').load('landing.html', function () {
       $.getScript();
+      $('#preloader').delay(100).fadeOut('slow',function(){$(this).remove();});
+      $('html, body').css({
+        'overflow': 'auto',
+        'height': 'auto'
+      });
     });
   </script>
 </body>
