@@ -47,11 +47,10 @@ switch ($request) {
 }
 
 function processGetRestaurantsNearUser() {
-  $searchstring = htmlspecialchars($_POST['searchstring']);
   $lat = htmlspecialchars($_POST['lat']);
   $lng = htmlspecialchars($_POST['lng']);
 
-  echo json_encode(search($searchstring, $lat, $lng));
+  echo json_encode(search($lat, $lng));
 } // processGetRestaurantsNearUser
 
 function processRegisterRequest() {
@@ -101,7 +100,7 @@ function processCreateRestaurantRequest() {
   $name = htmlspecialchars($_POST['name']);
   $description = htmlspecialchars($_POST['description']);
   $category = htmlspecialchars($_POST['category']);
-  
+
   $street1 = htmlspecialchars($_POST['street1']);
   if (empty($_POST['street2']))
     $street2 = "";
