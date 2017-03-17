@@ -1,7 +1,8 @@
 var apiURL = 'api/v1/api.php';
 var items = {};
 var Status = { ERROR: 0, SUCCESS: 1 };
-
+var allMenuItems = "";
+var oneMenuItem = $('#menu-table-item').html();
 $(function () {
   getMenu();
   $("#done-button-for-item").click(addMenuItem);
@@ -24,6 +25,9 @@ $(function () {
           e.preventDefault();
       }
   });
+  
+$('#menu-table-item').html("");
+console.log(oneMenuItem);
 });
 
 // Get menu for restaurant
@@ -79,13 +83,27 @@ function generate_html_for_menu(response)
 {
   if (response.status === Status.SUCCESS) {
     $('#items').empty();
-    $('#items').append('Menu items: <br>');
+    /*$('#items').append('Menu items: <br>');*/
+    var nr = 0;
     response.data.forEach(function (item) {
-      $('#items').append('Menu item: ' + item.name + ' in ' +
+       nr++;
+      /*$('#items').append('Menu item: ' + item.name + ' in ' +
                                 item.section + '. Cost: $' + item.price +
                                 '. Description: ' + item.description + '.<br>');
+    */
+        var tempItem = oneMenuItem;
+        tempItem.toString().replace("#number#", nr);
+        tempItem.toString().replace("#category#", item.section);
+        tempItem.toString().replace("#foodname#", item.name);
+        tempItem.toString().replace("#price#", item.price);
+        allMenuItems += "<td>" + tempItem + "</td>";
     });
-  } else {
+    if(nr == 0){
+        allMenuItems = "No items were found.";
+    }
+    $('#menu-table-item').html(allMenuItems);
+    allMenuItems = "";
+} else {
     console.log(response);
   }
 }
