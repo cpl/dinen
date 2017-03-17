@@ -22,6 +22,9 @@
   
   <!-- Main Stylesheet File -->
   <link href="imperial/css/style.css" rel="stylesheet">
+
+  <!-- Our Stylesheet File -->
+  <link href="imperial/css/custom.css" rel="stylesheet">
   
 <!-- =======================================================
   Theme Name: Imperial
@@ -83,12 +86,16 @@
       'height': '100%'
     });
     $('#page_contents').load('html/landing.html', function () {
-      $.getScript();
+      $.getScript('js/register_user.js');
       $('#preloader').delay(100).fadeOut('slow',function(){$(this).remove();});
       $('html, body').css({
         'overflow': 'auto',
         'height': 'auto'
       });
+      $('#sign_in').click(function () {
+        $('#page_contents').load('html/login.html');
+        $.getScript('js/login.js');
+      })
     });
   </script>
 </body>

@@ -14,7 +14,7 @@
       <div class="actions">
         <a href="#about" class="btn-services">About</a>
         <a href="#register" class="btn-services">Sign up</a>
-        <a href="../login.html" class="btn-services">Sign in</a>
+        <a href="#" id="sign_in" class="btn-services">Sign in</a>
       </div>
     </div>
   </div>
@@ -189,16 +189,15 @@
   Register Section
 ============================-->
 <section id="register">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h3 class="section-title">Sign Up</h3>
-        <div class="section-title-divider"></div>
+  <div class="container-fluid form-container">
+    <div class="form-contents">
+      <div class="row">
+        <div class="col-md-12">
+          <h3 class="section-title">Sign Up</h3>
+          <div class="section-title-divider"></div>
+        </div>
       </div>
-    </div>
-
-    <div class="row">
-      <form id="registerForm" class="form" method="post" onsubmit="return register()">
+      <form id="register-form" class="form" method="post" onsubmit="return register()">
 
         <div class="form-group">
           <label for="name" class="cols-sm-2 control-label">Your Name</label>
