@@ -68,6 +68,7 @@
   <script src="imperial/lib/superfish/hoverIntent.js"></script>
   <script src="imperial/lib/superfish/superfish.min.js"></script>
   <script src="imperial/lib/morphext/morphext.min.js"></script>
+  <script src="imperial/lib/wow/wow.min.js"></script>
   <script src="imperial/lib/stickyjs/sticky.js"></script>
   <script src="imperial/lib/easing/easing.js"></script>
   
@@ -81,7 +82,7 @@
       'overflow': 'hidden',
       'height': '100%'
     });
-    $('#page_contents').load('landing.html', function () {
+    $('#page_contents').load('html/landing.html', function () {
       $.getScript();
       $('#preloader').delay(100).fadeOut('slow',function(){$(this).remove();});
       $('html, body').css({
