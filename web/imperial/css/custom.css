@@ -1,13 +1,13 @@
 .form-container {
-  min-height: 75%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 75vh;
   display: flex;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
+  height: 100vh;
   max-width: 256px;
+  align-items: center;
+  padding: 0;
+  margin: 0 auto 0 auto;
 }
-.form-contents {
+.form-layout {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }

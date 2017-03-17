@@ -15,7 +15,7 @@ jQuery(document).ready(function( $ ) {
   });
   
   // Initiate the wowjs
-  //new WOW().init();
+  new WOW().init();
   
   // Initiate superfish on nav menu
   $('.nav-menu').superfish({
