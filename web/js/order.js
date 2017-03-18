@@ -10,7 +10,7 @@ var comments = "";
 
 // add required onchange's and submit's to form and select inputs
 $(function(){
-    //processItems(tmpServerResponse);
+  //processItems(tmpServerResponse);
   getMenu();
   $("#menus").change(changeItemsInSelect);
   $("#menuItems").change(changeItemDescription);
