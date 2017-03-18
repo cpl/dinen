@@ -1,6 +1,5 @@
 var apiURL = 'api/v1/api.php';
 var Status = { ERROR: 0, SUCCESS: 1 };
-var tmpServerResponse = {"status":1,"data":[{"name":"Peperonni Pizza","section":"Pizza","price":10,"description":"has peperonni","id":29},{"name":"Salami Pizza","section":"Pizza","price":11,"description":"has Salami","id":30},{"name":"Deep Fried Chicken","section":"Chicken","price":12,"description":"a bit spicy","id":32}]};
 var items = {};
 var orderItems = [];
 var sections = [];
@@ -45,7 +44,7 @@ function getMenu()
 // and add items to global array 'items'
 function processItems(response)
 {
-    
+
     console.log("ProcessItems: "+JSON.stringify(response));
   if (response.status === Status.SUCCESS) {
     items = response.data;
@@ -121,6 +120,7 @@ function submitOrder()
   requestData['restaurant'] = get_url_vars()['restaurant'];
   requestData['comments'] = comments;
   requestData['order_items'] = JSON.stringify(orderItems);
+  localStorage.setItem("basket", orderItems);
   requestData['request'] = 'create_order';
   $.ajax({
     url: apiURL,

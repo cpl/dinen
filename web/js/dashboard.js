@@ -1,8 +1,6 @@
 var apiURL = 'api/v1/api.php';
-
 var Status = {ERROR: 0, SUCCESS: 1};
 
-//var response = {"status": 1, "data": [{"name": "French Fries", "description": "Best potatoes.", "category": "tavern"}, {"name": "test", "description": "test", "category": "tavern"}]};
 
 var allRestaurants = "";
 var oneRestaurant = $('#restaurants').html();
@@ -19,14 +17,21 @@ $(function () {
           data: data
         }).done(function (response) {
           if (response.status === Status.SUCCESS) {
-            window.location.replace("index.html");
+            loadPage('landing', true);
           } else {
             alert(response.data);
           }
         });
         return false;
     });
-    //generate_html_for_restaurants(response);
+    $('#to-index').click(function(event){
+        loadPage('landing', true);
+        event.preventDefault();
+    });
+    $('#create-restaurant').click(function(event){
+        loadPage('register_restaurant', true);
+        event.preventDefault();
+    });
 });
 
 function get_restaurants() {
@@ -55,6 +60,13 @@ function generate_html_for_restaurants(response)
     }
 }
 
+function go_to_restaurant_menu(id)
+{
+    localStorage.setItem("restaurant", id);
+    loadPage('menu', true);
+    return false;
+}
+
 function generate_restaurant(restaurant)
 {
     console.log('Restaurant: ' + JSON.stringify(restaurant));
@@ -62,7 +74,7 @@ function generate_restaurant(restaurant)
     tempRestaurant = tempRestaurant.toString().replace("#name#", restaurant.name);
     tempRestaurant = tempRestaurant.toString().replace("#description#", restaurant.description);
     tempRestaurant = tempRestaurant.toString().replace('#menu#',
-                                                       'menu?restaurant=' + restaurant.id)
+                                                       'return go_to_restaurant_menu(' + restaurant.id + ')');
     allRestaurants += tempRestaurant;
 }
 
