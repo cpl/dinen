@@ -28,22 +28,33 @@ $(function () {
 });
 
 function loadPage(name, hasJS) {
-  $('#preloader').show();
+  showPreloader(function () {
+    $('#page_contents').load('html/' + name + '.html', function () {
+      $.getScript('imperial/js/custom.js', function () {
+        if (hasJS) {
+          $.getScript('js/' + name + '.js', function () {
+            hidePreloader();
+          });
+        } else {
+          hidePreloader();
+        }
+      });
+    });
+  });
+}
+
+function showPreloader(callback) {
   $('html, body').css({
     'overflow': 'hidden',
     'height': '100%'
   });
-  $('#page_contents').load('html/' + name + '.html', function () {
-    $.getScript('imperial/js/custom.js', function () {
-      if (hasJS) {
-        $.getScript('js/' + name + '.js', function () {
-          hidePreloader();
-        });
-      } else {
-        hidePreloader();
-      }
+  if ($('#preloader').css('display') == 'none') {
+    $('#preloader').slideDown(400, function () {
+      callback();
     });
-  });
+  } else {
+    callback();
+  }
 }
 
 function hidePreloader() {
