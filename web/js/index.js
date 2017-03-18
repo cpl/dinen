@@ -50,8 +50,8 @@ function showPreloader(callback) {
 }
 
 function hidePreloader() {
-  // Trigger the slide-up animation after a delay of 100ms.
-  $('#preloader').delay(300).slideUp(400, function () {
+  // Trigger the slide-up animation after a delay of 200ms.
+  $('#preloader').delay(200).slideUp(400, function () {
     // Once complete, hide the pre-loader and allow the scroll bar to be shown.
     $(this).hide();
     $('html, body').css({
