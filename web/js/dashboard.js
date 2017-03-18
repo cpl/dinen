@@ -62,7 +62,7 @@ function generate_restaurant(restaurant)
     tempRestaurant = tempRestaurant.toString().replace("#name#", restaurant.name);
     tempRestaurant = tempRestaurant.toString().replace("#description#", restaurant.description);
     tempRestaurant = tempRestaurant.toString().replace('#menu#',
-                                                       '/menu?restaurant=' + restaurant.id)
+                                                       'menu?restaurant=' + restaurant.id)
     allRestaurants += tempRestaurant;
 }
 
