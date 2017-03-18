@@ -49,7 +49,7 @@ function showPreloader(callback) {
     'height': '100%'
   });
   if ($('#preloader').css('display') == 'none') {
-    $('#preloader').slideDown(400, function () {
+    $('#preloader').slideDown(300, function () {
       callback();
     });
   } else {
