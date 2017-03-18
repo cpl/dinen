@@ -36,7 +36,7 @@ function showPreloader(callback) {
   // Check whether the pre-loader image is already shown (when the user first
   // visits the site), or not.
   if ($('#preloader').css('display') == 'none') {
-    // If it is, trigger the slide-down animation.
+    // If it isn't, trigger the slide-down animation.
     $('#preloader').slideDown(300, function () {
       // Once the animation is complete, call the function that defines what
       // to do next.
