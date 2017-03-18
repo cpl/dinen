@@ -24,7 +24,37 @@ $(function () {
     var themeURL = themes[$(this).attr('data-theme')];
     currentTheme.attr('href', themeURL);
   });
+  loadPage('landing', true);
 });
+
+function loadPage(name, hasJS) {
+  $('#preloader').show();
+  $('html, body').css({
+    'overflow': 'hidden',
+    'height': '100%'
+  });
+  $('#page_contents').load('html/' + name + '.html', function () {
+    $.getScript('imperial/js/custom.js', function () {
+      if (hasJS) {
+        $.getScript('js/' + name + '.js', function () {
+          hidePreloader();
+        });
+      } else {
+        hidePreloader();
+      }
+    });
+  });
+}
+
+function hidePreloader() {
+  $('#preloader').delay(400).slideUp(400, function () {
+    $(this).hide();
+    $('html, body').css({
+      'overflow': 'auto',
+      'height': 'auto'
+    });
+  });
+}
 
 function create_restaurant() {
   const JWT = getJWT();

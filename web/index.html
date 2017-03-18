@@ -36,11 +36,11 @@
 
 <body>
   <div id="preloader"></div>
-  <div id="page_contents"></div>
+  <div id = "page_contents"></div>
 
-<!--==========================
-  Footer
-============================--> 
+  <!--==========================
+    Footer
+  ============================-->
   <footer id="footer">
       <div class="container">
         <div class="row">
@@ -60,10 +60,10 @@
           </div>
         </div>
       </div>
-  </footer><!-- #footer -->
+  </footer>
   
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-    
+
   <!-- Required JavaScript Libraries -->
   <script src="imperial/lib/jquery/jquery.min.js"></script>
   <script src="imperial/lib/jquery/jquery-migrate.min.js"></script>
@@ -74,29 +74,8 @@
   <script src="imperial/lib/wow/wow.min.js"></script>
   <script src="imperial/lib/stickyjs/sticky.js"></script>
   <script src="imperial/lib/easing/easing.js"></script>
-  
-  <!-- Template Specific Custom JavaScript File -->
-  <script src="imperial/js/custom.js"></script>
 
   <!-- Our JavaScript -->
   <script src="js/common.js"></script>
-  <script>
-    $('html, body').css({
-      'overflow': 'hidden',
-      'height': '100%'
-    });
-    $('#page_contents').load('html/landing.html', function () {
-      $.getScript('js/register_user.js');
-      $('#preloader').delay(100).fadeOut('slow',function(){$(this).remove();});
-      $('html, body').css({
-        'overflow': 'auto',
-        'height': 'auto'
-      });
-      $('#sign_in').click(function () {
-        $('#page_contents').load('html/login.html');
-        $.getScript('js/login.js');
-      })
-    });
-  </script>
 </body>
 </html>
