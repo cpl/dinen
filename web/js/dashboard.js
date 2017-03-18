@@ -9,6 +9,23 @@ var oneRestaurant = $('#restaurants').html();
 $('#restaurants').html("");
 $(function () {
     get_restaurants();
+    $('#logout').click(function () {
+        var data = {};
+        data['request'] = 'logout';
+        data['jwt'] = localStorage.getItem('JWT');
+        $.ajax({
+          url: apiURL,
+          type: 'POST',
+          data: data
+        }).done(function (response) {
+          if (response.status === Status.SUCCESS) {
+            window.location.replace("index.html");
+          } else {
+            alert(response.data);
+          }
+        });
+        return false;
+    });
     //generate_html_for_restaurants(response);
 });
 

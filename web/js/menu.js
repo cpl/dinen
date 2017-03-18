@@ -1,7 +1,8 @@
 var apiURL = 'api/v1/api.php';
 var items = {};
 var Status = { ERROR: 0, SUCCESS: 1 };
-
+var allMenuItems = "";
+var menuItems = $('#menu-table').html();
 $(function () {
   getMenu();
   $("#done-button-for-item").click(addMenuItem);
@@ -24,6 +25,7 @@ $(function () {
           e.preventDefault();
       }
   });
+  
 });
 
 // Get menu for restaurant
@@ -77,15 +79,30 @@ function addMenuItem(e)
 
 function generate_html_for_menu(response)
 {
+    //response = {"status":1,"data":[{"name":"Peperonni Pizza","section":"Pizza","price":10,"description":"has peperonni","id":29},{"name":"Salami Pizza","section":"Pizza","price":11,"description":"has Salami","id":30}]}  
+    //console.log(JSON.stringify(response));
   if (response.status === Status.SUCCESS) {
     $('#items').empty();
-    $('#items').append('Menu items: <br>');
+    /*$('#items').append('Menu items: <br>');*/
+    var nr = 0;
     response.data.forEach(function (item) {
-      $('#items').append('Menu item: ' + item.name + ' in ' +
+       nr++;
+      /*$('#items').append('Menu item: ' + item.name + ' in ' +
                                 item.section + '. Cost: $' + item.price +
                                 '. Description: ' + item.description + '.<br>');
+    */
+        var tempItem = "<td>" + nr + "</td>";
+        tempItem += "<td>" + item.section + "</td>";
+        tempItem += "<td>" + item.name + "</td>";
+        tempItem += "<td>£" + item.price + "</td>";
+        menuItems += "<tr>" + tempItem + "</tr>";
     });
-  } else {
+    if(nr === 0){
+        menuItems = "No items were found.";
+    }
+    $('#menu-table').html(menuItems);
+    menuItems = "";
+} else {
     console.log(response);
   }
 }

@@ -22,6 +22,9 @@
   
   <!-- Main Stylesheet File -->
   <link href="imperial/css/style.css" rel="stylesheet">
+
+  <!-- Our Stylesheet File -->
+  <link href="imperial/css/custom.css" rel="stylesheet">
   
 <!-- =======================================================
   Theme Name: Imperial
@@ -33,259 +36,11 @@
 
 <body>
   <div id="preloader"></div>
-  
-<!--==========================
-  Hero Section
-============================-->
-  <section id="hero">
-    <div class="hero-container">
-      <div class="wow fadeIn">
-        <div class="hero-logo">
-          <img class="" src="img/Dinen%20small%20logo.png" alt="Imperial">
-        </div>
-        
-        <h1>Get Dinen, Get Food</h1>
-        <h2>Dinen is for <span class="rotating">food lovers, cooks & chefs,
-          food servers, owners & managers</span></h2>
-        <div class="actions">
-          <a href="#about" class="btn-services">About</a>
-          <a href="#register" class="btn-services">Sign up</a>
-          <a href="login.html" class="btn-services">Sign in</a>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-<!--==========================
-  Header Section
-============================-->
-  <header id="header">
-    <div class="container">
-    
-      <div id="logo" class="pull-left">
-        <a href="#hero"><img src="img/Dinen%20small%20logo.png" alt="" title="" /></img></a>
-        <!-- Uncomment below if you prefer to use a text image -->
-        <!--<h1><a href="#hero">Header 1</a></h1>-->
-      </div>
-        
-      <nav id="nav-menu-container">
-        <ul class="nav-menu">
-          <li><a href="#about">What is Dinen?</a></li>
-          <li><a href="#eaters">For Food Eaters</a></li>
-          <li><a href="#restaurants">For Restaurants</a></li>
-          <li><a href="#register">Sign Up</a></li>
-        </ul>
-      </nav><!-- #nav-menu-container -->
-    </div>
-  </header><!-- #header -->
-    
-<!--==========================
-  About Section
-============================-->
-  <section id="about">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="section-title">What is Dinen?</h3>
-          <div class="section-title-divider"></div>
-          <p class="section-description">Dinen is mainly used for browsing through restaurants and ordering and buying food from them, online or as a menu at the restaurant itself.
+  <div id = "page_contents"></div>
 
-            It is also a platform where restaurants can use as an online website for reservation, showing their menu and purchasing food even though the user is far away. It also serves the purpose of a custom made restaurant webpage which can be customize by its owner to suit their own preference.
-
-            Dinen is a cheap and affordable version of a built in ordering system, where it is widely distributed and can be use by all restaurants.
-
-            Its ultimate purpose of course it to hope that people can find food easily and buy them with minimum effort and maximum efficiency while restaurant owners will benefit from using this platform as well.</p>
-        </div>
-      </div>
-    </div>
-    <!--
-    <div class="container about-container">
-      <div class="row">
-        <div class="col-md-6 col-md-push-6 about-content">
-          <h2 class="about-title">We provide great services and ideass</h2>
-          <p class="about-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-          </p>
-          <p class="about-text">
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-          </p>
-          <p class="about-text">
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-          </p>
-        </div>
-      </div>
-    </div>
-    -->
-  </section>
-  
-<!--==========================
-  Eaters Section
-============================-->
-  <section id="eaters">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="section-title">For Food Eaters</h3>
-          <div class="section-title-divider"></div>
-          <p class="section-description">Packed full of flavoursome features</p>
-        </div>
-      </div>
-        
-      <div class="row">
-        <div class="col-md-4 service-item">
-          <div class="service-icon"><i class="fa fa-desktop"></i></div>
-          <h4 class="service-title"><a href="">Order before you arrive</a></h4>
-          <p class="service-description">Nah</p>
-        </div>
-        <div class="col-md-4 service-item">
-          <div class="service-icon"><i class="fa fa-bar-chart"></i></div>
-          <h4
-            class="service-title"><a href="">Find restaurants near you</a></h4>
-          <p class="service-description">Maybe, doesn't really work atm</p>
-        </div>
-        <div class="col-md-4 service-item">
-          <div class="service-icon"><i class="fa fa-paper-plane"></i></div>
-          <h4 class="service-title"><a href="">Read customers reviews</a></h4>
-          <p class="service-description">Yeah, no</p>
-        </div>
-        <div class="col-md-4 service-item">
-          <div class="service-icon"><i class="fa fa-photo"></i></div>
-          <h4
-            class="service-title"><a href="">Watch your chef live while
-            you wait</a></h4>
-          <p class="service-description">No, thankfully; can't have that
-            special sauce spoiled</p>
-        </div>
-        <div class="col-md-4 service-item">
-          <div class="service-icon"><i class="fa fa-road"></i></div>
-          <h4 class="service-title"><a href="">Nemo Enim</a></h4>
-          <p class="service-description">Uh</p>
-        </div>
-        <div class="col-md-4 service-item">
-          <div class="service-icon"><i class="fa fa-shopping-bag"></i></div>
-          <h4
-            class="service-title"><a href="">Plan terrorist attacks using
-          order requests</a></h4>
-          <p class="service-description">Our unique selling point</p>
-        </div>
-      </div>
-    </div>  
-  </section>
-    
-<!--==========================
-  Restaurants Section
-============================-->
-  <section id="restaurants">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="section-title">For Restaurants</h3>
-          <div class="section-title-divider"></div>
-          <p class="section-description">Our site is amazing, look at its
-            restaurants.</p>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/fruit-pizza.jpg);"
-             href="">
-            <div class="details">
-              <h4>Degenerate Express</h4>
-              <span>Alored dono par</span>
-            </div>
-          </a>
-        </div>
-        
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/macaroons.jpg);"
-             href="">
-            <div class="details">
-              <h4>Off-the-Floor</h4>
-              <span>Alored dono par</span>
-            </div>
-          </a>
-        </div>
-        
-        <div class="col-md-3">
-          <a class="portfolio-item" style="background-image: url(img/pancake.jpg);"
-             href="">
-            <div class="details">
-              <h4>Off-the-Wall</h4>
-              <span>Alored dono par</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-<!--==========================
-  Register Section
-============================-->
-  <section id="register">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="section-title">Sign Up</h3>
-          <div class="section-title-divider"></div>
-        </div>
-      </div>
-
-      <div class="row">
-        <form id="registerForm" class="form" method="post" onsubmit="return register()">
-
-          <div class="form-group">
-            <label for="name" class="cols-sm-2 control-label">Your Name</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="name" id="name" required placeholder="Enter your Name" />
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="email" class="cols-sm-2 control-label">Your Email</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                <input type="email" class="form-control" name="email" id="email" required placeholder="Enter your Email" />
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="password" class="cols-sm-2 control-label">Password</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                <input type="password" class="form-control" name="password" id="password" minlength="8" required placeholder="Enter your Password" />
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="password_confirmation" class="cols-sm-2 control-label">Confirm Password</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" minlength="8" required placeholder="Confirm your Password" onchange="validatePassword()" />
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-
-<!--==========================
-  Footer
-============================--> 
+  <!--==========================
+    Footer
+  ============================-->
   <footer id="footer">
       <div class="container">
         <div class="row">
@@ -305,10 +60,10 @@
           </div>
         </div>
       </div>
-  </footer><!-- #footer -->
+  </footer>
   
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-    
+
   <!-- Required JavaScript Libraries -->
   <script src="imperial/lib/jquery/jquery.min.js"></script>
   <script src="imperial/lib/jquery/jquery-migrate.min.js"></script>
@@ -319,13 +74,8 @@
   <script src="imperial/lib/wow/wow.min.js"></script>
   <script src="imperial/lib/stickyjs/sticky.js"></script>
   <script src="imperial/lib/easing/easing.js"></script>
-  
-  <!-- Template Specific Custom JavaScript File -->
-  <script src="imperial/contactform/contactform.js"></script>
-  <script src="imperial/js/custom.js"></script>
 
   <!-- Our JavaScript -->
-  <script src="js/main.js"></script>
-
+  <script src="js/common.js"></script>
 </body>
 </html>
