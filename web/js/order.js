@@ -1,13 +1,16 @@
 var apiURL = 'api/v1/api.php';
 var Status = { ERROR: 0, SUCCESS: 1 };
-
+var tmpServerResponse = {"status":1,"data":[{"name":"Peperonni Pizza","section":"Pizza","price":10,"description":"has peperonni","id":29},{"name":"Salami Pizza","section":"Pizza","price":11,"description":"has Salami","id":30},{"name":"Deep Fried Chicken","section":"Chicken","price":12,"description":"a bit spicy","id":32}]};
 var items = {};
 var orderItems = [];
 var sections = [];
 var comments = "";
 
+
+
 // add required onchange's and submit's to form and select inputs
 $(function(){
+    //processItems(tmpServerResponse);
   getMenu();
   $("#menus").change(changeItemsInSelect);
   $("#menuItems").change(changeItemDescription);
@@ -42,6 +45,8 @@ function getMenu()
 // and add items to global array 'items'
 function processItems(response)
 {
+    
+    console.log("ProcessItems: "+JSON.stringify(response));
   if (response.status === Status.SUCCESS) {
     items = response.data;
     items.forEach(function(item) {
