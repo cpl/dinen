@@ -81,7 +81,7 @@ function create_restaurant() {
     type: 'POST',
     data: data
   }).done(function (response) {
-      window.location.replace("dashboard");
+     window.location.replace("dashboard");
     }
   );
   return false;
