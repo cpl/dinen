@@ -1,9 +1,11 @@
 jQuery(document).ready(function( $ ) {
 
   // Preloader
+  /*
   $(window).load(function(){
     $('#preloader').delay(100).fadeOut('slow',function(){$(this).remove();});
   });
+  */
 
   // Hero rotating texts
   $("#hero .rotating").Morphext({
@@ -73,7 +75,7 @@ jQuery(document).ready(function( $ ) {
               
               $('html, body').animate({
                   scrollTop: target.offset().top - top_space
-              }, 1500, 'easeInOutExpo');
+              }, 750, 'easeInOutExpo');
 
               if ( $(this).parents('.nav-menu').length ) {
                 $('.nav-menu .menu-active').removeClass('menu-active');
@@ -103,7 +105,7 @@ jQuery(document).ready(function( $ ) {
   });
   
   $('.back-to-top').click(function(){
-      $('html, body').animate({scrollTop : 0},1500, 'easeInOutExpo');
+      $('html, body').animate({scrollTop : 0},750, 'easeInOutExpo');
       return false;
   });
 

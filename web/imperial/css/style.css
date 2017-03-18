@@ -44,8 +44,8 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 999;
   width: 100%;
   height: 100%;
-  overflow: visible;
-  background: #fff url("../img/preloader.svg") no-repeat center center;
+  overflow: hidden;
+  background: #1A1A1A url("../../img/dinen_logo-small.png") no-repeat center center;
 }
 
 /* Back to top button */
@@ -86,7 +86,7 @@ h1, h2, h3, h4, h5, h6 {
   display: table;
   width: 100%;
   height: 100vh;
-  background: url(../../img/pub.jpg) top center fixed;
+  background: url(../../img/pub_4K-blurred.jpg) top center fixed;
   background-size: cover;
 }
 
@@ -224,7 +224,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .is-sticky #header {
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.75);
 }
 
 /*--------------------------------------------------------------
@@ -508,7 +508,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 /* Services Section
 --------------------------------*/
 #eaters {
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("../../img/kitchen.jpg") fixed center center;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("../../img/kitchen_4K-blurred.jpg") fixed center center;
   background-size: cover;
   padding: 80px 0 60px 0;
 }
@@ -776,7 +776,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------*/
 #register {
   background: #f7f7f7;
-  padding: 80px 0;
 }
 
 #register .info {
