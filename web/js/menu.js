@@ -2,7 +2,7 @@ var apiURL = 'api/v1/api.php';
 var items = {};
 var Status = { ERROR: 0, SUCCESS: 1 };
 var allMenuItems = "";
-var oneMenuItem = $('#menu-table-item').html();
+var menuItems = $('#menu-table').html();
 $(function () {
   getMenu();
   $("#done-button-for-item").click(addMenuItem);
@@ -26,8 +26,6 @@ $(function () {
       }
   });
   
-$('#menu-table-item').html("");
-console.log(oneMenuItem);
 });
 
 // Get menu for restaurant
@@ -81,6 +79,8 @@ function addMenuItem(e)
 
 function generate_html_for_menu(response)
 {
+    //response = {"status":1,"data":[{"name":"Peperonni Pizza","section":"Pizza","price":10,"description":"has peperonni","id":29},{"name":"Salami Pizza","section":"Pizza","price":11,"description":"has Salami","id":30}]}  
+    //console.log(JSON.stringify(response));
   if (response.status === Status.SUCCESS) {
     $('#items').empty();
     /*$('#items').append('Menu items: <br>');*/
@@ -91,18 +91,17 @@ function generate_html_for_menu(response)
                                 item.section + '. Cost: $' + item.price +
                                 '. Description: ' + item.description + '.<br>');
     */
-        var tempItem = oneMenuItem;
-        tempItem.toString().replace("#number#", nr);
-        tempItem.toString().replace("#category#", item.section);
-        tempItem.toString().replace("#foodname#", item.name);
-        tempItem.toString().replace("#price#", item.price);
-        allMenuItems += "<td>" + tempItem + "</td>";
+        var tempItem = "<td>" + nr + "</td>";
+        tempItem += "<td>" + item.section + "</td>";
+        tempItem += "<td>" + item.name + "</td>";
+        tempItem += "<td>£" + item.price + "</td>";
+        menuItems += "<tr>" + tempItem + "</tr>";
     });
-    if(nr == 0){
-        allMenuItems = "No items were found.";
+    if(nr === 0){
+        menuItems = "No items were found.";
     }
-    $('#menu-table-item').html(allMenuItems);
-    allMenuItems = "";
+    $('#menu-table').html(menuItems);
+    menuItems = "";
 } else {
     console.log(response);
   }
