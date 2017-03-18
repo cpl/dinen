@@ -1,0 +1,122 @@
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/register.css">
+
+
+<nav class='navbar navbar-inverse'>
+    <div class='container-fluid'>
+        <div class='navbar-header'>
+            <a class='navbar-brand' href='index.html'>
+                <img class="logo" src="img/dinen_logo-small.png" />
+            </a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class='nav navbar-left navbar-nav'>
+                <li><a href='#'>Business</a></li>
+                <li><a href='#'>Customers</a></li>
+            </ul>
+            <ul class='nav navbar-nav navbar-right'>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Themes <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-theme="default" class="theme-link">Default</a></li>
+                        <li><a href="#" data-theme="amelia" class="theme-link">Amelia</a></li>
+                        <li><a href="#" data-theme="cerulean" class="theme-link">Cerulean</a></li>
+                        <li><a href="#" data-theme="cosmo" class="theme-link">Cosmo</a></li>
+                        <li><a href="#" data-theme="cyborg" class="theme-link">Cyborg</a></li>
+                        <li><a href="#" data-theme="flatly" class="theme-link">Flatly</a></li>
+                        <li><a href="#" data-theme="journal" class="theme-link">Journal</a></li>
+                        <li><a href="#" data-theme="simplex" class="theme-link">Simplex</a></li>
+                        <li><a href="#" data-theme="slate" class="theme-link">Slate</a></li>
+                        <li><a href="#" data-theme="spacelab" class="theme-link">Spacelab</a></li>
+                        <li><a href="#" data-theme="united" class="theme-link">United</a></li>
+                    </ul>
+                </li>
+                <li><a href='html/login.html'><span class='glyphicon glyphicon-log-in'></span>Log in</a></li>
+                <li class="active"><a href='register.html'><span class='glyphicon glyphicon-user'></span>Sign Up</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row main">
+
+        <div class="main-login register-restaurant-center">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    <h1 class="title">Register Restaurant</h1>
+                    <hr />
+                </div>
+            </div>
+            <div id="msgDiv"> </div>
+            <form id="createForm" class="form-horizontal" method="post" onsubmit="return create_restaurant()">
+
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Restaurant name:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-cutlery fa" aria-hidden="true"></i></span>
+                        <input name="name" type="text" placeholder="Restaurant name" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="cols-sm-2 control-label">Description:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-info fa" aria-hidden="true"></i></span>
+                        <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="country" class="cols-sm-2 control-label">Country:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-globe fa" aria-hidden="true"></i></span>
+                        <select class="form-control input-medium bfh-countries" data-country="GB" data-flags="true"></select>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="town" class="cols-sm-2 control-label">Town:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-map-marker fa" aria-hidden="true"></i></span>
+                        <input name="town" type="text" class="form-control" placeholder="Town">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="street1" class="cols-sm-2 control-label">Street:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-street-view fa" aria-hidden="true"></i></span>
+                        <input name="street1" type="text" class="form-control" placeholder="Street address line 1">
+                        <input name="street2" type="text" class="form-control" placeholder="Street address line 2">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="postcode" class="cols-sm-2 control-label">Postcode:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                        <input name="postcode" type="text" class="form-control" placeholder="Postcode">
+                    </div>
+                </div>
+                <label for="category" class="cols-sm-2 control-label">Restaurant Category:</label>
+
+                <select name="category" placeholder="tavern">
+                    <option value="tavern">Tavern</option>
+                    <option value="pub">Pub</option>
+                    <option value="restaurant">Restaurant</option>
+                    <option value="fastFood">Fast food</option>
+                    <option value="takeaway">Takeaway</option>
+                </select>
+
+                <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register restaurant</button>
+            </form>
+        </div>
+    </div>
+</div>
