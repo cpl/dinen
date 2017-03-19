@@ -1,6 +1,5 @@
 function initPageScript() {
   $('#sign_in').click(function () {
-    alert('Test.');
     loadPage('login', true);
   });
   // Hero rotating texts

@@ -36,7 +36,6 @@ function loadPage(name, hasJS) {
         if ($.inArray(name, loadedScripts) == -1) {
           $.getScript('js/' + name + '.js', function () {
             loadedScripts.push(name);
-            alert("New script loaded.");
             initPageScript();
             hidePreloader();
           });
