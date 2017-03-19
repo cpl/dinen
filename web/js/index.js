@@ -1,6 +1,6 @@
 var loadedScripts = [];
 
-$(function () {
+$(window).on('load', function () {
   // Back to top button
   $(window).scroll(function() {
 
