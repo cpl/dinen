@@ -6,7 +6,7 @@ function initPageScript() {
   $("#hero .rotating").Morphext({
     animation: "flipInX",
     separator: ",",
-    speed: 3000
+    speed: 2360
   });
   // Smoth scroll on page hash links
   $('a[href*="#"]:not([href="#"])').on('click', function() {
