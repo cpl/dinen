@@ -1,6 +1,26 @@
+var loadedScripts = [];
+
 $(function () {
+  // Back to top button
+  $(window).scroll(function() {
+
+    if ($(this).scrollTop() > 100) {
+      $('.back-to-top').fadeIn('slow');
+    } else {
+      $('.back-to-top').fadeOut('slow');
+    }
+
+  });
+  $('.back-to-top').click(function(){
+    $('html, body').animate({scrollTop : 0},750, 'easeInOutExpo');
+    return false;
+  });
   // TODO: look at the URL and load the appropriate page (GET?)
-  loadPage('landing', true);
+  if (isManager()) {
+    loadPage('dashboard', true);
+  } else {
+    loadPage('landing', true);
+  }
 });
 
 function loadPage(name, hasJS) {
@@ -8,21 +28,25 @@ function loadPage(name, hasJS) {
     // After the pre-loader image is shown, load the page's html into the
     // page_contents div (on index).
     $('#page_contents').load('html/' + name + '.html', function () {
-      // Load the JS used by the theme (for e.g. the changing text on the
-      // landing page). Must be loaded after the DOM is so that its elements
-      // can be referred to.
-      // TODO: check if this needs to be loaded more than once
-      $.getScript('imperial/js/custom.js', function () {
-        // If the page has any additional JS, load it and then hide the
-        // pre-loader, otherwise hide the pre-loader 'straight away'.
-        if (hasJS) {
+      // If the page has any additional JS, load it (if not already loaded) and
+      // initialise it, then hide the pre-loader, otherwise hide the
+      // pre-loader 'straight away'.
+      if (hasJS) {
+        // Ensure that the script isn't loaded twice.
+        if ($.inArray(name, loadedScripts) == -1) {
           $.getScript('js/' + name + '.js', function () {
+            loadedScripts.push(name);
+            alert("New script loaded.");
+            initPageScript();
             hidePreloader();
           });
         } else {
+          initPageScript();
           hidePreloader();
         }
-      });
+      } else {
+        hidePreloader();
+      }
     });
   });
 }
