@@ -1,6 +1,7 @@
-var apiURL = 'api/v1/api.php';
+//TODO: initPageScript
+function initPageScript() {
+}
 var items = {};
-var Status = { ERROR: 0, SUCCESS: 1 };
 var allMenuItems = "";
 var menuItems = $('#menu-table').html();
 $(function () {

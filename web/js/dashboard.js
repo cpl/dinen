@@ -1,7 +1,6 @@
-var apiURL = 'api/v1/api.php';
-var Status = {ERROR: 0, SUCCESS: 1};
-
-
+//TODO: initPageScript
+function initPageScript() {
+}
 var allRestaurants = "";
 var oneRestaurant = $('#restaurants').html();
 $('#restaurants').html("");
@@ -10,14 +9,15 @@ $(function () {
     $('#logout').click(function () {
         var data = {};
         data['request'] = 'logout';
-        data['jwt'] = localStorage.getItem('JWT');
+        data['jwt'] = getJWT()
         $.ajax({
           url: apiURL,
           type: 'POST',
           data: data
         }).done(function (response) {
           if (response.status === Status.SUCCESS) {
-            loadPage('landing', true);
+            loadPage('login', true);
+            localStorage.removeItem('JWT');
           } else {
             alert(response.data);
           }
