@@ -1,4 +1,6 @@
-var loadedScripts = [];
+var loadedScripts = ['landing', 'dashboard'];
+var scriptsWithInit = {'dashboard' : new Dashboard(),
+                       'landing' : new Landing()};
 
 $(window).on('load', function () {
   // Back to top button
@@ -36,11 +38,15 @@ function loadPage(name, hasJS, data) {
         if ($.inArray(name, loadedScripts) == -1) {
           $.getScript('js/' + name + '.js', function () {
             loadedScripts.push(name);
-            initPage(data);
+            if (scriptsWithInit[name] != undefined) {
+              scriptsWithInit[name].init(data);
+            }
             hidePreloader();
           });
         } else {
-          initPage(data);
+          if (scriptsWithInit[name] != undefined) {
+            scriptsWithInit[name].init(data);
+          }
           hidePreloader();
         }
       } else {

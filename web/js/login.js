@@ -13,6 +13,3 @@ function login() {
   });
   return false;
 }
-
-function initPage() {
-}
