@@ -14,7 +14,7 @@ $(window).on('load', function () {
 
   });
   $('.back-to-top').click(function(){
-    $('html, body').animate({scrollTop : 0},750, 'easeInOutExpo');
+    $('html, body').animate({scrollTop : 0}, 750, 'easeInOutExpo');
     return false;
   });
   // TODO: look at the URL and load the appropriate page (GET?)
