@@ -6,7 +6,7 @@ function login() {
   }).done(function (response) {
     if (response.status === Status.SUCCESS) {
       localStorage.setItem('JWT', response.data);
-      loadPage('dashboard', true);
+      loadPage('dashboard', true, {});
     } else {
       alert(response.data);
     }
@@ -14,5 +14,5 @@ function login() {
   return false;
 }
 
-function initPageScript() {
+function initPage() {
 }

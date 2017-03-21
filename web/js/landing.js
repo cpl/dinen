@@ -1,7 +1,10 @@
-function initPageScript() {
+function initPage() {
   $('#sign_in').click(function () {
     loadPage('login', true);
   });
+
+  // The following code is provided by the Imperial theme.
+
   // Hero rotating texts
   $("#hero .rotating").Morphext({
     animation: "flipInX",
@@ -10,7 +13,8 @@ function initPageScript() {
   });
   // Smoth scroll on page hash links
   $('a[href*="#"]:not([href="#"])').on('click', function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+        && location.hostname == this.hostname) {
       var target = $(this.hash);
       if (target.length) {
 

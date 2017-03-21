@@ -17,13 +17,13 @@ $(window).on('load', function () {
   });
   // TODO: look at the URL and load the appropriate page (GET?)
   if (isManager()) {
-    loadPage('dashboard', true);
+    loadPage('dashboard', true, {});
   } else {
-    loadPage('landing', true);
+    loadPage('landing', true, {});
   }
 });
 
-function loadPage(name, hasJS) {
+function loadPage(name, hasJS, data) {
   showPreloader(function () {
     // After the pre-loader image is shown, load the page's html into the
     // page_contents div (on index).
@@ -36,11 +36,11 @@ function loadPage(name, hasJS) {
         if ($.inArray(name, loadedScripts) == -1) {
           $.getScript('js/' + name + '.js', function () {
             loadedScripts.push(name);
-            initPageScript();
+            initPage(data);
             hidePreloader();
           });
         } else {
-          initPageScript();
+          initPage(data);
           hidePreloader();
         }
       } else {
@@ -58,9 +58,10 @@ function showPreloader(callback) {
   });
   // Check whether the pre-loader image is already shown (when the user first
   // visits the site), or not.
-  if ($('#preloader').css('display') == 'none') {
+  var preloader = $('#preloader');
+  if (preloader.css('display') == 'none') {
     // If it isn't, trigger the slide-down animation.
-    $('#preloader').slideDown(300, function () {
+    preloader.slideDown(300, function () {
       // Once the animation is complete, call the function that defines what
       // to do next.
       callback();
