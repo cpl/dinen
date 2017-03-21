@@ -48,5 +48,7 @@ function Landing() {
         }
       }
     });
+
+    // End of Imperial code.
   }
 }

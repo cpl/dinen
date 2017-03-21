@@ -1,28 +1,26 @@
-var scriptsWithInit = {'dashboard' : new Dashboard(),
-                       'landing' : new Landing(),
-                       'menu' : new Menu(),
-                       'order' : new Order(),
-                       'cook' : new Cook(),
-                       'search' : new Search(),
-                       'payment' : new Payment()
-                      };
-var loadedScripts = Object.keys(scriptsWithInit);
+var scriptsWithInit = {'dashboard' : null, 'landing' : null, 'menu' : null,
+                       'order' : null, 'cook' : null, 'search' : null,
+                       'payment' : null};
+var loadedScripts = [];
 
 $(window).on('load', function () {
+  // The following code is provided by the Imperial theme.
+
   // Back to top button
   $(window).scroll(function() {
-
     if ($(this).scrollTop() > 100) {
       $('.back-to-top').fadeIn('slow');
     } else {
       $('.back-to-top').fadeOut('slow');
     }
-
   });
   $('.back-to-top').click(function(){
     $('html, body').animate({scrollTop : 0}, 750, 'easeInOutExpo');
     return false;
   });
+
+  // End of Imperial code.
+
   // TODO: look at the URL and load the appropriate page (GET?)
   if (isManager()) {
     loadPage('dashboard');
@@ -45,21 +43,29 @@ function loadPage(name) {
         // Script not loaded.
         $.getScript('js/' + name + '.js', function () {
           loadedScripts.push(name);
-          // Shouldn't be necessary (all scripts with init included in
-          // index.html), but just in case.
-          if (scriptsWithInit[name] != undefined) {
-            scriptsWithInit[name].init();
-          }
+          initPageScript(name);
           hidePreloader();
         });
       } else {
-        if (scriptsWithInit[name] != undefined) {
-          scriptsWithInit[name].init();
-        }
+        initPageScript(name);
         hidePreloader();
       }
     });
   });
+}
+
+function initPageScript(name) {
+  // Determine whether the script needs to be initialised or not, by checking if
+  // its name is a key in scriptsWithInit.
+  if ($.inArray(name, Object.keys(scriptsWithInit)) != -1) {
+    // Create a new instance of the object defined by the script (which
+    // contains init), if there isn't one already.
+    if (scriptsWithInit[name] == null) {
+      // With help from http://stackoverflow.com/a/9804142
+      scriptsWithInit[name] = new window[capitaliseFirstLetter(name)]();
+    }
+    scriptsWithInit[name].init();
+  }
 }
 
 function showPreloader(callback) {
