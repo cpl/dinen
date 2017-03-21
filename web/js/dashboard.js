@@ -1,7 +1,6 @@
 function Dashboard() {
   var me = this;
   this.init = function () {
-    alert('test a');
     me.allRestaurants = "";
     me.oneRestaurant = $('#restaurants').html();
     $('#restaurants').html("");
@@ -78,5 +77,6 @@ function Dashboard() {
 
 function editRestaurantMenu(id) {
   loadPage('menu');
+  sessionStorage.setItem('restaurantID', id);
   return false;
 }

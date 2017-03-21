@@ -51,7 +51,7 @@ function Menu() {
     }
     var requestData = {};
     requestData['request'] = 'add_menu_item';
-    requestData['restaurant_id'] = restaurantID;
+    requestData['restaurant_id'] = me.restaurantID;
     requestData['jwt'] = JWT;
     // TODO: Add section from form
     requestData['section'] = $("#category").val();
@@ -83,13 +83,13 @@ function Menu() {
         tempItem += "<td>" + item.section + "</td>";
         tempItem += "<td>" + item.name + "</td>";
         tempItem += "<td>£" + item.price + "</td>";
-        menuItems += "<tr>" + tempItem + "</tr>";
+        me.menuItems += "<tr>" + tempItem + "</tr>";
       });
       if(nr === 0){
-        menuItems = "No items were found.";
+        me.menuItems = "No items were found.";
       }
-      $('#menu-table').html(menuItems);
-      menuItems = "";
+      $('#menu-table').html(me.menuItems);
+      me.menuItems = "";
     } else {
       console.log(response);
     }

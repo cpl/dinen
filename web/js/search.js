@@ -1,103 +1,96 @@
 var apiURL = 'api/v1/api.php';
-
 var Status = {ERROR: 0, SUCCESS: 1};
-var restaurants = {};
-var position = null;
-var allRestaurants = "";
-var oneRestaurant = "";
-
-$(function(){
-  $('#search-button').click(search);
-  oneRestaurant = $('#result-box').html();
-  $('#result-box').html("");
-  getPosition(getRestaurants);
-});
-
-// Get all restaurants in near vicinity of user
-function getRestaurants(latitude, longitude)
+function Search()
 {
-  var requestData = {'request': 'get_restaurants_near_user',
-                     'lat' : latitude,
-                     'lng' : longitude};
-  $.ajax({
-    url: apiURL,
-    type: 'POST',
-    data: requestData
-  }).done(generate_html_for_restaurants);
-}
-
-function getPosition()
-{
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(wrapGpsPosition, wrapIpPosition,{timeout:10000});
-  } else {
-    wrapIpPosition("no error");
+  var me = this;
+  me.restaurants = {};
+  me.position = null;
+  me.allRestaurants = "";
+  me.oneRestaurant = "";
+  me.init = function()
+  {
+    $('#search-button').click(search);
+    me.oneRestaurant = $('#result-box').html();
+    $('#result-box').html("");
+    me.getPosition(me.getRestaurants);
   }
-}
-
-
-function wrapIpPosition(error)
-{
-  // TODO: Add geoplugin to website
-  position = {lat: parseFloat(geoplugin_latitude()),
-              lng: parseFloat(geoplugin_longitude())};
-  getRestaurants(position.lat, position.lng);
-}
-
-function wrapGpsPosition(pos) {
-  var crd = pos.coords;
-  position = {lat: parseFloat(crd.latitude), lng: parseFloat(crd.longitude)};
-  getRestaurants(position.lat, position.lng);
-};
-
-function get_url_vars()
-{
-  var vars = {};
-  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
-  function(m,key,value) {
-    vars[key] = value;
-  });
-  return vars;
-}
-
-function generate_html_for_restaurants(response)
-{
-  console.log(1);
-  restaurants = response.data;
-  allRestaurants = "";
-  $('#result-box').html('');
-  if (response.status === Status.SUCCESS) {
-    response.data.forEach(generate_restaurant);
-    console.log(allRestaurants);
-    $("#result-box").html(allRestaurants);
-  } else {
-    $('#welcome').innerHTML = response.data;
+  // Get all restaurants in near vicinity of user
+  me.getRestaurants = function(latitude, longitude)
+  {
+    var requestData = {'request': 'get_restaurants_near_user',
+                       'lat' : latitude,
+                       'lng' : longitude};
+    $.ajax({
+      url: apiURL,
+      type: 'POST',
+      data: requestData
+    }).done(me.generate_html_for_restaurants);
   }
-}
 
-function generate_restaurant(restaurant)
-{
-  var tempRestaurant = oneRestaurant;
-  tempRestaurant = tempRestaurant.toString().replace("#restaurantName#", restaurant.name);
-  tempRestaurant = tempRestaurant.toString().replace("#restaurantDescription#", restaurant.description);
-  allRestaurants += tempRestaurant;
-}
+  me.getPosition = function()
+  {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(me.wrapGpsPosition, me.wrapIpPosition,{timeout:10000});
+    } else {
+      me.wrapIpPosition("no error");
+    }
+  }
 
-function search()
-{
-  var searched = $('#search').val().toLowerCase();
-  allRestaurants = "";
-  $('#result-box').val('');
-  restaurants.forEach(function(restaurant){
-    var string = restaurant.name.toLowerCase();
-    var result = string.indexOf(searched) >= 0;
-    if(result === true)
-      generate_restaurant(restaurant);
-  });
-  $("#result-box").html(allRestaurants);
+
+  me.wrapIpPosition = function(error)
+  {
+    // TODO: Add geoplugin to website
+    me.position = {lat: parseFloat(geoplugin_latitude()),
+                lng: parseFloat(geoplugin_longitude())};
+    me.getRestaurants(me.position.lat, me.position.lng);
+  }
+
+  me.wrapGpsPosition = function(pos)
+  {
+    var crd = pos.coords;
+    me.position = {lat: parseFloat(crd.latitude), lng: parseFloat(crd.longitude)};
+    me.getRestaurants(me.position.lat, me.position.lng);
+  };
+
+  me.generate_html_for_restaurants = function(response)
+  {
+    me.restaurants = response.data;
+    me.allRestaurants = "";
+    $('#result-box').html('');
+    if (response.status === Status.SUCCESS) {
+      response.data.forEach(me.generate_restaurant);
+      $("#result-box").html(me.allRestaurants);
+    } else {
+      $('#welcome').innerHTML = response.data;
+    }
+  }
+
+  me.generate_restaurant = function(restaurant)
+  {
+    var tempRestaurant = me.oneRestaurant;
+    tempRestaurant = tempRestaurant.toString().replace("#restaurantName#", restaurant.name);
+    tempRestaurant = tempRestaurant.toString().replace("#restaurantDescription#", restaurant.description);
+    tempRestaurant = tempRestaurant.toString().replace("#order#", "return goToOrdering(" + restaurant.id + ")");
+    me.allRestaurants += tempRestaurant;
+  }
+
+  me.search = function()
+  {
+    var searched = $('#search').val().toLowerCase();
+    me.allRestaurants = "";
+    $('#result-box').val('');
+    me.restaurants.forEach(function(restaurant){
+      var string = restaurant.name.toLowerCase();
+      var result = string.indexOf(searched) >= 0;
+      if(result === true)
+        me.generate_restaurant(restaurant);
+    });
+    $("#result-box").html(me.allRestaurants);
+  }
 }
 
 function goToOrdering(id)
 {
   sessionStorage.setItem('restaurantID', id);
+  loadPage('order');
 }

@@ -1,139 +1,119 @@
 var apiURL = 'api/v1/api.php';
 var Status = { ERROR: 0, SUCCESS: 1 };
-var items = {};
-var orderItems = [];
-var sections = [];
-var comments = "";
 
-
-
-// add required onchange's and submit's to form and select inputs
-$(function(){
-  //processItems(tmpServerResponse);
-  getMenu();
-  $("#menus").change(changeItemsInSelect);
-  $("#menuItems").change(changeItemDescription);
-  $("#orderForm").submit(submitItem);
-  $("#createOrderButton").click(submitOrder);
-});
-
-
-// Get menu for restaurant
-// Needs to have 'restaurant' (restaurant id)
-// as parameters
-function getMenu()
+function Order()
 {
-  // if menu GET parameter doesn't exist, abort operation
-  if(!('restaurant' in get_url_vars())) {
-    console.log("No restaurant parameter in GET");
-    return;
+  var me = this;
+  me.items = {};
+  me.orderItems = [];
+  me.sections = [];
+  me.comments = "";
+  me.init = function()
+  {
+    // add required onchange's and submit's to form and select input
+    me.getMenu();
+    $("#menus").change(me.changeItemsInSelect);
+    $("#menuItems").change(me.changeItemDescription);
+    $("#orderForm").submit(me.submitItem);
+    $("#createOrderButton").click(me.submitOrder);
   }
-  var requestData = {'request': 'get_menu',
-                     'restaurant_id' : get_url_vars()['restaurant']};
-  $.ajax({
-    url: apiURL,
-    type: 'POST',
-    data: requestData
-  }).done(processItems);
+  // Get menu for restaurant
+  me.getMenu = function()
+  {
+    var restaurantId = sessionStorage.getItem('restaurantID');
+    if(restaurantId == null)
+      console.log("empty restaurantId");
+    var requestData = {'request': 'get_menu',
+                       'restaurant_id' : restaurantId};
+    $.ajax({
+      url: apiURL,
+      type: 'POST',
+      data: requestData
+    }).done(me.processItems);
 
-  return false;
-}
-
-// process the items sent by server
-// that is, update the select inputs
-// and add items to global array 'items'
-function processItems(response)
-{
-  console.log("ProcessItems: "+JSON.stringify(response));
-  if (response.status === Status.SUCCESS) {
-    items = response.data;
-    items.forEach(function(item) {
-      sections.push(item.section);
-    });
-    sections = $.unique(sections);
-    console.log(items);
-    console.log(sections);
-    for(var index in sections){
-       $('#menus')
-          .append($("<option></option>")
-          .attr("value",sections[index])
-          .text(sections[index]));
-    }
-    changeItemsInSelect(null);
-  } else {
-    console.log(response);
+    return false;
   }
-}
 
-// update the menu item options based on current menu selected
-function changeItemsInSelect(sel)
-{
-  $("#menuItems option").remove();
-  items.forEach(function(item) {
-    if(item.section == $('#menus').val())
-    {
-      $('#menuItems')
-         .append($("<option></option>")
-         .attr("value",item.name)
-         .text(item.name));
+  // process the items sent by server
+  // that is, update the select inputs
+  // and add items to global array 'items'
+  me.processItems = function(response)
+  {
+    console.log("ProcessItems: "+JSON.stringify(response));
+    if (response.status === Status.SUCCESS) {
+      me.items = response.data;
+      me.items.forEach(function(item) {
+        me.sections.push(item.section);
+      });
+      me.sections = $.unique(me.sections);
+      for(var index in me.sections){
+         $('#menus')
+            .append($("<option></option>")
+            .attr("value", me.sections[index])
+            .text(me.sections[index]));
+      }
+      me.changeItemsInSelect(null);
+    } else {
+      console.log(response);
     }
-  });
-  changeItemDescription(null);
-}
+  }
 
-// update the description of the order item to be created
-// based on select for menu section
-function changeItemDescription(sel)
-{
-  $("#itemDescription").text("");
-  items.forEach(function(item) {
-    if(item.name == $('#menuItems').val())
-    {
-      $("#itemDescription").text(item.description);
-    }
-  });
-}
-
-// submit item - creates and order item out of menu item
-// for sending the order later
-function submitItem(event)
-{
-  // for every item
-  items.forEach(function(item) {
-    // if the name of the item is specified in input select, add it
-    // to array of all item ids and and create html for it
-    if(item.name == $('#menuItems').val())
-    {
-      $('#orderItems').append('Menu item: ' + item.name + ' in a ' +
-                               item.section + '. Cost: $' + item.price +
-                               '. Description: ' + item.description + '.<br>');
-      orderItems.push(item.id);
-    }
-  });
-  event.preventDefault();
-}
-
-function submitOrder()
-{
-  var orderData = {};
-  orderData['menuItems'] = menuItems;
-  orderData['comments'] = comments;
-  orderData['orderItems'] = orderItems;
-  sessionStorage.setItem('orderData', JSON.stringify(orderData));
-  loadPage('payment');
-  return false;
-}
-
-// function to get GET parameters
-// Used as getUrlVars()['parameter']
-// Copied from stack overflow answer
-// Kinda surprised that neither JS nor JQuery has a url parameter getters
-function get_url_vars()
-{
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
-    function(m,key,value) {
-      vars[key] = value;
+  // update the menu item options based on current menu selected
+  me.changeItemsInSelect = function(sel)
+  {
+    $("#menuItems option").remove();
+    me.items.forEach(function(item) {
+      if(item.section == $('#menus').val())
+      {
+        $('#menuItems')
+           .append($("<option></option>")
+           .attr("value",item.name)
+           .text(item.name));
+      }
     });
-    return vars;
+    me.changeItemDescription(null);
+  }
+
+  // update the description of the order item to be created
+  // based on select for menu section
+  me.changeItemDescription = function(sel)
+  {
+    $("#itemDescription").text("");
+    me.items.forEach(function(item) {
+      if(item.name == $('#menuItems').val())
+      {
+        $("#itemDescription").text(item.description);
+      }
+    });
+  }
+
+  // submit item - creates and order item out of menu item
+  // for sending the order later
+  me.submitItem = function(event)
+  {
+    // for every item
+    me.items.forEach(function(item) {
+      // if the name of the item is specified in input select, add it
+      // to array of all item ids and and create html for it
+      if(item.name == $('#menuItems').val())
+      {
+        $('#orderItems').append('Menu item: ' + item.name + ' in a ' +
+                                 item.section + '. Cost: $' + item.price +
+                                 '. Description: ' + item.description + '.<br>');
+        me.orderItems.push(item.id);
+      }
+    });
+    event.preventDefault();
+  }
+
+  me.submitOrder = function()
+  {
+    var orderData = {};
+    orderData['menuItems'] = me.items;
+    orderData['comments'] = me.comments;
+    orderData['orderItems'] = me.orderItems;
+    sessionStorage.setItem('orderData', JSON.stringify(orderData));
+    loadPage('payment');
+    return false;
+  }
 }
