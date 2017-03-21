@@ -71,12 +71,20 @@ function Dashboard() {
       restaurant.description);
     tempRestaurant = tempRestaurant.toString().replace('#menu#',
       'return editRestaurantMenu(' + restaurant.id + ')');
+    tempRestaurant = tempRestaurant.toString().replace('#cookModule#',
+      'return gotoCookModule(' + restaurant.id + ')');
     me.allRestaurants += tempRestaurant;
   };
 }
 
 function editRestaurantMenu(id) {
-  loadPage('menu');
   sessionStorage.setItem('restaurantID', id);
+  loadPage('menu');
+  return false;
+}
+
+function gotoCookModule(id) {
+  sessionStorage.setItem('restaurantID', id);
+  loadPage('cook');
   return false;
 }
