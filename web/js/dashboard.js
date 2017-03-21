@@ -50,9 +50,9 @@ function Dashboard() {
       type: 'POST',
       data: requestData
     }).done(me.listRestaurants);
-    return false;    
+    return false;
   };
-  
+
   this.listRestaurants = function (response) {
     console.log('Response from get restaurants: ' + JSON.stringify(response));
     if (response.status === Status.SUCCESS) {
@@ -62,7 +62,7 @@ function Dashboard() {
       $('#welcome').innerHTML = response.data;
     }
   };
-  
+
   this.listRestaurant = function (restaurant) {
     console.log('Restaurant: ' + JSON.stringify(restaurant));
     var tempRestaurant = me.oneRestaurant;

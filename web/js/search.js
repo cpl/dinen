@@ -9,7 +9,6 @@ var oneRestaurant = "";
 $(function(){
   $('#search-button').click(search);
   oneRestaurant = $('#result-box').html();
-  console.log(oneRestaurant);
   $('#result-box').html("");
   getPosition(getRestaurants);
 });
@@ -82,7 +81,6 @@ function generate_restaurant(restaurant)
   tempRestaurant = tempRestaurant.toString().replace("#restaurantName#", restaurant.name);
   tempRestaurant = tempRestaurant.toString().replace("#restaurantDescription#", restaurant.description);
   allRestaurants += tempRestaurant;
-  console.log(oneRestaurant);
 }
 
 function search()
@@ -97,4 +95,9 @@ function search()
       generate_restaurant(restaurant);
   });
   $("#result-box").html(allRestaurants);
+}
+
+function goToOrdering(id)
+{
+  sessionStorage.setItem('restaurantID', id);
 }
