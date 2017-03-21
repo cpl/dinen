@@ -1,7 +1,7 @@
 var scriptsWithInit = {'dashboard' : new Dashboard(),
                        'landing' : new Landing(),
                        'menu' : new Menu()};
-var loadedScripts = scriptsWithInit.keys;
+var loadedScripts = Object.keys(scriptsWithInit);
 
 $(window).on('load', function () {
   // Back to top button

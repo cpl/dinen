@@ -34,7 +34,7 @@ function Menu() {
   // as parameters
   this.getMenu = function () {
     var requestData = {'request': 'get_menu',
-                       'restaurant_id' : restaurantID};
+                       'restaurant_id' : me.restaurantID};
     $.ajax({
       url: apiURL,
       type: 'POST',
