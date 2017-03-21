@@ -18,7 +18,7 @@ function Cook()
   me.getOrders = function()
   {
       // if menu GET parameter doesn't exist, abort operation
-      var restaurantId = sessionStorage.getItem('restaurantId');
+      var restaurantId = sessionStorage.getItem('restaurantID');
       if(restaurantId == null)
         console.log("empty restaurantId");
       var requestData = {
@@ -37,7 +37,7 @@ function Cook()
   // as parameters
   me.getMenu = function()
   {
-      var restaurantId = sessionStorage.getItem('restaurantId');
+      var restaurantId = sessionStorage.getItem('restaurantID');
       if(restaurantId == null)
         console.log("empty restaurantId");
       var requestData = {
@@ -62,10 +62,10 @@ function Cook()
       var data = response['data'];
       data.forEach(function(orderItem) {
           var string = "<tr>" +
-              "<th>" + menuItems[orderItem.menu_item_id].name + "</th>" +
+              "<th>" + me.menuItems[orderItem.menu_item_id].name + "</th>" +
               "<th>" + /* Add means of identifying customer */ +"</th>" +
               "<th>" + orderItem.time + "</th>" +
-              "<th>" + genOrderItemCheckbox(orderItem) +
+              "<th>" + me.genOrderItemCheckbox(orderItem) +
               "</tr>";
           $('#order-items').append(string);
       });
@@ -78,27 +78,27 @@ function Cook()
           me.menuItems[menuItem.id] = menuItem;
       });
       console.log(me.menuItems);
-      getOrders();
+      me.getOrders();
   }
 
   me.genOrderItemCheckbox = function(orderItem) {
       return "<input type='checkbox' value='isFinished' " +
-          "id='" + orderItem.order_id + "-completed' " +
+          "id='" + orderItem.id + "-completed' " +
           (orderItem.is_finished == 1 ? "checked" : "") +
-          "onchange='onCheckboxChanged(this)'>";
+          " onchange='onCheckboxChanged(this)'>";
   }
+}
 
-  me.onCheckboxChanged = function(checkbox) {
-    if (checkbox.checked) {
-      var requestData = {
-        'request': 'mark_order_item_finished',
-        'item': checkbox.id.split('-')[0]
-      }
-      $.ajax({
-          url: apiURL,
-          type: 'POST',
-          data: requestData
-      });
+function onCheckboxChanged(checkbox) {
+  if (checkbox.checked) {
+    var requestData = {
+      'request': 'mark_order_item_finished',
+      'item': checkbox.id.split('-')[0]
     }
+    $.ajax({
+        url: apiURL,
+        type: 'POST',
+        data: requestData
+    });
   }
 }

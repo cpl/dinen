@@ -51,7 +51,7 @@ switch ($request) {
 
 function processMarkOrderItemFinished() {
   $orderItemId = htmlspecialchars($_POST['item']);
-  mark_order_item_finished($orderItemId);
+  echo json_encode(mark_order_item_finished($orderItemId));
 }
 
 function processGetRestaurantsNearUser() {
