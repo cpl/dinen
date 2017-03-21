@@ -12,8 +12,8 @@ function create_order($restaurant_id, $comments, $data)
     return [ 'status' => Status::ERROR,
              'data'   => 'User id is empty'];
   if(strval($restaurant_id) != strval(intval($restaurant_id)))
-  return [ 'status' => Status::ERROR,
-           'data'   => 'HAAAACKS'];
+    return [ 'status' => Status::ERROR,
+             'data'   => 'HAAAACKS'];
   if(!arrayIsInt($data))
     return [ 'status' => Status::ERROR,
              'data'   => 'HAAAACKS'];
@@ -85,4 +85,35 @@ function create_order($restaurant_id, $comments, $data)
   $mysqli->close();
   return ['status' => Status::SUCCESS,
           'data'   => 'Order successfully added.'];
+}
+
+function mark_order_item_finished($item_id) {
+  if (empty($item_id))
+    return [ 'status' => Status::ERROR,
+             'data'   => 'Order item is empty' ];
+  else if (strval($item_id) != strval(intval($item_id)))
+    return [ 'status' => Status::ERROR,
+             'data'   => 'HAAAACKS' ];
+
+  $mysqli = createMySQLi();
+  if ($mysqli->connect_error)
+    return [ 'status' => Status::ERROR,
+             'data'   => 'Database connection failed.' ];
+
+  $stmt = $mysqli->prepare("UPDATE order_items
+                            SET is_finished = 1
+                            WHERE id = ?");
+  $stmt->bind_param('i', $item_id);
+  $stmt->execute();
+  if ($stmt->errno != 0) {
+    $stmt->close();
+    $mysqli->close();
+    return [ 'status' => Status::ERROR,
+             'data'   => 'Failed to mark item as finished' ];
+  }
+
+  $stmt->close();
+  $mysqli->close();
+  return [ 'status' => Status::SUCCESS,
+           'data'   => 'Order item marked as finished' ];
 }

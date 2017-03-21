@@ -44,6 +44,14 @@ switch ($request) {
   case 'get_restaurants_near_user':
     processGetRestaurantsNearUser();
     break;
+  case 'mark_order_item_finished':
+    processMarkOrderItemFinished();
+    break;
+}
+
+function processMarkOrderItemFinished() {
+  $orderItemId = htmlspecialchars($_POST['item']);
+  mark_order_item_finished($orderItemId);
 }
 
 function processGetRestaurantsNearUser() {
