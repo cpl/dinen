@@ -20,37 +20,37 @@ $(window).on('load', function () {
   });
   // TODO: look at the URL and load the appropriate page (GET?)
   if (isManager()) {
-    loadPage('dashboard', true, {});
+    loadPage('dashboard');
   } else {
-    loadPage('landing', true, {});
+    loadPage('landing');
   }
 });
 
-function loadPage(name, hasJS, data) {
+function loadPage(name) {
   showPreloader(function () {
     // After the pre-loader image is shown, load the page's html into the
     // page_contents div (on index).
     $('#page_contents').load('html/' + name + '.html', function () {
-      // If the page has any additional JS, load it (if not already loaded) and
-      // initialise it, then hide the pre-loader, otherwise hide the
-      // pre-loader 'straight away'.
-      if (hasJS) {
-        // Ensure that the script isn't loaded twice.
-        if ($.inArray(name, loadedScripts) == -1) {
-          $.getScript('js/' + name + '.js', function () {
-            loadedScripts.push(name);
-            if (scriptsWithInit[name] != undefined) {
-              scriptsWithInit[name].init(data);
-            }
-            hidePreloader();
-          });
-        } else {
+      // Load the page's JS it (if not already loaded) and initialise it,
+      // then hide the pre-loader, otherwise hide the pre-loader 'straight
+      // away'.
+
+      // Ensure that the script isn't loaded twice.
+      if ($.inArray(name, loadedScripts) == -1) {
+        // Script not loaded.
+        $.getScript('js/' + name + '.js', function () {
+          loadedScripts.push(name);
+          // Shouldn't be necessary (all scripts with init included in
+          // index.html), but just in case.
           if (scriptsWithInit[name] != undefined) {
-            scriptsWithInit[name].init(data);
+            scriptsWithInit[name].init();
           }
           hidePreloader();
-        }
+        });
       } else {
+        if (scriptsWithInit[name] != undefined) {
+          scriptsWithInit[name].init();
+        }
         hidePreloader();
       }
     });

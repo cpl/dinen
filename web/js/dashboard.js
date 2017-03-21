@@ -17,7 +17,7 @@ function Dashboard() {
         data: data
       }).done(function (response) {
         if (response.status === Status.SUCCESS) {
-          loadPage('landing', true, {});
+          loadPage('landing');
           localStorage.removeItem('JWT');
         } else {
           alert(response.data);
@@ -27,12 +27,12 @@ function Dashboard() {
     });
 
     $('#to-index').click(function(event){
-      loadPage('landing', true, {});
+      loadPage('landing');
       event.preventDefault();
     });
 
     $('#create-restaurant').click(function(event){
-      loadPage('register_restaurant', true, {});
+      loadPage('register_restaurant');
       event.preventDefault();
     });
   };
@@ -40,7 +40,7 @@ function Dashboard() {
   this.getRestaurants = function () {
     const JWT = getJWT();
     if (JWT == null) {
-      loadPage('landing', true, {});
+      loadPage('landing');
       return false;
     }
 
@@ -77,6 +77,6 @@ function Dashboard() {
 }
 
 function editRestaurantMenu(id) {
-  loadPage('menu', true, {'id' : id});
+  loadPage('menu');
   return false;
 }

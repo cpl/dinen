@@ -120,7 +120,7 @@ function submitOrder()
   orderData['comments'] = comments;
   orderData['orderItems'] = orderItems;
   sessionStorage.setItem('orderData', JSON.stringify(orderData));
-  loadPage('payment', true);
+  loadPage('payment');
   return false;
 }
 

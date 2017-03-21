@@ -13,7 +13,7 @@ function create_restaurant() {
     data: data
   }).done(function (response) {
     if(response.status == 'success')
-      loadPage('dashboard', true, {});
+      loadPage('dashboard');
     }
   );
   return false;
@@ -28,7 +28,4 @@ function validatePassword() {
   } else {
     confirm_password.setCustomValidity('');
   }
-}
-
-function initPage() {
 }

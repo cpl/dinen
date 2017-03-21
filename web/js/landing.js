@@ -1,10 +1,10 @@
 function Landing() {
   this.init = function () {
     $('#sign_in').click(function () {
-      loadPage('login', true);
+      loadPage('login');
     });
     $('#go-to-search').click(function(){
-      loadPage('search', true, {});
+      loadPage('search');
     });
 
     // The following code is provided by the Imperial theme.
