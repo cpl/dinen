@@ -1,6 +1,11 @@
 var scriptsWithInit = {'dashboard' : new Dashboard(),
                        'landing' : new Landing(),
-                       'menu' : new Menu()};
+                       'menu' : new Menu(),
+                       'order' : new Order(),
+                       'cook' : new Cook(),
+                       'search' : new Search(),
+                       'payment' : new Payment()
+                      };
 var loadedScripts = Object.keys(scriptsWithInit);
 
 $(window).on('load', function () {
