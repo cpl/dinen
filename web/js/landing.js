@@ -2,6 +2,9 @@ function initPage() {
   $('#sign_in').click(function () {
     loadPage('login', true);
   });
+  $('#go-to-search').click(function(){
+    loadPage('search', true, {});
+  });
 
   // The following code is provided by the Imperial theme.
 

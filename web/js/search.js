@@ -4,11 +4,13 @@ var Status = {ERROR: 0, SUCCESS: 1};
 var restaurants = {};
 var position = null;
 var allRestaurants = "";
-var oneRestaurant = $('#result-box').html();
-$('#result-box').html("");
+var oneRestaurant = "";
 
 $(function(){
   $('#search-button').click(search);
+  oneRestaurant = $('#result-box').html();
+  console.log(oneRestaurant);
+  $('#result-box').html("");
   getPosition(getRestaurants);
 });
 
@@ -61,11 +63,13 @@ function get_url_vars()
 
 function generate_html_for_restaurants(response)
 {
+  console.log(1);
   restaurants = response.data;
   allRestaurants = "";
-  $('#result-box').val('');
+  $('#result-box').html('');
   if (response.status === Status.SUCCESS) {
     response.data.forEach(generate_restaurant);
+    console.log(allRestaurants);
     $("#result-box").html(allRestaurants);
   } else {
     $('#welcome').innerHTML = response.data;
@@ -78,6 +82,7 @@ function generate_restaurant(restaurant)
   tempRestaurant = tempRestaurant.toString().replace("#restaurantName#", restaurant.name);
   tempRestaurant = tempRestaurant.toString().replace("#restaurantDescription#", restaurant.description);
   allRestaurants += tempRestaurant;
+  console.log(oneRestaurant);
 }
 
 function search()

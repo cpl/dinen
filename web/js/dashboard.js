@@ -16,7 +16,7 @@ function initPage() {
       data: data
     }).done(function (response) {
       if (response.status === Status.SUCCESS) {
-        loadPage('login', true, {});
+        loadPage('landing', true, {});
         localStorage.removeItem('JWT');
       } else {
         alert(response.data);
@@ -39,7 +39,7 @@ function initPage() {
 function getRestaurants() {
     const JWT = getJWT();
     if (JWT == null) {
-        window.location.replace("login.html");
+        loadPage('landing', true, {});
         return false;
     }
 
