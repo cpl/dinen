@@ -44,8 +44,7 @@ function getMenu()
 // and add items to global array 'items'
 function processItems(response)
 {
-
-    console.log("ProcessItems: "+JSON.stringify(response));
+  console.log("ProcessItems: "+JSON.stringify(response));
   if (response.status === Status.SUCCESS) {
     items = response.data;
     items.forEach(function(item) {
@@ -116,20 +115,13 @@ function submitItem(event)
 
 function submitOrder()
 {
-  var requestData = {};
-  requestData['restaurant'] = get_url_vars()['restaurant'];
-  requestData['comments'] = comments;
-  requestData['order_items'] = JSON.stringify(orderItems);
-  localStorage.setItem("basket", orderItems);
-  requestData['request'] = 'create_order';
-  $.ajax({
-    url: apiURL,
-    type: 'POST',
-    data: requestData
-  }).done(function(response){
-    console.log(response);
-  });
-  // TODO: finish the submit order script
+  var orderData = {};
+  orderData['menuItems'] = menuItems;
+  orderData['comments'] = comments;
+  orderData['orderItems'] = orderItems;
+  sessionStorage.setItem('orderData', JSON.stringify(orderData));
+  loadPage('payment', true);
+  return false;
 }
 
 // function to get GET parameters

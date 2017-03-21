@@ -18,13 +18,12 @@ window.setInterval(getOrders, 10000);
 // as parameters
 function getOrders() {
     // if menu GET parameter doesn't exist, abort operation
-    if (!('restaurant' in get_url_vars())) {
-        console.log("No restaurant parameter in GET");
-        return;
-    }
+    var restaurantId = sessionStorage.getItem('restaurantId');
+    if(restaurantId == null)
+      console.log("empty restaurantId");
     var requestData = {
         'request': 'get_unfinished_order_items',
-        'restaurant_id': get_url_vars()['restaurant']
+        'restaurant_id': restaurantId
     };
     $.ajax({
         url: apiURL,
@@ -38,13 +37,12 @@ function getOrders() {
 // as parameters
 function getMenu() {
     // if menu GET parameter doesn't exist, abort operation
-    if (!('restaurant' in get_url_vars())) {
-        console.log("No restaurant parameter in GET");
-        return;
-    }
+    var restaurantId = sessionStorage.getItem('restaurantId');
+    if(restaurantId == null)
+      console.log("empty restaurantId");
     var requestData = {
         'request': 'get_menu',
-        'restaurant_id': get_url_vars()['restaurant']
+        'restaurant_id': restaurantId
     };
     $.ajax({
         url: apiURL,
@@ -102,13 +100,4 @@ function onCheckboxChanged(checkbox) {
             data: requestData
         }).done(getOrders);
     }
-}
-
-function get_url_vars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
-        function(m, key, value) {
-            vars[key] = value;
-        });
-    return vars;
 }

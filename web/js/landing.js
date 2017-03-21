@@ -15,6 +15,7 @@ function Landing() {
       separator: ",",
       speed: 2360
     });
+    
     // Smoth scroll on page hash links
     $('a[href*="#"]:not([href="#"])').on('click', function() {
       if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
