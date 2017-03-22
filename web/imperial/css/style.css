@@ -11,6 +11,8 @@ body {
   background: #fff;
   color: #666666;
   font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -637,10 +639,13 @@ body.mobile-nav-active #mobile-nav-toggle {
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
+
 #footer {
   background: #111;
   padding: 30px 0;
   color: #fff;
+  width:100%;
+  bottom:0;
 }
 
 #footer .copyright {
