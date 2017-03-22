@@ -504,8 +504,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   text-align: center;
 }
 
-.section-item .details h4 {
-  font-size: 16px;
+.section-item .details h1 {
   transition: opacity 0.3s, -webkit-transform 0.3s;
   transition: transform 0.3s, opacity 0.3s;
   transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
@@ -515,10 +514,9 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #333333;
 }
 
-.section-item .details span {
+.section-item .details h4 {
   display: block;
   color: #666666;
-  font-size: 13px;
   transition: opacity 0.3s, -webkit-transform 0.3s;
   transition: transform 0.3s, opacity 0.3s;
   transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
@@ -650,9 +648,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #footer .footer-description {
-  font-family:times;
   padding-top: 10px;
   text-align: center;
-  font-size: 17px;
+  font-size: 15px;
   color: #ccc;
 }
