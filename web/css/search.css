@@ -2,6 +2,11 @@ html {
   background: url("../img/search-background.jpg") no-repeat center fixed;
   position:relative;
   min-height:100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
 }
 
 body{
@@ -9,13 +14,18 @@ body{
 }
 
 #search-background {
-  background: url("../img/search-background-faded.jpg") !important no-repeat center fixed;
+  background: url("../img/search-background-faded.jpg") no-repeat center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
 }
 
 .searchBox {
   height: 40px;
   outline: none;
-  font-size: 30px;
+  font-size: 25px;
   border-radius: 20px;
   border: 1px solid #808080;
   background-color: white;
@@ -31,21 +41,21 @@ input::-webkit-input-placeholder {
 
 .resultsBox {
   color: black;
-  border: 1px solid #808080;
-  background-color: #00c6ee;
+  border: 3px solid grey;
+  background-color: #f2f2f2;
   border-radius: 15px;
-  padding-top: 20px;
+  padding: 15px;
   margin-top: 20px;
   position: relative;
 }
 
 .filtersBox {
   color: black;
-  border: 1px solid #808080;
-  background-color: #00c6ee;
+  border: 3px solid grey;
+  background-color: #f2f2f2;
   border-radius: 15px;
   margin-top: 20px;
-  padding-bottom: 20px;
+  padding: 15px;
 }
 
 hr {
@@ -58,20 +68,9 @@ hr {
   margin-right: 20px;
 }
 
-.restaurantBox {
-  background-color: #3d3838;
-}
-
-.customButton {
-  border: 1px solid #808080;
-  color: white;
-  background: #3d3838;
-	text-align: center;
-}
-
 .reastaurantButton {
   position: absolute;
-  top: 30%;
+  top: 35%;
   right: 5%;
 }
 
@@ -84,4 +83,5 @@ hr {
   left:0;
   position:absolute;
   overflow:hidden;
+  height: 162px;
 }

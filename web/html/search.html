@@ -35,12 +35,14 @@
     </nav>
 
     <!-- template for search results -->
-    <div class="col-md-6 col-md-offset-1 resultsBox">
-     <div id="result-box">
-        <div><h4>#restaurantName#</h4></div>
+     <div class="col-md-6 col-md-offset-1">
+        <div id="result-box">
+       <!-- Rows of different restaurants -->
+        <div class="row resultsBox">
+        <div><h3>#restaurantName#</h3></div>
         <div><p>#restaurantDescription#</p></div>
-        <input type="button" value="Order" onclick="#order#"/>
-        <hr>
+        <input type="button" class="btn btn-primary reastaurantButton" value="Order" onclick="#order#"/>
+        </div>
      </div>
     </div>
 
