@@ -547,7 +547,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   padding: 0;
 }
 
-.form-container {
+.form-section .form-container {
   display: flex;
   height: 100vh;
   max-width: 256px;
@@ -556,22 +556,22 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin: 0 auto 0 auto;
 }
 
-.form-layout {
+.form-section .form-container .form-layout {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.form .show {
+.form-section .form .show {
   display: block;
 }
 
-.form input, .form textarea {
+.form-section .form input, .form-section .form textarea {
   border-radius: 0;
   box-shadow: none;
 }
 
-.form button[type="submit"] {
+.form-section .form button[type="submit"] {
   background: #03C4EB;
   border: 0;
   padding: 10px 24px;
@@ -579,7 +579,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   transition: 0.4s;
 }
 
-.form button[type="submit"]:hover {
+.form-section .form button[type="submit"]:hover {
   background: #25d8fc;
 }
 
@@ -594,11 +594,11 @@ body.mobile-nav-active #mobile-nav-toggle {
   padding: 80px 0 60px 0;
 }
 
-.feature-item {
+.features-section .feature-item {
   margin-bottom: 20px;
 }
 
-.feature-icon {
+.features-section .feature-item .feature-icon {
   float: left;
   background: #03C4EB;
   padding: 16px;
@@ -607,31 +607,31 @@ body.mobile-nav-active #mobile-nav-toggle {
   border: 1px solid #03C4EB;
 }
 
-.feature-icon i {
+.features-section .feature-item .feature-icon i {
   color: #fff;
   font-size: 24px;
 }
 
-.feature-item:hover .feature-icon {
+.features-section .feature-item:hover .feature-icon {
   background: #fff;
 }
 
-.feature-item:hover .feature-icon i {
+.features-section .feature-item:hover .feature-icon i {
   color: #03C4EB;
 }
 
-.feature-title {
+.features-section .feature-item .feature-title {
   margin-left: 80px;
   font-weight: 700;
   margin-bottom: 15px;
   text-transform: uppercase;
 }
 
-.feature-title a {
+.features-section .feature-item .feature-title a {
   color: #111;
 }
 
-.feature-description {
+.features-section .feature-item .feature-description {
   margin-left: 80px;
   line-height: 24px;
 }
