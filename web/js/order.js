@@ -97,9 +97,15 @@ function Order()
       // to array of all item ids and and create html for it
       if(item.name == $('#menuItems').val())
       {
-        $('#orderItems').append('Menu item: ' + item.name + ' in a ' +
-                                 item.section + '. Cost: $' + item.price +
-                                 '. Description: ' + item.description + '.<br>');
+        // $('#orderItems').append('Menu item: ' + item.name + ' in a ' +
+        //                          item.section + '. Cost: $' + item.price +
+        //                          '. Description: ' + item.description + '.<br>');
+        //
+        var tempItem = "<td>" + item.section + "</td>";
+        tempItem += "<td>" + item.name + "</td>";
+        tempItem += "<td>£" + item.price + "</td>";
+        tempItem += "<td>" + "<button type='button' class='btn btn-danger delete-button' aria-label='delete button'>\n<span class='glyphicon glyphicon-minus' aria-hidden='true'></span>\n</button>" + "</td>";
+        $('#orderItems').append("<tr>" + tempItem + "</tr>");
         me.orderItems.push(item.id);
       }
     });
