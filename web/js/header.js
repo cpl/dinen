@@ -6,39 +6,6 @@ function initHeader() {
     animation: {opacity:'show'},
     speed: 400
   });
-  if(localStorage.getItem('JWT') === null)
-  {
-    var elements = "<li><a href='#eaters' onclick=\"return loadPage('search')\">For Food Eaters</a></li>";
-    elements += "<li><a href='#restaurants' onclick=\"return loadPage('dashboard')\">For Restaurant</a></li>";
-    elements += "<li><a href='#register' onclick='return loadPage(\"landing\")'>Sign Up</a></li>";
-    elements += "<li><a href='#' onclick='return loadPage(\"login\")'>Log In</a></li>";
-    $('#changed-navbar').html(elements);
-  }
-  else
-  {
-    var elements = "<li><a href='#eaters' onclick=\"return loadPage('search')\">For Food Eaters</a></li>";
-    elements += "<li><a href='#restaurants' onclick=\"return loadPage('dashboard')\">For Restaurant</a></li>";
-    elements += "<li><a href='#register' id='logout'>Logout</a></li>";
-    $('#changed-navbar').html(elements);
-    $('#logout').click(function () {
-      var data = {};
-      data['request'] = 'logout';
-      data['jwt'] = getJWT();
-      $.ajax({
-        url: apiURL,
-        type: 'POST',
-        data: data
-      }).done(function (response) {
-        if (response.status === Status.SUCCESS) {
-          loadPage('landing');
-          localStorage.removeItem('JWT');
-        } else {
-          alert(response.data);
-        }
-      });
-      return false;
-    });
-  }
 
   // Mobile Navigation
   if( $('#nav-menu-container').length ) {
@@ -76,12 +43,40 @@ function initHeader() {
   }
 
   /* Stick the header at top on scroll
-  $("#header").sticky({topSpacing:0, zIndex: '50'});
-*/
+    $("#header").sticky({topSpacing:0, zIndex: '50'});
+  */
   // End of Imperial code.
+
+  updateHeader();
 }
 
-function logout()
-{
+function updateHeader() {
+  var element;
+  if(getJWT() === null) {
+    element = '<a href="#" onclick="return '
+                + ' loadPage(\'search\')">Sign In</a>';
+  } else {
+    element = '<a href="#" onclick="return signOut()">Sign Out</a>';
+  }
+  $('#header_user').html(element);
+}
 
+function signOut() {
+  var data = {};
+  data['request'] = 'logout';
+  data['jwt'] = getJWT();
+  $.ajax({
+    url: apiURL,
+    type: 'POST',
+    data: data
+  }).done(function (response) {
+    if (response.status === Status.SUCCESS) {
+      loadPage('landing');
+      localStorage.removeItem('JWT');
+    } else {
+      alert(response.data);
+    }
+  });
+  updateHeader();
+  return false;
 }

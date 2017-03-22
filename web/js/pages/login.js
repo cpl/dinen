@@ -12,5 +12,6 @@ function login() {
       alert(response.data);
     }
   });
+  updateHeader();
   return false;
 }
