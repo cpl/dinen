@@ -4,6 +4,7 @@ var Status = { ERROR: 0, SUCCESS: 1 };
 function Order()
 {
   var me = this;
+  me.currentItemId = 0;
   me.items = {};
   me.orderItems = [];
   me.sections = [];
@@ -97,17 +98,17 @@ function Order()
       // to array of all item ids and and create html for it
       if(item.name == $('#menuItems').val())
       {
-        // $('#orderItems').append('Menu item: ' + item.name + ' in a ' +
-        //                          item.section + '. Cost: $' + item.price +
-        //                          '. Description: ' + item.description + '.<br>');
-        //
         var tempItem = "<td>" + item.section + "</td>";
         tempItem += "<td>" + item.name + "</td>";
         tempItem += "<td>£" + item.price + "</td>";
-        tempItem += "<td>" + "<button type='button' class='btn btn-danger delete-button' aria-label='delete button'>\n<span class='glyphicon glyphicon-minus' aria-hidden='true'></span>\n</button>" + "</td>";
+        tempItem += "<td>" + "<button type='button' class='btn btn-danger delete-button' aria-label='delete button'>\n<span class='glyphicon glyphicon-minus' aria-hidden='true' id='deleteItem" + me.currentItemId + "'></span>\n</button>" + "</td>";
         $('#orderItems').append("<tr>" + tempItem + "</tr>");
+        $('#deleteItem' + me.currentItemId).click(function(){
+          // TODO: aallow item delete itself
+        });
         me.orderItems.push(item.id);
       }
+      me.currentItemId++;
     });
     event.preventDefault();
   }

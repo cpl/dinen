@@ -7,6 +7,7 @@ function login() {
     if (response.status === Status.SUCCESS) {
       localStorage.setItem('JWT', response.data);
       loadPage('dashboard');
+      initHeader();
     } else {
       alert(response.data);
     }

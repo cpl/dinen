@@ -6,25 +6,6 @@ function Dashboard() {
     $('#section').html("");
     me.getRestaurants();
 
-    $('#logout').click(function () {
-      var data = {};
-      data['request'] = 'logout';
-      data['jwt'] = getJWT();
-      $.ajax({
-        url: apiURL,
-        type: 'POST',
-        data: data
-      }).done(function (response) {
-        if (response.status === Status.SUCCESS) {
-          loadPage('landing');
-          localStorage.removeItem('JWT');
-        } else {
-          alert(response.data);
-        }
-      });
-      return false;
-    });
-
     $('#to-index').click(function(event){
       loadPage('landing');
       event.preventDefault();
@@ -53,7 +34,6 @@ function Dashboard() {
   };
 
   this.listRestaurants = function (response) {
-    console.log('Response from get restaurants: ' + JSON.stringify(response));
     if (response.status === Status.SUCCESS) {
       response.data.forEach(me.listRestaurant);
       $("#section").replaceWith(me.allRestaurants);
