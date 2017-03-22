@@ -1,3 +1,11 @@
+#search-background {
+  background: url("../img/search-background-faded.jpg") no-repeat center fixed;
+}
+
+html {
+  background: url("../img/search-background.jpg") no-repeat center fixed;
+}
+
 .searchBox {
   height: 40px;
   outline: none;
@@ -5,8 +13,8 @@
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   border: 1px solid #808080;
-  background-color: #3d3838;
-  color: white;
+  background-color: white;
+  color: black;
   text-align: center;
   line-height: 30px;
 }
@@ -18,7 +26,7 @@
   color: white;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-	background-color: #3d3838;
+	background-color: #0057e7;
 	text-align: center;
   line-height: 30px;
 }
@@ -29,9 +37,9 @@ input::-webkit-input-placeholder {
 }
 
 .resultsBox {
-  color: white;
+  color: black;
   border: 1px solid #808080;
-  background-color: #49392c;
+  background-color: #5bc0de;
   border-radius: 15px;
   padding-top: 20px;
   margin-top: 20px;
@@ -39,9 +47,9 @@ input::-webkit-input-placeholder {
 }
 
 .filtersBox {
-  color: white;
+  color: black;
   border: 1px solid #808080;
-  background-color: #49392c;
+  background-color: #5bc0de;
   border-radius: 15px;
   margin-top: 20px;
   padding-bottom: 20px;
