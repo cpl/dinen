@@ -51,14 +51,14 @@ function initHeader() {
 }
 
 function updateHeader() {
-  var element;
+  var userButton;
   if(getJWT() === null) {
-    element = '<a href="#" onclick="return '
-                + ' loadPage(\'search\')">Sign In</a>';
+    userButton = '<a href="#" onclick="return '
+                 + ' loadPage(\'login\')">Sign In</a>';
   } else {
-    element = '<a href="#" onclick="return signOut()">Sign Out</a>';
+    userButton = '<a href="#" onclick="return signOut()">Sign Out</a>';
   }
-  $('#header_user').html(element);
+  $('#header_user').html(userButton);
 }
 
 function signOut() {
