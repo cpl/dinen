@@ -2,9 +2,13 @@ var scriptsWithInit = {'dashboard' : null, 'landing' : null, 'menu' : null,
                        'order' : null, 'cook' : null, 'search' : null,
                        'payment' : null};
 var loadedScripts = [];
+var usingHeaderTemplate = false;
 
 $(window).on('load', function () {
   // The following code is provided by the Imperial theme.
+
+  // Initiate the wowjs
+  new WOW().init();
 
   // Back to top button
   $(window).scroll(function() {
@@ -33,25 +37,44 @@ function loadPage(name) {
   showPreloader(function () {
     // After the pre-loader image is shown, load the page's html into the
     // page_contents div (on index).
-    $('#page_contents').load('html/' + name + '.html', function () {
-      // Load the page's JS it (if not already loaded) and initialise it,
-      // then hide the pre-loader, otherwise hide the pre-loader 'straight
-      // away'.
+    prepareTemplate(name, function (container) {
+      container.load('html/' + name + '.html', function () {
+        // Load the page's JS it (if not already loaded) and initialise it,
+        // then hide the pre-loader, otherwise hide the pre-loader 'straight
+        // away'.
 
-      // Ensure that the script isn't loaded twice.
-      if ($.inArray(name, loadedScripts) == -1) {
-        // Script not loaded.
-        $.getScript('js/' + name + '.js', function () {
-          loadedScripts.push(name);
+        // Ensure that the script isn't loaded twice.
+        if ($.inArray(name, loadedScripts) == -1) {
+          // Script not loaded.
+          $.getScript('js/' + name + '.js', function () {
+            loadedScripts.push(name);
+            initPageScript(name);
+            hidePreloader();
+          });
+        } else {
           initPageScript(name);
           hidePreloader();
-        });
-      } else {
-        initPageScript(name);
-        hidePreloader();
-      }
+        }
+      });
     });
   });
+}
+
+function prepareTemplate(name, callback) {
+  if (name == 'landing') {
+    callback($('#base_template_contents'));
+    usingHeaderTemplate = false;
+  } else {
+    if (usingHeaderTemplate) {
+      callback($('#header_template_contents'));
+    } else {
+      $('#base_template_contents').load('html/header.html', function () {
+        initHeader();
+        callback($('#header_template_contents'));
+        usingHeaderTemplate = true;
+      });
+    }
+  }
 }
 
 function initPageScript(name) {
