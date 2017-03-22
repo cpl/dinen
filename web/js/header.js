@@ -54,7 +54,7 @@ function updateHeader() {
   var userButton;
   if(getJWT() === null) {
     userButton = '<a href="#" onclick="return '
-                 + ' loadPage(\'login\')">Sign In</a>';
+                 + ' loadPage(\'sign_in\')">Sign In</a>';
   } else {
     userButton = '<a href="#" onclick="return signOut()">Sign Out</a>';
   }

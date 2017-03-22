@@ -27,7 +27,7 @@ $(window).on('load', function () {
   }
 });
 
-function register(event) {
+function signUp(event) {
   var ref = $(this).find("[required]");
   $(ref).each(function () {
     if ($(this).val() === '') {
@@ -40,7 +40,7 @@ function register(event) {
   $.ajax({
     url: apiURL,
     type: 'POST',
-    data: 'request=register&data=' + formToJSON('#register-form')
+    data: 'request=register&data=' + formToJSON('#sign_up_form')
   }).done(function (response) {
     if (response == 'success') {
       alert('Registration email was sent to your email');
