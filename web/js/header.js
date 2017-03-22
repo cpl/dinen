@@ -42,8 +42,8 @@ function initHeader() {
     $("#mobile-nav, #mobile-nav-toggle").hide();
   }
 
-  // Stick the header at top on scroll
+  /* Stick the header at top on scroll
   $("#header").sticky({topSpacing:0, zIndex: '50'});
-
+*/
   // End of Imperial code.
 }
