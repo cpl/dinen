@@ -41,7 +41,7 @@ function Payment()
   {
     var requestData = {};
     requestData['restaurant'] = sessionStorage.getItem('restaurantId');
-    requestData['comments'] = comments;
+    requestData['comments'] = me.comments;
     requestData['order_items'] = JSON.stringify(orderItems);
     requestData['request'] = 'create_order';
     $.ajax({
