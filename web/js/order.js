@@ -110,7 +110,7 @@ function Order()
   {
     var orderData = {};
     orderData['menuItems'] = me.items;
-    orderData['comments'] = me.comments;
+    orderData['comments'] = $('#comments').val();
     orderData['orderItems'] = me.orderItems;
     sessionStorage.setItem('orderData', JSON.stringify(orderData));
     loadPage('payment');
