@@ -117,3 +117,39 @@ function mark_order_item_finished($item_id) {
   return [ 'status' => Status::SUCCESS,
            'data'   => 'Order item marked as finished' ];
 }
+
+
+
+function get_orders($restaurant_id)
+{
+  // TODO: Check if user can access this data (is cook)
+  if(empty($restaurant_id))
+    return [ 'status' => Status::ERROR,
+              'data' => "No restaurant id given"];
+  $mysqli = createMySQLi();
+  if ($mysqli->connect_error)
+    return [ 'status' => Status::ERROR,
+             'data' => "Database connection failed"];
+  // get the orders from dbase to get time of order
+  $stmt = $mysqli->prepare('SELECT * FROM orders
+                            WHERE restaurant_id = ? AND
+                            is_finished = 0');
+  $stmt->bind_param('i', $restaurant_id);
+  $stmt->execute();
+  if ($stmt->errno != 0)
+  {
+    $mysqli->close();
+    return ['status' => Status::ERROR,
+            'data' => 'Error getting all orders'];
+  }
+  $stmt_result = $stmt->get_result();
+  $order_list = array();
+  while ($row = $stmt_result->fetch_array()) {
+    $order_list[$row['id']] = ['id'       => $row['id'],
+                               'comments' => $row['comments'],
+                               'time'     => $row['time']];
+  }
+
+  return [ 'status' => Status::SUCCESS,
+           'data' => ($order_list)];
+}

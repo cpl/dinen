@@ -10,12 +10,35 @@ function Cook()
   var me = this;
   me.menuLoaded = false;
   me.menuItems = {};
+  me.orders = {};
+
   me.init = function() {
+    window.setInterval(me.getOrderItems, 10000);
     window.setInterval(me.getOrders, 10000);
     me.getMenu();
   }
-  // Get unifinished orders for restaurant
+
   me.getOrders = function()
+  {
+    // if menu GET parameter doesn't exist, abort operation
+    var restaurantId = sessionStorage.getItem('restaurantID');
+    if(restaurantId == null)
+      console.log("empty restaurantId");
+    var requestData = {
+        'request': 'get_orders',
+        'restaurant_id': restaurantId
+    };
+    $.ajax({
+        url: apiURL,
+        type: 'POST',
+        data: requestData
+    }).done(function(response){
+      me.orders = response.data;
+    });
+  }
+
+  // Get unifinished orders for restaurant
+  me.getOrderItems = function()
   {
       // if menu GET parameter doesn't exist, abort operation
       var restaurantId = sessionStorage.getItem('restaurantID');

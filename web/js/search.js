@@ -12,7 +12,7 @@ function Search()
     $('#search-button').click(search);
     me.oneRestaurant = $('#result-box').html();
     $('#result-box').html("");
-    me.getPosition(me.getRestaurants);
+    me.getPosition();
   }
   // Get all restaurants in near vicinity of user
   me.getRestaurants = function(latitude, longitude)
