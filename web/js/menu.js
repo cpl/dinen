@@ -83,6 +83,7 @@ function Menu() {
         tempItem += "<td>" + item.section + "</td>";
         tempItem += "<td>" + item.name + "</td>";
         tempItem += "<td>£" + item.price + "</td>";
+        tempItem += "<td>" + "<button type='button' class=#'btn btn-danger delete-button' aria-label='delete button'>\n<span class='glyphicon glyphicon-minus' aria-hidden='true'></span>\n</button>" + "</td>";
         me.menuItems += "<tr>" + tempItem + "</tr>";
       });
       if(nr === 0){
