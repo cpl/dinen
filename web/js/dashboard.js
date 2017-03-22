@@ -63,7 +63,6 @@ function Dashboard() {
   };
 
   this.listRestaurant = function (restaurant) {
-    console.log('Restaurant: ' + JSON.stringify(restaurant));
     var tempRestaurant = me.oneRestaurant;
     tempRestaurant = tempRestaurant.toString().replace("#name#",
       restaurant.name);
