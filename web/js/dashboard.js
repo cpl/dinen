@@ -2,8 +2,8 @@ function Dashboard() {
   var me = this;
   this.init = function () {
     me.allRestaurants = "";
-    me.oneRestaurant = $('#restaurants').html();
-    $('#restaurants').html("");
+    me.oneRestaurant = $('#section').html();
+    $('#section').html("");
     me.getRestaurants();
 
     $('#logout').click(function () {
@@ -56,7 +56,7 @@ function Dashboard() {
     console.log('Response from get restaurants: ' + JSON.stringify(response));
     if (response.status === Status.SUCCESS) {
       response.data.forEach(me.listRestaurant);
-      $("#restaurants").replaceWith(me.allRestaurants);
+      $("#section").replaceWith(me.allRestaurants);
     } else {
       $('#welcome').innerHTML = response.data;
     }

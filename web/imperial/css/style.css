@@ -36,7 +36,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
-/* Prelaoder */
+/* Preloader */
 #preloader {
   position: fixed;
   left: 0;
@@ -455,6 +455,11 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------------------------------------*/
 /* Sections Common
 --------------------------------*/
+.section {
+  background: #fff;
+  padding: 80px 0;
+}
+
 .section-title {
   font-size: 32px;
   color: #111;
@@ -472,140 +477,12 @@ body.mobile-nav-active #mobile-nav-toggle {
   width: 50px;
   height: 3px;
   background: #03C4EB;
-  margin: 0 auto;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
 }
 
-/* Get Started Section
+/* Section Item
 --------------------------------*/
-#about {
-  background: #fff;
-  padding: 80px 0;
-}
-
-#about .about-container {
-  background: url(../img/about-img.jpg) left top no-repeat;
-}
-
-#about .about-content {
-  background: #fff;
-}
-
-#about .about-title {
-  color: #333;
-  font-weight: 700;
-  font-size: 28px;
-}
-
-#about .about-text {
-  line-height: 26px;
-}
-
-#about .about-text:last-child {
-  margin-bottom: 0;
-}
-
-/* Services Section
---------------------------------*/
-#eaters {
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("../../img/kitchen_4K-blurred.jpg") fixed center center;
-  background-size: cover;
-  padding: 80px 0 60px 0;
-}
-
-#eaters .service-item {
-  margin-bottom: 20px;
-}
-
-#eaters .service-icon {
-  float: left;
-  background: #03C4EB;
-  padding: 16px;
-  border-radius: 50%;
-  transition: 0.5s;
-  border: 1px solid #03C4EB;
-}
-
-#eaters .service-icon i {
-  color: #fff;
-  font-size: 24px;
-}
-
-#eaters .service-item:hover .service-icon {
-  background: #fff;
-}
-
-#eaters .service-item:hover .service-icon i {
-  color: #03C4EB;
-}
-
-#eaters .service-title {
-  margin-left: 80px;
-  font-weight: 700;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-}
-
-#eaters .service-title a {
-  color: #111;
-}
-
-#eaters .service-description {
-  margin-left: 80px;
-  line-height: 24px;
-}
-
-/* Subscribe Section
---------------------------------*/
-#subscribe {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../img/subscribe-bg.jpg) fixed center center;
-  background-size: cover;
-  padding: 80px 0;
-}
-
-#subscribe .subscribe-title {
-  color: #fff;
-  font-size: 28px;
-  font-weight: 700;
-}
-
-#subscribe .subscribe-text {
-  color: #fff;
-}
-
-#subscribe .subscribe-btn-container {
-  text-align: center;
-  padding-top: 20px;
-}
-
-#subscribe .subscribe-btn {
-  font-family: "Raleway", sans-serif;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 16px;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 8px 20px;
-  border-radius: 2px;
-  transition: 0.5s;
-  margin: 10px;
-  border: 2px solid #fff;
-  color: #fff;
-}
-
-#subscribe .subscribe-btn:hover {
-  background: #03C4EB;
-  border: 2px solid #03C4EB;
-}
-
-/* Portfolio Section
---------------------------------*/
-#restaurants {
-  background: #fff;
-  padding: 80px 0;
-}
-
-#restaurants .portfolio-item {
+.section-item {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -617,7 +494,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin-bottom: 30px;
 }
 
-#restaurants .portfolio-item .details {
+.section-item .details {
   height: 260px;
   background: #fff;
   display: table-cell;
@@ -627,7 +504,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   text-align: center;
 }
 
-#restaurants .portfolio-item .details h4 {
+.section-item .details h4 {
   font-size: 16px;
   transition: opacity 0.3s, -webkit-transform 0.3s;
   transition: transform 0.3s, opacity 0.3s;
@@ -638,7 +515,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #333333;
 }
 
-#restaurants .portfolio-item .details span {
+.section-item .details span {
   display: block;
   color: #666666;
   font-size: 13px;
@@ -649,188 +526,52 @@ body.mobile-nav-active #mobile-nav-toggle {
   transform: translate3d(0, 15px, 0);
 }
 
-#restaurants .portfolio-item:hover .details {
+.section-item:hover .details {
   opacity: 0.8;
 }
 
-#restaurants .portfolio-item:hover .details h4 {
+.section-item:hover .details h4 {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
 
-#restaurants .portfolio-item:hover .details span {
+.section-item:hover .details span {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
 
-/* Testimonials Section
+/* Form Section
 --------------------------------*/
-#testimonials {
-  background: #f6f6f6;
-  padding: 80px 0;
-}
-
-#testimonials .profile {
-  text-align: center;
-}
-
-#testimonials .profile .pic {
-  border-radius: 50%;
-  border: 6px solid #fff;
-  margin-bottom: 15px;
-  overflow: hidden;
-  height: 260px;
-  width: 260px;
-}
-
-#testimonials .profile .pic img {
-  max-width: 100%;
-}
-
-#testimonials .profile h4 {
-  font-weight: 700;
-  color: #03C4EB;
-  margin-bottom: 5px;
-}
-
-#testimonials .profile span {
-  color: #333333;
-}
-
-#testimonials .quote {
-  position: relative;
-  background: #fff;
-  padding: 60px;
-  margin-top: 40px;
-  font-size: 16px;
-  font-style: italic;
-  border-radius: 5px;
-}
-
-#testimonials .quote b {
-  display: inline-block;
-  font-size: 22px;
-  left: -9px;
-  position: relative;
-  top: -8px;
-}
-
-#testimonials .quote small {
-  display: inline-block;
-  right: -9px;
-  position: relative;
-  top: 4px;
-}
-
-/* Team Section
---------------------------------*/
-#team {
-  background: #fff;
-  padding: 80px 0 60px 0;
-}
-
-#team .member {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-#team .member .pic {
-  margin-bottom: 15px;
-  overflow: hidden;
-  height: 260px;
-}
-
-#team .member .pic img {
-  max-width: 100%;
-}
-
-#team .member h4 {
-  font-weight: 700;
-  margin-bottom: 2px;
-}
-
-#team .member span {
-  font-style: italic;
-  display: block;
-  font-size: 13px;
-}
-
-#team .member .social {
-  margin-top: 15px;
-}
-
-#team .member .social a {
-  color: #b3b3b3;
-}
-
-#team .member .social a:hover {
-  color: #03C4EB;
-}
-
-#team .member .social i {
-  font-size: 18px;
-  margin: 0 2px;
-}
-
-/* Register Section
---------------------------------*/
-#register {
+.form-section {
   background: #f7f7f7;
+  padding: 0;
 }
 
-#register .info {
-  color: #333333;
+.form-container {
+  display: flex;
+  height: 100vh;
+  max-width: 256px;
+  align-items: center;
+  padding: 0;
+  margin: 0 auto 0 auto;
 }
 
-#register .info i {
-  font-size: 32px;
-  color: #03C4EB;
-  float: left;
+.form-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-#register .info p {
-  padding: 0 0 10px 50px;
-  line-height: 24px;
-}
-
-#register .form #sendmessage {
-  color: #03C4EB;
-  border: 1px solid #03C4EB;
-  display: none;
-  text-align: center;
-  padding: 15px;
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-
-#register .form #errormessage {
-  color: red;
-  display: none;
-  border: 1px solid red;
-  text-align: center;
-  padding: 15px;
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-
-#register .form #sendmessage.show, #register .form #errormessage.show, #register .form .show {
+.form .show {
   display: block;
 }
 
-#register .form .validation {
-  color: red;
-  display: none;
-  margin: 0 0 20px;
-  font-weight: 400;
-  font-size: 13px;
-}
-
-#register .form input, #register .form textarea {
+.form input, .form textarea {
   border-radius: 0;
   box-shadow: none;
 }
 
-#register .form button[type="submit"] {
+.form button[type="submit"] {
   background: #03C4EB;
   border: 0;
   padding: 10px 24px;
@@ -838,8 +579,61 @@ body.mobile-nav-active #mobile-nav-toggle {
   transition: 0.4s;
 }
 
-#register .form button[type="submit"]:hover {
+.form button[type="submit"]:hover {
   background: #25d8fc;
+}
+
+/* Features Section
+--------------------------------*/
+.features-section {
+  background: linear-gradient(rgba(255, 255, 255, 0.9),
+  rgba(255, 255, 255, 0.9)),
+  url("../../img/kitchen_4K-blurred.jpg")
+  fixed center center;
+  background-size: cover;
+  padding: 80px 0 60px 0;
+}
+
+.feature-item {
+  margin-bottom: 20px;
+}
+
+.feature-icon {
+  float: left;
+  background: #03C4EB;
+  padding: 16px;
+  border-radius: 50%;
+  transition: 0.5s;
+  border: 1px solid #03C4EB;
+}
+
+.feature-icon i {
+  color: #fff;
+  font-size: 24px;
+}
+
+.feature-item:hover .feature-icon {
+  background: #fff;
+}
+
+.feature-item:hover .feature-icon i {
+  color: #03C4EB;
+}
+
+.feature-title {
+  margin-left: 80px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.feature-title a {
+  color: #111;
+}
+
+.feature-description {
+  margin-left: 80px;
+  line-height: 24px;
 }
 
 /*--------------------------------------------------------------

@@ -1,5 +1,5 @@
-<section id="register">
-  <div class="container-fluid form-container">
+<section class="form-section">
+  <div class="container form-container">
     <div class="form-layout">
       <div class="row">
         <div class="col-md-12">
@@ -9,12 +9,16 @@
       </div>
       <form id="login-form" class="form" role="form" onsubmit="return login()">
         <div class="form-group">
-          <input id="email" name="email" type="email" placeholder="Email" class="form-control">
+          <input id="email" name="email" type="email" required
+                 placeholder="Email" class="form-control" />
         </div>
         <div class="form-group">
-          <input id="password" name="password" type="password" placeholder="Password" class="form-control">
+          <input id="password" name="password" type="password" required
+                 placeholder="Password" class="form-control" />
         </div>
-        <button class="btn btn-login btn-block" type="submit">Sign In</button>
+        <div class="form-group">
+          <button type="submit" class="btn-block">Sign In</button>
+        </div>
       </form>
     </div>
   </div>
