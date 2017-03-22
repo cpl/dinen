@@ -5,31 +5,63 @@
 <link rel="stylesheet" href="css/index.css"> -->
 
 <section class="section">
-    <div class="row main">
-        <div class="container">
-            <h3 class="section-title">Dinen - My Restaurants</h3>
-            <div class="section-title-divider"></div>
-            <div id="section">
-                <div class="col-md-3" id="first-panel">
-                  <div class="panel panel-default">
+    <div class="container">
+        <h3 class="section-title">Dinen - My Restaurants</h3>
+        <div class="section-title-divider"></div>
+        <div id="section">
+            <div class="col-md-3" id="first-panel">
+                <div class="panel panel-default">
                     <div class="panel-heading panel-text">
-                      <h3 class="panel-title">#name#</h3>
+                        <h3 class="panel-title">#name#</h3>
                     </div>
                     <div class="panel-body">
-                      <p>#description#</p>
-                      <p><a class="btn btn-default" href='#' onclick="#menu#" role="button">Change Menu &raquo;</a></p>
-                      <p><a class="btn btn-default" href='#' onclick="#cookModule#" role="button">Cook Module &raquo;</a></p>
-                      <p><a class="btn btn-warning" href='#' onclick="" role="button">Delete</a></p>
+                        <p>#description#</p>
+                        <p><a class="btn btn-default" href='#' onclick="#menu#" role="button">Change Menu &raquo;</a></p>
+                        <p><a class="btn btn-default" href='#' onclick="#cookModule#" role="button">Cook Module &raquo;</a></p>
+
+                        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal#id#">Delete</button>
+                        <!-- Modal -->
+                        <div id="myModal#id#" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Delete Confirmation</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Please retype your credentials to confirm the deletion of the restaurant.</p>
+                                        <form id="delete_restaurant_form" class="form" role="form">
+                                            <div class="form-group">
+                                                <input id="email" name="email" type="email" required
+                                                       placeholder="Email" class="form-control" />
+                                            </div>
+                                            <div class="form-group">
+                                                <input id="password" name="password" type="password" required
+                                                       placeholder="Password" class="form-control" />
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn-block" onclick="deleteRestaurant('#id#')">Confirm</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
             </div>
-            <div class="row">
-            </div>
-            <br/>
-            <div>
-                <a href='#' id='create-restaurant'><h3>Add another restaurant</h3></a>
-            </div>
+        </div>
+        <div class="row">
+        </div>
+        <br/>
+        <div>
+            <a href='#' id='create-restaurant'><h3>Add another restaurant</h3></a>
         </div>
     </div>
 </section>
