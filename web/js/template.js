@@ -13,6 +13,30 @@ function loadPage(name) {
         // Load the page's JS it (if not already loaded) and initialise it,
         // then hide the pre-loader, otherwise hide the pre-loader 'straight
         // away'.
+        function doesFileExist(name)
+        {
+          var xhr = new XMLHttpRequest();
+          xhr.open('HEAD','../css/' + name + '.css', false);
+          xhr.send();
+           
+          if (xhr.status == "404") {
+              return false;
+          } else {
+              return true;
+          }
+        }
+
+        function loadCSS(name) {
+          if(doesFileExist(name) == true)  
+            if (document.createStyleSheet){
+                document.createStyleSheet('../css/' + name + '.css');
+                // this method supports IE8 and below
+            }
+            else{
+                $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', '../css/' + name + '.css') );
+            }
+        };        
+        loadCSS(name);
 
         // Ensure that the script isn't loaded twice.
         if ($.inArray(name, loadedScripts) == -1) {
@@ -30,6 +54,8 @@ function loadPage(name) {
     });
   });
 }
+
+
 
 function prepareTemplate(name, callback) {
   if (name == 'landing') {
