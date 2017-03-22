@@ -86,7 +86,7 @@ h1, h2, h3, h4, h5, h6 {
   display: table;
   width: 100%;
   height: 100vh;
-  background: url(../../img/restaurant.gif) top center fixed;
+  background: url(../../img/cafe-blurred-dark.jpg) top center fixed;
   background-size: cover;
 }
 
@@ -649,9 +649,10 @@ body.mobile-nav-active #mobile-nav-toggle {
   text-align: center;
 }
 
-#footer .credits {
+#footer .footer-description {
+  font-family:times;
   padding-top: 10px;
   text-align: center;
-  font-size: 13px;
+  font-size: 17px;
   color: #ccc;
 }
