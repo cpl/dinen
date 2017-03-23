@@ -9,6 +9,7 @@ function Cook()
 {
   var me = this;
   me.menuLoaded = false;
+  me.ordersLoaded = false;
   me.menuItems = {};
   me.orders = {};
 
@@ -16,10 +17,12 @@ function Cook()
     window.setInterval(me.getOrderItems, 10000);
     window.setInterval(me.getOrders, 10000);
     me.getMenu();
+    me.getOrders();
   }
 
   me.getOrders = function()
   {
+    me.orders = {};
     // if menu GET parameter doesn't exist, abort operation
     var restaurantId = sessionStorage.getItem('restaurantID');
     if(restaurantId == null)
@@ -34,6 +37,8 @@ function Cook()
         data: requestData
     }).done(function(response){
       me.orders = response.data;
+      me.ordersLoaded = true;
+      me.getOrderItems();
     });
   }
 
@@ -79,7 +84,7 @@ function Cook()
   me.processOrderItems = function(response) {
       // TODO: Check for errors
       // don't process items if menu isn't loaded
-      if (!me.menuLoaded)
+      if (!me.menuLoaded || !me.ordersLoaded)
           return;
       $('#order-items').empty();
       var data = response['data'];
@@ -89,7 +94,7 @@ function Cook()
               "<th>" + me.menuItems[orderItem.menu_item_id].name + "</th>" +
               "<th>" + orderItem.id +"</th>" +
               "<th>" + orderItem.time + "</th>" +
-              "<th>" + orderItem.comments + "</th>" +
+              "<th>" + me.orders[orderItem.order_id].comments + "</th>" +
               "<th>" + me.genOrderItemCheckbox(orderItem) +
               "</tr>";
           $('#order-items').append(string);
@@ -103,7 +108,7 @@ function Cook()
           me.menuItems[menuItem.id] = menuItem;
       });
       console.log(me.menuItems);
-      me.getOrders();
+      me.getOrderItems();
   }
 
   me.genOrderItemCheckbox = function(orderItem) {
