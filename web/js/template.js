@@ -3,9 +3,12 @@ var scriptsWithInit = {'dashboard' : null, 'landing' : null, 'menu' : null,
                        'payment' : null};
 var loadedScripts = [];
 var usingHeaderTemplate = false;
+var cssLoaded = 0;
+var loadedPage = [];
 
 function loadPage(name) {
-  showPreloader(function () {
+  showPreloader(function () {    
+    loadedPage[cssLoaded] = name;
     // After the pre-loader image is shown, load the page's html into the
     // page_contents div (on index).
     prepareTemplate(name, function (container) {
@@ -13,10 +16,28 @@ function loadPage(name) {
         // Load the page's JS it (if not already loaded) and initialise it,
         // then hide the pre-loader, otherwise hide the pre-loader 'straight
         // away'.
+
+        // removes the previous css that was added to the page
+        function removeCSS()
+        {
+          // means no css has been loaded yet
+          if(cssLoaded == 0){
+
+          }
+          // removes the previous css that has been loaded
+          else{
+            if(doesFileExist(loadedPage[cssLoaded]) == true){
+              $('<link rel="stylesheet" type="text/css" />').attr('href', '/css/' + loadedPage[cssLoaded] + '.css').remove();         
+            }
+          }
+        }
+        removeCSS();
+
+        // checks if css files exists before adding it to the page
         function doesFileExist(name)
         {
           var xhr = new XMLHttpRequest();
-          xhr.open('HEAD','../css/' + name + '.css', false);
+          xhr.open('HEAD','/css/' + name + '.css', false);
           xhr.send();
            
           if (xhr.status == "404") {
@@ -24,17 +45,23 @@ function loadPage(name) {
           } else {
               return true;
           }
-        }
+        };
 
+        // loads the custom css of the file
         function loadCSS(name) {
           if(doesFileExist(name) == true)  
+          {
+            // so cssLoaded only increments when file exists
+            cssLoaded++;
             if (document.createStyleSheet){
-                document.createStyleSheet('../css/' + name + '.css');
+                document.createStyleSheet('/css/' + name + '.css');
                 // this method supports IE8 and below
             }
+            // adds the link to the header
             else{
-                $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', '../css/' + name + '.css') );
+                $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', '/css/' + name + '.css') );
             }
+          }
         };        
         loadCSS(name);
 

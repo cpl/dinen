@@ -473,6 +473,10 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin-bottom: 40px;
 }
 
+#first-panel{
+  border:1px solid #292929;
+}
+
 .section-title-divider {
   width: 50px;
   height: 3px;
