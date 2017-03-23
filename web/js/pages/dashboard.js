@@ -44,7 +44,7 @@ function Dashboard() {
         if (response.status === Status.SUCCESS) {
             console.log(JSON.stringify(response));
             response.data.forEach(me.listRestaurant);
-            $("#section").replaceWith(me.allRestaurants);
+            //$("#section").replaceWith(me.allRestaurants);
         } else {
           if(response.data === "expired")
             signOut();
@@ -62,7 +62,7 @@ function Dashboard() {
                 'return editRestaurantMenu(' + restaurant.id + ')');
         tempRestaurant = tempRestaurant.toString().replace('#cookModule#',
                 'return gotoCookModule(' + restaurant.id + ')');
-        me.allRestaurants += tempRestaurant;
+        $('#section').append(tempRestaurant);
     };
 
 }
@@ -78,22 +78,25 @@ function deleteRestaurant(id) {
             loadPage('landing');
             return false;
         }
-    var requestData = {'request': 'remove_restaurant','restaurant_id': id, 'jwt': JWT};
-        $.ajax({
-            url: apiURL,
-            type: 'POST',
-            data: requestData
-        }).done(processResponseDeleteRestaurant);
+    var requestData = {'request': 'remove_restaurant',
+                       'restaurant_id': id,
+                       'jwt': JWT,
+                       'password': $('#password' + id).val(),
+                       'email': $('#email' + id).val()};
+    $.ajax({
+        url: apiURL,
+        type: 'POST',
+        data: requestData
+    }).done(processResponseDeleteRestaurant);
 }
 
 function processResponseDeleteRestaurant(response) {
-    console.log(JSON.stringify(response));
-        if (response.status === Status.SUCCESS) {
-            alert("Successfully deleted the restaurant.");
-        }
-        else{
-            alert("Error deleting the restaurant.");
-        }
+    if (response.status === Status.SUCCESS) {
+        loadPage('dashboard');
+    }
+    else{
+        alert("Error deleting the restaurant.");
+    }
 }
 
 function editRestaurantMenu(id) {

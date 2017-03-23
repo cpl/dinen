@@ -9,7 +9,7 @@ function Search()
   me.oneRestaurant = "";
   me.init = function()
   {
-    $('#search-button').click(search);
+    $('#search').on('input', me.search);
     me.oneRestaurant = $('#result-box').html();
     $('#result-box').html("");
     me.getPosition();

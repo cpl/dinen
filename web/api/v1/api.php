@@ -206,6 +206,7 @@ function processGetOrders()
 function processRemoveRestaurant()
 {
   $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
+  $password = htmlspecialchars($_POST['password']);
   $jwt = $_POST['jwt'];
   if (checkJWT($jwt)['status'] !== Status::SUCCESS) {
     echo json_encode(['status' => Status::ERROR,
@@ -214,5 +215,5 @@ function processRemoveRestaurant()
   }
   $payload = getJWTPayload($jwt);
   $id = $payload['user_id'];
-  echo json_encode(get_orders($restaurant_id));
+  echo json_encode(remove_restaurant($restaurant_id, $id, $password));
 }
