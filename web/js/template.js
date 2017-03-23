@@ -37,7 +37,7 @@ function loadPage(name) {
         function doesFileExist(name)
         {
           var xhr = new XMLHttpRequest();
-          xhr.open('HEAD','/css/' + name + '.css', false);
+          xhr.open('head','/css/' + name + '.css', false);
           xhr.send();
            
           if (xhr.status == "404") {
