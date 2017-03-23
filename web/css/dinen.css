@@ -1,0 +1,23 @@
+html {
+    min-height: 100%;
+}
+body {
+    height: 100vh !important;
+}
+
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -162px;
+}
+
+#footer, #push {
+    height: 162px;
+}
+
+.hcentre {
+    margin: 0 auto;
+    display: block;
+    width: 50px;
+}
