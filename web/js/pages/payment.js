@@ -33,6 +33,11 @@ function Payment()
     var amountHtml = $('#amount').html();
     amountHtml = amountHtml.toString().replace('#amount#', "$" + totalAmount);
     $('#amount').html(amountHtml);
+    $('#amount').html(amountHtml);
+    var commentsHtml = $('#comments').html();
+    commentsHtml = commentsHtml.toString().replace('#comments#', "Comments : " + me.comments);
+    $('#comments').html(commentsHtml);
+
   }
 
   me.submitOrder = function()
@@ -47,7 +52,15 @@ function Payment()
       type: 'POST',
       data: requestData
     }).done(function(response){
-      console.log(response);
+      if(response.status === 1)
+      {
+        loadPage('landing');
+        alert('Your order is on the way!');
+      }
+      else
+      {
+        alert('Sorry, something went wrong');
+      }
     });
   }
 }

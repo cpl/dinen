@@ -86,7 +86,7 @@ function Cook()
       data.forEach(function(orderItem) {
           var string = "<tr>" +
               "<th>" + me.menuItems[orderItem.menu_item_id].name + "</th>" +
-              "<th>" + /* Add means of identifying customer */ +"</th>" +
+              "<th>" + orderItem.id +"</th>" +
               "<th>" + orderItem.time + "</th>" +
               "<th>" + orderItem.comments + "</th>" +
               "<th>" + me.genOrderItemCheckbox(orderItem) +
