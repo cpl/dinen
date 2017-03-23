@@ -27,7 +27,7 @@ function loadPage(name) {
           // removes the previous css that has been loaded
           else{
             if(doesFileExist(loadedPage[cssLoaded]) == true){
-              $('<link rel="stylesheet" type="text/css" />').attr('href', '/css/' + loadedPage[cssLoaded] + '.css').remove();         
+              $('<link rel="stylesheet" type="text/css" />').attr('href', 'css/' + loadedPage[cssLoaded] + '.css').remove();         
             }
           }
         }
@@ -37,7 +37,7 @@ function loadPage(name) {
         function doesFileExist(name)
         {
           var xhr = new XMLHttpRequest();
-          xhr.open('head','/css/' + name + '.css', false);
+          xhr.open('head','css/' + name + '.css', false);
           xhr.send();
            
           if (xhr.status == "404") {
@@ -54,12 +54,12 @@ function loadPage(name) {
             // so cssLoaded only increments when file exists
             cssLoaded++;
             if (document.createStyleSheet){
-                document.createStyleSheet('/css/' + name + '.css');
+                document.createStyleSheet('css/' + name + '.css');
                 // this method supports IE8 and below
             }
             // adds the link to the header
             else{
-                $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', '/css/' + name + '.css') );
+                $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'css/' + name + '.css') );
             }
           }
         };        
