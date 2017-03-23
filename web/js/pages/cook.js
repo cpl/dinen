@@ -83,6 +83,7 @@ function Cook()
           return;
       $('#order-items').empty();
       var data = response['data'];
+      console.log(JSON.stringify(response));
       data.forEach(function(orderItem) {
           var string = "<tr>" +
               "<th>" + me.menuItems[orderItem.menu_item_id].name + "</th>" +

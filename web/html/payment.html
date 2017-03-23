@@ -3,41 +3,41 @@
 <!-- <link rel="stylesheet" href="css/main.css"> -->
 
 <!-- the jumbotron ======================================================================== -->
-<div class = "container">
-  <div id="payment-panel" class="jumbotron">
-    <!--<button type="button" id="edit-button" class="btn btn-secondary btn-sm">Edit</button>-->
+<div class = "container" style="max-width: 500px; padding: 50px">
+    <div id="payment-panel" class="jumbotron" style="max-width: 500px">
+        <!--<button type="button" id="edit-button" class="btn btn-secondary btn-sm">Edit</button>-->
 
-    <p>Order Summary</p>
-    <div class="payment-items">
-      <table class="table table-borderless">
-        <thead>
-            <tr>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Price</th>
-            </tr>
-        </thead>
-        <tbody id="menu-table">
-          <tr>
-              <th>#foodName#</th>
-              <th>#foodCategory#</th>
-              <th>#foodPrice#</th>
-          </tr>
-        </tbody>
-      </table>
+        <p>Order Summary</p>
+        <div class="payment-items">
+            <table class="table table-borderless" style="max-width: 500px">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody id="menu-table">
+                    <tr>
+                        <th>#foodName#</th>
+                        <th>#foodCategory#</th>
+                        <th>#foodPrice#</th>
+                    </tr>
+                </tbody>
+            </table>
 
+        </div>
+        <div class="make-bottom">
+            <div class="col-md-12 total-box" id='amount'>
+                <span> Total : #amount#</span>
+            </div>
+            <div class="col-md-12 total-box" id='comments'>
+                <span> #comments#</span>
+            </div>
+
+            
+            <button type="button" class="btn btn-outline-secondary done-button btn-success"
+                    id="payment-button" role = "button" style="position: right">Order</button>
+        </div>
     </div>
-    <div class="make-bottom">
-      <div class="col-md-12 total-box" id='amount'>
-        <span> Total : #amount#</span>
-      </div>
-      <div class="col-md-12 total-box" id='comments'>
-        <span> #comments#</span>
-      </div>
-
-
-      <button type="button" class="btn btn-outline-secondary done-button"
-                  id="payment-button" role = "button">Order</button>
-    </div>
-  </div>
 </div>

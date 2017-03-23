@@ -35,7 +35,7 @@ function Payment()
     $('#amount').html(amountHtml);
     $('#amount').html(amountHtml);
     var commentsHtml = $('#comments').html();
-    commentsHtml = commentsHtml.toString().replace('#comments#', "Comments : " + me.comments);
+    commentsHtml = commentsHtml.toString().replace('#comments#', "<br>Comments : " + me.comments);
     $('#comments').html(commentsHtml);
 
   }
