@@ -27,7 +27,6 @@ function loadPage(name) {
           // removes the previous css that has been loaded
           else{
             if(doesFileExist(loadedPage[cssLoaded]) == true){
-              alert('link[href="css/' + loadedPage[cssLoaded] + '.css"]')
               $('link[href="css/' + loadedPage[cssLoaded] + '.css"]').remove();        
             }
           }
