@@ -27,10 +27,11 @@ function loadPage(name) {
           // removes the previous css that has been loaded
           else{
             if(doesFileExist(loadedPage[cssLoaded]) == true){
-              $('<link rel="stylesheet" type="text/css" />').attr('href', 'css/' + loadedPage[cssLoaded] + '.css').remove();         
+              alert('link[href="css/' + loadedPage[cssLoaded] + '.css"]')
+              $('link[href="css/' + loadedPage[cssLoaded] + '.css"]').remove();        
             }
           }
-        }
+        };
         removeCSS();
 
         // checks if css files exists before adding it to the page

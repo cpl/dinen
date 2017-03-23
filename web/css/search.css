@@ -1,5 +1,5 @@
 html {
-  background: url("../img/search-background.jpg") no-repeat center fixed;
+  background: url("img/search-background.jpg") no-repeat center fixed !important;
   position:relative;
   min-height:100%;
   -webkit-background-size: cover;
@@ -14,7 +14,7 @@ body{
 }
 
 #search-background {
-  background: url("../img/search-background-faded.jpg") no-repeat center fixed;
+  background: url("img/search-background-faded.jpg") no-repeat center fixed !important;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
