@@ -139,6 +139,7 @@ function Order()
     orderData['orderItems'] = me.orderItems;
     sessionStorage.setItem('orderData', JSON.stringify(orderData));
     loadPage('payment');
+    me.orderItems = [];
     return false;
   }
 }
