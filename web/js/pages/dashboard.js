@@ -36,7 +36,7 @@ function Dashboard() {
             type: 'POST',
             data: requestData
         }).done(me.listRestaurants);
-        
+
         return false;
     };
 
@@ -46,7 +46,8 @@ function Dashboard() {
             response.data.forEach(me.listRestaurant);
             $("#section").replaceWith(me.allRestaurants);
         } else {
-            $('#welcome').innerHTML = response.data;
+          if(response.data === "expired")
+            signOut();
         }
     };
 
@@ -63,7 +64,7 @@ function Dashboard() {
                 'return gotoCookModule(' + restaurant.id + ')');
         me.allRestaurants += tempRestaurant;
     };
-    
+
 }
 
 function replaceAll(str, find, replace) {

@@ -60,23 +60,3 @@ function updateHeader() {
   }
   $('#header_user').html(userButton);
 }
-
-function signOut() {
-  var data = {};
-  data['request'] = 'logout';
-  data['jwt'] = getJWT();
-  $.ajax({
-    url: apiURL,
-    type: 'POST',
-    data: data
-  }).done(function (response) {
-    if (response.status === Status.SUCCESS) {
-      loadPage('landing');
-      localStorage.removeItem('JWT');
-    } else {
-      alert(response.data);
-    }
-  });
-  updateHeader();
-  return false;
-}

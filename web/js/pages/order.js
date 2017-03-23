@@ -5,7 +5,7 @@ function Order()
 {
   var me = this;
   me.currentItemId = 0;
-  me.items = {};
+  me.menuItems = {};
   me.orderItems = [];
   me.sections = [];
   me.comments = "";
@@ -42,8 +42,8 @@ function Order()
   {
     console.log("ProcessItems: "+JSON.stringify(response));
     if (response.status === Status.SUCCESS) {
-      me.items = response.data;
-      me.items.forEach(function(item) {
+      response.data.forEach(function(item) {
+        me.menuItems[item.id] = item;
         me.sections.push(item.section);
       });
       me.sections = $.unique(me.sections);
@@ -63,7 +63,8 @@ function Order()
   me.changeItemsInSelect = function(sel)
   {
     $("#menuItems option").remove();
-    me.items.forEach(function(item) {
+    console.log(me.menuItems);
+    $.each(me.menuItems, function(id, item) {
       if(item.section == $('#menus').val())
       {
         $('#menuItems')
@@ -80,11 +81,36 @@ function Order()
   me.changeItemDescription = function(sel)
   {
     $("#itemDescription").text("");
-    me.items.forEach(function(item) {
+    $.each(me.menuItems, function(id, item) {
       if(item.name == $('#menuItems').val())
       {
         $("#itemDescription").text(item.description);
       }
+    });
+  }
+
+  me.updateItems = function()
+  {
+    $('#orderItems').html("");
+    me.currentItemId = 0;
+    me.orderItems.forEach(function(item){
+      var tempItem = $("<tr>");
+      $("<td>", {text: me.menuItems[item].section}).appendTo(tempItem);
+      $("<td>", {text: me.menuItems[item].name}).appendTo(tempItem);
+      $("<td>", {text: me.menuItems[item].price}).appendTo(tempItem);
+      var button = $("<td>");
+      var id = me.currentItemId;
+      $("<button>", {type:'button',
+                     class:'btn btn-danger delete-button',
+                     click: function()
+                     {
+                       me.orderItems.splice(id, 1);
+                       me.updateItems();
+                     }
+                   }).appendTo(button);
+      button.appendTo(tempItem);
+      tempItem.appendTo($('#orderItems'));
+      me.currentItemId++;
     });
   }
 
@@ -93,30 +119,22 @@ function Order()
   me.submitItem = function(event)
   {
     // for every item
-    me.items.forEach(function(item) {
+    $.each(me.menuItems, function(id, item) {
       // if the name of the item is specified in input select, add it
       // to array of all item ids and and create html for it
       if(item.name == $('#menuItems').val())
       {
-        var tempItem = "<td>" + item.section + "</td>";
-        tempItem += "<td>" + item.name + "</td>";
-        tempItem += "<td>£" + item.price + "</td>";
-        tempItem += "<td>" + "<button type='button' class='btn btn-danger delete-button' aria-label='delete button'>\n<span class='glyphicon glyphicon-minus' aria-hidden='true' id='deleteItem" + me.currentItemId + "'></span>\n</button>" + "</td>";
-        $('#orderItems').append("<tr>" + tempItem + "</tr>");
-        $('#deleteItem' + me.currentItemId).click(function(){
-          // TODO: aallow item delete itself
-        });
         me.orderItems.push(item.id);
       }
-      me.currentItemId++;
     });
+    me.updateItems();
     event.preventDefault();
   }
 
   me.submitOrder = function()
   {
     var orderData = {};
-    orderData['menuItems'] = me.items;
+    orderData['menuItems'] = me.menuItems;
     orderData['comments'] = $('#comments').val();
     orderData['orderItems'] = me.orderItems;
     sessionStorage.setItem('orderData', JSON.stringify(orderData));

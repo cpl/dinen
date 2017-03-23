@@ -134,7 +134,7 @@ function processCreateRestaurantRequest() {
 
 function processGetRestaurantsRequest() {
   if (checkJWT($_POST['jwt'])['status'] !== Status::SUCCESS) {
-    echo json_encode(checkJWT($_POST['jwt'])['data']);
+    echo json_encode(checkJWT($_POST['jwt']));
     //echo checkJWT($_POST['jwt'])['data'];
     return;
   }

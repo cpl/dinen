@@ -10,7 +10,7 @@ function create_order($restaurant_id, $comments, $data)
   // check if restaurant is not emptyand int and data contains only integers
   if(empty($restaurant_id))
     return [ 'status' => Status::ERROR,
-             'data'   => 'User id is empty'];
+             'data'   => 'Restaurant id is empty'];
   if(strval($restaurant_id) != strval(intval($restaurant_id)))
     return [ 'status' => Status::ERROR,
              'data'   => 'HAAAACKS'];
@@ -45,7 +45,7 @@ function create_order($restaurant_id, $comments, $data)
       $items_stringified = $items_stringified . ',';
     else
       $first = false;
-    $items_stringified = $items_stringified . $item_id;
+    $items_stringified = $items_stringified . intval($item_id);
   }
   $stmt = $mysqli->prepare("SELECT * FROM menu_items
                             WHERE restaurant_id NOT IN (?) AND

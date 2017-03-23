@@ -8,9 +8,7 @@ function Payment()
   me.init = function()
   {
     data = JSON.parse(sessionStorage.getItem('orderData'));
-    data['menuItems'].forEach(function(item){
-      me.menuItems[item.id] = item;
-    });
+    me.menuItems = data['menuItems'];
     me.orderItems = data['orderItems'];
     me.comments = data['comments'];
     me.oneOrder = $('#menu-table').html();
@@ -40,9 +38,9 @@ function Payment()
   me.submitOrder = function()
   {
     var requestData = {};
-    requestData['restaurant'] = sessionStorage.getItem('restaurantId');
-    requestData['comments'] = comments;
-    requestData['order_items'] = JSON.stringify(orderItems);
+    requestData['restaurant'] = sessionStorage.getItem('restaurantID');
+    requestData['comments'] = me.comments;
+    requestData['order_items'] = JSON.stringify(me.orderItems);
     requestData['request'] = 'create_order';
     $.ajax({
       url: apiURL,
