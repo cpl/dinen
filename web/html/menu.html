@@ -36,8 +36,9 @@
                                 <label for="food-description" class="cols-sm-2 control-label">Add a food description:</label>
                             </td>
                             <td>
-                                <textarea class="food-description" id="food-description"></textarea>              
-
+                                <textarea class="food-description" id="food-description"></textarea>                                              
+                            </td>
+                            <td>
                                 <div id="price-panel" class="input-group">
                                     Price:
                                     <div class="input-group-addon currency-symbol">£</div>
@@ -47,15 +48,21 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="col-md-12 item-panel">
-                                    <button type="button" class="btn btn-outline-secondary done-button-for-item"
-                                            id="done-button-for-item" role = "button">Add</button>
-                                </div> 
+                                
                             </td>
                         </tr>
                     </table>
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><h4>Menu Items</h4></div>
+                    
+                </form>
+                
+                <table id="newOrderForm">
+                </table>
+            </div>
+            <div class="panel panel-default">
+                        <div class="panel-heading"><h4>Menu Items</h4><div class="col-md-12 item-panel">
+                                    <button type="button" class="btn btn-outline-secondary done-button-for-item"
+                                            id="done-button-for-item" role = "button">Add</button>
+                                </div> </div>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -71,10 +78,6 @@
                             </tbody>
                         </table>
                     </div>
-                </form>
-                <table id="newOrderForm">
-                </table>
-            </div>
         </div>
 
     </div>
