@@ -7,55 +7,74 @@
 <div class = "container">
     <div id="jumbotron-override" class = "jumbotron">
         <h1>MENU</h1>
-        <div class = "container">
-            <div id="menu" class = "jumbotron">
-                <!-- inner menu ============================ -->
-                <div class="col-md-12 item-panel">
 
-
-                    <label for="category">Category </label>
-                    <span class="colon"> : </span>
-                    <input type="text" class="category" id="category">
-                    <br>
-                    <label for="food-name">Food Name : </label>
-                    <input type="text" class="food-name" id="food-name">
-                    <br>
-                    <label for="food-description">Description : </label>
-                    <textarea class="food-description" id="food-description"></textarea>
-                    <div id="price-panel" class="input-group">
-                        Price:
-                        <div class="input-group-addon currency-symbol">£</div>
-                        <input type="number" class="price" id="price" step="0.01" value = "0.00" min="0.00">
-                    </div>
-                    <div class="col-md-12 item-panel">
-                    <button type="button" class="btn btn-outline-secondary done-button-for-item"
-                            id="done-button-for-item" role = "button">Add</button>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><h4>Menu Items</h4></div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Category</th>
-                                <th>Food Name</th>
-                                <th>Price</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody id="menu-table">
-
-                        </tbody>
-                    </table>
-                </div>
+        <div class="panel panel-default">
+            <div class="panel-heading panel-text">
+                <h3 class="panel-title">Edit Menu</h3>
             </div>
-                </div>
+            <div class="panel-body">
+                <form id="menuForm" role="form">
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="category" class="cols-sm-2 control-label">Define a category:</label>
+                            </td>
+                            <td>
+                                <input type="text" class="category" id="category">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="food-name" class="cols-sm-2 control-label">Add the food name:</label>
+                            </td>
+                            <td>
+                                <input type="text" class="food-name" id="food-name">                                              
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="food-description" class="cols-sm-2 control-label">Add a food description:</label>
+                            </td>
+                            <td>
+                                <textarea class="food-description" id="food-description"></textarea>              
 
-                <!--<button type="button" class="btn btn-info add-button" aria-label="add button">Add Item</button> -->
+                                <div id="price-panel" class="input-group">
+                                    Price:
+                                    <div class="input-group-addon currency-symbol">£</div>
+                                    <input type="number" class="price" id="price" step="0.01" value = "0.00" min="0.00">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-md-12 item-panel">
+                                    <button type="button" class="btn btn-outline-secondary done-button-for-item"
+                                            id="done-button-for-item" role = "button">Add</button>
+                                </div> 
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>Menu Items</h4></div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Category</th>
+                                    <th>Food Name</th>
+                                    <th>Price</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="menu-table">
 
-                <div id="items" style="color:black"> </div>
-
-
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <table id="newOrderForm">
+                </table>
+            </div>
         </div>
 
     </div>
