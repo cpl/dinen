@@ -83,7 +83,7 @@ function Menu() {
         tempItem += "<td>" + item.section + "</td>";
         tempItem += "<td>" + item.name + "</td>";
         tempItem += "<td>£" + item.price + "</td>";
-        tempItem += "<td>" + "<button type='button' class='btn btn-danger delete-button' aria-label='delete button'>\n<span class='glyphicon glyphicon-minus' aria-hidden='true'></span>\n</button>" + "</td>";
+        tempItem += "<td>" + "<button type='button' class='btn btn-danger delete-button' aria-label='delete button'>\n<span class='glyphicon glyphicon-minus' aria-hidden='true' onclick='removeItem(" + item.id + ")'></span>\n</button>" + "</td>";
         me.menuItems += "<tr>" + tempItem + "</tr>";
       });
       if(nr === 0){
@@ -95,4 +95,27 @@ function Menu() {
       console.log(response);
     }
   }
+}
+
+function removeItem(id)
+{
+  const JWT = localStorage.getItem('JWT');
+  if(JWT == null) {
+    console.log("User not logged in while creating items for restaurant.");
+    return;
+  }
+  var requestData = {};
+  requestData['restaurant_id'] = sessionStorage.getItem('restaurantID');
+  requestData['jwt'] = JWT;
+  requestData['menu_item_id'] = id;
+  requestData['request'] = 'remove_menu_item';
+  $.ajax({
+    url: apiURL,
+    type: 'POST',
+    data: requestData
+  }).done(function(response){
+    console.log(response);
+    // TODO: Reload items 
+  });
+  return false;
 }

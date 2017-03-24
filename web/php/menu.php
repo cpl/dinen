@@ -144,3 +144,35 @@ function get_unfinished_order_items($restaurant_id)
   return [ 'status' => Status::SUCCESS,
            'data' => ($order_item_list)];
 }
+
+function remove_menu_item($menu_item_id, $restaurant_id, $manager_id)
+{
+  if(empty($menu_item_id) || empty($restaurant_id) || empty($manager_id))
+    return [ 'status' => Status::ERROR,
+              'data' => "Empty required fields given to create menu item".$menu_item_id." ".$restaurant_id." ".$manager_id];
+  $mysqli = createMySQLi();
+  if ($mysqli->connect_error)
+    return [ 'status' => Status::ERROR,
+             'data' => "Database connection failed"];
+  // check if restaurant is owned by user
+  $stmt = $mysqli->prepare('SELECT * FROM restaurants
+                            WHERE id = ? AND manager_id = ?');
+  $stmt->bind_param('ii', $restaurant_id, $manager_id);
+  $stmt->execute();
+  $stmt_result = $stmt->get_result();
+  if ($stmt->errno != 0)
+    return ['status' => Status::ERROR,
+            'data' => 'Error executing menu item insertion query'];
+  if ($stmt_result->num_rows === 0)
+    return ['status' => Status::ERROR,
+            'data' => 'No restaurant with given user id found'];
+  $stmt = $mysqli->prepare('DELETE FROM menu_items
+                            WHERE id = ? AND restaurant_id = ?');
+  // create and execute sql request
+  $stmt->bind_param('ii', $menu_item_id, $restaurant_id);
+  $stmt->execute();
+  if ($stmt->errno != 0)
+    return ['status' => Status::ERROR,
+            'data'   => 'Error executing menu item insertion query'];
+  return ['status' => Status::SUCCESS];
+}

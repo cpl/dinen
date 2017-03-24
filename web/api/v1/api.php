@@ -54,6 +54,9 @@ switch ($request) {
   case 'mark_order_item_finished':
     processMarkOrderItemFinished();
     break;
+  case 'remove_menu_item':
+    processRemoveMenuItem();
+    break;
 }
 
 function processMarkOrderItemFinished() {
@@ -222,4 +225,19 @@ function processRemoveRestaurant()
   $payload = getJWTPayload($jwt);
   $id = $payload['user_id'];
   echo json_encode(remove_restaurant($restaurant_id, $id, $password));
+}
+
+function processRemoveMenuItem()
+{
+  $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
+  $jwt = $_POST['jwt'];
+  if (checkJWT($jwt)['status'] !== Status::SUCCESS) {
+    echo json_encode(['status' => Status::ERROR,
+                      'data'   => 'Wrong jwt sent']);
+    return;
+  }
+  $payload = getJWTPayload($jwt);
+  $id = $payload['user_id'];
+  $menu_item_id = htmlspecialchars($_POST['menu_item_id']);
+  echo json_encode(remove_menu_item($menu_item_id, $restaurant_id, $id));
 }
