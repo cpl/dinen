@@ -13,7 +13,7 @@ function Search()
     me.oneRestaurant = $('#result-box').html();
     $('#result-box').html("");
     me.getPosition();
-  }
+  };
   // Get all restaurants in near vicinity of user
   me.getRestaurants = function(latitude, longitude)
   {
@@ -25,7 +25,7 @@ function Search()
       type: 'POST',
       data: requestData
     }).done(me.generate_html_for_restaurants);
-  }
+  };
 
   me.getPosition = function()
   {
@@ -34,7 +34,7 @@ function Search()
     } else {
       me.wrapIpPosition("no error");
     }
-  }
+  };
 
 
   me.wrapIpPosition = function(error)
@@ -43,7 +43,7 @@ function Search()
     me.position = {lat: parseFloat(geoplugin_latitude()),
                 lng: parseFloat(geoplugin_longitude())};
     me.getRestaurants(me.position.lat, me.position.lng);
-  }
+  };
 
   me.wrapGpsPosition = function(pos)
   {
@@ -63,7 +63,7 @@ function Search()
     } else {
       $('#welcome').innerHTML = response.data;
     }
-  }
+  };
 
   me.generate_restaurant = function(restaurant)
   {
@@ -72,7 +72,7 @@ function Search()
     tempRestaurant = tempRestaurant.toString().replace("#restaurantDescription#", restaurant.description);
     tempRestaurant = tempRestaurant.toString().replace("#order#", "return goToOrdering(" + restaurant.id + ")");
     me.allRestaurants += tempRestaurant;
-  }
+  };
 
   me.search = function()
   {
