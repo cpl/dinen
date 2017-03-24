@@ -25,19 +25,25 @@
                     </tr>
                 </tbody>
             </table>
-
         </div>
-        <div class="make-bottom">
-            <div class="col-md-12 total-box" id='amount'>
-                <span> Total : #amount#</span>
+            <div id='amount'>
+                <span>Total: #amount#</span>
             </div>
-            <div class="col-md-12 total-box" id='comments'>
+            <div id='comments'>
                 <span> #comments#</span>
             </div>
-
-            
-            <button type="button" class="btn btn-outline-secondary done-button btn-success"
-                    id="payment-button" role = "button" style="position: right">Order</button>
+            <br/>
+            <div class="dialog-btn-group-small">
+              <span>
+                <button class="btn btn-default" onclick="return loadPage('order')">
+                  Change Order
+                </button>
+              </span>
+              <span>
+                <button type="button" class="btn btn-primary done-button"
+                        id="payment-button" role="button">Place Order</button>
+              </span>
+            </div>
         </div>
     </div>
 </div>

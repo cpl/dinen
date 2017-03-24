@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row main">
         <div class="container">
-            <p class="panel-text">Dinen - Make Your Order</p>
             <div id="order" class="col-md-12 item-panel">
+              <div><br/><h3>Place your order</h3></div>
                 <div class="panel panel-default">
                     <div class="panel-heading panel-text">
                         <h3 class="panel-title">Select items from menu</h3>
@@ -72,9 +72,13 @@
                     </table>
                     </div>
                 </div>
-                <button class="btn btn-default" id="createOrderButton" style="padding: 20px">Create order</button>
+                <div class="dialog-btn-group pull-right" role="group">
+                  <button class="btn btn-default" onclick="return loadPage('search')">
+                    Cancel
+                  </button>
+                  <button class="btn btn-primary" id="createOrderButton">Place Order</button>
+                </div>
             </div>
-
         </div>
     </div>
 </div>
