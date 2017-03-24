@@ -13,16 +13,16 @@ body{
   margin: 0 0 162px;
 }
 
-#search-background {
+/*#search-background {
   background: url("img/search-background-faded.jpg") no-repeat center fixed !important;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   height: 100%;
-}
+}*/
 
-.searchBox {
+/*.searchBox {
   height: 40px;
   outline: none;
   font-size: 25px;
@@ -32,13 +32,13 @@ body{
   color: black;
   text-align: center;
   line-height: 30px;
-}
+}*/
 
 /* makes the placeholder in searchBox bigger */
-input::-webkit-input-placeholder {
+/*input::-webkit-input-placeholder {
   font-size: 30px;
-}
-
+}*/
+/*
 .resultsBox {
   color: black;
   border: 3px solid grey;
@@ -56,23 +56,23 @@ input::-webkit-input-placeholder {
   border-radius: 15px;
   margin-top: 20px;
   padding: 15px;
-}
+}*/
 
-hr {
+/*hr {
   width: 100%;
-}
+}*/
 
-.resultsAndFilters {
+/*.resultsAndFilters {
   margin-top: 20px;
   margin-left: 20px;
   margin-right: 20px;
-}
-
+}*/
+/*
 .reastaurantButton {
   position: absolute;
   top: 35%;
   right: 5%;
-}
+}*/
 
 #footer {
   background: #111;

@@ -11,13 +11,12 @@
          <input type="text" class="form-control searchBox" placeholder="Search" id ="search">
     </div>
   </div>
+  <p></p>
 
 
-  <!-- Another row for search results and filters -->
-  <div class="row resultsAndFilters">
 
     <!-- List of search filters -->
-    <nav>
+    <!-- <nav>
       <div class="col-md-2 filtersBox">
         <dl>
           <dt><h4>Filters:</h4></dt>
@@ -29,21 +28,28 @@
             <dd> <input type="checkbox" name="Takeaway"/> Takeaway </dd>
         </dl>
      </div>
-    </nav>
+    </nav> -->
 
     <!-- template for search results -->
-     <div class="col-md-6 col-md-offset-1">
+     <div class="col-md-12">
         <div id="result-box">
        <!-- Rows of different restaurants -->
-        <div class="row resultsBox">
-        <div><h3>#restaurantName#</h3></div>
-        <div><p>#restaurantDescription#</p></div>
-        <input type="button" class="btn btn-primary reastaurantButton" value="Order" onclick="#order#"/>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-text">
+                    <h3 class="panel-title">#restaurantName#</h3>
+                </div>
+                <div class="panel-body">
+                    <p>#restaurantDescription#</p>
+                </div>
+                <div class="dialog-btn-group-small">
+                  <input type="button" class="btn btn-default" value="Order" onclick="#order#"/>
+                </div>
+            </div>
         </div>
      </div>
     </div>
 
-  </div> <!-- row for results and filters -->
 
   <br>
 
