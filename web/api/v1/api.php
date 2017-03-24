@@ -58,7 +58,7 @@ switch ($request) {
 
 function processMarkOrderItemFinished() {
   $orderItemId = htmlspecialchars($_POST['item']);
-  echo json_encode(mark_order_item_finished($orderItemId));
+  echo json_encode(set_order_item_finished($orderItemId));
 }
 
 function processGetRestaurantsNearUser() {
@@ -193,6 +193,12 @@ function processOrder()
 
 function processGetUnfinishedOrderItems()
 {
+  $jwt = $_POST['jwt'];
+  if (checkJWT($jwt)['status'] !== Status::SUCCESS) {
+    echo json_encode(['status' => Status::ERROR,
+                      'data'   => 'Wrong jwt sent']);
+    return;
+  }
   $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
   echo json_encode(get_unfinished_order_items($restaurant_id));
 }

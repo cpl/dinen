@@ -29,7 +29,8 @@ function Cook()
       console.log("empty restaurantId");
     var requestData = {
         'request': 'get_orders',
-        'restaurant_id': restaurantId
+        'restaurant_id': restaurantId,
+        'jwt' : localStorage.getItem('JWT')
     };
     $.ajax({
         url: apiURL,
@@ -51,7 +52,8 @@ function Cook()
         console.log("empty restaurantId");
       var requestData = {
           'request': 'get_unfinished_order_items',
-          'restaurant_id': restaurantId
+          'restaurant_id': restaurantId,
+          'jwt' : localStorage.getItem('JWT')
       };
       $.ajax({
           url: apiURL,
@@ -70,7 +72,8 @@ function Cook()
         console.log("empty restaurantId");
       var requestData = {
           'request': 'get_menu',
-          'restaurant_id': restaurantId
+          'restaurant_id': restaurantId,
+          'jwt' : localStorage.getItem('JWT')
       };
       $.ajax({
           url: apiURL,
@@ -123,7 +126,8 @@ function onCheckboxChanged(checkbox) {
   if (checkbox.checked) {
     var requestData = {
       'request': 'mark_order_item_finished',
-      'item': checkbox.id.split('-')[0]
+      'item': checkbox.id.split('-')[0],
+      'jwt' : localStorage.getItem('JWT')
     }
     $.ajax({
         url: apiURL,

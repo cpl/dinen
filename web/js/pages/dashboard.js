@@ -26,7 +26,7 @@ function Dashboard() {
     this.getRestaurants = function () {
         const JWT = getJWT();
         if (JWT == null) {
-            loadPage('landing');
+            loadPage('sign_in');
             return false;
         }
 
@@ -74,10 +74,10 @@ function replaceAll(str, find, replace) {
 function deleteRestaurant(id) {
     console.log("deleted restaurant: " + id);
     const JWT = getJWT();
-        if (JWT == null) {
-            loadPage('landing');
-            return false;
-        }
+    if (JWT == null) {
+        loadPage('sign_in');
+        return false;
+    }
     var requestData = {'request': 'remove_restaurant',
                        'restaurant_id': id,
                        'jwt': JWT,
