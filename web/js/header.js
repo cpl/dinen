@@ -60,3 +60,11 @@ function updateHeader() {
   }
   $('#header_user').html(userButton);
 }
+
+function loadDashOrLanding() {
+  if (isManager()) {
+    return loadPage('dashboard');
+  } else {
+    return loadPage('landing');
+  }
+}
