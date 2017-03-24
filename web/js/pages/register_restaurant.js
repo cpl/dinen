@@ -12,7 +12,7 @@ function create_restaurant() {
     type: 'POST',
     data: data
   }).done(function (response) {
-    if(response.status == 'success')
+    if(response.status == 1)
       loadPage('dashboard');
     }
   );

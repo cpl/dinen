@@ -45,6 +45,23 @@ function Order()
       response.data.forEach(function(item) {
         me.menuItems[item.id] = item;
         me.sections.push(item.section);
+        var tempItem = $("<tr>");
+        $("<td>", {text: item.section}).appendTo(tempItem);
+        $("<td>", {text: item.name}).appendTo(tempItem);
+        $("<td>", {text: item.description}).appendTo(tempItem);
+        var button = $("<td>");
+        var id = item.id;
+        $("<button>", {
+                        type:'button',
+                        class:'btn',
+                        text:'+',
+                        click: function()
+                        {
+                          me.submitItem(id);
+                        }
+                      }).appendTo(button);
+        button.appendTo(tempItem);
+        tempItem.appendTo($('#newOrderForm'));
       });
       me.sections = $.unique(me.sections);
       for(var index in me.sections){
@@ -129,6 +146,12 @@ function Order()
     });
     me.updateItems();
     event.preventDefault();
+  }
+
+  me.submitItemId = function(id)
+  {
+    me.orderItems.push(id);
+    me.updateItems();
   }
 
   me.submitOrder = function()
