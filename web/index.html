@@ -23,8 +23,8 @@
   <!-- Main Stylesheet File -->
   <link href="imperial/css/style.css" rel="stylesheet">
 
-  <!-- Our Stylesheet File -->
-  <link href="imperial/css/custom.css" rel="stylesheet">
+  <!-- Dinen specific stylesheet -->
+  <link href="css/dinen.css" rel="stylesheet">
 
 <!-- =======================================================
   Theme Name: Imperial
@@ -36,31 +36,29 @@
 
 <body>
   <div id="preloader"></div>
-  <div id = "page_contents"></div>
+  <div id="wrap">
+    <div id="base_template_contents"></div>
+    <div id="push"></div>
+  </div>
 
   <!--==========================
     Footer
   ============================-->
-  <footer id="footer">
+
+  <div id="footer">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <div class="copyright">
-              &copy; Copyright <strong>Imperial Theme</strong>. All Rights Reserved
+            <div class="footer-description">
+              <p>Dinen is optimized for satisfying people with food. We create an easy interface for managers to manage their restaurants and   customers to order food. While using this site, you agree to have read and accepted our terms of use, cookie and privacy policy.</p>
             </div>
-            <div class="credits">
-              <!--
-                All the links in the footer should remain intact.
-                You can delete the links only if you purchased the pro version.
-                Licensing information: https://bootstrapmade.com/license/
-                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Imperial
-              -->
-              Bootstrap Themes by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            <div class="copyright">
+              &copy; <strong>Dinen 2017</strong>. All Rights Reserved
             </div>
           </div>
         </div>
       </div>
-  </footer>
+  </div>
 
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
@@ -74,17 +72,14 @@
   <script src="imperial/lib/wow/wow.min.js"></script>
   <script src="imperial/lib/stickyjs/sticky.js"></script>
   <script src="imperial/lib/easing/easing.js"></script>
+  <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp"
+          type="text/javascript"></script>
+
 
   <!-- Our JavaScript -->
-  <script src="js/common.js"></script>
-  <script src="js/landing.js"></script>
-  <script src="js/dashboard.js"></script>
-  <script src="js/menu.js"></script>
-  <script src="js/cook.js"></script>
-  <script src="js/search.js"></script>
-  <script src="js/payment.js"></script>
-  <script src="js/order.js"></script>
+  <script src="js/utility.js"></script>
   <script src="js/index.js"></script>
-
+  <script src="js/header.js"></script>
+  <script src="js/template.js"></script>
 </body>
 </html>

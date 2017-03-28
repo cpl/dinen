@@ -1,0 +1,38 @@
+html {
+    min-height: 100%;
+}
+body {
+    height: 100vh !important;
+}
+
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -162px;
+}
+
+#footer, #push {
+    height: 162px;
+}
+
+.hcentre {
+    margin: 0 auto;
+    display: block;
+    width: 50px;
+}
+
+.dialog-btn-group {
+    margin-bottom: 24px;
+}
+
+.dialog-btn-group button {
+    padding: 16px;
+    margin-left: 16px;
+    margin-bottom: 16px;
+}
+
+.dialog-btn-group-small button {
+    padding: 8px;
+    margin-right: 8px;
+}

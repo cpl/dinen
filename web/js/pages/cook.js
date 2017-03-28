@@ -9,13 +9,42 @@ function Cook()
 {
   var me = this;
   me.menuLoaded = false;
+  me.ordersLoaded = false;
   me.menuItems = {};
+  me.orders = {};
+
   me.init = function() {
+    window.setInterval(me.getOrderItems, 10000);
     window.setInterval(me.getOrders, 10000);
     me.getMenu();
+    me.getOrders();
   }
-  // Get unifinished orders for restaurant
+
   me.getOrders = function()
+  {
+    me.orders = {};
+    // if menu GET parameter doesn't exist, abort operation
+    var restaurantId = sessionStorage.getItem('restaurantID');
+    if(restaurantId == null)
+      console.log("empty restaurantId");
+    var requestData = {
+        'request': 'get_orders',
+        'restaurant_id': restaurantId,
+        'jwt' : localStorage.getItem('JWT')
+    };
+    $.ajax({
+        url: apiURL,
+        type: 'POST',
+        data: requestData
+    }).done(function(response){
+      me.orders = response.data;
+      me.ordersLoaded = true;
+      me.getOrderItems();
+    });
+  }
+
+  // Get unifinished orders for restaurant
+  me.getOrderItems = function()
   {
       // if menu GET parameter doesn't exist, abort operation
       var restaurantId = sessionStorage.getItem('restaurantID');
@@ -23,7 +52,8 @@ function Cook()
         console.log("empty restaurantId");
       var requestData = {
           'request': 'get_unfinished_order_items',
-          'restaurant_id': restaurantId
+          'restaurant_id': restaurantId,
+          'jwt' : localStorage.getItem('JWT')
       };
       $.ajax({
           url: apiURL,
@@ -42,7 +72,8 @@ function Cook()
         console.log("empty restaurantId");
       var requestData = {
           'request': 'get_menu',
-          'restaurant_id': restaurantId
+          'restaurant_id': restaurantId,
+          'jwt' : localStorage.getItem('JWT')
       };
       $.ajax({
           url: apiURL,
@@ -56,15 +87,17 @@ function Cook()
   me.processOrderItems = function(response) {
       // TODO: Check for errors
       // don't process items if menu isn't loaded
-      if (!me.menuLoaded)
+      if (!me.menuLoaded || !me.ordersLoaded)
           return;
       $('#order-items').empty();
       var data = response['data'];
+      console.log(JSON.stringify(response));
       data.forEach(function(orderItem) {
           var string = "<tr>" +
               "<th>" + me.menuItems[orderItem.menu_item_id].name + "</th>" +
-              "<th>" + /* Add means of identifying customer */ +"</th>" +
+              "<th>" + orderItem.id +"</th>" +
               "<th>" + orderItem.time + "</th>" +
+              "<th>" + me.orders[orderItem.order_id].comments + "</th>" +
               "<th>" + me.genOrderItemCheckbox(orderItem) +
               "</tr>";
           $('#order-items').append(string);
@@ -78,7 +111,7 @@ function Cook()
           me.menuItems[menuItem.id] = menuItem;
       });
       console.log(me.menuItems);
-      me.getOrders();
+      me.getOrderItems();
   }
 
   me.genOrderItemCheckbox = function(orderItem) {
@@ -93,7 +126,8 @@ function onCheckboxChanged(checkbox) {
   if (checkbox.checked) {
     var requestData = {
       'request': 'mark_order_item_finished',
-      'item': checkbox.id.split('-')[0]
+      'item': checkbox.id.split('-')[0],
+      'jwt' : localStorage.getItem('JWT')
     }
     $.ajax({
         url: apiURL,

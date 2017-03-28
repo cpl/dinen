@@ -4,7 +4,8 @@ var Status = { ERROR: 0, SUCCESS: 1 };
 function Order()
 {
   var me = this;
-  me.items = {};
+  me.currentItemId = 0;
+  me.menuItems = {};
   me.orderItems = [];
   me.sections = [];
   me.comments = "";
@@ -41,9 +42,26 @@ function Order()
   {
     console.log("ProcessItems: "+JSON.stringify(response));
     if (response.status === Status.SUCCESS) {
-      me.items = response.data;
-      me.items.forEach(function(item) {
+      response.data.forEach(function(item) {
+        me.menuItems[item.id] = item;
         me.sections.push(item.section);
+        var tempItem = $("<tr>");
+        $("<td>", {text: item.section}).appendTo(tempItem);
+        $("<td>", {text: item.name}).appendTo(tempItem);
+        $("<td>", {text: item.description}).appendTo(tempItem);
+        var button = $("<td>");
+        var id = item.id;
+        $("<button>", {
+                        type:'button',
+                        class:'btn',
+                        text:'+',
+                        click: function()
+                        {
+                          me.submitItem(id);
+                        }
+                      }).appendTo(button);
+        button.appendTo(tempItem);
+        tempItem.appendTo($('#newOrderForm'));
       });
       me.sections = $.unique(me.sections);
       for(var index in me.sections){
@@ -62,7 +80,8 @@ function Order()
   me.changeItemsInSelect = function(sel)
   {
     $("#menuItems option").remove();
-    me.items.forEach(function(item) {
+    console.log(me.menuItems);
+    $.each(me.menuItems, function(id, item) {
       if(item.section == $('#menus').val())
       {
         $('#menuItems')
@@ -79,11 +98,36 @@ function Order()
   me.changeItemDescription = function(sel)
   {
     $("#itemDescription").text("");
-    me.items.forEach(function(item) {
+    $.each(me.menuItems, function(id, item) {
       if(item.name == $('#menuItems').val())
       {
         $("#itemDescription").text(item.description);
       }
+    });
+  }
+
+  me.updateItems = function()
+  {
+    $('#orderItems').html("");
+    me.currentItemId = 0;
+    me.orderItems.forEach(function(item){
+      var tempItem = $("<tr>");
+      $("<td>", {text: me.menuItems[item].section}).appendTo(tempItem);
+      $("<td>", {text: me.menuItems[item].name}).appendTo(tempItem);
+      $("<td>", {text: me.menuItems[item].price}).appendTo(tempItem);
+      var button = $("<td>");
+      var id = me.currentItemId;
+      $("<button>", {type:'button',
+                     class:'btn btn-danger delete-button',
+                     click: function()
+                     {
+                       me.orderItems.splice(id, 1);
+                       me.updateItems();
+                     }
+                   }).appendTo(button);
+      button.appendTo(tempItem);
+      tempItem.appendTo($('#orderItems'));
+      me.currentItemId++;
     });
   }
 
@@ -92,28 +136,33 @@ function Order()
   me.submitItem = function(event)
   {
     // for every item
-    me.items.forEach(function(item) {
+    $.each(me.menuItems, function(id, item) {
       // if the name of the item is specified in input select, add it
       // to array of all item ids and and create html for it
       if(item.name == $('#menuItems').val())
       {
-        $('#orderItems').append('Menu item: ' + item.name + ' in a ' +
-                                 item.section + '. Cost: $' + item.price +
-                                 '. Description: ' + item.description + '.<br>');
         me.orderItems.push(item.id);
       }
     });
+    me.updateItems();
     event.preventDefault();
+  }
+
+  me.submitItemId = function(id)
+  {
+    me.orderItems.push(id);
+    me.updateItems();
   }
 
   me.submitOrder = function()
   {
     var orderData = {};
-    orderData['menuItems'] = me.items;
-    orderData['comments'] = me.comments;
+    orderData['menuItems'] = me.menuItems;
+    orderData['comments'] = $('#comments').val();
     orderData['orderItems'] = me.orderItems;
     sessionStorage.setItem('orderData', JSON.stringify(orderData));
     loadPage('payment');
+    me.orderItems = [];
     return false;
   }
 }

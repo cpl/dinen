@@ -1,50 +1,56 @@
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" type="text/css" href="css/search.css">
-
+<!-- TODO: remove references to previous theme -->
 <!-- All items go in this div -->
-<div class="container-fluid">
+<div id="search-background" class="container-fluid">
+
+  <br>
+  <h2 style="text-align: center">Search for your favourite restaurants here!</h2>
 
   <!-- Search bar and search button-->
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <div class="input-group">
          <input type="text" class="form-control searchBox" placeholder="Search" id ="search">
-         <span class="input-group-btn">
-           <button class="searchButton" type="button" id="search-button">Go!</button>
-         </span>
-      </div>
     </div>
   </div>
+  <p></p>
 
 
-<!-- Another row for search results and filters -->
-<div class="row resultsAndFilters">
 
-  <!-- List of search filters -->
-<nav>
-  <div class="col-md-2 filtersBox">
-    <dl>
-      <dt><h4>Filters:</h4></dt>
-      <dt>Restaurant category:</dt>
-        <dd> <input type="checkbox" name="Tavern"/> Tavern </dd>
-        <dd> <input type="checkbox" name="Pub"/> Pub </dd>
-        <dd> <input type="checkbox" name="Restaurant"/> Restaurant </dd>
-        <dd> <input type="checkbox" name="FastFood"/> Fast food </dd>
-        <dd> <input type="checkbox" name="Takeaway"/> Takeaway </dd>
-    </dl>
- </div>
-</nav>
+    <!-- List of search filters -->
+    <!-- <nav>
+      <div class="col-md-2 filtersBox">
+        <dl>
+          <dt><h4>Filters:</h4></dt>
+          <dt>Restaurant category:</dt>
+            <dd> <input type="checkbox" name="Tavern"/> Tavern </dd>
+            <dd> <input type="checkbox" name="Pub"/> Pub </dd>
+            <dd> <input type="checkbox" name="Restaurant"/> Restaurant </dd>
+            <dd> <input type="checkbox" name="FastFood"/> Fast food </dd>
+            <dd> <input type="checkbox" name="Takeaway"/> Takeaway </dd>
+        </dl>
+     </div>
+    </nav> -->
 
-<!-- template for search results -->
-<div class="col-md-6 col-md-offset-1 resultsBox">
- <div id="result-box">
-    <div><h4>#restaurantName#</h4></div>
-    <div><p>#restaurantDescription#</p></div>
-    <input type="button" value="Order" onclick="#order#"/>
-    <hr>
- </div>
-</div>
+    <!-- template for search results -->
+     <div class="col-md-12">
+        <div id="result-box">
+       <!-- Rows of different restaurants -->
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-text">
+                    <h3 class="panel-title">#restaurantName#</h3>
+                </div>
+                <div class="panel-body">
+                    <p>#restaurantDescription#</p>
+                  <div class="dialog-btn-group-small">
+                    <input type="button" class="btn btn-default" value="Order" onclick="#order#"/>
+                  </div>
+                </div>
+            </div>
+        </div>
+     </div>
+    </div>
 
-</div> <!-- row for results and filters -->
+
+  <br>
 
 </div> <!-- container div -->

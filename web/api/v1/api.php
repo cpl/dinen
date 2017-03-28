@@ -11,6 +11,7 @@ require_once '../../php/menu.php';
 require_once '../../php/restaurant.php';
 require_once '../../php/order.php';
 require_once '../../php/search.php';
+require_once '../../php/removal.php';
 
 $request = htmlspecialchars($_POST['request']);
 switch ($request) {
@@ -41,17 +42,26 @@ switch ($request) {
   case 'get_unfinished_order_items':
     processGetUnfinishedOrderItems();
     break;
+  case 'remove_restaurant':
+    processRemoveRestaurant();
+    break;
+  case 'get_orders':
+    processGetOrders();
+    break;
   case 'get_restaurants_near_user':
     processGetRestaurantsNearUser();
     break;
   case 'mark_order_item_finished':
     processMarkOrderItemFinished();
     break;
+  case 'remove_menu_item':
+    processRemoveMenuItem();
+    break;
 }
 
 function processMarkOrderItemFinished() {
   $orderItemId = htmlspecialchars($_POST['item']);
-  echo json_encode(mark_order_item_finished($orderItemId));
+  echo json_encode(set_order_item_finished($orderItemId));
 }
 
 function processGetRestaurantsNearUser() {
@@ -127,7 +137,7 @@ function processCreateRestaurantRequest() {
 
 function processGetRestaurantsRequest() {
   if (checkJWT($_POST['jwt'])['status'] !== Status::SUCCESS) {
-    echo json_encode(checkJWT($_POST['jwt'])['data']);
+    echo json_encode(checkJWT($_POST['jwt']));
     //echo checkJWT($_POST['jwt'])['data'];
     return;
   }
@@ -186,6 +196,48 @@ function processOrder()
 
 function processGetUnfinishedOrderItems()
 {
+  $jwt = $_POST['jwt'];
+  if (checkJWT($jwt)['status'] !== Status::SUCCESS) {
+    echo json_encode(['status' => Status::ERROR,
+                      'data'   => 'Wrong jwt sent']);
+    return;
+  }
   $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
   echo json_encode(get_unfinished_order_items($restaurant_id));
+}
+
+function processGetOrders()
+{
+  $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
+  echo json_encode(get_orders($restaurant_id));
+}
+
+function processRemoveRestaurant()
+{
+  $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
+  $password = htmlspecialchars($_POST['password']);
+  $jwt = $_POST['jwt'];
+  if (checkJWT($jwt)['status'] !== Status::SUCCESS) {
+    echo json_encode(['status' => Status::ERROR,
+                      'data'   => 'Wrong jwt sent']);
+    return;
+  }
+  $payload = getJWTPayload($jwt);
+  $id = $payload['user_id'];
+  echo json_encode(remove_restaurant($restaurant_id, $id, $password));
+}
+
+function processRemoveMenuItem()
+{
+  $restaurant_id = htmlspecialchars($_POST['restaurant_id']);
+  $jwt = $_POST['jwt'];
+  if (checkJWT($jwt)['status'] !== Status::SUCCESS) {
+    echo json_encode(['status' => Status::ERROR,
+                      'data'   => 'Wrong jwt sent']);
+    return;
+  }
+  $payload = getJWTPayload($jwt);
+  $id = $payload['user_id'];
+  $menu_item_id = htmlspecialchars($_POST['menu_item_id']);
+  echo json_encode(remove_menu_item($menu_item_id, $restaurant_id, $id));
 }

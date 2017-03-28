@@ -8,9 +8,7 @@ function Payment()
   me.init = function()
   {
     data = JSON.parse(sessionStorage.getItem('orderData'));
-    data['menuItems'].forEach(function(item){
-      me.menuItems[item.id] = item;
-    });
+    me.menuItems = data['menuItems'];
     me.orderItems = data['orderItems'];
     me.comments = data['comments'];
     me.oneOrder = $('#menu-table').html();
@@ -35,21 +33,34 @@ function Payment()
     var amountHtml = $('#amount').html();
     amountHtml = amountHtml.toString().replace('#amount#', "$" + totalAmount);
     $('#amount').html(amountHtml);
+    $('#amount').html(amountHtml);
+    var commentsHtml = $('#comments').html();
+    commentsHtml = commentsHtml.toString().replace('#comments#', "<br>Comments : " + me.comments);
+    $('#comments').html(commentsHtml);
+
   }
 
   me.submitOrder = function()
   {
     var requestData = {};
-    requestData['restaurant'] = sessionStorage.getItem('restaurantId');
+    requestData['restaurant'] = sessionStorage.getItem('restaurantID');
     requestData['comments'] = me.comments;
-    requestData['order_items'] = JSON.stringify(orderItems);
+    requestData['order_items'] = JSON.stringify(me.orderItems);
     requestData['request'] = 'create_order';
     $.ajax({
       url: apiURL,
       type: 'POST',
       data: requestData
     }).done(function(response){
-      console.log(response);
+      if(response.status === 1)
+      {
+        loadPage('landing');
+        alert('Your order is on the way!');
+      }
+      else
+      {
+        alert('Sorry, something went wrong');
+      }
     });
   }
 }

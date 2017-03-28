@@ -1,7 +1,7 @@
 function Landing() {
   this.init = function () {
     $('#sign_in').click(function () {
-      loadPage('login');
+      loadPage('sign_in');
     });
     $('#go-to-search').click(function(){
       loadPage('search');
@@ -48,5 +48,7 @@ function Landing() {
         }
       }
     });
+
+    // End of Imperial code.
   }
 }

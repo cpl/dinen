@@ -78,7 +78,7 @@
    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
    <script src="js/vendor/bootstrap.js"></script>
    <script src="http://malsup.github.io/jquery.form.js"></script>
-   <script src="js/common.js"></script> <!-- Here we will write the code responsible for communicating between frontend and backend -->
+   <script src="js/utility.js"></script> <!-- Here we will write the code responsible for communicating between frontend and backend -->
    <script src="js/search.js"></script>
  </body>
 

@@ -67,31 +67,52 @@ function Menu() {
   };
 
   this.displayMenu = function (response) {
-    //response = {"status":1,"data":[{"name":"Peperonni Pizza","section":"Pizza","price":10,"description":"has peperonni","id":29},{"name":"Salami Pizza","section":"Pizza","price":11,"description":"has Salami","id":30}]}
-    //console.log(JSON.stringify(response));
+    $('#menu-table').html("");
     if (response.status === Status.SUCCESS) {
-      $('#items').empty();
-      /*$('#items').append('Menu items: <br>');*/
       var nr = 0;
       response.data.forEach(function (item) {
         nr++;
-        /*$('#items').append('Menu item: ' + item.name + ' in ' +
-         item.section + '. Cost: $' + item.price +
-         '. Description: ' + item.description + '.<br>');
-         */
-        var tempItem = "<td>" + nr + "</td>";
-        tempItem += "<td>" + item.section + "</td>";
-        tempItem += "<td>" + item.name + "</td>";
-        tempItem += "<td>£" + item.price + "</td>";
-        me.menuItems += "<tr>" + tempItem + "</tr>";
+        var tempItem = $("<tr>");
+        $("<td>", {text: nr}).appendTo(tempItem);
+        $("<td>", {text: item.section}).appendTo(tempItem);
+        $("<td>", {text: item.name}).appendTo(tempItem);
+        $("<td>", {text: "$" + item.price}).appendTo(tempItem);
+        var button = $("<td>");
+        var id = item.id;
+        $("<button>", {type:'button',
+                       class:'btn btn-danger delete-button',
+                       click: function()
+                       {
+                         me.removeItem(id);
+                       }
+                     }).appendTo(button);
+        button.appendTo(tempItem)
+        tempItem.appendTo($('#menu-table'));
       });
-      if(nr === 0){
-        me.menuItems = "No items were found.";
-      }
-      $('#menu-table').html(me.menuItems);
-      me.menuItems = "";
     } else {
       console.log(response);
     }
+  }
+
+  me.removeItem = function(id)
+  {
+    const JWT = localStorage.getItem('JWT');
+    if(JWT == null) {
+      console.log("User not logged in while creating items for restaurant.");
+      return;
+    }
+    var requestData = {};
+    requestData['restaurant_id'] = sessionStorage.getItem('restaurantID');
+    requestData['jwt'] = JWT;
+    requestData['menu_item_id'] = id;
+    requestData['request'] = 'remove_menu_item';
+    $.ajax({
+      url: apiURL,
+      type: 'POST',
+      data: requestData
+    }).done(function(response){
+      me.getMenu();
+    });
+    return false;
   }
 }

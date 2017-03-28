@@ -89,80 +89,6 @@ function create_menu_item($user_id, $name, $section, $description, $price, $rest
   return ['status' => Status::SUCCESS];
 }
 
-// set order item finished
-// sets the order item with required id to 'fiinished'
-// and, if there are no unfinished items left in order sets the order to finished
-function set_order_item_finished($order_item_id)
-{
-  // TODO : Check if user is cook
-  if(empty($order_item_id))
-    return [ 'status' => Status::ERROR,
-             'data' => "No restaurant id given"];
-  $mysqli = createMySQLi();
-  if ($mysqli->connect_error)
-    return [ 'status' => Status::ERROR,
-             'data' => "Database connection failed"];
-  // sets order item to finished and returns the order id associated with order item
-  $stmt = $mysqli->prepare('UPDATE order_items
-                              SET is_finished = 1
-                              WHERE id = ?;
-                            SELECT order_id
-                              FROM order_items
-                              WHERE id = ?');
-  $stmt->bind_param('ii', $order_item_id, $order_item_id);
-  $stmt->execute();
-  if ($stmt->errno != 0)
-  {
-    $mysqli->close();
-    return ['status' => Status::ERROR,
-            'data' => 'Error setting order item to finished'];
-  }
-  $stmt_result = $stmt->get_result();
-  // if no id is returned, something went wrong
-  if($stmt_result->num_rows === 0)
-  {
-    $mysqli->close();
-    return ['status' => Status::ERROR,
-            'data' => 'Error setting order item to finished'];
-  }
-  // get order id
-  $order_id = $stmt_result->fetch_array()['order_id'];
-  // TODO: Check if order is finished
-  $stmt->close();
-  $stmt = $mysqli->prepare('SELECT * FROM order_items
-                              WHERE order_id = ? AND is_finished = 0');
-  $stmt->bind_param('i', $order_id);
-  $stmt->execute();
-  if ($stmt->errno != 0)
-  {
-    $mysqli->close();
-    return ['status' => Status::ERROR,
-            'data' => 'Error setting order item to finished'];
-  }
-  // if there are items in the order left unfinished return
-  if($stmt_result->num_rows !== 0)
-  {
-    $mysqli->close();
-    return ['status' => Status::SUCCESS,
-            'data' => 'Menu item set as finished'];
-  }
-  // if there are no items left unfinished, set order as finished
-  $stmt = $mysqli->prepare('UPDATE orders
-                              SET is_finished = 1
-                              WHERE id = ?;');
-  $stmt->bind_param('i', $order_id);
-  $stmt->execute();
-  if ($stmt->errno != 0)
-  {
-    $mysqli->close();
-    return ['status' => Status::ERROR,
-            'data' => 'Error setting order to finished'];
-  }
-  $mysqli->close();
-  return ['status' => Status::SUCCESS,
-          'data' => 'Both order and order item are set to finished'];
-}
-
 function get_unfinished_order_items($restaurant_id)
 {
   // TODO: Check if user can access this data (is cook)
@@ -217,4 +143,36 @@ function get_unfinished_order_items($restaurant_id)
   $mysqli->close();
   return [ 'status' => Status::SUCCESS,
            'data' => ($order_item_list)];
+}
+
+function remove_menu_item($menu_item_id, $restaurant_id, $manager_id)
+{
+  if(empty($menu_item_id) || empty($restaurant_id) || empty($manager_id))
+    return [ 'status' => Status::ERROR,
+              'data' => "Empty required fields given to create menu item".$menu_item_id." ".$restaurant_id." ".$manager_id];
+  $mysqli = createMySQLi();
+  if ($mysqli->connect_error)
+    return [ 'status' => Status::ERROR,
+             'data' => "Database connection failed"];
+  // check if restaurant is owned by user
+  $stmt = $mysqli->prepare('SELECT * FROM restaurants
+                            WHERE id = ? AND manager_id = ?');
+  $stmt->bind_param('ii', $restaurant_id, $manager_id);
+  $stmt->execute();
+  $stmt_result = $stmt->get_result();
+  if ($stmt->errno != 0)
+    return ['status' => Status::ERROR,
+            'data' => 'Error executing menu item insertion query'];
+  if ($stmt_result->num_rows === 0)
+    return ['status' => Status::ERROR,
+            'data' => 'No restaurant with given user id found'];
+  $stmt = $mysqli->prepare('DELETE FROM menu_items
+                            WHERE id = ? AND restaurant_id = ?');
+  // create and execute sql request
+  $stmt->bind_param('ii', $menu_item_id, $restaurant_id);
+  $stmt->execute();
+  if ($stmt->errno != 0)
+    return ['status' => Status::ERROR,
+            'data'   => 'Error executing menu item insertion query'];
+  return ['status' => Status::SUCCESS];
 }

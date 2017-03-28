@@ -58,22 +58,6 @@ function remove_restaurant($restaurant_id, $manager_id, $password){
 
   $mysqli = createMySQLi();
 
-  if ($mysqli->connect_error)
-    return ['status' => Status::ERROR,
-            'data' => 'Database connection failed'];
-
-  $stmt = $mysqli->prepare('DELETE FROM addresses
-                            WHERE id in (SELECT address_id FROM restaurants
-                                         WHERE manager_id = ? AND id = ?)');
-  $stmt->bind_param('ii', $manager_id, $restaurant_id);
-  $stmt->execute();
-
-  if ($stmt->errno != 0)
-    return ['status' => Status::ERROR,
-            'data' => 'Error executing restaurant address removal'];
-
-  $stmt->close();
-
   $stmt = $mysqli->prepare('DELETE FROM restaurants
                             WHERE manager_id = ? AND id = ?');
   $stmt->bind_param('ii', $manager_id, $restaurant_id);
@@ -85,40 +69,9 @@ function remove_restaurant($restaurant_id, $manager_id, $password){
 
   $stmt->close();
   $mysqli->close();
-
+  return ['status' => Status::SUCCESS,
+          'data' => 'Deleted'];
 } // remove_restaurant
-
-function remove_menu($menu_id, $manager_id, $password){
-
-  if (empty($password))
-    return ['status' => Status::ERROR, 'data' => 'Empty password.'];
-  if(!passwordIsValid($password))
-    return ['status' => Status::ERROR, 'data' => 'Invalid password.'];
-
-  if(!confirm_action($manager_id, $password))
-    return ['status' => Status::ERROR, 'data' => 'Auth failed'];
-
-  $mysqli = createMySQLi();
-
-  if ($mysqli->connect_error)
-    return ['status' => Status::ERROR,
-            'data' => 'Database connection failed'];
-
-  $stmt = $mysqli->prepare('DELETE FROM menus
-                            WHERE id = ? AND restaurant_id in (
-                                                    SELECT id FROM restaurant
-                                                    WHERE manager_id = ?)');
-
-  $stmt->bind_param('ii', $menu_id, $manager_id);
-  $stmt->execute();
-
-  if ($stmt->errno != 0)
-    return ['status' => Status::ERROR,
-            'data' => 'Error executing menu removal'];
-
-  $stmt->close();
-  $mysqli->close();
-} // remove_menu
 
 function remove_item($item_id, $manager_id, $password){
 
@@ -150,7 +103,8 @@ function remove_item($item_id, $manager_id, $password){
 
   $stmt->close();
   $mysqli->close();
-
+  return ['status' => Status::SUCCESS,
+          'data' => 'Deleted'];
 } // remove_item
 
 function confirm_action($user_id, $password){
