@@ -1,6 +1,6 @@
 Ethical Framework
 ===
-###### Team X3
+Team X3
 ---
 
 # 1. PREAMBLE
@@ -28,7 +28,7 @@ This document sets forth ethical standards of ”Team X3” (referred to as ”t
  + 9. Members shall be honest with each other regarding their work and abilities.
  + 10. Members are not to obtain any code illegally. All code used for the software must comply to the University’s Malpractice and Collusion regulations[1]. 2
 + 2.3 The software
- + 1. The software will be provided to its users free of charge under the license <insert license>.
+ + 1. The software will be provided to its users free of charge under the license 4-Clause BSD.
  + 2. The members will endeavour to produce code which is readable to the other members (and possibly other contributors).
  + 3. The software must be tested rigorously.
  + 4. The tests for the software will be made public.
@@ -41,6 +41,18 @@ This document sets forth ethical standards of ”Team X3” (referred to as ”t
  + 4. In event of a security breach all users will be made aware of the risks and will be recommended solutions by the team.
  + 5. We will not be responsible for any security infringement caused by the user, but the team will help to best fit the situation.
 
+# 3. LEGAL
+### Dinen is provided as it is, without any warrenty!
+Dinen must be treated as a PRIVILEGE, not respecting any of the points covered by the ETHICAL FRAMEWORK or LICENSE
+could and will lead to termination of Dinen services to The User.
+## Registering a business under the Dinen domain, has the following requierments:
+ * The Business must regulate to the latests UK GOV regulations and policies. [3]
+ * The Business must fall under the "Food, catering and retail" category as defined by the UK GOV. [4]
+## By using Dinen services, The User must agrees to the following statements:
+ * Dinen (or any of its members or contributors) will not be held liable for any personal injury (of any nature).
+ * As a consumer (of both Dinen services and products provided trough Dinen) it is your right and responsability to
+ protect Dinen (and its members and contributors) from any kind of legal actions.
+
 # References
 [1] The University of Manchester, Guidance to students on plagiarism and other forms of academic malpractice:
 
@@ -49,3 +61,11 @@ This document sets forth ethical standards of ”Team X3” (referred to as ”t
 [2] The Case of the Killer Robot:
 
    http://www.onlineethics.org/CMS/computers/compcases/killerrobot.aspx
+
+[3] UK GOV Regulations
+
+   https://www.gov.uk/government/policies/business-regulation
+
+[4] UK GOV Food & Catering
+
+   https://www.gov.uk/browse/business/food
