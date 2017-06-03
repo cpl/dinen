@@ -1,1 +1,1 @@
-docker run -p 8080:80 -p 8081:443 -d dinen
+docker run -p 8080:80 -p 8081:443 -p 3306:8082 -d dinen

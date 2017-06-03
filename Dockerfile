@@ -2,9 +2,9 @@ FROM ubuntu:latest
 MAINTAINER Alexandru-Paul Copil (thee-engineer) <alexandru.p.copil@gmail.com>
 
 # Install Apache & Update Ubuntu
+RUN DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y apache2 php7.0 php7.0-mysql libapache2-mod-php7.0 curl lynx-cur
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Enable php and ssl mods
 RUN a2enmod php7.0
@@ -23,7 +23,7 @@ ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_PID_FILE /var/run/apache2.pid
 
 # Open ports to the host machine
-EXPOSE 80 443
+EXPOSE 80 443 3306
 
 # Add website content
 ADD web /srv/dinen
@@ -43,18 +43,30 @@ ADD env/apache/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 ADD env/apache/ssl-params.conf /etc/apache2/conf-available/ssl-params.conf
 
 # Setup permissions
-RUN chown www-data:www-data -R /srv
+RUN chown www-data:www-data -R /srv/
 
 # Prepare MySQL
-RUN sudo apt-get install mysql-server
-RUN mysql_secure_installation
+RUN apt-get update
+RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
+RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
+RUN apt-get install -y mysql-server mysql-client
+
+# Copy configuration
+ADD env/database/my.cnf /etc/mysql/my.cnf
+RUN chown -R mysql:mysql /var/lib/mysql
+
+# Start MySQL
+RUN /etc/init.d/mysql start
 
 # Create teamdinen user in MySQL database
-#  brb, shopping :)
+RUN mysql -u root -p=root << "CREATE USER 'teamdinen'@'localhost' IDENTIFIED BY 'dinenX3'; GRANT ALL PRIVILEGES ON * . * TO 'teamdinen'@'localhost'; FLUSH PRIVILEGES;"
 
 # Migrate DB
 ADD env/database/dinen.sql /var/dinen.sql
 RUN mysql -u teamdinen -p=dinenX3 dinen < /var/dinen.sql
+
+# Clean apt
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Start Apache
 CMD /usr/sbin/apache2ctl -D FOREGROUND
