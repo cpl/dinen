@@ -45,5 +45,16 @@ ADD env/apache/ssl-params.conf /etc/apache2/conf-available/ssl-params.conf
 # Setup permissions
 RUN chown www-data:www-data -R /srv
 
+# Prepare MySQL
+RUN sudo apt-get install mysql-server
+RUN mysql_secure_installation
+
+# Create teamdinen user in MySQL database
+#  brb, shopping :)
+
+# Migrate DB
+ADD env/database/dinen.sql /var/dinen.sql
+RUN mysql -u teamdinen -p=dinenX3 dinen < /var/dinen.sql
+
 # Start Apache
 CMD /usr/sbin/apache2ctl -D FOREGROUND
