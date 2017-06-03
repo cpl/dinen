@@ -1,0 +1,1 @@
+docker run -i -t -p 8080:80 -p 8081:443 dinen /bin/bash
